@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; DeerAnalysis2 2019 documentation</title>
+  <title>Installation &mdash; DeerLab2 2019 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tutorial.html" />
-    <link rel="prev" title="DeerAnalysis" href="index.html" /> 
+    <link rel="prev" title="DeerLab" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -70,10 +70,10 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../0.8.beta./download.html">0.8.beta</option>
-        <option value="../0.6.beta./download.html">0.6.beta</option>
+        <option value="../0.8.beta/download.html">0.8.beta</option>
+        <option value="../0.6.beta/download.html">0.6.beta</option>
         <option selected value="">0.2.beta</option>
-        <option value="../develop./download.html">develop</option>
+        <option value="../develop/download.html">develop</option>
     </select>
     <div class="select_arrow">
     </div>
@@ -126,7 +126,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DeerAnalysis2</a>
+          <a href="index.html">DeerLab2</a>
         
       </nav>
 
@@ -164,7 +164,7 @@
         
             
             
-              <a href="https://github.com/luisfabib/DeerAnalysis2/blob/master/source/download.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/luisfabib/DeerLab2/blob/master/source/download.rst" class="fa fa-github"> Edit on GitHub</a>
             
           
         
@@ -180,10 +180,10 @@
             
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>Get the latest version of DeerAnalysis from the <a class="reference external" href="https://github.com/luisfabib/DeerAnalysis2">GitHub repository</a>.</p>
+<p>Get the latest version of DeerLab from the <a class="reference external" href="https://github.com/luisfabib/DeerLab2">GitHub repository</a>.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>The application programming interface (API) of DeerAnalysis requires the following products:</p>
+<p>The application programming interface (API) of DeerLab requires the following products:</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://ch.mathworks.com/products/matlab.html">MATLAB</a></li>
@@ -193,23 +193,23 @@
 </div>
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>In order for MATLAB to access the DeerAnalysis API functions, the path to DeerAnalysis installation folder must be set.</p>
+<p>In order for MATLAB to access the DeerLab API functions, the path to DeerLab installation folder must be set.</p>
 <dl class="docutils">
-<dt>Method A) Add DeerAnalysis path via MATLAB’s IDE</dt>
+<dt>Method A) Add DeerLab path via MATLAB’s IDE</dt>
 <dd><ol class="first last arabic simple">
 <li>On the <code class="docutils literal notranslate"><span class="pre">Home</span></code> tab, in the <code class="docutils literal notranslate"><span class="pre">Environment</span></code> section, click <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Path</span></code>.</li>
-<li>Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">with</span> <span class="pre">Subfolders...</span></code> and select the <code class="docutils literal notranslate"><span class="pre">DeerAnalysis\functions</span></code> directory.</li>
+<li>Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">with</span> <span class="pre">Subfolders...</span></code> and select the <code class="docutils literal notranslate"><span class="pre">DeerLab\functions</span></code> directory.</li>
 <li>Click <code class="docutils literal notranslate"><span class="pre">Save</span></code> to save the current MATLAB search path and exit via <code class="docutils literal notranslate"><span class="pre">Close</span></code>.</li>
 </ol>
 </dd>
-<dt>Method B) Adding DeerAnalysis path at startup</dt>
+<dt>Method B) Adding DeerLab path at startup</dt>
 <dd><ol class="first arabic simple">
 <li>Open (or create) the <code class="docutils literal notranslate"><span class="pre">startup.m</span></code> file in the default <code class="docutils literal notranslate"><span class="pre">\MATLAB</span></code> directory.</li>
 <li>Add the following lines of code:</li>
 </ol>
 <blockquote>
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerAnalysis/functions&#39;</span><span class="p">)</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerAnalysis/functions/models&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerLab/functions&#39;</span><span class="p">)</span>
+<span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerLab/functions/models&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -232,7 +232,7 @@
         <a href="tutorial.html" class="btn btn-neutral float-right" title="Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="DeerAnalysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="DeerLab" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

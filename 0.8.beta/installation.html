@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; DeerAnalysis  documentation</title>
+  <title>Installation &mdash; DeerLab  documentation</title>
   
 
   
@@ -70,9 +70,9 @@
 <div class="select">
     <select onChange="window.location.href=this.value">
         <option selected value="">0.8.beta</option>
-        <option value="../0.6.beta./installation.html">0.6.beta</option>
-        <option value="../0.2.beta./installation.html">0.2.beta</option>
-        <option value="../develop./installation.html">develop</option>
+        <option value="../0.6.beta/installation.html">0.6.beta</option>
+        <option value="../0.2.beta/installation.html">0.2.beta</option>
+        <option value="../develop/installation.html">develop</option>
     </select>
     <div class="select_arrow">
     </div>
@@ -125,7 +125,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">DeerAnalysis</a>
+          <a href="index.html">DeerLab</a>
         
       </nav>
 
@@ -177,7 +177,7 @@
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>The application programming interface (API) of DeerAnalysis requires the following products:</p>
+<p>The application programming interface (API) of DeerLab requires the following products:</p>
 <blockquote>
 <div><ul class="simple">
 <li><a class="reference external" href="https://ch.mathworks.com/products/matlab.html">MATLAB</a></li>
@@ -193,16 +193,16 @@
 <hr class="docutils" />
 <div class="section" id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
-<p>In order for MATLAB to access the DeerAnalysis API functions, the path to DeerAnalysis installation folder must be set.</p>
+<p>In order for MATLAB to access the DeerLab API functions, the path to DeerLab installation folder must be set.</p>
 <dl class="docutils">
-<dt>Method A) Add DeerAnalysis path via MATLAB’s IDE</dt>
+<dt>Method A) Add DeerLab path via MATLAB’s IDE</dt>
 <dd><ol class="first last arabic">
 <li><p class="first">On the <code class="docutils literal notranslate"><span class="pre">Home</span></code> tab, in the <code class="docutils literal notranslate"><span class="pre">Environment</span></code> section, click <code class="docutils literal notranslate"><span class="pre">Set</span> <span class="pre">Path</span></code>.</p>
 <blockquote>
 <div><img alt="_images/installation1.png" src="_images/installation1.png" />
 </div></blockquote>
 </li>
-<li><p class="first">Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">with</span> <span class="pre">Subfolders...</span></code> and select the <code class="docutils literal notranslate"><span class="pre">DeerAnalysis\functions</span></code> directory.</p>
+<li><p class="first">Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">with</span> <span class="pre">Subfolders...</span></code> and select the <code class="docutils literal notranslate"><span class="pre">DeerLab\functions</span></code> directory.</p>
 <blockquote>
 <div><img alt="_images/installation2.png" src="_images/installation2.png" />
 </div></blockquote>
@@ -214,14 +214,14 @@
 </dl>
 <hr class="docutils" />
 <dl class="docutils">
-<dt>Method B) Add DeerAnalysis path at startup</dt>
+<dt>Method B) Add DeerLab path at startup</dt>
 <dd><ol class="first arabic simple">
 <li>Open (or create) the <code class="docutils literal notranslate"><span class="pre">startup.m</span></code> file in the default <code class="docutils literal notranslate"><span class="pre">\MATLAB</span></code> directory.</li>
 <li>Add the following lines of code:</li>
 </ol>
 <blockquote>
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerAnalysis/functions&#39;</span><span class="p">)</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerAnalysis/functions/models&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerLab/functions&#39;</span><span class="p">)</span>
+<span class="n">addpath</span><span class="p">(</span><span class="s">&#39;mypath/DeerLab/functions/models&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
