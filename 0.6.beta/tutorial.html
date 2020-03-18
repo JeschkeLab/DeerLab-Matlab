@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tutorial &mdash; DeerAnalysis  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Functions" href="functions.html" />
+    <link rel="prev" title="Installation" href="download.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../0.8.beta./tutorial.html">0.8.beta</option>
+        <option selected value="">0.6.beta</option>
+        <option value="../0.2.beta./tutorial.html">0.2.beta</option>
+        <option value="../develop./tutorial.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="download.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DeerAnalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tutorial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generating-datasets">
+<h2>Generating datasets<a class="headerlink" href="#generating-datasets" title="Permalink to this headline">¶</a></h2>
+<p>It takes only a few lines to generate synthetic datasets:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>          <span class="c">% Set up time axis</span>
+<span class="n">r</span> <span class="p">=</span> <span class="n">time2dist</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>               <span class="c">% Set up distance axis</span>
+<span class="n">P0</span> <span class="p">=</span> <span class="n">rd_onegaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="mi">3</span> <span class="mf">0.2</span><span class="p">]);</span> <span class="c">% Generate a one-Gaussian model distribution</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">td_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>              <span class="c">% Generate exponential background</span>
+
+<span class="c">% Generate associated dipolar signal</span>
+<span class="p">[</span><span class="n">V</span><span class="p">,</span><span class="n">S</span><span class="p">]</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P0</span><span class="p">,</span><span class="s">&#39;Background&#39;</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;ModDepth&#39;</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="s">&#39;NoiseLevel&#39;</span><span class="p">,</span><span class="mf">0.02</span><span class="p">);</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P0</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="analyzing-datasets">
+<h2>Analyzing datasets<a class="headerlink" href="#analyzing-datasets" title="Permalink to this headline">¶</a></h2>
+<p>Also, it takes only a few lines to analyze an experimental dataset. Here is how to fit the above generated data using a streched-exponential background model followed by Tikhonov regularization:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% assuming data are in V and t</span>
+<span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">lam</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">td_exp</span><span class="p">);</span>        <span class="c">% Fit background</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>                <span class="c">% Prepare dipolar kernel</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;tikhonov&#39;</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">);</span>  <span class="c">% Run Tikhonov regularization</span>
+<span class="n">Vfit</span> <span class="p">=</span> <span class="n">K</span><span class="o">*</span><span class="n">Pfit</span><span class="p">;</span>                               <span class="c">% Calculate fitted time-domain signal</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">lam</span><span class="p">)</span><span class="o">*</span><span class="n">B</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P0</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="physical-units">
+<span id="physicalunits"></span><h2>Physical units<a class="headerlink" href="#physical-units" title="Permalink to this headline">¶</a></h2>
+<p>In DeerAnaysis are distance-domain variables are given in nanometers, whereas all time-domain variables are given in microseconds.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="functions.html" class="btn btn-neutral float-right" title="Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="download.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,292 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>suppressghost &mdash; DeerAnalysis  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="time2dist" href="time2dist.html" />
+    <link rel="prev" title="sensitivan" href="sensitivan.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="apt.html"><code class="docutils literal notranslate"><span class="pre">apt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="aptkernel.html"><code class="docutils literal notranslate"><span class="pre">aptkernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="backgroundstart.html"><code class="docutils literal notranslate"><span class="pre">backgroundstart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctphase.html"><code class="docutils literal notranslate"><span class="pre">correctphase</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctscale.html"><code class="docutils literal notranslate"><span class="pre">correctscale</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctzerotime.html"><code class="docutils literal notranslate"><span class="pre">correctzerotime</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deerload.html"><code class="docutils literal notranslate"><span class="pre">deerload</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dipolarkernel.html"><code class="docutils literal notranslate"><span class="pre">dipolarkernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dipolarsignal.html"><code class="docutils literal notranslate"><span class="pre">dipolarsignal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fftspec.html"><code class="docutils literal notranslate"><span class="pre">fftspec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitbackground.html"><code class="docutils literal notranslate"><span class="pre">fitbackground</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitmultigauss.html"><code class="docutils literal notranslate"><span class="pre">fitmultigauss</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitparamodel.html"><code class="docutils literal notranslate"><span class="pre">fitparamodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitregmodel.html"><code class="docutils literal notranslate"><span class="pre">fitregmodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="longpass.html"><code class="docutils literal notranslate"><span class="pre">longpass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixmodels.html"><code class="docutils literal notranslate"><span class="pre">mixmodels</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="noiselevel.html"><code class="docutils literal notranslate"><span class="pre">noiselevel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="obir.html"><code class="docutils literal notranslate"><span class="pre">obir</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="overtones.html"><code class="docutils literal notranslate"><span class="pre">overtones</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="paramodel.html"><code class="docutils literal notranslate"><span class="pre">paramodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepvalidation.html"><code class="docutils literal notranslate"><span class="pre">prepvalidation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regoperator.html"><code class="docutils literal notranslate"><span class="pre">regoperator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regparamrange.html"><code class="docutils literal notranslate"><span class="pre">regparamrange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="selectmodel.html"><code class="docutils literal notranslate"><span class="pre">selectmodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="selregparam.html"><code class="docutils literal notranslate"><span class="pre">selregparam</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensitivan.html"><code class="docutils literal notranslate"><span class="pre">sensitivan</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">suppressghost</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time2dist.html"><code class="docutils literal notranslate"><span class="pre">time2dist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time2freq.html"><code class="docutils literal notranslate"><span class="pre">time2freq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whitenoise.html"><code class="docutils literal notranslate"><span class="pre">whitegaussnoise</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="winlowpass.html"><code class="docutils literal notranslate"><span class="pre">winlowpass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerAnalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../functions.html">Functions</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">suppressghost</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="suppressghost">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">suppressghost</span></code><a class="headerlink" href="#suppressghost" title="Permalink to this headline">¶</a></h1>
+<p>Ghost distance suppression in multi-spin systems</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vs</span> <span class="p">=</span> <span class="n">suppressghost</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Signal vector (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">n</span></code> - number of radicals (scalar)</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">Vs</span></code> Power-scaled signal (N-array)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vs</span> <span class="p">=</span> <span class="n">suppressghost</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Suppresses multi-spin contributions to the signal <code class="docutils literal notranslate"><span class="pre">V</span></code> by means of the power scaling approximation <a class="footnote-reference" href="#id3" id="id2">[1]</a>. The scaling is determined by the number of radicals <code class="docutils literal notranslate"><span class="pre">n</span></code> in the system. The function returns the power-scaled signal in <code class="docutils literal notranslate"><span class="pre">Vs</span></code>.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>von Hagens et al., Phys.Chem.Chem.Phys. 15, 2013, 5854-5866, <a class="reference external" href="https://doi.org/10.1039/C3CP44462G">https://doi.org/10.1039/C3CP44462G</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="time2dist.html" class="btn btn-neutral float-right" title="time2dist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sensitivan.html" class="btn btn-neutral float-left" title="sensitivan" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples &mdash; DeerAnalysis2 2019 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="_static/fancybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Generating dipolar signals" href="examples/example_generatesignals.html" />
+    <link rel="prev" title="td_poly3" href="models/td_poly3.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../0.8.beta./examples.html">0.8.beta</option>
+        <option value="../0.6.beta./examples.html">0.6.beta</option>
+        <option selected value="">0.2.beta</option>
+        <option value="../develop./examples.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_generatesignals.html">Generating dipolar signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_basicprocessing.html">Basic experimental signal processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_basicvalidation.html">Experimental signal processing with validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_fitting5pulseDEER.html">Fitting 5-pulse DEER data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_ridmeregularization.html">Processing RIDME with strong background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_multigauss.html">Multigauss fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_selectmodel.html">Parametric model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_timedomainfitting.html">Parametric time-domain model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_pararegcombination.html">Synchronous background and regularization fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/example_parametricglobalfit.html">Global fit of parametric time-domain model</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DeerAnalysis2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Examples</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/luisfabib/DeerAnalysis2/blob/master/source/examples.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">API Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_generatesignals.html">Generating dipolar signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_basicprocessing.html">Basic experimental signal processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_basicvalidation.html">Experimental signal processing with validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_fitting5pulseDEER.html">Fitting 5-pulse DEER data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_ridmeregularization.html">Processing RIDME with strong background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_multigauss.html">Multigauss fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_selectmodel.html">Parametric model selection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_timedomainfitting.html">Parametric time-domain model fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_pararegcombination.html">Synchronous background and regularization fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/example_parametricglobalfit.html">Global fit of parametric time-domain model</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/example_generatesignals.html" class="btn btn-neutral float-right" title="Generating dipolar signals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="models/td_poly3.html" class="btn btn-neutral float-left" title="td_poly3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

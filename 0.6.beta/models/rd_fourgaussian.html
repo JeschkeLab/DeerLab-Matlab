@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>rd_fourgaussian &mdash; DeerAnalysis  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="rd_fivegaussian" href="rd_fivegaussian.html" />
+    <link rel="prev" title="rd_threegaussian" href="rd_threegaussian.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Parametric Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="rd_onegaussian.html"><code class="docutils literal notranslate"><span class="pre">rd_onegaussian</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_twogaussian.html"><code class="docutils literal notranslate"><span class="pre">rd_twogaussian</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_threegaussian.html"><code class="docutils literal notranslate"><span class="pre">rd_threegaussian</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">rd_fourgaussian</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_fivegaussian.html"><code class="docutils literal notranslate"><span class="pre">rd_fivegaussian</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_onerice.html"><code class="docutils literal notranslate"><span class="pre">rd_onerice</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_tworice.html"><code class="docutils literal notranslate"><span class="pre">rd_tworice</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_threerice.html"><code class="docutils literal notranslate"><span class="pre">rd_threerice</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_wormchain.html"><code class="docutils literal notranslate"><span class="pre">rd_wormchain</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="rd_randcoil.html"><code class="docutils literal notranslate"><span class="pre">rd_randcoil</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_exp.html"><code class="docutils literal notranslate"><span class="pre">td_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_strexp.html"><code class="docutils literal notranslate"><span class="pre">td_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">td_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">td_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_poly1.html"><code class="docutils literal notranslate"><span class="pre">td_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_poly2.html"><code class="docutils literal notranslate"><span class="pre">td_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="td_poly3.html"><code class="docutils literal notranslate"><span class="pre">td_poly3</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerAnalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../models.html">Parametric Models</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">rd_fourgaussian</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rd-fourgaussian">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">rd_fourgaussian</span></code><a class="headerlink" href="#rd-fourgaussian" title="Permalink to this headline">¶</a></h1>
+<p>Sum of four Gaussian distributions parametric model</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">rd_fourgaussian</span><span class="p">()</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">rd_fourgaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code> - Time axis (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Model parameters</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">B</span></code> - Model background (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">info</span></code> - Model information (struct)</li>
+</ul>
+</dd>
+</dl>
+<p>Model equation: <img class="math" src="../_images/math/111bacfab16cb8e50af6e09fe9c4ecf7f6704056.svg" alt="P(r) = A_1\sqrt{\frac{2}{\pi}}\frac{1}{\Gamma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\Gamma_1^2}\right) + A_2\sqrt{\frac{2}{\pi}}\frac{1}{\Gamma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\Gamma_2^2}\right) + A_3\sqrt{\frac{2}{\pi}}\frac{1}{\Gamma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\Gamma_3^2}\right) +  (1 - A_1 - A_2 - A_3)\sqrt{\frac{2}{\pi}}\frac{1}{\Gamma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\Gamma_4^2}\right)"/></p>
+<p>with <img class="math" src="../_images/math/3e308658f3a02eee69e51992615cdb0616e20761.svg" alt="\Gamma_i = w_i/\sqrt{2ln(2)}"/></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="25%" />
+<col width="9%" />
+<col width="8%" />
+<col width="9%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Symbol</th>
+<th class="head">Default</th>
+<th class="head">Lower</th>
+<th class="head">Upper</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>param(1)</td>
+<td><img class="math" src="../_images/math/5e4815a6454ac238e7d289b2f4fd69035f04b654.svg" alt="\left&lt;r_1\right&gt;"/></td>
+<td>2.5</td>
+<td>1.0</td>
+<td>20</td>
+<td>1st Gaussian mean distance</td>
+</tr>
+<tr class="row-odd"><td>param(2)</td>
+<td><img class="math" src="../_images/math/992a357338333368bc3d78583418b3033b9c0857.svg" alt="w_1"/></td>
+<td>0.5</td>
+<td>0.2</td>
+<td>5</td>
+<td>1st Gaussian FWHM</td>
+</tr>
+<tr class="row-even"><td>param(3)</td>
+<td><img class="math" src="../_images/math/744cec7f41b26cbbf9ebd311fac14a965cc2ff14.svg" alt="\left&lt;r_2\right&gt;"/></td>
+<td>3.0</td>
+<td>1.0</td>
+<td>20</td>
+<td>2nd Gaussian mean distance</td>
+</tr>
+<tr class="row-odd"><td>param(4)</td>
+<td><img class="math" src="../_images/math/52f0968514f104b80866f12f688399f3203b7970.svg" alt="w_2"/></td>
+<td>0.5</td>
+<td>0.2</td>
+<td>5</td>
+<td>2nd Gaussian FWHM</td>
+</tr>
+<tr class="row-even"><td>param(5)</td>
+<td><img class="math" src="../_images/math/b170ac218308bce94cb16840e014858e3adf46a7.svg" alt="\left&lt;r_3\right&gt;"/></td>
+<td>4.0</td>
+<td>1.0</td>
+<td>20</td>
+<td>3rd Gaussian mean distance</td>
+</tr>
+<tr class="row-odd"><td>param(6)</td>
+<td><img class="math" src="../_images/math/3825375057bb10ccf72577871e4a523fd2f9e6db.svg" alt="w_3"/></td>
+<td>0.5</td>
+<td>0.2</td>
+<td>5</td>
+<td>3rd Gaussian FWHM</td>
+</tr>
+<tr class="row-even"><td>param(7)</td>
+<td><img class="math" src="../_images/math/221f331f2f8b2148db713e66d0d513c219bd774c.svg" alt="\left&lt;r_4\right&gt;"/></td>
+<td>5.0</td>
+<td>1.0</td>
+<td>20</td>
+<td>4th Gaussian mean distance</td>
+</tr>
+<tr class="row-odd"><td>param(8)</td>
+<td><img class="math" src="../_images/math/166964176d6201231f0971d40f9542f2e58b2b17.svg" alt="w_4"/></td>
+<td>0.5</td>
+<td>0.2</td>
+<td>5</td>
+<td>4th Gaussian FWHM</td>
+</tr>
+<tr class="row-even"><td>param(9)</td>
+<td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
+<td>0.25</td>
+<td>0</td>
+<td>1</td>
+<td>1st Gaussian relative amplitude</td>
+</tr>
+<tr class="row-odd"><td>param(10)</td>
+<td><img class="math" src="../_images/math/0895ba57f5ee3dc17d18c9015f8ae860c5fd20ce.svg" alt="A_2"/></td>
+<td>0.25</td>
+<td>0</td>
+<td>1</td>
+<td>2nd Gaussian relative amplitude</td>
+</tr>
+<tr class="row-even"><td>param(10)</td>
+<td><img class="math" src="../_images/math/2989e2a30d2d883a78f663928e1b5ef7bb7fc4f7.svg" alt="A_3"/></td>
+<td>0.25</td>
+<td>0</td>
+<td>1</td>
+<td>3rd Gaussian relative amplitude</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">rd_fourgaussian</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">info.model</span></code> -  Full name of the parametric model.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.nparam</span></code> -  Total number of adjustable parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">rd_fourgaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computes the distance distribution model <code class="docutils literal notranslate"><span class="pre">P</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">r</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rd_fivegaussian.html" class="btn btn-neutral float-right" title="rd_fivegaussian" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rd_threegaussian.html" class="btn btn-neutral float-left" title="rd_threegaussian" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

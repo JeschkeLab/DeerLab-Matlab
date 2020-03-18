@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic experimental signal processing &mdash; DeerAnalysis2 2019 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/fancybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Experimental signal processing with validation" href="example_basicvalidation.html" />
+    <link rel="prev" title="Generating dipolar signals" href="example_generatesignals.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example_generatesignals.html">Generating dipolar signals</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Basic experimental signal processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_basicvalidation.html">Experimental signal processing with validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_fitting5pulseDEER.html">Fitting 5-pulse DEER data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_ridmeregularization.html">Processing RIDME with strong background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_multigauss.html">Multigauss fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_selectmodel.html">Parametric model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_timedomainfitting.html">Parametric time-domain model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_pararegcombination.html">Synchronous background and regularization fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_parametricglobalfit.html">Global fit of parametric time-domain model</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerAnalysis2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+        
+      <li>Basic experimental signal processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/luisfabib/DeerAnalysis2/blob/master/source/examples/example_basicprocessing.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-experimental-signal-processing">
+<span id="example-basicprocessing"></span><h1>Basic experimental signal processing<a class="headerlink" href="#basic-experimental-signal-processing" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%================================================================</span>
+<span class="c">% DeerAnalyis2</span>
+<span class="c">% Example: Basic experimental signal processing</span>
+<span class="c">%================================================================</span>
+
+<span class="n">clear</span><span class="p">,</span><span class="n">clc</span><span class="p">,</span><span class="n">clf</span>
+
+<span class="c">% Preparation</span>
+<span class="c">%----------------------------------------------</span>
+<span class="c">% Load experimental data</span>
+<span class="p">[</span><span class="n">traw</span><span class="p">,</span><span class="n">Vraw</span><span class="p">]</span> <span class="p">=</span> <span class="n">deerload</span><span class="p">(</span><span class="s">&#39;data/deer_broad_50K_4us&#39;</span><span class="p">);</span>
+<span class="c">% Use a reduced distance axis length to speed-up processing</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span> <span class="c">% nm</span>
+
+<span class="c">% Pre-processing</span>
+<span class="c">%----------------------------------------------</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">Vraw</span><span class="p">);</span>
+<span class="n">t</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">traw</span><span class="p">);</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+
+<span class="c">% Processing</span>
+<span class="c">%----------------------------------------------</span>
+<span class="c">% Fit background</span>
+<span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">lambda</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">td_strexp</span><span class="p">);</span>
+<span class="c">% Prepare regularization</span>
+<span class="n">KB</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+<span class="c">% Run fitting</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">KB</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;tikhonov&#39;</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">);</span>
+<span class="c">% Transform to time-domain</span>
+<span class="n">Vfit</span> <span class="p">=</span> <span class="n">KB</span><span class="o">*</span><span class="n">Pfit</span><span class="p">;</span>
+
+<span class="c">% Plotting</span>
+<span class="c">%----------------------------------------------</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">traw</span><span class="p">,</span><span class="nb">real</span><span class="p">(</span><span class="n">Vraw</span><span class="p">),</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">traw</span><span class="p">,</span><span class="nb">imag</span><span class="p">(</span><span class="n">Vraw</span><span class="p">),</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;time (\mus)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;experimental (Re)&#39;</span><span class="p">,</span><span class="s">&#39;experimental (Im)&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;time (\mus)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;pre-processed&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;distance (nm)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../_images/example_basicprocessing.svg" src="../_images/example_basicprocessing.svg" /></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example_basicvalidation.html" class="btn btn-neutral float-right" title="Experimental signal processing with validation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example_generatesignals.html" class="btn btn-neutral float-left" title="Generating dipolar signals" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

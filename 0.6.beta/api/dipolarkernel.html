@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dipolarkernel &mdash; DeerAnalysis  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="dipolarsignal" href="dipolarsignal.html" />
+    <link rel="prev" title="deerload" href="deerload.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="apt.html"><code class="docutils literal notranslate"><span class="pre">apt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="aptkernel.html"><code class="docutils literal notranslate"><span class="pre">aptkernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="backgroundstart.html"><code class="docutils literal notranslate"><span class="pre">backgroundstart</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctphase.html"><code class="docutils literal notranslate"><span class="pre">correctphase</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctscale.html"><code class="docutils literal notranslate"><span class="pre">correctscale</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="correctzerotime.html"><code class="docutils literal notranslate"><span class="pre">correctzerotime</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="deerload.html"><code class="docutils literal notranslate"><span class="pre">deerload</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">dipolarkernel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="dipolarsignal.html"><code class="docutils literal notranslate"><span class="pre">dipolarsignal</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fftspec.html"><code class="docutils literal notranslate"><span class="pre">fftspec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitbackground.html"><code class="docutils literal notranslate"><span class="pre">fitbackground</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitmultigauss.html"><code class="docutils literal notranslate"><span class="pre">fitmultigauss</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitparamodel.html"><code class="docutils literal notranslate"><span class="pre">fitparamodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitregmodel.html"><code class="docutils literal notranslate"><span class="pre">fitregmodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="longpass.html"><code class="docutils literal notranslate"><span class="pre">longpass</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mixmodels.html"><code class="docutils literal notranslate"><span class="pre">mixmodels</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="noiselevel.html"><code class="docutils literal notranslate"><span class="pre">noiselevel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="obir.html"><code class="docutils literal notranslate"><span class="pre">obir</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="overtones.html"><code class="docutils literal notranslate"><span class="pre">overtones</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="paramodel.html"><code class="docutils literal notranslate"><span class="pre">paramodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prepvalidation.html"><code class="docutils literal notranslate"><span class="pre">prepvalidation</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regoperator.html"><code class="docutils literal notranslate"><span class="pre">regoperator</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="regparamrange.html"><code class="docutils literal notranslate"><span class="pre">regparamrange</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="selectmodel.html"><code class="docutils literal notranslate"><span class="pre">selectmodel</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="selregparam.html"><code class="docutils literal notranslate"><span class="pre">selregparam</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensitivan.html"><code class="docutils literal notranslate"><span class="pre">sensitivan</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="suppressghost.html"><code class="docutils literal notranslate"><span class="pre">suppressghost</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time2dist.html"><code class="docutils literal notranslate"><span class="pre">time2dist</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="time2freq.html"><code class="docutils literal notranslate"><span class="pre">time2freq</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="whitenoise.html"><code class="docutils literal notranslate"><span class="pre">whitegaussnoise</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="winlowpass.html"><code class="docutils literal notranslate"><span class="pre">winlowpass</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerAnalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../functions.html">Functions</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">dipolarkernel</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dipolarkernel">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dipolarkernel</span></code><a class="headerlink" href="#dipolarkernel" title="Permalink to this headline">¶</a></h1>
+<p>Computes the dipolar interaction kernel <img class="math" src="../_images/math/970d58dfe30d97dba4e714f2f68a78194339b2e7.svg" alt="\mathbf{K}"/> for the linear transformation <img class="math" src="../_images/math/1bf2271d81a54355635138def8215e25536ff8db.svg" alt="\mathbf{S}=\mathbf{K}\mathbf{P}"/> from a distance-domain distribution <img class="math" src="../_images/math/2e1b9128d3c9b8fb56d099ad56863fd3a9137bb9.svg" alt="\mathbf{P}"/> to a time-domain signal <img class="math" src="../_images/math/6008247ed025b01a947d2b56c315fad4c111c13c.svg" alt="\mathbf{S}"/>.</p>
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code> - Time axis vector (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code> -  Distance axis vector (M-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambda</span></code> - Modulation depth (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">B</span></code> -  Background function vector (N-array)</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">K</span></code> - Dipolar kernel (NxM-matrix)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">K</span></code> for the transformation to the dipolar evolution function from the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> and distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code>. The output kernel will not contain the background function.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The function automatically detects the units of the inputs. The time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> can be passed both in <img class="math" src="../_images/math/9d1812efd1e10bae20f202a5c8b9469322725267.svg" alt="\mu s"/> and <img class="math" src="../_images/math/d5053dc8b2467444c8a9037b34187adc64aa5249.svg" alt="ns"/> and the distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code> both in <img class="math" src="../_images/math/574539893dcf6f814e6ee4f9dbd40a2d71dfb784.svg" alt="nm"/> and Angstrom.</p>
+</div>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Since the dipolar kernel is normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/>, in order to obtain the correct time-domain signal with <code class="docutils literal notranslate"><span class="pre">S=K*P</span></code>, the distance distribution must be properly normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/> as well.</p>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the background <code class="docutils literal notranslate"><span class="pre">B</span></code> and modulation depth <code class="docutils literal notranslate"><span class="pre">lambda</span></code> are specified, then the background is included into the kernel function. Therefore, linear transformation of distance distributions using this kernel will yield the form factor with the background function.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">If the dipolar kernel includes the background function, the form factor should not be background corrected.</p>
+</div>
+</div>
+<div class="section" id="optional-arguments">
+<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
+<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="c">...)</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="c">...)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>ExcitationBandwidth</dt>
+<dd><p class="first">Excitation bandwith of the pulses in <strong>MHz</strong>. If specified, its value is used in the compensation of limited excitation bandwidth of the experimental pulses. If not specified infinite excitation bandwidth is assumed. The compensation for a given excitation bandwidth <img class="math" src="../_images/math/9ccba61f6fd5c2b926b897f756af9c60f61cd012.svg" alt="\Delta\omega"/> is taken into account by the approximation <a class="footnote-reference" href="#id3" id="id2">[1]</a></p>
+<div class="math">
+<p><img src="../_images/math/a7b5e7f1e6d09649356a96158c5b77d0f1dc4d97.svg" alt="K(t,r,\Delta\omega)  = exp\left(-\frac{\omega_{dd}^2}{\Delta\omega^2}\right)K(t,r)"/></p>
+</div><p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;ExcitationBandwidth&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span> <span class="c">%Correct for 50 MHz excitation bandwidth</span>
+</pre></div>
+</div>
+</dd>
+<dt>OvertoneCoeffs</dt>
+<dd><p class="first">1D-Array containing the overtone coefficients for RIDME experimens. If passed, the dipolar kernel overtones are calculated based on the passed coefficients. The coefficient values must be normalized. The kernel containing up to the <img class="math" src="../_images/math/4047168aa989d7d2ccdbe51f5f498b42234f0a09.svg" alt="K^{th}"/> overtone is constructed as follows</p>
+<div class="math">
+<p><img src="../_images/math/66b4d48609de5a1737fd11df150e137992ef9d05.svg" alt="K(t,r)  = \int_{0}^{\pi/2}\sum_{k=1}^K P_k\cos\left[(3\cos^2\theta -1)k\frac{\mu_0\hbar\gamma_A\gamma_B}{4\pi r^3}t\right]\sin\theta d\theta"/></p>
+</div><p>where <img class="math" src="../_images/math/5fde09a8bd2c6c2bbd322d3f2a0a5f74b3abfd4c.svg" alt="P_k"/> are the overtone coefficients passed as arguments.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;OvertoneCoeffs&#39;</span><span class="p">,[</span><span class="mf">0.4</span> <span class="mf">0.2</span> <span class="mf">0.4</span><span class="p">])</span>
+</pre></div>
+</div>
+</dd>
+<dt>gValue</dt>
+<dd><p class="first">Specifies the g-value of the electron spin center used to compute the dipolar frequencies from the given distance axis.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2.004602204236924</span></code></p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;gValue&#39;</span><span class="p">,</span><span class="mf">2.00</span><span class="p">)</span> <span class="c">%Use experimental g-value</span>
+</pre></div>
+</div>
+</dd>
+<dt>Method</dt>
+<dd><p class="first">Specifies the way the kernel is computed numerically.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'fresnel'</span></code> - Employs Fresnel integrals for the kernel calculation (fast).</li>
+<li><code class="docutils literal notranslate"><span class="pre">'explicit'</span></code> - Employs explicit powder averaging for the kernel calculation (slow).</li>
+</ul>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'fresnel'</span></code></p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;explicit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Knots</dt>
+<dd><p class="first">If the kernel is computed using the <code class="docutils literal notranslate"><span class="pre">explicit</span></code> powder averaging, this options specifies the number knots for the grid of powder orientations used for the powder averaging.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1001</span></code></p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;explicit&#39;</span><span class="p">,</span><span class="s">&#39;Knots&#39;</span><span class="p">,</span><span class="mi">2001</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>Interference</dt>
+<dd><blockquote class="first">
+<div>Relative amplitude and time shift pairs of the dipolar interferences in multipulse-DEER experiments. The background model can be passed as a last argument to include the time-shifted backgrounds.</div></blockquote>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Interference&#39;</span><span class="p">,[</span><span class="mf">0.34</span> <span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Interference&#39;</span><span class="p">,{</span><span class="mf">0.34</span> <span class="n">max</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="p">@</span><span class="n">td_strexp</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Banham et al., JMR 191, 2008, 202-218</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dipolarsignal.html" class="btn btn-neutral float-right" title="dipolarsignal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deerload.html" class="btn btn-neutral float-left" title="deerload" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

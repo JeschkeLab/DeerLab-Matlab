@@ -1,0 +1,301 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parametric model selection &mdash; DeerAnalysis  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parametric time-domain model fitting" href="example_timedomainfitting.html" />
+    <link rel="prev" title="Multigauss fitting" href="example_multigauss.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First Steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="example_generatesignals.html">Generating dipolar signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_basicprocessing.html">Basic experimental signal processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_basicvalidation.html">Experimental signal processing with validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_Lcurve.html">Selection Methods &amp; L-curve</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_fitting5pulseDEER.html">Fitting 5-pulse DEER data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_ridmeregularization.html">Processing RIDME with strong background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_multigauss.html">Multigauss fitting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parametric model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_timedomainfitting.html">Parametric time-domain model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_pararegcombination.html">Synchronous background and regularization fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="example_parametricglobalfit.html">Global fit of parametric time-domain model</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerAnalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../examples.html">Examples</a> &raquo;</li>
+        
+      <li>Parametric model selection</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parametric-model-selection">
+<span id="example-selectmodel"></span><h1>Parametric model selection<a class="headerlink" href="#parametric-model-selection" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%===========================================================</span>
+<span class="c">% DeerAnalyis2</span>
+<span class="c">% Example: Optimal parametric model selection</span>
+<span class="c">% Optimize the choice of parametric model for a given signal.</span>
+<span class="c">%===========================================================</span>
+
+<span class="n">clear</span><span class="p">,</span><span class="n">clc</span>
+
+<span class="c">%Parameters</span>
+<span class="c">%-------------------------</span>
+<span class="n">N</span> <span class="p">=</span> <span class="mi">300</span><span class="p">;</span>
+<span class="n">dt</span> <span class="p">=</span> <span class="mf">0.008</span><span class="p">;</span>
+<span class="n">param0</span> <span class="p">=</span> <span class="p">[</span><span class="mi">3</span> <span class="mf">0.3</span> <span class="mi">5</span> <span class="mf">0.3</span> <span class="mf">0.5</span><span class="p">];</span>
+<span class="n">NGauss</span> <span class="p">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="n">Models</span> <span class="p">=</span> <span class="p">{@</span><span class="n">rd_onerice</span><span class="p">,@</span><span class="n">rd_tworice</span><span class="p">,@</span><span class="n">rd_threerice</span><span class="p">,</span><span class="c">...</span>
+          <span class="p">@</span><span class="n">rd_onegaussian</span><span class="p">,@</span><span class="n">rd_twogaussian</span><span class="p">,@</span><span class="n">rd_threegaussian</span><span class="p">};</span>
+
+<span class="c">%Preparation</span>
+<span class="c">%-------------------------</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">dt</span><span class="o">*</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="n">time2dist</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">rd_twogaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param0</span><span class="p">);</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<span class="c">%Generate dipolar signal with noise</span>
+<span class="n">S</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;NoiseLevel&#39;</span><span class="p">,</span><span class="mf">0.1</span><span class="p">);</span>
+
+<span class="c">%Run parametric model selection</span>
+<span class="c">%-------------------------------</span>
+<span class="p">[</span><span class="n">optIdx</span><span class="p">,</span><span class="n">metric</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">Models</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">);</span>
+
+<span class="c">%Fit distance distribution with optimal model</span>
+<span class="p">[</span><span class="n">paramfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Models</span><span class="p">{</span><span class="n">optIdx</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">);</span>
+
+<span class="c">%Plot results</span>
+<span class="c">%-------------------------</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span><span class="n">clf</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">),</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">K</span><span class="o">*</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time [\mus]&#39;</span><span class="p">),</span> <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;S(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;Truth&#39;</span><span class="p">,</span><span class="s">&#39;Fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">),</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Distance [nm]&#39;</span><span class="p">),</span> <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;Truth&#39;</span><span class="p">,</span><span class="s">&#39;Fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">),</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span><span class="s">&#39;b-o&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;AIC&#39;</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on,axis</span> <span class="s">tight</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Metric&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">Models</span><span class="p">)</span>
+<span class="n">tags</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span> <span class="p">=</span> <span class="n">func2str</span><span class="p">(</span><span class="n">Models</span><span class="p">{</span><span class="nb">i</span><span class="p">});</span>
+<span class="n">end</span>
+<span class="s">set(gca,&#39;xtick&#39;,1:length(Models),&#39;xticklabel&#39;,tags)</span>
+<span class="n">xtickangle</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<img alt="../_images/example_selectmodel1.svg" src="../_images/example_selectmodel1.svg" /></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="example_timedomainfitting.html" class="btn btn-neutral float-right" title="Parametric time-domain model fitting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="example_multigauss.html" class="btn btn-neutral float-left" title="Multigauss fitting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
