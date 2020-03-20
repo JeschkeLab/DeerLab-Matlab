@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dipolarkernel &mdash; DeerAnalysis  documentation</title>
+  <title>dipolarkernel &mdash; DeerLab  documentation</title>
   
 
   
@@ -35,11 +35,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="dipolarsignal" href="dipolarsignal.html" />
     <link rel="prev" title="deerload" href="deerload.html" /> 
@@ -71,6 +67,17 @@
           
 
           
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.8.beta</option>
+        <option value="../../0.6.beta/api/dipolarkernel.html">0.6.beta</option>
+        <option value="../../develop/api/dipolarkernel.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -117,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DeerAnalysis</a>
+          <a href="../index.html">DeerLab</a>
         
       </nav>
 
@@ -207,7 +214,7 @@
 <div><div class="math">
 <p><img src="../_images/math/c69b330c8965ffe8d1f57dfe7bf5d7b82b6bdd55.svg" alt="\mathbf{K}\mathbf{P}  = \mathbf{D}"/></p>
 </div></div></blockquote>
-<p>Since the dipolar kernel is normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/>, in order to obtain the correct time-domain signal via <code class="docutils literal notranslate"><span class="pre">S=K*P</span></code>, the distance distribution must be properly normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/> as well. By default, all distribution <code class="docutils literal notranslate"><span class="pre">P</span></code> returned by DeerAnalysis are already normalized.</p>
+<p>Since the dipolar kernel is normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/>, in order to obtain the correct time-domain signal via <code class="docutils literal notranslate"><span class="pre">S=K*P</span></code>, the distance distribution must be properly normalized by <img class="math" src="../_images/math/2b39036dc8392ebdedb7e33a3b4dc9c630266dcd.svg" alt="\Delta r"/> as well. By default, all distribution <code class="docutils literal notranslate"><span class="pre">P</span></code> returned by DeerLab are already normalized.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
 </pre></div>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mixmodels &mdash; DeerAnalysis  documentation</title>
+  <title>mixmodels &mdash; DeerLab  documentation</title>
   
 
   
@@ -35,11 +35,7 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
-    <link rel="index" title="Index" href="../genindex.html" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="noiselevel" href="noiselevel.html" />
     <link rel="prev" title="longpass" href="longpass.html" /> 
@@ -71,6 +67,17 @@
           
 
           
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.8.beta</option>
+        <option value="../../0.6.beta/api/mixmodels.html">0.6.beta</option>
+        <option value="../../develop/api/mixmodels.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -117,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DeerAnalysis</a>
+          <a href="../index.html">DeerLab</a>
         
       </nav>
 
@@ -195,7 +202,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">({@</span><span class="n">model1</span><span class="p">,@</span><span class="n">model2</span><span class="p">,</span> <span class="p">..,</span> <span class="p">@</span><span class="n">modelN</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>Combines the parametric model function handles <code class="docutils literal notranslate"><span class="pre">model1</span></code>, <code class="docutils literal notranslate"><span class="pre">model2</span></code>, …,  <code class="docutils literal notranslate"><span class="pre">modelN</span></code> into a new parametric model function handle <code class="docutils literal notranslate"><span class="pre">newmodel</span></code>. The models must be passed as a cell array of function handles and the parametric models must be of the type as the models distributed in DeerAnalysis. The returned function handle can be used for parametric model fitting.</p>
+<p>Combines the parametric model function handles <code class="docutils literal notranslate"><span class="pre">model1</span></code>, <code class="docutils literal notranslate"><span class="pre">model2</span></code>, …,  <code class="docutils literal notranslate"><span class="pre">modelN</span></code> into a new parametric model function handle <code class="docutils literal notranslate"><span class="pre">newmodel</span></code>. The models must be passed as a cell array of function handles and the parametric models must be of the type as the models distributed in DeerLab. The returned function handle can be used for parametric model fitting.</p>
 <p>Information about the new model and its parameters can be accessed by</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">newmodel</span><span class="p">();</span>
 </pre></div>
