@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dd_fivegaussian &mdash; DeerLab  documentation</title>
+  <title>dd_threegauss &mdash; DeerLab  documentation</title>
   
 
   
@@ -41,8 +41,8 @@
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dd_gengaussian" href="dd_gengaussian.html" />
-    <link rel="prev" title="dd_fourgaussian" href="dd_fourgaussian.html" /> 
+    <link rel="next" title="dd_fourgauss" href="dd_fourgauss.html" />
+    <link rel="prev" title="dd_twogauss" href="dd_twogauss.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -146,7 +146,7 @@
         
           <li><a href="../models.html">Parametric Models</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">dd_fivegaussian</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">dd_threegauss</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,14 +163,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dd-fivegaussian">
-<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dd_fivegaussian</span></code><a class="headerlink" href="#dd-fivegaussian" title="Permalink to this headline">¶</a></h1>
-<p>Sum of five Gaussian distributions parametric model</p>
+  <div class="section" id="dd-threegauss">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dd_threegauss</span></code><a class="headerlink" href="#dd-threegauss" title="Permalink to this headline">¶</a></h1>
+<p>Sum of three Gaussian distributions parametric model</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_fivegaussian</span><span class="p">()</span>
-<span class="n">P</span> <span class="p">=</span> <span class="n">dd_fivegaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_threegauss</span><span class="p">()</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_threegauss</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -191,16 +191,16 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/bd48f648054446c31c4ae8900401c93e44b89060.svg" alt="P(r) = A_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + A_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + A_3\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right) +  A_4\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\sigma_4^2}\right) + (1 - A_1 - A_2 - A_3 - A_4)\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_5}\exp\left(-\frac{(r-\left&lt;r_5\right&gt;)^2}{\sigma_5^2}\right)"/></p>
+<p><img class="math" src="../_images/math/60acca94896a37228946fe7da4465e50019a80e0.svg" alt="P(r) = A_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + A_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + (1 - A_1 - A_2)\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right)"/></p>
 <p>with <img class="math" src="../_images/math/2ed3e60460e9629545b729c99a288aae48febd4c.svg" alt="\sigma_i = w_i/\sqrt{2ln(2)}"/></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="14%" />
+<col width="16%" />
 <col width="24%" />
 <col width="9%" />
 <col width="8%" />
 <col width="9%" />
-<col width="36%" />
+<col width="35%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Variable</th>
@@ -228,7 +228,7 @@
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
 <td><img class="math" src="../_images/math/744cec7f41b26cbbf9ebd311fac14a965cc2ff14.svg" alt="\left&lt;r_2\right&gt;"/></td>
-<td>3.0</td>
+<td>3.5</td>
 <td>1.0</td>
 <td>20</td>
 <td>2nd Gaussian mean distance</td>
@@ -242,7 +242,7 @@
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
 <td><img class="math" src="../_images/math/b170ac218308bce94cb16840e014858e3adf46a7.svg" alt="\left&lt;r_3\right&gt;"/></td>
-<td>3.5</td>
+<td>5.0</td>
 <td>1.0</td>
 <td>20</td>
 <td>3rd Gaussian mean distance</td>
@@ -255,70 +255,28 @@
 <td>3rd Gaussian FWHM</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(7)</span></code></td>
-<td><img class="math" src="../_images/math/221f331f2f8b2148db713e66d0d513c219bd774c.svg" alt="\left&lt;r_4\right&gt;"/></td>
-<td>4.5</td>
-<td>1.0</td>
-<td>20</td>
-<td>4th Gaussian mean distance</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(8)</span></code></td>
-<td><img class="math" src="../_images/math/166964176d6201231f0971d40f9542f2e58b2b17.svg" alt="w_4"/></td>
-<td>0.5</td>
-<td>0.2</td>
-<td>5</td>
-<td>4th Gaussian FWHM</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(9)</span></code></td>
-<td><img class="math" src="../_images/math/9b536304b3381dc8fa580d81d938f53f1aa4e7d3.svg" alt="\left&lt;r_5\right&gt;"/></td>
-<td>5.0</td>
-<td>1.0</td>
-<td>20</td>
-<td>5th Gaussian mean distance</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(10)</span></code></td>
-<td><img class="math" src="../_images/math/2a0def9f7fc8499aef6c698cbc48cfc5bf64c206.svg" alt="w_5"/></td>
-<td>0.5</td>
-<td>0.2</td>
-<td>5</td>
-<td>5th Gaussian FWHM</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(11)</span></code></td>
 <td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
-<td>0.2</td>
+<td>0.3</td>
 <td>0</td>
 <td>1</td>
 <td>1st Gaussian relative amplitude</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(12)</span></code></td>
-<td><img class="math" src="../_images/math/0895ba57f5ee3dc17d18c9015f8ae860c5fd20ce.svg" alt="A_2"/></td>
-<td>0.2</td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(8)</span></code>   :</td>
+<td>math:<img class="math" src="../_images/math/0895ba57f5ee3dc17d18c9015f8ae860c5fd20ce.svg" alt="A_2"/></td>
+<td>0.3</td>
 <td>0</td>
 <td>1</td>
 <td>2nd Gaussian relative amplitude</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(13)</span></code></td>
-<td><img class="math" src="../_images/math/2989e2a30d2d883a78f663928e1b5ef7bb7fc4f7.svg" alt="A_3"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>3rd Gaussian relative amplitude</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(14)</span></code></td>
-<td><img class="math" src="../_images/math/5d7527969d563ef47fc51614003cdd9fdb4130b8.svg" alt="A_4"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>4th Gaussian relative amplitude</td>
-</tr>
 </tbody>
 </table>
 <p>Example using default parameters:</p>
-<a class="reference internal image-reference" href="../_images/model_dd_fivegaussian.png"><img alt="../_images/model_dd_fivegaussian.png" src="../_images/model_dd_fivegaussian.png" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="../_images/model_dd_threegauss.png"><img alt="../_images/model_dd_threegauss.png" src="../_images/model_dd_threegauss.png" style="width: 40%;" /></a>
 </div>
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_fivegaussian</span><span class="p">()</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_threegauss</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
@@ -328,7 +286,7 @@
 <li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
 </ul>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_fivegaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_threegauss</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Computes the distance distribution model <code class="docutils literal notranslate"><span class="pre">P</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">r</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
@@ -343,10 +301,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dd_gengaussian.html" class="btn btn-neutral float-right" title="dd_gengaussian" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dd_fourgauss.html" class="btn btn-neutral float-right" title="dd_fourgauss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dd_fourgaussian.html" class="btn btn-neutral float-left" title="dd_fourgaussian" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dd_twogauss.html" class="btn btn-neutral float-left" title="dd_twogauss" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

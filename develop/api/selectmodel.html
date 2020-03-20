@@ -246,7 +246,7 @@
 <p><em>Default:</em> [<em>empty</em>] - Uses the model’s default upper bound values</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_onegaussian</span><span class="p">,@</span><span class="n">dd_onerice</span><span class="p">},</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Upper&#39;</span><span class="p">,{[</span><span class="mi">10</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">10</span> <span class="mi">2</span><span class="p">]})</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_onegauss</span><span class="p">,@</span><span class="n">dd_onerice</span><span class="p">},</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Upper&#39;</span><span class="p">,{[</span><span class="mi">10</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">10</span> <span class="mi">2</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -259,7 +259,7 @@
 <p><em>Default:</em> [<em>empty</em>] - Uses the model’s default lower bound values</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_onegaussian</span><span class="p">,@</span><span class="n">dd_onerice</span><span class="p">},</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Lower&#39;</span><span class="p">,{[</span><span class="mi">1</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mi">10</span> <span class="mf">0.2</span><span class="p">]})</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_onegauss</span><span class="p">,@</span><span class="n">dd_onerice</span><span class="p">},</span><span class="n">S</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Lower&#39;</span><span class="p">,{[</span><span class="mi">1</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mi">10</span> <span class="mf">0.2</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div></blockquote>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dd_onegaussian &mdash; DeerLab  documentation</title>
+  <title>dd_gengauss &mdash; DeerLab  documentation</title>
   
 
   
@@ -41,8 +41,8 @@
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dd_twogaussian" href="dd_twogaussian.html" />
-    <link rel="prev" title="Parametric Models" href="../models.html" /> 
+    <link rel="next" title="dd_skewgauss" href="dd_skewgauss.html" />
+    <link rel="prev" title="dd_fivegauss" href="dd_fivegauss.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -146,7 +146,7 @@
         
           <li><a href="../models.html">Parametric Models</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">dd_onegaussian</span></code></li>
+      <li><code class="docutils literal notranslate"><span class="pre">dd_gengauss</span></code></li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,14 +163,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="dd-onegaussian">
-<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dd_onegaussian</span></code><a class="headerlink" href="#dd-onegaussian" title="Permalink to this headline">¶</a></h1>
-<p>Gaussian distribution parametric model</p>
+  <div class="section" id="dd-gengauss">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dd_gengauss</span></code><a class="headerlink" href="#dd-gengauss" title="Permalink to this headline">¶</a></h1>
+<p>Generalized Gaussian distribution parametric model</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_onegaussian</span><span class="p">()</span>
-<span class="n">P</span> <span class="p">=</span> <span class="n">dd_onegaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_gengauss</span><span class="p">()</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gengauss</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -191,8 +191,9 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/3b928c2ef7d0a6d13ce84156d55901717eeb758d.svg" alt="P(r) = \sqrt{\frac{2}{\pi}}\frac{1}{\sigma}\exp\left(-\frac{(r-\left&lt;r\right&gt;)^2}{\sigma^2}\right)"/></p>
-<p>with <img class="math" src="../_images/math/de9f620dafa8f9df4f37c88b5ed0bb6b66c18385.svg" alt="\sigma = w/\sqrt{2ln(2)}"/></p>
+<a class="reference internal image-reference" href="../_images/model_scheme_dd_gengauss.png"><img alt="../_images/model_scheme_dd_gengauss.png" src="../_images/model_scheme_dd_gengauss.png" style="width: 40%;" /></a>
+<p><img class="math" src="../_images/math/ff657640e0af6555da6bff1146e803c3d35c55a3.svg" alt="P(r) = \frac{\beta}{2\sigma\Gamma(1/\beta)}\exp\left(-\left(\frac{(r-\left&lt;r\right&gt;)}{\sigma}\right)^\beta \right)"/></p>
+<p>with <img class="math" src="../_images/math/ec797692d2bdfede6dea3d9eecf366f3aa982362.svg" alt="\sigma = w/(2\sqrt{2ln(2)})"/></p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -226,15 +227,22 @@
 <td>5</td>
 <td>FWHM</td>
 </tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(2)</span></code></td>
+<td><img class="math" src="../_images/math/410a9d0df9c135dd73b269cba7ef04dcfd932b1f.svg" alt="\beta"/></td>
+<td>5.0</td>
+<td>0.25</td>
+<td>15</td>
+<td>Kurtosis</td>
+</tr>
 </tbody>
 </table>
 <p>Example using default parameters:</p>
-<a class="reference internal image-reference" href="../_images/model_dd_onegaussian.png"><img alt="../_images/model_dd_onegaussian.png" src="../_images/model_dd_onegaussian.png" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="../_images/model_dd_gengauss.png"><img alt="../_images/model_dd_gengauss.png" src="../_images/model_dd_gengauss.png" style="width: 40%;" /></a>
 </div>
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_onegaussian</span><span class="p">()</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_gengauss</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
@@ -244,7 +252,7 @@
 <li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
 </ul>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_onegaussian</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_gengauss</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Computes the distance distribution model <code class="docutils literal notranslate"><span class="pre">P</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">r</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
@@ -259,10 +267,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dd_twogaussian.html" class="btn btn-neutral float-right" title="dd_twogaussian" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dd_skewgauss.html" class="btn btn-neutral float-right" title="dd_skewgauss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../models.html" class="btn btn-neutral float-left" title="Parametric Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dd_fivegauss.html" class="btn btn-neutral float-left" title="dd_fivegauss" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
