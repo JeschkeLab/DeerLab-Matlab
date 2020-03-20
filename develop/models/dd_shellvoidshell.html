@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dd_shellvoidshell &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="bg_exp" href="bg_exp.html" />
+    <link rel="prev" title="dd_shellvoidsphere" href="dd_shellvoidsphere.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../models.html">Parametric Models</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">dd_shellvoidshell</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dd-shellvoidshell">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dd_shellvoidshell</span></code><a class="headerlink" href="#dd-shellvoidshell" title="Permalink to this headline">¶</a></h1>
+<p>Particles distributed on two spherical shells separated by a void</p>
+<hr class="docutils" />
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_shellvoidshell</span><span class="p">()</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_shellvoidshell</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code> - Distance axis (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Model parameters</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">P</span></code> - Distance distribution (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">info</span></code> - Model information (struct)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/model_scheme_dd_shellvoidshell.png"><img alt="../_images/model_scheme_dd_shellvoidshell.png" src="../_images/model_scheme_dd_shellvoidshell.png" style="width: 25%;" /></a>
+<p><img class="math" src="../_images/math/2fe8bf6a94e3257b50ed11a46ae90475bfc93c0d.svg" alt="P(r) = \left(R_1^3((R_3^3 - R_1^3)P_\mathrm{BS}(r|R_1,R_3) - (R_4^3 - R_1^3)P_\mathrm{BS}(r|R_1,R_4)) + R_2^3((R_4^3 - R_2^3)P_\mathrm{BS}(r|R_2,R_4) - (R_3^3 - R_2^3)P_\mathrm{BS}(r|R_2,R_3)) \right)/((R_4^3 - R_3^3)(R_2^3 - R_1^3))"/></p>
+<p>with</p>
+<p><img class="math" src="../_images/math/706c3093371a73de930621dfca9145588f1aa4f0.svg" alt="P_\mathrm{BS}(r|R_i,R_j) = \frac{3}{16R_i^3(R_j^3 - R_i^3)}\begin{cases} 12r^3R_i^2 - r^5  \quad \text{for} \quad 0\leq r &lt; \min(2R_i,R_j - R_i) \\ 8r^2(R_j^3 - R_i^3) - 3r(R_j^2 - R_i^2)^2 - 6r^3(R_j - R_i)(R_j + R_i) \quad \text{for} \quad R_j-R_i \leq r &lt; 2R_i \\ 16r^2R_i^3 \quad \text{for} \quad 2R_i\leq r &lt; R_j - R_i  \\  r^5 - 6r^3(R_j^2 + R_i^2) + 8r^2(R_j^3 + R_i^3) - 3r(R_j^2 - R1_2)^2 \quad \text{for} \quad \max(R_j-R_i,2R_i) \leq r &lt; R_i+R_j \\ 0 \quad \text{for} \quad \text{otherwise}  \end{cases}"/></p>
+<p>and</p>
+<p><img class="math" src="../_images/math/51c678938e5d858ed58f60c84cd14e9fa36f97d5.svg" alt="R_1 = R"/></p>
+<p><img class="math" src="../_images/math/20bd4e6a9c722e806bc1ec4fd693bdc7d1f6e0ae.svg" alt="R_2 = R + w_1"/></p>
+<p><img class="math" src="../_images/math/4837435ca14978204abc537c3bbda60b13910eb2.svg" alt="R_3 = R + w_1 + d"/></p>
+<p><img class="math" src="../_images/math/46e63d8fbcde6dc2d3fa792bd55a904a02c5e064.svg" alt="R_4 = R + w_1 + d + w_2"/></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="15%" />
+<col width="10%" />
+<col width="9%" />
+<col width="10%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable</th>
+<th class="head">Symbol</th>
+<th class="head">Default</th>
+<th class="head">Lower</th>
+<th class="head">Upper</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(1)</span></code></td>
+<td><img class="math" src="../_images/math/a00254b18ffa992f0ef19f6e6e095b83c8f85e94.svg" alt="R"/></td>
+<td>0.75</td>
+<td>0.1</td>
+<td>20</td>
+<td>Sphere radius</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(2)</span></code></td>
+<td><img class="math" src="../_images/math/992a357338333368bc3d78583418b3033b9c0857.svg" alt="w_1"/></td>
+<td>1.00</td>
+<td>0.1</td>
+<td>20</td>
+<td>1st Shell thickness</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
+<td><img class="math" src="../_images/math/52f0968514f104b80866f12f688399f3203b7970.svg" alt="w_2"/></td>
+<td>1.00</td>
+<td>0.1</td>
+<td>20</td>
+<td>2nd Shell thickness</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
+<td><img class="math" src="../_images/math/b9d10b54744d07746b97f53c55eb98046fd76c8c.svg" alt="d"/></td>
+<td>0.50</td>
+<td>0.1</td>
+<td>20</td>
+<td>Shell-Shell separation</td>
+</tr>
+</tbody>
+</table>
+<p>Example using default parameters:</p>
+<a class="reference internal image-reference" href="../_images/model_dd_shellvoidshell.png"><img alt="../_images/model_dd_shellvoidshell.png" src="../_images/model_dd_shellvoidshell.png" style="width: 40%;" /></a>
+</div>
+<hr class="docutils" />
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_shellvoidshell</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">info.model</span></code> -  Full name of the parametric model.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.nparam</span></code> -  Total number of adjustable parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
+</ul>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_shellvoidshell</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computes the distance distribution model <code class="docutils literal notranslate"><span class="pre">P</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">r</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>[1] D.R. Kattnig, D. Hinderberger, Journal of Magnetic Resonance, 230 (2013), 50-63.
+<a class="reference external" href="http://doi.org/10.1016/j.jmr.2013.01.007">DOI:  10.1016/j.jmr.2013.01.007</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="bg_exp.html" class="btn btn-neutral float-right" title="bg_exp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dd_shellvoidsphere.html" class="btn btn-neutral float-left" title="dd_shellvoidsphere" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Luis Fabregas Ibanez
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

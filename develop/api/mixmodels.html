@@ -202,7 +202,7 @@
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>If one mixes a single Gaussian model (2 parameters) with a WLC model (2 parameters) into a single model</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">({@</span><span class="n">rd_onegaussian</span><span class="p">,@</span><span class="n">rd_wormchain</span><span class="p">})</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">({@</span><span class="n">dd_onegaussian</span><span class="p">,@</span><span class="n">dd_wormchain</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>the resulting model <code class="docutils literal notranslate"><span class="pre">newmodel</span></code> will contain 5 parameters in the followig order: 1 amplitude parameter, the 2 single-Gaussian parameters and the 2 WLC parameters.</p>
