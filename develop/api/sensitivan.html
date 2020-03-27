@@ -181,9 +181,8 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">)</span>
-<span class="p">[</span><span class="n">stats</span><span class="p">,</span><span class="n">factors</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">)</span>
 <span class="p">[</span><span class="n">stats</span><span class="p">,</span><span class="n">factors</span><span class="p">,</span><span class="n">evals</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">)</span>
-<span class="p">[</span><span class="n">stats</span><span class="p">,</span><span class="n">factors</span><span class="p">,</span><span class="n">evals</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+<span class="p">[</span><span class="n">stats</span><span class="p">,</span><span class="n">factors</span><span class="p">,</span><span class="n">evals</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -201,8 +200,10 @@
 <li><code class="docutils literal notranslate"><span class="pre">.median</span></code> - Median of output the variables</li>
 <li><code class="docutils literal notranslate"><span class="pre">.mean</span></code> - Mean of the output variables</li>
 <li><code class="docutils literal notranslate"><span class="pre">.std</span></code> - Standard deviation of the output variables</li>
+<li><code class="docutils literal notranslate"><span class="pre">.p2</span></code> - 2nd percentile of the output variables</li>
 <li><code class="docutils literal notranslate"><span class="pre">.p25</span></code> - 25th percentile of the output variables</li>
 <li><code class="docutils literal notranslate"><span class="pre">.p75</span></code> - 75th percentile of the output variables</li>
+<li><code class="docutils literal notranslate"><span class="pre">.p98</span></code> - 98th percentile of the output variables</li>
 </ul>
 </div></blockquote>
 </li>
@@ -235,7 +236,8 @@
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>From the evaluation of all level-combinations an ensemble of outputs is obtained on which statistical estimators are used. The summary of these statistics is returned in the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure. This summary contains the mean, median, standard deviation, 75th-percentile and 25th-percentile values for all outputs.</p>
+<p>From the evaluation of all level-combinations an ensemble of outputs is obtained on which statistical estimators are used. The summary of these statistics is returned in the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure. This summary contains the mean, median, standard deviation, 98t, 75th, 25th and 2nd percentile values for all outputs.</p>
+<p>The range defined by the 25th and 75th percentiles is known as the inter-quartile range and contains 50% of all cases around the median. The range between the 2nd and 98th percentiles contains 99% of all cases around the median.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">stats</span><span class="p">,</span><span class="n">factors</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">)</span>
 </pre></div>
@@ -248,10 +250,10 @@
 <p>Additionally, a last output argument <code class="docutils literal notranslate"><span class="pre">evals</span></code> can be requested, a cell array, containing the <code class="docutils literal notranslate"><span class="pre">fcn</span></code> outputs evaluated at each parameter combination.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">valpar</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">)</span>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
@@ -261,7 +263,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">,</span><span class="s">&#39;RandPerm&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RandPerm&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -270,11 +272,11 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'AxisHandle'</span></code> - Plot intermediate results</dt>
-<dd><p class="first">Axis handle to plot the state of the validation results at each level combination.</p>
+<dd><p class="first">Axis handle to plot the state of the validation results at each level combination. The display is refreshed every 5 level cobinations (for the sake of speed).</p>
 <p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">,</span><span class="s">&#39;AxisHandle&#39;</span><span class="p">,</span><span class="n">gca</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;AxisHandle&#39;</span><span class="p">,</span><span class="n">gca</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -289,7 +291,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">false</span></code> (if enough memory available) <code class="docutils literal notranslate"><span class="pre">true</span></code> (if not enough memory available)</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">varpar</span><span class="p">,</span><span class="s">&#39;dynamicStats&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">median</span><span class="p">,</span><span class="n">iqr</span><span class="p">]</span> <span class="p">=</span> <span class="n">sensitivan</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;dynamicStats&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

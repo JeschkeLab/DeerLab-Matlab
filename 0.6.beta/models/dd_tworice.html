@@ -209,8 +209,10 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/3394408b80c88d5b3163ad012074f22a47ffa99d.svg" alt="P(r) = \frac{r}{\sigma_1^2}\exp\left(-\frac{(r^2+\left&lt;r_1\right&gt;^2)}{2\sigma_1^2}\right)I_0\left(\frac{r\left&lt;r_1\right&gt;}{\sigma_1^2} \right) + (1 - A_1) \frac{r}{\sigma_2^2}\exp\left(-\frac{(r^2+\left&lt;r_2\right&gt;^2)}{2\sigma_2^2}\right)I_0\left(\frac{r\left&lt;r_2\right&gt;}{\sigma_2^2} \right)"/></p>
-<p>where <img class="math" src="../_images/math/97098b6e7fa1a4c13de4284074b0d36cbc7f187c.svg" alt="I_0(x)"/> is the modified Bessel function of the first kind with order zero.</p>
+<p><img class="math" src="../_images/math/1e8d3e5dac7593e8646d254dcc68f97ae928469f.svg" alt="P(r) = A_1 R(r,\nu_1,\sigma_1) + (1-A_1) R(r,\nu_2,\sigma_2)"/></p>
+<p><img class="math" src="../_images/math/6d0392126ab3e8c39966a1e53ec04d24e225a46b.svg" alt="R(r,\nu,\sigma) = \frac{\nu^{n/2-1}}{\sigma^2}r^{n/2}\exp\left(-\frac{(r^2+\nu^2)}{2\sigma^2}\right)I_{n/2-1}\left(\frac{r\nu}{\sigma^2} \right)"/></p>
+<p>where <img class="math" src="../_images/math/17c82847c57fff9f831a1bf935975491d5ce5d33.svg" alt="n=3"/> and <img class="math" src="../_images/math/942744093cfed8167cbfece38cf958a99b2e6f46.svg" alt="I_{n/2-1}(x)"/> is the modified Bessel function of the first kind with order <img class="math" src="../_images/math/5990638f4aef06fe2c0c275720e4ee6727b9da83.svg" alt="n/2-1"/>.
+This is a three-dimensional non-central chi distribution, the 3D generalization of the 2D Rice distribution.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="15%" />
@@ -231,39 +233,39 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(1)</span></code></td>
-<td><img class="math" src="../_images/math/5e4815a6454ac238e7d289b2f4fd69035f04b654.svg" alt="\left&lt;r_1\right&gt;"/></td>
+<td><img class="math" src="../_images/math/cf8309a008485e87a37a1f328ad8b0c9ef063033.svg" alt="\nu_1"/></td>
 <td>2.5</td>
 <td>1.0</td>
 <td>10</td>
-<td>1st Rician mean distance</td>
+<td>1st mean distance</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(2)</span></code></td>
 <td><img class="math" src="../_images/math/d222dc0cd47ced05a69795d4f9f8bd681cb5cf7b.svg" alt="\sigma_1"/></td>
 <td>0.4</td>
 <td>0.1</td>
 <td>5</td>
-<td>1st Rician standard deviation</td>
+<td>1st standard deviation</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
-<td><img class="math" src="../_images/math/744cec7f41b26cbbf9ebd311fac14a965cc2ff14.svg" alt="\left&lt;r_2\right&gt;"/></td>
+<td><img class="math" src="../_images/math/befe3d4e546310a206f0a743b383d66ad830fd18.svg" alt="\nu_2"/></td>
 <td>4.0</td>
 <td>1.0</td>
 <td>10</td>
-<td>2nd Rician mean distance</td>
+<td>2nd mean distance</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
 <td><img class="math" src="../_images/math/b97d12e01f1724ae73034f757af071455c55425f.svg" alt="\sigma_2"/></td>
 <td>0.4</td>
 <td>0.1</td>
 <td>5</td>
-<td>2nd Rician standard deviation</td>
+<td>2nd standard deviation</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
 <td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
 <td>0.5</td>
 <td>0</td>
 <td>1</td>
-<td>1st Rician relative amplitude</td>
+<td>fraction of 1st component</td>
 </tr>
 </tbody>
 </table>

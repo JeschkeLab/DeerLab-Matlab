@@ -219,8 +219,10 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/7f4002a3f8fba94d71d669210774d6fc00d19d89.svg" alt="P(r) = \frac{r}{\sigma_1^2}\exp\left(-\frac{(r^2+\left&lt;r_1\right&gt;^2)}{2\sigma_1^2}\right)I_0\left(\frac{r\left&lt;r_1\right&gt;}{\sigma_1^2} \right) + A_2\frac{r}{\sigma_2^2}\exp\left(-\frac{(r^2+\left&lt;r_2\right&gt;^2)}{2\sigma_2^2}\right)I_0\left(\frac{r\left&lt;r_2\right&gt;}{\sigma_2^2} \right) + (1-A_1-A_2)\frac{r}{\sigma_3^2}\exp\left(-\frac{(r^2+\left&lt;r_3\right&gt;^2)}{2\sigma_3^2}\right)I_0\left(\frac{r\left&lt;r_3\right&gt;}{\sigma_3^2} \right)"/></p>
-<p>where <img class="math" src="../_images/math/97098b6e7fa1a4c13de4284074b0d36cbc7f187c.svg" alt="I_0(x)"/> is the modified Bessel function of the first kind with order zero.</p>
+<p><img class="math" src="../_images/math/bb2283de0cfed0de2f6932cce40febb3024b842a.svg" alt="P(r) = A_1 R(r,\nu_1,\sigma_1) + A_2 R(r,\nu_2,\sigma_2) + (1-A_1-A_2) R(r,\nu_3,\sigma_3)"/></p>
+<p><img class="math" src="../_images/math/6d0392126ab3e8c39966a1e53ec04d24e225a46b.svg" alt="R(r,\nu,\sigma) = \frac{\nu^{n/2-1}}{\sigma^2}r^{n/2}\exp\left(-\frac{(r^2+\nu^2)}{2\sigma^2}\right)I_{n/2-1}\left(\frac{r\nu}{\sigma^2} \right)"/></p>
+<p>where <img class="math" src="../_images/math/17c82847c57fff9f831a1bf935975491d5ce5d33.svg" alt="n=3"/> and <img class="math" src="../_images/math/942744093cfed8167cbfece38cf958a99b2e6f46.svg" alt="I_{n/2-1}(x)"/> is the modified Bessel function of the first kind with order <img class="math" src="../_images/math/5990638f4aef06fe2c0c275720e4ee6727b9da83.svg" alt="n/2-1"/>.
+This is a three-dimensional non-central chi distribution, the 3D generalization of the 2D Rice distribution.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />

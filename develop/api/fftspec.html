@@ -212,10 +212,10 @@
 <p>If two output arguments are requested, the frequency axis <code class="docutils literal notranslate"><span class="pre">nu</span></code> is returned as well.</p>
 </div>
 <hr class="docutils" />
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="c">...)</span>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
@@ -230,7 +230,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">abs</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Type&#39;</span><span class="p">,</span><span class="s">&#39;real&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Type&#39;</span><span class="p">,</span><span class="s">&#39;real&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -243,7 +243,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2*length(S)</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;ZeroFilling&#39;</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spec</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ZeroFilling&#39;</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

@@ -176,7 +176,7 @@
             
   <div class="section" id="dipolarkernel">
 <span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dipolarkernel</span></code><a class="headerlink" href="#dipolarkernel" title="Permalink to this headline">¶</a></h1>
-<p>Computes the dipolar kernel matrix <code class="docutils literal notranslate"><span class="pre">K</span></code> that transforms a distance distribution <code class="docutils literal notranslate"><span class="pre">P</span></code> to a time-domain dipolar signal <code class="docutils literal notranslate"><span class="pre">D</span></code> via <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">K*P</span></code>.</p>
+<p>Computes the dipolar kernel matrix  that transforms a distance distribution to a time-domain dipolar signal.</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
@@ -194,7 +194,7 @@
 <li><code class="docutils literal notranslate"><span class="pre">t</span></code>        - Time axis vector (<em>N</em>-element array), in microseconds</li>
 <li><code class="docutils literal notranslate"><span class="pre">r</span></code>        - Distance axis vector (<em>M</em>-element array), in nanometers</li>
 <li><code class="docutils literal notranslate"><span class="pre">lambda</span></code>   - Modulation depth (scalar)</li>
-<li><code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> - Array of modulation depths, refocusing times, and harmonics (<em>px2</em> or <em>px3</em> array) for all pathways</li>
+<li><code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> - Modulation depths, refocusing times, and harmonics (<em>px2</em> or <em>px3</em> array) for multiple dipolar pathways</li>
 <li><code class="docutils literal notranslate"><span class="pre">B</span></code>        - Background, either vector of values (<em>N</em>-element array) or function handle</li>
 </ul>
 </dd>
@@ -221,7 +221,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If the modulation depth <code class="docutils literal notranslate"><span class="pre">lambda</span></code> is specified, then it is included into the kernel matrix. <code class="docutils literal notranslate"><span class="pre">K</span></code> then describes the transformation from the distance distribution to the form factor <img class="math" src="../_images/math/12375c0b63626372bb53f970422bbbf888b2a1f2.svg" alt="\mathbf{F}"/> given by</p>
+<p>If the modulation depth <code class="docutils literal notranslate"><span class="pre">lambda</span></code> (a number between 0 and 1) is specified, then it is included into the kernel matrix. <code class="docutils literal notranslate"><span class="pre">K</span></code> then describes the transformation from the distance distribution to a time-domain signal <img class="math" src="../_images/math/f11108f9246387772dca9f482bc3f49075335b8a.svg" alt="\mathbf{V}"/> that includes a constant offset of amplitude <img class="math" src="../_images/math/21dd856b01a8c4549861224cca8d5da5d7570aed.svg" alt="1-\lambda"/>, and dipolar modulation with amplitude <img class="math" src="../_images/math/76f1d8ace30435987c01a00ca53a71cba1f40e6c.svg" alt="\lambda"/>:</p>
 <blockquote>
 <div><div class="math">
 <p><img src="../_images/math/55fe1ad1f5c8ae372482f3f6cf93c732aaedcc83.svg" alt="\mathbf{K}\mathbf{P}  = \mathbf{F} = (1-\lambda) + \lambda \mathbf{D}"/></p>
@@ -230,7 +230,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If the background <code class="docutils literal notranslate"><span class="pre">B</span></code> and modulation depth <code class="docutils literal notranslate"><span class="pre">lambda</span></code> are specified, then both are included into the kernel matrix. <code class="docutils literal notranslate"><span class="pre">B</span></code> can be either an array with the precalculated background decay, or a function handle with a background model. <code class="docutils literal notranslate"><span class="pre">K</span></code> describes the transformation from the distance distribution to the dipolar signal <img class="math" src="../_images/math/f11108f9246387772dca9f482bc3f49075335b8a.svg" alt="\mathbf{V}"/> given by</p>
+<p>If the background <code class="docutils literal notranslate"><span class="pre">B</span></code> and modulation depth <code class="docutils literal notranslate"><span class="pre">lambda</span></code> are specified, then both are included into the kernel matrix. <code class="docutils literal notranslate"><span class="pre">B</span></code> can be either an array with the precalculated background decay (over <code class="docutils literal notranslate"><span class="pre">t</span></code>), or a function handle with a background model. <code class="docutils literal notranslate"><span class="pre">K</span></code> describes the transformation from the distance distribution to the dipolar signal <img class="math" src="../_images/math/f11108f9246387772dca9f482bc3f49075335b8a.svg" alt="\mathbf{V}"/> given by</p>
 <blockquote>
 <div><div class="math">
 <p><img src="../_images/math/3dee3495e565f24defaa6adaa7a300e6a58aa6cb.svg" alt="\mathbf{K}\mathbf{P}  = \mathbf{V} = [(1-\lambda) + \lambda \mathbf{D} ]\mathbf{B}"/></p>
@@ -240,24 +240,46 @@
 <span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For a multi-pathway DEER signal (e.g, 4-pulse DEER with 2+1 contribution; 5-pulse DEER with 4-pulse DEER residual signal), <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> contains a list of modulation depths (amplitudes), refocusing times (in microseconds), and optional harmonics for all modulated pathway signals. Each row of <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> has two or three values: one amplitude, one time, and one harmonic (1 = fundamental, 2 = first overtone, etc.). For a pathway with unmodulated signal, set the refocusing time to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% three pathways, the first unmodulated, the second refocusing at time 0, the third at time 4 microseconds</span>
-<span class="n">pathinfo</span> <span class="p">=</span> <span class="p">[</span><span class="mf">0.3</span> <span class="n">NaN</span><span class="p">;</span> <span class="mf">0.6</span> <span class="mi">0</span><span class="p">;</span> <span class="mf">0.1</span> <span class="mi">4</span><span class="p">];</span>
-<span class="n">pathinfo</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda</span> <span class="n">T0</span><span class="p">];</span>
-<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>In the above example, the first pathway has a refocusing time of <code class="docutils literal notranslate"><span class="pre">NaN</span></code>, indicating that it is a constant offset.</p>
-<p>To specify the standard model for 4-pulse DEER with an unmodulated offset and a single dipolar pathway refocused at time 0, use</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.4</span><span class="p">;</span> <span class="c">% modulation depth</span>
+<p>For a multi-pathway DEER signal (e.g, 4-pulse DEER with 2+1 contribution; 5-pulse DEER with 4-pulse DEER residual signal, and more complicated experiments), <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> is a 2D array that contains a list of modulation depths (amplitudes), refocusing times (in microseconds), and optional harmonics for all modulated pathway signals.</p>
+<p>Each row of <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> contains two values: one modulation depth and one refocusing time. For a pathway with unmodulated signal, set the refocusing time to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<p>Optionally, the harmonic (1 = fundamental, 2 = first overtone, etc.) can be given as a third value in each row. This can be useful for modeling RIDME signals. If not given, the harmonic is 1 for all pathways.</p>
+<dl class="docutils">
+<dt>Example 1:</dt>
+<dd>To specify the standard model for 4-pulse DEER with an unmodulated offset and a single dipolar pathway that refocuses at time 0, use</dd>
+</dl>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.4</span><span class="p">;</span> <span class="c">% modulation depth main signal</span>
+
 <span class="n">pathinfo</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span> <span class="n">NaN</span><span class="p">;</span> <span class="n">lambda</span> <span class="s">0]</span><span class="p">;</span>
+
+    <span class="c">% alternative input</span>
+    <span class="n">pathinfo</span><span class="p">(</span><span class="mi">1</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span> <span class="n">NaN</span><span class="p">];</span>    <span class="c">% unmodulated part, gives offset</span>
+    <span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda</span> <span class="mi">0</span><span class="p">];</span>        <span class="c">% main modulation, refocusing at time zero</span>
+
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The shorthand input syntax <code class="docutils literal notranslate"><span class="pre">dipolarkernel(t,r,lambda)</span></code> is equivalent to this input.</p>
+<dl class="docutils">
+<dt>Example 2:</dt>
+<dd>To specify a more complete 4-pulse DEER model that includes the 2+1 contribution, use</dd>
+</dl>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Lambda0</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span>   <span class="c">% unmodulated part</span>
+<span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.4</span><span class="p">;</span>    <span class="c">% modulation depth main signal</span>
+<span class="n">lambda21</span> <span class="p">=</span> <span class="mf">0.1</span><span class="p">;</span>  <span class="c">% modulation depth 2+1 contribution</span>
+<span class="n">tau2</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>        <span class="c">% refocusing time of 2+1 contribution</span>
+
+<span class="n">pathinfo</span><span class="p">(</span><span class="mi">1</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">Lambda0</span>  <span class="n">NaN</span><span class="p">];</span>     <span class="c">% unmodulated part, gives offset</span>
+<span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda4</span>  <span class="mi">0</span><span class="p">];</span>       <span class="c">% main modulation, refocusing at time zero</span>
+<span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda21</span> <span class="n">tau2</span><span class="p">];</span>    <span class="c">% 2+1 modulation, refocusing at time tau2</span>
+
 <span class="n">K</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
+<hr class="docutils" />
 <div class="section" id="additional-settings">
 <h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
-<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -277,7 +299,7 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'OvertoneCoeffs'</span></code> - RIDME overtone coefficients</dt>
-<dd><p class="first">1D-Array containing the overtone coefficients for RIDME experimens. If passed, the dipolar kernel overtones are calculated based on the passed coefficients. The coefficient values must be normalized. The kernel containing up to the <img class="math" src="../_images/math/3af01b3f850c53aa06a7ef9878392efada5f2e71.svg" alt="k^{th}"/> overtone is constructed as follows</p>
+<dd><p class="first">1D array containing the overtone coefficients for RIDME experimens. If passed, the dipolar kernel overtones are calculated based on the passed coefficients. The coefficient values must be normalized. The kernel containing up to the <img class="math" src="../_images/math/3af01b3f850c53aa06a7ef9878392efada5f2e71.svg" alt="k^{th}"/> overtone is constructed as follows</p>
 <div class="math">
 <p><img src="../_images/math/ba4bf7b903ede0daa0ca6ca4f1e2d7d4b90f6ac7.svg" alt="K(t,r)  = \int_{0}^{1}\sum_{k=1}^K c_k\cos\left[(3\cos^2\theta -1)k\frac{\mu_0\hbar\gamma_A\gamma_B}{4\pi r^3}t\right]\mathrm{d} \cos\theta"/></p>
 </div><p>where <img class="math" src="../_images/math/f330e54fd76a21140c67b3893aa4b7cad3b99677.svg" alt="c_k"/> are the overtone coefficients passed as arguments.</p>

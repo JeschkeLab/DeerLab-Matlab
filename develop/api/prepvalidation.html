@@ -263,9 +263,9 @@
 </tbody>
 </table>
 </div>
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">varparam</span> <span class="p">=</span> <span class="n">prepvalidation</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -274,7 +274,7 @@
 <dd><p class="first">Specifies whether to randomly permute the validation parameters combinations.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
 <p><em>Example:</em></p>
-<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mean</span><span class="p">,</span><span class="n">std</span><span class="p">]</span> <span class="p">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">op</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="s">&#39;RandPerm&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">varparam</span> <span class="p">=</span> <span class="n">prepvalidation</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="s">&#39;RandPerm&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>

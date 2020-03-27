@@ -181,7 +181,7 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">model</span><span class="p">)</span>
-<span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+<span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -214,22 +214,22 @@
 <li><code class="docutils literal notranslate"><span class="pre">&#64;bg_sumstrexp</span></code> -  See <a class="reference internal" href="../models/bg_sumstrexp.html#bg-sumstrexp"><span class="std std-ref">bg_sumstrexp</span></a> for details.</li>
 <li><code class="docutils literal notranslate"><span class="pre">&#64;bg_poly1</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;bg_poly2</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;bg_poly3</span></code> - See <a class="reference internal" href="../models/bg_poly1.html#bg-poly1"><span class="std std-ref">bg_poly1</span></a>, <a class="reference internal" href="../models/bg_poly2.html#bg-poly2"><span class="std std-ref">bg_poly2</span></a> and <a class="reference internal" href="../models/bg_poly3.html#bg-poly3"><span class="std std-ref">bg_poly3</span></a>  for details.</li>
 </ul>
-<img alt="../_images/backgroundstart1.svg" src="../_images/backgroundstart1.svg" /></div>
+</div>
 <hr class="docutils" />
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span>  <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="c">...)</span>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span>  <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'RelSearchStart'</span></code> - Relative Search Start</dt>
-<dd><p class="first">Relative position at which the background start search starts.</p>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.1</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">'SearchStart'</span></code> - Relative Search Start</dt>
+<dd><p class="first">Time (in microseconds) at which the background search starts</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.1*max(t)</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;RelSearchStart&#39;</span><span class="p">,</span><span class="mf">0.25</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RelSearchStart&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -237,12 +237,12 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'RelSearchEnd'</span></code> - Relative Search End</dt>
-<dd><p class="first">Relative position at which the background start search stops.</p>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.6</span></code></p>
+<dt><code class="docutils literal notranslate"><span class="pre">'SearchEnd'</span></code> - Relative Search End</dt>
+<dd><p class="first">Time (in microseconds) at which the background search ends</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.6*max(t)</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;RelSearchEnd&#39;</span><span class="p">,</span><span class="mf">0.7</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RelSearchEnd&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -251,11 +251,11 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'EndCutOff'</span></code> - Signal cutoff</dt>
-<dd><p class="first">Maximal number of points to evaluate from the signal. Must be an integer value between <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">length(V)</span></code>. By default the whole signal is evaluated.</p>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">length(S)</span></code></p>
+<dd><p class="first">Time (in microseconds) after which the signal is no longer used for fitting By default the whole signal is evaluated.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">max(t)</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;EndCutOff&#39;</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">backgroundstart</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;EndCutOff&#39;</span><span class="p">,</span><span class="mf">6.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

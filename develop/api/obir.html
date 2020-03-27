@@ -181,7 +181,7 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
-<span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -216,10 +216,10 @@
 </ul>
 </div>
 <hr class="docutils" />
-<div class="section" id="optional-arguments">
-<h2>Optional Arguments<a class="headerlink" href="#optional-arguments" title="Permalink to this headline">¶</a></h2>
-<p>Optional arguments can be specified by parameter/value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed..</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="c">...)</span>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
@@ -229,7 +229,7 @@
 <p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;NoiseLevelAim&#39;</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;NoiseLevelAim&#39;</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -242,7 +242,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;RegOrder&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RegOrder&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -255,7 +255,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;DivergenceStop&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;DivergenceStop&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -269,7 +269,7 @@
 <div><p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">5000</span></code></p>
 <p><em>Example:</em></p>
 <blockquote>
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;MaxOuterIter&#39;</span><span class="p">,</span><span class="mf">1e5</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MaxOuterIter&#39;</span><span class="p">,</span><span class="mf">1e5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -283,7 +283,7 @@
 <p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;AxisHandle&#39;</span><span class="p">,</span><span class="n">gca</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;AxisHandle&#39;</span><span class="p">,</span><span class="n">gca</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -302,7 +302,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'fnnls'</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Solver&#39;</span><span class="p">,</span><span class="s">&#39;fmincon&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Solver&#39;</span><span class="p">,</span><span class="s">&#39;fmincon&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -315,7 +315,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e-9</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;TolFun&#39;</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;TolFun&#39;</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -328,7 +328,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2e7</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;MaxIter&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MaxIter&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -341,7 +341,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2e7</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;MaxFunEval&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">obir</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MaxFunEval&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
