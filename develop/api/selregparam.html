@@ -38,10 +38,12 @@
   <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="sensitivan" href="sensitivan.html" />
+    <link rel="next" title="regparamrange" href="regparamrange.html" />
     <link rel="prev" title="selectmodel" href="selectmodel.html" /> 
 </head>
 
@@ -100,16 +102,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -180,10 +224,10 @@
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
-<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
-<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
-<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">({</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
+<span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 <span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 <span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">res</span><span class="p">,</span><span class="n">pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
@@ -191,7 +235,7 @@
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">S</span></code> - Input signal (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Input signal (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">K</span></code> -  Dipolar kernel (<em>NxM</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">r</span></code> -  Distance axis (<em>M</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">type</span></code> - Regularization type (string)</li>
@@ -212,10 +256,10 @@
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns the optimal regularization parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from a range of regularization parameter candidates <code class="docutils literal notranslate"><span class="pre">alphas</span></code>. The parameter for the regularization type given by <code class="docutils literal notranslate"><span class="pre">'type'</span></code> is computed based on the input signal <code class="docutils literal notranslate"><span class="pre">S</span></code>, the dipolar kernel <code class="docutils literal notranslate"><span class="pre">K</span></code> and the regularization operator <code class="docutils literal notranslate"><span class="pre">L</span></code>. The method employed for the selection of the regularization parameter can be specified as the <code class="docutils literal notranslate"><span class="pre">'method'</span></code> input argument. The available regularization models specified by <code class="docutils literal notranslate"><span class="pre">'type'</span></code> are</p>
+<p>Returns the optimal regularization parameter <code class="docutils literal notranslate"><span class="pre">alpha</span></code> from a range of regularization parameter candidates <code class="docutils literal notranslate"><span class="pre">alphas</span></code>. The parameter for the regularization type given by <code class="docutils literal notranslate"><span class="pre">'type'</span></code> is computed based on the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code>, the dipolar kernel <code class="docutils literal notranslate"><span class="pre">K</span></code> and the regularization operator <code class="docutils literal notranslate"><span class="pre">L</span></code>. The method employed for the selection of the regularization parameter can be specified as the <code class="docutils literal notranslate"><span class="pre">'method'</span></code> input argument. The available regularization models specified by <code class="docutils literal notranslate"><span class="pre">'type'</span></code> are</p>
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">'tikhonov'</span></code> - Tikhonov regularization</li>
@@ -224,22 +268,22 @@
 </ul>
 </div></blockquote>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>If multiple selection methods are passed as a cell array of strings, the function returns <code class="docutils literal notranslate"><span class="pre">alpha</span></code> as an array of optimal regularization parameters corresponding to the input methods. The selection models functionals <code class="docutils literal notranslate"><span class="pre">selfcn</span></code> are also returned as a cell array of arrays containing the evaluated functionals of the requested models. The order of the output parameters corresponds to the order of the model strings in the input.</p>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">res</span><span class="p">,</span><span class="n">pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">res</span><span class="p">,</span><span class="n">pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,{</span><span class="s">&#39;method1&#39;</span><span class="p">,</span><span class="s">&#39;method2&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>The vector of evaluated residual <code class="docutils literal notranslate"><span class="pre">res</span></code> and penalty <code class="docutils literal notranslate"><span class="pre">pen</span></code> terms can be requested as additional outputs. They can be used, e.g. to build the L-curve.</p>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="n">selfcn</span><span class="p">,</span><span class="n">alphas</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;all&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Alternatively, the argument <code class="docutils literal notranslate"><span class="pre">'all'</span></code> can be passed, which will compute the optimal regularization parameter based on all the selection methods implemented in the function.</p>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">({</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;type&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Passing multiple signals/kernels enables selection of the regularization parameter for global fitting of the regularization model to a single distribution. The global fit weights are automatically computed according to their contribution to ill-posedness. The multiple signals are passed as a cell array of arrays of sizes <em>N1</em>, <em>N2</em>,… and a cell array of Kernel matrices with sizes <em>N1xM</em>, <em>N2xM</em>,… must be passed as well.</p>
@@ -348,7 +392,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">'grid'</span></code> - Systematic search over a grid of regularization parameter values, using the grid specified in <code class="docutils literal notranslate"><span class="pre">'Range'</span></code>.</li>
-<li><code class="docutils literal notranslate"><span class="pre">'golden'</span></code> - Golden-ratio search algorithm over the interval specified in <code class="docutils literal notranslate"><span class="pre">'Range'</span></code>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">'golden'</span></code> - Golden-ratio search algorithm over the interval specified in <code class="docutils literal notranslate"><span class="pre">'Range'</span></code>  (not compatible with the <code class="docutils literal notranslate"><span class="pre">lc</span></code> or <code class="docutils literal notranslate"><span class="pre">lr</span></code> selection methods).</li>
 </ul>
 </div></blockquote>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">golden</span></code></p>
@@ -376,7 +420,7 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'HuberParam'</span></code> - Huber parameter value</dt>
-<dd><p class="first">Value of the superparameter used in pseudo-Huber regularization.</p>
+<dd><p class="first">Value of the super-parameter used in pseudo-Huber regularization.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1.35</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
@@ -393,7 +437,7 @@
 <p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">alphas</span><span class="p">,{</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">S3</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">K3</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="s">&#39;tikhonov&#39;</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">alphas</span><span class="p">,{</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">V3</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">K3</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="s">&#39;tikhonov&#39;</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -451,7 +495,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="sensitivan.html" class="btn btn-neutral float-right" title="sensitivan" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="regparamrange.html" class="btn btn-neutral float-right" title="regparamrange" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="selectmodel.html" class="btn btn-neutral float-left" title="selectmodel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -463,7 +507,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>

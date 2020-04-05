@@ -35,9 +35,11 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="bg_prodstrexp" href="bg_prodstrexp.html" />
+    <link rel="next" title="Experiment models" href="../expmodels.html" />
     <link rel="prev" title="bg_strexp" href="bg_strexp.html" /> 
 </head>
 
@@ -107,16 +109,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../bgmodels.html">Background models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -162,7 +206,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../models.html">Parametric Models</a> &raquo;</li>
+          <li><a href="../bgmodels.html">Background models</a> &raquo;</li>
         
       <li><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></li>
     
@@ -295,7 +339,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bg_prodstrexp.html" class="btn btn-neutral float-right" title="bg_prodstrexp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../expmodels.html" class="btn btn-neutral float-right" title="Experiment models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="bg_strexp.html" class="btn btn-neutral float-left" title="bg_strexp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -307,7 +351,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>

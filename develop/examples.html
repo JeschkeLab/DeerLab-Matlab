@@ -38,6 +38,8 @@
   <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -100,16 +102,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="models.html">Parametric Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bgmodels.html">Background models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -174,89 +218,148 @@
             
   <div class="section" id="tutorials">
 <h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h1>
-<p>This is a collection of tutorials for the use of the DeerLab API. The tutorials cover topics from the basics of dipolar analysis to more advanced topics. You can download the individual tutorials in various formats by using the buttons located on top of each tutorial.</p>
+<p>This is a collection of tutorials and examples for the use of DeerLab. The tutorials cover topics from the basics of dipolar analysis to more advanced topics. You can download the individual tutorials in various formats by using the buttons located on top of each tutorial.</p>
+<hr class="docutils" />
+<div class="section" id="tutorials-basics">
+<h2>Tutorials - Basics<a class="headerlink" href="#tutorials-basics" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 </div>
-<br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/tutorials_basics.png"></div>
-  <div class="sectionTitle"><h3>Tutorials - Basics</h3></div>
-      <ul class="simple" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="examples/example_simulation_4deer.html#example_simulation_4deer">
-           <span class="std std-ref" style="font-family: Consolas">
-               Basics of 4-pulse DEER signal simulation (1)
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_simulation_4deer_part2.html#example_simulation_4deer_part2">
-           <span class="std std-ref" style="font-family: Consolas">
-               Basics of 4-pulse DEER signal simulation (2)
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_basicprocessing.html#example_basicprocessing">
-           <span class="std std-ref" style="font-family: Consolas">
-               Basic signal processing of experimental 4-pulse DEER data (Regularization)
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_basicprocessing_multigauss.html#example_basicprocessing_multigauss">
-           <span class="std std-ref" style="font-family: Consolas">
-               Basic signal processing of experimental 4-pulse DEER data (Multi-Gauss)
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_mixmodels_fitting.html#example_mixmodels_fitting">
-           <span class="std std-ref" style="font-family: Consolas">
-               Fitting a mixed distance-domain model
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_sensitivan_tikhonov_simple.html#example_sensitivan_tikhonov_simple">
-           <span class="std std-ref" style="font-family: Consolas">
-               Sensitivity analysis - Simple case with Tikhonov regularization
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_sensitivan_ridmecoeff.html#example_sensitivan_ridmecoeff">
-           <span class="std std-ref" style="font-family: Consolas">
-               Sensitivity analysis - RIDME overtone coefficients
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_pakepattern.html#example_pakepattern">
-           <span class="std std-ref" style="font-family: Consolas">
-               Computing the Pake pattern of a dipolar signal
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_aptsimple.html#example_aptsimple">
-           <span class="std std-ref" style="font-family: Consolas">
-               Simple processing with the approximate Pake transformation (APT)
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_backgroundtreatment.html#example_backgroundtreatment">
-           <span class="std std-ref" style="font-family: Consolas">
-               Comparison of background treatment approaches
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_visualization_lcurve.html#example_visualization_lcurve">
-           <span class="std std-ref" style="font-family: Consolas">
-               Visualization of the regularization parameter selection on the L-curve
-           </span></a> </li>
-      </ul>
-  </div><br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/tutorials_advanced.png"></div>
-  <div class="sectionTitle"><h3>Tutorials - Advanced</h3></div>
-      <ul class="simple" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="examples/example_timedomainfitting.html#example_timedomainfitting">
-           <span class="std std-ref" style="font-family: Consolas">
-               Fitting a custom time-domain model of a 4-pulse DEER signal
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_selectmodel.html#example_selectmodel">
-           <span class="std std-ref" style="font-family: Consolas">
-               Selecting an optimal parametric model for fitting a dipolar signal
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_globalfit_regularization.html#example_globalfit_regularization">
-           <span class="std std-ref" style="font-family: Consolas">
-               Global fit of a dipolar evolution function using regularization
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_globalfit_timedomain.html#example_globalfit_timedomain">
-           <span class="std std-ref" style="font-family: Consolas">
-               Global fit of a time-domain parameteric 4-pulse DEER dipolar signal
-           </span></a> </li>
-      <li><a class="reference internal" href="examples/example_bilevelopt_background.html#example_bilevelopt_background">
-           <span class="std std-ref" style="font-family: Consolas">
-               Bilevel optimization - Fitting background with a model-free distance distribution
-           </span></a> </li>
-      </ul>
-  </div>
-<br>
-<br>
-<br></div>
+<div class="limiter">
+<div class="container-table100">
+<div class="wrap-table100">
+<div class="table">
+
+
+        <div class="row" onclick="window.location='examples/example_simulation_4deer.html#example_simulation_4deer'">
+                <div class="cell">
+                        Basics of 4-pulse DEER signal simulation (1)
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_simulation_4deer_part2.html#example_simulation_4deer_part2'">
+                <div class="cell">
+                        Basics of 4-pulse DEER signal simulation (2)
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_basicprocessing.html#example_basicprocessing'">
+                <div class="cell">
+                        Basic signal processing of experimental 4-pulse DEER data (Regularization)
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_basicprocessing_multigauss.html#example_basicprocessing_multigauss'">
+                <div class="cell">
+                        Basic signal processing of experimental 4-pulse DEER data (Multi-Gauss)
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_mixmodels_fitting.html#example_mixmodels_fitting'">
+                <div class="cell">
+                        Fitting a mixed distance-domain model
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_sensitivan_tikhonov_simple.html#example_sensitivan_tikhonov_simple'">
+                <div class="cell">
+                        Sensitivity analysis - Simple case with Tikhonov regularization
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_sensitivan_ridmecoeff.html#example_sensitivan_ridmecoeff'">
+                <div class="cell">
+                        Sensitivity analysis - RIDME overtone coefficients
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_pakepattern.html#example_pakepattern'">
+                <div class="cell">
+                        Computing the Pake pattern of a dipolar signal
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_aptsimple.html#example_aptsimple'">
+                <div class="cell">
+                        Simple processing with the approximate Pake transformation (APT)
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_backgroundtreatment.html#example_backgroundtreatment'">
+                <div class="cell">
+                        Comparison of background treatment approaches
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_visualization_lcurve.html#example_visualization_lcurve'">
+                <div class="cell">
+                        Visualization of the regularization parameter selection on the L-curve
+                </div>
+        </div>
+
+</div>
+</div>
+</div>
+</div></div>
+<hr class="docutils" />
+<div class="section" id="tutorials-advanced">
+<h2>Tutorials - Advanced<a class="headerlink" href="#tutorials-advanced" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<div class="limiter">
+<div class="container-table100">
+<div class="wrap-table100">
+<div class="table">
+
+
+        <div class="row" onclick="window.location='examples/example_timedomainfitting.html#example_timedomainfitting'">
+                <div class="cell">
+                        Fitting a custom time-domain model of a 4-pulse DEER signal
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_selectmodel.html#example_selectmodel'">
+                <div class="cell">
+                        Selecting an optimal parametric model for fitting a dipolar signal
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_globalfit_regularization.html#example_globalfit_regularization'">
+                <div class="cell">
+                        Global fit of a dipolar evolution function using regularization
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_globalfit_timedomain.html#example_globalfit_timedomain'">
+                <div class="cell">
+                        Global fit of a time-domain parameteric 4-pulse DEER dipolar signal
+                </div>
+        </div>
+
+
+        <div class="row" onclick="window.location='examples/example_bilevelopt_background.html#example_bilevelopt_background'">
+                <div class="cell">
+                        Bilevel optimization - Fitting background with a model-free distance distribution
+                </div>
+        </div>
+
+</div>
+</div>
+</div>
+</div></div>
+</div>
 
 
            </div>
@@ -278,7 +381,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>

@@ -38,10 +38,12 @@
   <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="apt" href="api/apt.html" />
+    <link rel="next" title="dipolarkernel" href="api/dipolarkernel.html" />
     <link rel="prev" title="Bilevel optimization - Fitting background with a model-free distance distribution" href="examples/example_bilevelopt_background.html" /> 
 </head>
 
@@ -100,16 +102,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="bgmodels.html">Background models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -173,99 +217,194 @@
            <div itemprop="articleBody">
             
   <div class="section" id="functions">
-<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
-<p>This is the official documentation for the DeerLab toolbox functions. The following list contains the names of the different function and a brief description of their functionality. The parametric model functions are listed in a separate section (see <a class="reference internal" href="models.html#parametric-models"><span class="std std-ref">Parametric Models</span></a>).</p>
+<span id="id1"></span><h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<p>This is the official documentation for the DeerLab toolbox functions. The following list contains the names of the different function and a brief description of their functionality. The parametric model functions are listed in separate sections.</p>
+<div class="section" id="modeling">
+<h2>Modeling<a class="headerlink" href="#modeling" title="Permalink to this headline">¶</a></h2>
+<p>This class of functions allows simulation of dipolar signals and their modeling for fitting experimental data.</p>
 <div class="toctree-wrapper compound">
 </div>
-<br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/function_section_model.png"></div>
-  <div class="sectionTitle"><h3>Modelling</h3></div>
-      <ul class="functionsList" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="api/dipolarkernel.html#dipolarkernel"><span class="std std-ref" style="font-family: monospace;">dipolarkernel</span></a>
-      &nbsp - &nbsp Dipolar kernel contructor </li>
-      <li><a class="reference internal" href="api/aptkernel.html#aptkernel"><span class="std std-ref" style="font-family: monospace">aptkernel</span></a>
-      &nbsp - &nbsp APT kernel contructor </li>
-      <li><a class="reference internal" href="api/dipolarsignal.html#dipolarsignal"><span class="std std-ref" style="font-family: monospace">dipolarsignal</span></a>
-      &nbsp - &nbsp Dipolar signal simulator </li>
-      <li><a class="reference internal" href="api/whitenoise.html#whitenoise"><span class="std std-ref" style="font-family: monospace">whitegaussnoise</span></a>
-      &nbsp - &nbsp Gaussian white noise generator </li>
-      <li><a class="reference internal" href="api/mixmodels.html#mixmodels"><span class="std std-ref" style="font-family: monospace">mixmodels</span></a>
-      &nbsp - &nbsp Parametric model mixer </li>
-      </ul>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="api/dipolarkernel.html#dipolarkernel"><span class="std std-ref">dipolarkernel</span></a></td>
+<td>Dipolar kernel constructor</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/aptkernel.html#aptkernel"><span class="std std-ref">aptkernel</span></a></td>
+<td>APT kernel constructor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/dipolarsignal.html#dipolarsignal"><span class="std std-ref">dipolarsignal</span></a></td>
+<td>Dipolar signal simulator</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/whitenoise.html#whitegaussnoise"><span class="std std-ref">whitegaussnoise</span></a></td>
+<td>Gaussian white noise generator</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/paramodel.html#paramodel"><span class="std std-ref">paramodel</span></a></td>
+<td>Parametric model builder</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/mixmodels.html#mixmodels"><span class="std std-ref">mixmodels</span></a></td>
+<td>Parametric model mixer</td>
+</tr>
+</tbody>
+</table>
 </div>
-<br><br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/function_section_analysis.png"></div>
-  <div class="sectionTitle"><h3>Analysis</h3></div>
-      <ul class="functionsList" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="api/backgroundstart.html#backgroundstart"><span class="std std-ref" style="font-family: monospace">backgroundstart</span></a>
-      &nbsp - &nbsp Background fit start point optimizer </li>
-      <li><a class="reference internal" href="api/fitbackground.html#fitbackground"><span class="std std-ref" style="font-family: monospace">fitbackground</span></a>
-      &nbsp - &nbsp Background fitting engine </li>
-      <li><a class="reference internal" href="api/fitmultigauss.html#fitmultigauss"><span class="std std-ref" style="font-family: monospace">fitmultigauss</span></a>
-      &nbsp - &nbsp Multi-Gauss fitting engine </li>
-      <li><a class="reference internal" href="api/fitparamodel.html#fitparamodel"><span class="std std-ref" style="font-family: monospace">fitparamodel</span></a>
-      &nbsp - &nbsp Parametric model fitting engine </li>
-      <li><a class="reference internal" href="api/fitregmodel.html#fitregmodel"><span class="std std-ref" style="font-family: monospace">fitregmodel</span></a>
-      &nbsp - &nbsp Regularization fitting engine </li>
-      <li><a class="reference internal" href="api/obir.html#obir"><span class="std std-ref" style="font-family: monospace">obir</span></a>
-      &nbsp - &nbsp Osher-Bregman iterative regularization </li>
-      <li><a class="reference internal" href="api/apt.html#apt"><span class="std std-ref" style="font-family: monospace">apt</span></a>
-      &nbsp - &nbsp Approximate Pake transformation </li>
-      <li><a class="reference internal" href="api/sensitivan.html#sensitivan"><span class="std std-ref" style="font-family: monospace">sensitivan</span></a>
-      &nbsp - &nbsp Sensitivity analysis engine </li>
-      </ul>
-  </div><br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/function_section_preprocessing.png"></div>
-  <div class="sectionTitle"><h3>Pre-Processing</h3></div>
-      <ul class="functionsList" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="api/correctphase.html#correctphase"><span class="std std-ref" style="font-family: monospace">correctphase</span></a>
-      &nbsp - &nbsp IQ Phase correction </li>
-      <li><a class="reference internal" href="api/correctzerotime.html#correctzerotime"><span class="std std-ref" style="font-family: monospace">correctzerotime</span></a>
-      &nbsp - &nbsp Dipolar zero-time correction </li>
-      <li><a class="reference internal" href="api/correctscale.html#correctscale" style="font-family: monospace">correctscale</a>
-      &nbsp - &nbsp Dipolar signal amplitude rescaling </li>
-      <li><a class="reference internal" href="api/suppressghost.html#suppressghost"><span class="std std-ref" style="font-family: monospace">suppressghost</span></a>
-      &nbsp - &nbsp Ghost-distance suppression </li>
-      <li><a class="reference internal" href="api/longpass.html#longpass"><span class="std std-ref" style="font-family: monospace">longpass</span></a>
-      &nbsp - &nbsp Longpass filtering </li>
-      <li><a class="reference internal" href="api/winlowpass.html#winlowpass"><span class="std std-ref" style="font-family: monospace">winlowpass</span></a>
-      &nbsp - &nbsp Windowed-lowpass filtering </li>
-      </ul>
-  </div><br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/function_section_selection.png"></div>
-  <div class="sectionTitle"><h3>Model Selection</h3></div>
-      <ul class="functionsList" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="api/selectmodel.html#selectmodel"><span class="std std-ref" style="font-family: monospace">selectmodel</span></a>
-      &nbsp - &nbsp Parametric model selector </li>
-      <li><a class="reference internal" href="api/selregparam.html#selregparam"><span class="std std-ref" style="font-family: monospace">selregparam</span></a>
-      &nbsp - &nbsp Regularization parameter selector </li>
-      <li><a class="reference internal" href="api/regparamrange.html#regparamrange"><span class="std std-ref" style="font-family: monospace">regparamrange</span></a>
-      &nbsp - &nbsp Regularization parameter range selector </li>
-      </ul>
-  </div><br>
-<div class="tutorialSectionBox ", style="border: #5c87d6 1.5px solid; padding-bottom:15px;">
-  <div class="sectionLogo"><img class="avatar" src="./_static/img/function_section_utilities.png"></div>
-  <div class="sectionTitle"><h3>Utilities</h3></div>
-      <ul class="functionsList" style="width: 90%;margin: auto;">
-      <li><a class="reference internal" href="api/deerload.html#deerload"><span class="std std-ref" style="font-family: monospace">deerload</span></a>
-      &nbsp - &nbsp Spectrometer data loader </li>
-      <li><a class="reference internal" href="api/time2freq.html#time2freq"><span class="std std-ref" style="font-family: monospace">time2freq</span></a>
-      &nbsp - &nbsp Time to frequency axis convertor </li>
-      <li><a class="reference internal" href="api/time2dist.html#time2dist"><span class="std std-ref" style="font-family: monospace">time2dist</span></a>
-      &nbsp - &nbsp Time to distance axis convertor </li>
-      <li><a class="reference internal" href="api/noiselevel.html#noiselevel"><span class="std std-ref" style="font-family: monospace">noiselevel</span></a>
-      &nbsp - &nbsp Noise level estimator </li>
-      <li><a class="reference internal" href="api/overtones.html#overtones"><span class="std std-ref" style="font-family: monospace">overtones</span></a>
-      &nbsp - &nbsp RIDME overtone coefficients</li>
-      <li><a class="reference internal" href="api/fftspec.html#fftspec"><span class="std std-ref" style="font-family: monospace">fftspec</span></a>
-      &nbsp - &nbsp Fast-Fourier trasnform spectrum </li>
-      </ul>
+<div class="section" id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this headline">¶</a></h2>
+<p>This class of functions can be used and/or combined to create fitting routines of dipolar data.</p>
+<div class="toctree-wrapper compound">
 </div>
-<br></div>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="api/backgroundstart.html#backgroundstart"><span class="std std-ref">backgroundstart</span></a></td>
+<td>Background fit start point optimizer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/fitbackground.html#fitbackground"><span class="std std-ref">fitbackground</span></a></td>
+<td>Background fitting engine</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/fitmultigauss.html#fitmultigauss"><span class="std std-ref">fitmultigauss</span></a></td>
+<td>Multi-Gauss fitting engine</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/fitparamodel.html#fitparamodel"><span class="std std-ref">fitparamodel</span></a></td>
+<td>Parametric model fitting engine</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/fitregmodel.html#fitregmodel"><span class="std std-ref">fitregmodel</span></a></td>
+<td>Regularization fitting engine</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/obir.html#obir"><span class="std std-ref">obir</span></a></td>
+<td>Osher-Bregman iterative regularization</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/regoperator.html#regoperator"><span class="std std-ref">regoperator</span></a></td>
+<td>Regularization operator constructor</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/apt.html#apt"><span class="std std-ref">apt</span></a></td>
+<td>Approximate Pake transformation</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/sensitivan.html#sensitivan"><span class="std std-ref">sensitivan</span></a></td>
+<td>Sensitivity analysis engine</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pre-processing">
+<h2>Pre-Processing<a class="headerlink" href="#pre-processing" title="Permalink to this headline">¶</a></h2>
+<p>This class of functions provide tools for preparing experimental data for analysis.</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="api/correctphase.html#correctphase"><span class="std std-ref">correctphase</span></a></td>
+<td>IQ Phase correction</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/correctzerotime.html#correctzerotime"><span class="std std-ref">correctzerotime</span></a></td>
+<td>Dipolar zero-time correction</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/correctscale.html#correctscale"><span class="std std-ref">correctscale</span></a></td>
+<td>Dipolar signal amplitude rescaling</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/suppressghost.html#suppressghost"><span class="std std-ref">suppressghost</span></a></td>
+<td>Ghost-distance suppression</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/longpass.html#longpass"><span class="std std-ref">longpass</span></a></td>
+<td>Longpass filtering</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/winlowpass.html#winlowpass"><span class="std std-ref">winlowpass</span></a></td>
+<td>Windowed-lowpass filtering</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="model-selection">
+<h2>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this headline">¶</a></h2>
+<p>This class of functions helps to find an optimal choice of model or model parameters.</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="api/selectmodel.html#selectmodel"><span class="std std-ref">selectmodel</span></a></td>
+<td>Parametric model selector</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/selregparam.html#selregparam"><span class="std std-ref">selregparam</span></a></td>
+<td>Regularization parameter selector</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/regparamrange.html#regparamrange"><span class="std std-ref">regparamrange</span></a></td>
+<td>Regularization parameter range selector</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<p>This class of functions provides several tools for quick commands typically required in data processing.</p>
+<div class="toctree-wrapper compound">
+</div>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="43%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Function</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="api/deerload.html#deerload"><span class="std std-ref">deerload</span></a></td>
+<td>Spectrometer data loader</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/time2freq.html#time2freq"><span class="std std-ref">time2freq</span></a></td>
+<td>Time to frequency axis converter</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/time2dist.html#time2dist"><span class="std std-ref">time2dist</span></a></td>
+<td>Time to distance axis converter</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/noiselevel.html#noiselevel"><span class="std std-ref">noiselevel</span></a></td>
+<td>Noise level estimator</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api/fftspec.html#fftspec"><span class="std std-ref">fftspec</span></a></td>
+<td>Fast-Fourier transform spectrum</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/prepvalidation.html#prepvalidation"><span class="std std-ref">prepvalidation</span></a></td>
+<td>Full-factorial analysis preparation</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
            </div>
@@ -275,7 +414,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api/apt.html" class="btn btn-neutral float-right" title="apt" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/dipolarkernel.html" class="btn btn-neutral float-right" title="dipolarkernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="examples/example_bilevelopt_background.html" class="btn btn-neutral float-left" title="Bilevel optimization - Fitting background with a model-free distance distribution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -287,7 +426,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>

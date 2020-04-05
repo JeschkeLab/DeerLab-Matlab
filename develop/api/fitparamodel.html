@@ -38,6 +38,8 @@
   <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -100,16 +102,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -197,12 +241,12 @@
 <li><code class="docutils literal notranslate"><span class="pre">t</span></code> -  Model time axis (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">r</span></code> -  Model distance axis (<em>M</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">K</span></code> -  Dipolar kernel (<em>NxM</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">param0</span></code> -  Model parameter inital guess (<em>W</em>-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param0</span></code> -  Model parameter initial guess (<em>W</em>-array)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Fitted model paramters (<em>W</em>-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Fitted model parameters (<em>W</em>-array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">fit</span></code> - Parametric model fit (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">paramci</span></code> - Fit confidence intervals (<em>Wx2</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">fitci</span></code> - Model fit confidence bands (<em>Nx2</em>-element array)</li>
@@ -217,14 +261,14 @@
 <span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">ci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Fits the <strong>time-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a time axis <code class="docutils literal notranslate"><span class="pre">t</span></code>. User-defined inital guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
+<p>Fits the <strong>time-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a time axis <code class="docutils literal notranslate"><span class="pre">t</span></code>. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
 <p>The fitted parameters as well as their 99%-confidence intervals are returned as the <code class="docutils literal notranslate"><span class="pre">param</span></code> and <code class="docutils literal notranslate"><span class="pre">paramci</span></code> outputs, respectively. The fitted model and its 99%-confidence band are returned as the <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">fitci</span></code> outputs, respectively.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">ci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">)</span>
 <span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">ci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Fits the <strong>distance-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code>. The dipolar kernel <code class="docutils literal notranslate"><span class="pre">K</span></code> is required as in input for distance-domain fitting. User-defined inital guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
+<p>Fits the <strong>distance-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code>. The dipolar kernel <code class="docutils literal notranslate"><span class="pre">K</span></code> is required as in input for distance-domain fitting. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
 <span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">param0</span><span class="p">)</span>
@@ -308,7 +352,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> - Non-linear least squares (requires Opt. toolbox)</li>
-<li><code class="docutils literal notranslate"><span class="pre">'fminsearch'</span></code> - Unconstrained minmization (free)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'fminsearch'</span></code> - Unconstrained minimization (free)</li>
 <li><code class="docutils literal notranslate"><span class="pre">'fmincon'</span></code> - Constrained non-linear minimization solver (requires Opt. toolbox)</li>
 <li><code class="docutils literal notranslate"><span class="pre">'fminsearchcon'</span></code> - Constrained non-linear minimization solver (free)</li>
 <li><code class="docutils literal notranslate"><span class="pre">'nlsqbnd'</span></code> - Non-linear least squares (free)</li>
@@ -377,7 +421,7 @@
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'MaxFunEval'</span></code> -  Maximal solver function evalutions</dt>
+<dt><code class="docutils literal notranslate"><span class="pre">'MaxFunEval'</span></code> -  Maximal solver function evaluations</dt>
 <dd><p class="first">Maximum number of function evaluation of the solver. After the solver exceeds this number the optimization will stop. This option is only relevant for the <code class="docutils literal notranslate"><span class="pre">'fmincon'</span></code>  and <code class="docutils literal notranslate"><span class="pre">'lsqnonneg'</span></code> solvers.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2e7</span></code></p>
 <p><em>Example:</em></p>
@@ -459,7 +503,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>

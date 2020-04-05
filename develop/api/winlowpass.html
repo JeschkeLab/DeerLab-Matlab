@@ -38,11 +38,13 @@
   <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
   <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Parametric Models" href="../models.html" />
-    <link rel="prev" title="whitegaussnoise" href="whitenoise.html" /> 
+    <link rel="next" title="selectmodel" href="selectmodel.html" />
+    <link rel="prev" title="longpass" href="longpass.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,16 +102,58 @@
               
             
             
-              <p class="caption"><span class="caption-text">User guide</span></p>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User guide</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../models.html">Parametric Models</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -189,8 +233,8 @@
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">S</span></code> - Signal (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Fstop</span></code> - Stopband frequency (scalar)</li>
-<li><code class="docutils literal notranslate"><span class="pre">Fpass</span></code> - Passband frequency (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Fstop</span></code> - Stop-band frequency (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Fpass</span></code> - Pass-band frequency (scalar)</li>
 <li><code class="docutils literal notranslate"><span class="pre">Fsamp</span></code> - Sampling frequency (scalar)</li>
 </ul>
 </dd>
@@ -208,12 +252,12 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Sout</span> <span class="p">=</span> <span class="n">winlowpass</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Fstop</span><span class="p">,</span><span class="n">Fpass</span><span class="p">,</span><span class="n">Fsamp</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Filters the N-point signal <code class="docutils literal notranslate"><span class="pre">S</span></code> using a Kaiser-windowed lowpass FIR filter with a transition band given by the passband <code class="docutils literal notranslate"><span class="pre">Fpass</span></code> and stopband <code class="docutils literal notranslate"><span class="pre">Fstop</span></code> frequencies in Hz. The filter is then constructed according to the sampling rate <code class="docutils literal notranslate"><span class="pre">Fsamp</span></code> of the signal in Hz.</p>
+<p>Filters the N-point signal <code class="docutils literal notranslate"><span class="pre">S</span></code> using a Kaiser-windowed lowpass FIR filter with a transition band given by the pass-band <code class="docutils literal notranslate"><span class="pre">Fpass</span></code> and stop-band <code class="docutils literal notranslate"><span class="pre">Fstop</span></code> frequencies in Hz. The filter is then constructed according to the sampling rate <code class="docutils literal notranslate"><span class="pre">Fsamp</span></code> of the signal in Hz.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Sout</span><span class="p">,</span><span class="n">H</span><span class="p">]</span> <span class="p">=</span> <span class="n">winlowpass</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">Fstop</span><span class="p">,</span><span class="n">Fpass</span><span class="p">,</span><span class="n">Fsamp</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The filter transfer function parameters <code class="docutils literal notranslate"><span class="pre">H</span></code> requested as a second ouput argument.</p>
+<p>The filter transfer function parameters <code class="docutils literal notranslate"><span class="pre">H</span></code> requested as a second output argument.</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="additional-settings">
@@ -225,7 +269,7 @@
 <ul>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'MinimalAttenuation'</span></code> - Minimal sidelobe attenuation</dt>
-<dd><p class="first">Minimal attenuation level [dB] of the first sidelobe after the stopband.</p>
+<dd><p class="first">Minimal attenuation level [dB] of the first sidelobe after the stop-band.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">50</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
@@ -261,10 +305,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../models.html" class="btn btn-neutral float-right" title="Parametric Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="selectmodel.html" class="btn btn-neutral float-right" title="selectmodel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="whitenoise.html" class="btn btn-neutral float-left" title="whitegaussnoise" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="longpass.html" class="btn btn-neutral float-left" title="longpass" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -273,7 +317,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Luis Fabregas Ibanez
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>
