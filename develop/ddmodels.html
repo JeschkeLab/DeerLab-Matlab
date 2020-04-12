@@ -43,7 +43,7 @@
   <link rel="stylesheet" href="_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="dd_gauss" href="models/dd_gauss.html" />
+    <link rel="next" title="dd_circle" href="models/dd_circle.html" />
     <link rel="prev" title="prepvalidation" href="api/prepvalidation.html" /> 
 </head>
 
@@ -230,7 +230,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_rice</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>There are several classes of parametric distance distribution models. The first class contains models that are based on basis functions and linear combinations thereof.</p>
+<p>DeerLab’s parametric distance distribution models can be classified into several groups. There are models that are based on basis functions and linear combinations thereof. Gaussian and 3D-Rice functions are the most important ones.</p>
 <table border="1" class="func-list docutils">
 <colgroup>
 <col width="36%" />
@@ -280,7 +280,7 @@
 </tr>
 </tbody>
 </table>
-<p>The second group contains distance distribution models that represent three-dimensional disordered segmented objects such as proteins and other polymers.</p>
+<p>A second group of distance distribution models represent three-dimensional disordered segmented objects such as proteins and other polymers.</p>
 <table border="1" class="func-list docutils">
 <colgroup>
 <col width="35%" />
@@ -303,7 +303,7 @@
 </tr>
 </tbody>
 </table>
-<p>Finally, DeerLab provides a series of models for distributions of labels in simple confined spaces such as spheres and spherical shells.</p>
+<p>A third group provides models for distributions of labels in simple confined spaces such as spheres and spherical shells.</p>
 <table border="1" class="func-list docutils">
 <colgroup>
 <col width="28%" />
@@ -341,6 +341,24 @@
 </tr>
 </tbody>
 </table>
+<p>Finally, DeerLab provides a series of distance distribution models that represent simple geometric shapes. These models are worthless for practical purposes, but are useful as toy distributions for methods development.</p>
+<table border="1" class="func-list docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="models/dd_circle.html#dd-circle"><span class="std std-ref">dd_circle</span></a></td>
+<td>Semi-circle distribution</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="models/dd_triangle.html#dd-triangle"><span class="std std-ref">dd_triangle</span></a></td>
+<td>Triangle distribution</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="models/dd_uniform.html#dd-uniform"><span class="std std-ref">dd_uniform</span></a></td>
+<td>Uniform distribution</td>
+</tr>
+</tbody>
+</table>
 <div class="toctree-wrapper compound">
 </div>
 </div>
@@ -354,7 +372,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="models/dd_gauss.html" class="btn btn-neutral float-right" title="dd_gauss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="models/dd_circle.html" class="btn btn-neutral float-right" title="dd_circle" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="api/prepvalidation.html" class="btn btn-neutral float-left" title="prepvalidation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

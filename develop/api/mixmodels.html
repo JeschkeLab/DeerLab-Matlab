@@ -224,13 +224,13 @@
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">(</span><span class="n">model1</span><span class="p">,</span><span class="n">model2</span><span class="p">,</span><span class="c">...)</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">models</span></code> - Input parametric models (<em>N</em>-element cell array of function handles)</li>
+<li><code class="docutils literal notranslate"><span class="pre">model1</span></code>, <code class="docutils literal notranslate"><span class="pre">model2</span></code>, etc. - Input parametric models (function handles)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
@@ -243,10 +243,10 @@
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">({@</span><span class="n">model1</span><span class="p">,@</span><span class="n">model2</span><span class="p">,</span> <span class="p">..,</span> <span class="p">@</span><span class="n">modelN</span><span class="p">})</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">(@</span><span class="n">model1</span><span class="p">,@</span><span class="n">model2</span><span class="p">,</span> <span class="p">..,</span> <span class="p">@</span><span class="n">modelN</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Combines the parametric model function handles <code class="docutils literal notranslate"><span class="pre">model1</span></code>, <code class="docutils literal notranslate"><span class="pre">model2</span></code>, …,  <code class="docutils literal notranslate"><span class="pre">modelN</span></code> into a new parametric model function handle <code class="docutils literal notranslate"><span class="pre">newmodel</span></code>. The models must be passed as a cell array of function handles and the parametric models must be of the type as the models distributed in DeerLab. The returned function handle can be used for parametric model fitting.</p>
+<p>Combines the parametric model function handles <code class="docutils literal notranslate"><span class="pre">model1</span></code>, <code class="docutils literal notranslate"><span class="pre">model2</span></code>, …,  and <code class="docutils literal notranslate"><span class="pre">modelN</span></code> into a new parametric model function with handle <code class="docutils literal notranslate"><span class="pre">newmodel</span></code>. The models must be passed as function handles and the parametric models must be of the type as the models distributed in DeerLab. The returned function handle can be used for parametric model fitting.</p>
 <p>Information about the new model and its parameters can be accessed by</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">newmodel</span><span class="p">();</span>
 </pre></div>
@@ -257,7 +257,7 @@
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>If one mixes a single Gaussian model (2 parameters) with a WLC model (2 parameters) into a single model</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">({@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">dd_wormchain</span><span class="p">})</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newmodel</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">(@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">dd_wormchain</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>the resulting model <code class="docutils literal notranslate"><span class="pre">newmodel</span></code> will contain 5 parameters in the following order: 1 amplitude parameter, the 2 single-Gaussian parameters and the 2 WLC parameters.</p>

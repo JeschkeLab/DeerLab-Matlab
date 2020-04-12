@@ -304,16 +304,17 @@
 </div>
 <ul>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'CostModel'</span></code> - Optimization cost functional</dt>
-<dd><p class="first">Type of fitting cost functional to use.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">'CostModel'</span></code> - Optimization objective functional</dt>
+<dd><p class="first">Type of objective functional to use.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">'lsq'</span></code> - Least-squares fitting</li>
-<li><code class="docutils literal notranslate"><span class="pre">'chisquared'</span></code> - <img class="math" src="../_images/math/b0a677c7b64a9ce46bca897eabaf2af1c84de1a5.svg" alt="\chi^2"/>-fitting (as in GLADD or DD)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'ssr'</span></code> - Sum of squared residuals</li>
+<li><code class="docutils literal notranslate"><span class="pre">'chi2'</span></code> - <img class="math" src="../_images/math/b0a677c7b64a9ce46bca897eabaf2af1c84de1a5.svg" alt="\chi^2"/></li>
+<li><code class="docutils literal notranslate"><span class="pre">'chi2red'</span></code> - Reduced <img class="math" src="../_images/math/b0a677c7b64a9ce46bca897eabaf2af1c84de1a5.svg" alt="\chi^2"/> (= ssr divided by variance and number of degrees of freedom)</li>
 </ul>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">lsq</span></code></p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">ssr</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;CostModel&#39;</span><span class="p">,</span><span class="s">&#39;chisquared&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;CostModel&#39;</span><span class="p">,</span><span class="s">&#39;chi2red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

@@ -299,7 +299,7 @@
 <span class="n">pathinfo</span><span class="p">(</span><span class="mi">1</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span> <span class="n">NaN</span><span class="p">];</span>    <span class="c">% unmodulated part, gives offset</span>
 <span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda</span> <span class="mi">0</span><span class="p">];</span>        <span class="c">% main modulation, refocusing at time zero</span>
 
-<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>The shorthand input syntax <code class="docutils literal notranslate"><span class="pre">dipolarkernel(t,r,lambda)</span></code> is equivalent to this input.</p>
@@ -316,7 +316,7 @@
 <span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda4</span>  <span class="mi">0</span><span class="p">];</span>       <span class="c">% main modulation, refocusing at time zero</span>
 <span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda21</span> <span class="n">tau2</span><span class="p">];</span>    <span class="c">% 2+1 modulation, refocusing at time tau2</span>
 
-<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
