@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
 <link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="dd_gauss" href="dd_gauss.html" />
+    <link rel="next" title="dd_cos" href="dd_cos.html" />
     <link rel="prev" title="Distribution models" href="../ddmodels.html" /> 
 </head>
 
@@ -147,6 +147,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
@@ -253,8 +254,7 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/d9db124ca6acdb57732a40e9a15be5e30f0ce134.svg" alt="P(r) = 2\pi\sqrt{(r-r_0)^2/R^2+1}\qquad r_0-R\le r\le r_0+R"/></p>
-<p>This provides a semi-circle distribution.</p>
+<p>This provides a <a class="reference external" href="https://en.wikipedia.org/wiki/Wigner_semicircle_distribution">semi-circle distribution</a>, defined by  <img class="math" src="../_images/math/a9b284e8799a6a5dcba9e2f12039f34fa6a26181.svg" alt="P(r) = 2\pi\sqrt{(r-r_0)^2/R^2+1}"/> for <img class="math" src="../_images/math/744fb006152fb711b05c94443b7425e0038685cb.svg" alt="r_0-R\le r\le r_0+R"/> and zero otherwise.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -321,7 +321,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dd_gauss.html" class="btn btn-neutral float-right" title="dd_gauss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dd_cos.html" class="btn btn-neutral float-right" title="dd_cos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../ddmodels.html" class="btn btn-neutral float-left" title="Distribution models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
