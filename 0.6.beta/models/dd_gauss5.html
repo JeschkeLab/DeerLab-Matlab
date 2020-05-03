@@ -146,20 +146,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -254,7 +249,7 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/bd48f648054446c31c4ae8900401c93e44b89060.svg" alt="P(r) = A_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + A_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + A_3\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right) +  A_4\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\sigma_4^2}\right) + (1 - A_1 - A_2 - A_3 - A_4)\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_5}\exp\left(-\frac{(r-\left&lt;r_5\right&gt;)^2}{\sigma_5^2}\right)"/></p>
+<p><img class="math" src="../_images/math/0ea43f588781ad37ade0798b4fb3fb53c7260de8.svg" alt="P(r) = a_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + a_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + a_3\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right) +  a_4\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\sigma_4^2}\right) + (1 - a_1 - a_2 - a_3 - a_4)\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_5}\exp\left(-\frac{(r-\left&lt;r_5\right&gt;)^2}{\sigma_5^2}\right)"/></p>
 <p>with <img class="math" src="../_images/math/0d6e0a3dbf803cc5c7b97875b07e81aa736f7df6.svg" alt="\sigma_i = \mathrm{FWHM}_i/\sqrt{2ln(2)}"/></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -290,88 +285,88 @@
 <td>1st Gaussian FWHM</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
+<td><img class="math" src="../_images/math/a852b5a7e66b16beb10f265228178f02f46744f7.svg" alt="a_1"/></td>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>1st Gaussian relative amplitude</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
 <td><img class="math" src="../_images/math/744cec7f41b26cbbf9ebd311fac14a965cc2ff14.svg" alt="\left&lt;r_2\right&gt;"/></td>
 <td>3.0</td>
 <td>1.0</td>
 <td>20</td>
 <td>2nd Gaussian center distance</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
 <td><img class="math" src="../_images/math/2f70306b10ffd054dac4f2e3862e0441991738dc.svg" alt="\mathrm{FWHM}_2"/></td>
 <td>0.5</td>
 <td>0.2</td>
 <td>5</td>
 <td>2nd Gaussian FWHM</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(6)</span></code></td>
+<td><img class="math" src="../_images/math/31dba42ef75ca1671dcc240865b9ed03fdc8e740.svg" alt="a_2"/></td>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>2nd Gaussian relative amplitude</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(7)</span></code></td>
 <td><img class="math" src="../_images/math/b170ac218308bce94cb16840e014858e3adf46a7.svg" alt="\left&lt;r_3\right&gt;"/></td>
 <td>3.5</td>
 <td>1.0</td>
 <td>20</td>
 <td>3rd Gaussian center distance</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(6)</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(8)</span></code></td>
 <td><img class="math" src="../_images/math/17b56aeb06401cdd5c447a628b1ed265ec73498d.svg" alt="\mathrm{FWHM}_3"/></td>
 <td>0.5</td>
 <td>0.2</td>
 <td>5</td>
 <td>3rd Gaussian FWHM</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(7)</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(9)</span></code></td>
+<td><img class="math" src="../_images/math/308a58d3fc872a69696978070c722dfad3511d5e.svg" alt="a_3"/></td>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>3rd Gaussian relative amplitude</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(10)</span></code></td>
 <td><img class="math" src="../_images/math/221f331f2f8b2148db713e66d0d513c219bd774c.svg" alt="\left&lt;r_4\right&gt;"/></td>
 <td>4.5</td>
 <td>1.0</td>
 <td>20</td>
 <td>4th Gaussian center distance</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(8)</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(11)</span></code></td>
 <td><img class="math" src="../_images/math/035c6f7f357eec588066dfb3cc84b853120886ba.svg" alt="\mathrm{FWHM}_4"/></td>
 <td>0.5</td>
 <td>0.2</td>
 <td>5</td>
 <td>4th Gaussian FWHM</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(9)</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(12)</span></code></td>
+<td><img class="math" src="../_images/math/3698a1db4cfe6497b233fff1e024d9441993c26e.svg" alt="a_4"/></td>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>4th Gaussian relative amplitude</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(13)</span></code></td>
 <td><img class="math" src="../_images/math/9b536304b3381dc8fa580d81d938f53f1aa4e7d3.svg" alt="\left&lt;r_5\right&gt;"/></td>
 <td>5.0</td>
 <td>1.0</td>
 <td>20</td>
 <td>5th Gaussian center distance</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(10)</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(14)</span></code></td>
 <td><img class="math" src="../_images/math/a859a68d6317bd941dae576842fbb1fed2008f7e.svg" alt="\mathrm{FWHM}_5"/></td>
 <td>0.5</td>
 <td>0.2</td>
 <td>5</td>
 <td>5th Gaussian FWHM</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(11)</span></code></td>
-<td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>1st Gaussian relative amplitude</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(12)</span></code></td>
-<td><img class="math" src="../_images/math/0895ba57f5ee3dc17d18c9015f8ae860c5fd20ce.svg" alt="A_2"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>2nd Gaussian relative amplitude</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(13)</span></code></td>
-<td><img class="math" src="../_images/math/2989e2a30d2d883a78f663928e1b5ef7bb7fc4f7.svg" alt="A_3"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>3rd Gaussian relative amplitude</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(14)</span></code></td>
-<td><img class="math" src="../_images/math/5d7527969d563ef47fc51614003cdd9fdb4130b8.svg" alt="A_4"/></td>
-<td>0.2</td>
-<td>0</td>
-<td>1</td>
-<td>4th Gaussian relative amplitude</td>
 </tr>
 </tbody>
 </table>

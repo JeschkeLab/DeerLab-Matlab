@@ -139,20 +139,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -242,16 +237,19 @@
 <tr class="row-odd"><td><a class="reference internal" href="api/aptkernel.html#aptkernel"><span class="std std-ref">aptkernel</span></a></td>
 <td>APT kernel constructor</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/dipolarsignal.html#dipolarsignal"><span class="std std-ref">dipolarsignal</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/dipolarbackground.html#dipolarbackground"><span class="std std-ref">dipolarbackground</span></a></td>
+<td>Multi-pathway background constructor</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/dipolarsignal.html#dipolarsignal"><span class="std std-ref">dipolarsignal</span></a></td>
 <td>Dipolar signal simulator</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/whitenoise.html#whitegaussnoise"><span class="std std-ref">whitegaussnoise</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/whitenoise.html#whitegaussnoise"><span class="std std-ref">whitegaussnoise</span></a></td>
 <td>Gaussian white noise generator</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/paramodel.html#paramodel"><span class="std std-ref">paramodel</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/paramodel.html#paramodel"><span class="std std-ref">paramodel</span></a></td>
 <td>Parametric model builder</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/mixmodels.html#mixmodels"><span class="std std-ref">mixmodels</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/mixmodels.html#mixmodels"><span class="std std-ref">mixmodels</span></a></td>
 <td>Parametric model mixer</td>
 </tr>
 </tbody>
@@ -273,31 +271,34 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td><a class="reference internal" href="api/backgroundstart.html#backgroundstart"><span class="std std-ref">backgroundstart</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/bootan.html#bootan"><span class="std std-ref">bootan</span></a></td>
+<td>Bootstrap uncertainty analysis</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api/backgroundstart.html#backgroundstart"><span class="std std-ref">backgroundstart</span></a></td>
 <td>Background fit start point optimizer</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/fitbackground.html#fitbackground"><span class="std std-ref">fitbackground</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/fitbackground.html#fitbackground"><span class="std std-ref">fitbackground</span></a></td>
 <td>Background fitting engine</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/fitmultigauss.html#fitmultigauss"><span class="std std-ref">fitmultigauss</span></a></td>
-<td>Multi-Gauss fitting engine</td>
+<tr class="row-odd"><td><a class="reference internal" href="api/fitmultimodel.html#fitmultimodel"><span class="std std-ref">fitmultimodel</span></a></td>
+<td>Multi-component model fitting engine</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/fitparamodel.html#fitparamodel"><span class="std std-ref">fitparamodel</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/fitparamodel.html#fitparamodel"><span class="std std-ref">fitparamodel</span></a></td>
 <td>Parametric model fitting engine</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/fitregmodel.html#fitregmodel"><span class="std std-ref">fitregmodel</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/fitregmodel.html#fitregmodel"><span class="std std-ref">fitregmodel</span></a></td>
 <td>Regularization fitting engine</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/obir.html#obir"><span class="std std-ref">obir</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/obir.html#obir"><span class="std std-ref">obir</span></a></td>
 <td>Osher-Bregman iterative regularization</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/regoperator.html#regoperator"><span class="std std-ref">regoperator</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/regoperator.html#regoperator"><span class="std std-ref">regoperator</span></a></td>
 <td>Regularization operator constructor</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api/apt.html#apt"><span class="std std-ref">apt</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="api/apt.html#apt"><span class="std std-ref">apt</span></a></td>
 <td>Approximate Pake transformation</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api/sensitivan.html#sensitivan"><span class="std std-ref">sensitivan</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="api/sensitivan.html#sensitivan"><span class="std std-ref">sensitivan</span></a></td>
 <td>Sensitivity analysis engine</td>
 </tr>
 </tbody>

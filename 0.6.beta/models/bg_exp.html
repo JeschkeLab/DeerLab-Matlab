@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
 <link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="bg_exvol" href="bg_exvol.html" />
+    <link rel="next" title="bg_hom3d" href="bg_hom3d.html" />
     <link rel="prev" title="Background models" href="../bgmodels.html" /> 
 </head>
 
@@ -146,20 +146,15 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../bgmodels.html">Background models</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -228,25 +223,27 @@
             
   <div class="section" id="bg-exp">
 <span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">bg_exp</span></code><a class="headerlink" href="#bg-exp" title="Permalink to this headline">¶</a></h1>
-<p>Product of two stretched exponentials background parametric model</p>
+<p>Single-exponential background model</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">()</span>
 <span class="n">P</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
-<dt>Parameters</dt>
+<dt>Inputs</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">t</span></code> - Time axis (N-array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Model parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code> – Time axis (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code> – Model parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">lambda</span></code> – Modulation amplitude (between 0 and 1)</li>
 </ul>
 </dd>
-<dt>Returns</dt>
+<dt>Outputs</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">B</span></code> - Model background (N-array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">info</span></code> - Model information (struct)</li>
+<li><code class="docutils literal notranslate"><span class="pre">B</span></code> – Model background (N-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">info</span></code> – Model information (struct)</li>
 </ul>
 </dd>
 </dl>
@@ -254,15 +251,15 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/8a640fd3cafb63cb835713d3f9a8ca46bd308166.svg" alt="B(t) = e^{-kt}"/></p>
+<p><img class="math" src="../_images/math/c246d6f2a2d479e3f80c7de4590cc11a2d36d647.svg" alt="B(t) = \exp\left(-\lambda\kappa \vert t \vert\right)"/></p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="11%" />
 <col width="15%" />
+<col width="16%" />
 <col width="10%" />
-<col width="15%" />
-<col width="15%" />
-<col width="34%" />
+<col width="14%" />
+<col width="14%" />
+<col width="32%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Variable</th>
@@ -274,8 +271,8 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>param(1)</td>
-<td><img class="math" src="../_images/math/0b7c1e16a3a8a849bb8ffdcdbf86f65fd1f30438.svg" alt="k"/></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(1)</span></code></td>
+<td><img class="math" src="../_images/math/e18d839a0e889a07a4e7a17bed70fe453966c6df.svg" alt="\kappa"/></td>
 <td>0.35</td>
 <td>0</td>
 <td>200</td>
@@ -292,15 +289,20 @@
 </div>
 <p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">info.model</span></code> -  Full name of the parametric model.</li>
-<li><code class="docutils literal notranslate"><span class="pre">info.nparam</span></code> -  Total number of adjustable parameters.</li>
-<li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.model</span></code> – Full name of the parametric model.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.nparam</span></code> – Total number of adjustable parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> – Structure array with information on individual parameters.</li>
 </ul>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Computes the background model <code class="docutils literal notranslate"><span class="pre">B</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">t</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
+<p>Computes the background model <code class="docutils literal notranslate"><span class="pre">B</span></code> from the axis <code class="docutils literal notranslate"><span class="pre">t</span></code> according to the parameters array <code class="docutils literal notranslate"><span class="pre">param</span></code> for a modulation amplitude <code class="docutils literal notranslate"><span class="pre">lambda=1</span></code>. The required parameters can also be found in the <code class="docutils literal notranslate"><span class="pre">info</span></code> structure.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computes the background model <code class="docutils literal notranslate"><span class="pre">B</span></code> for a given modulation amplitude <code class="docutils literal notranslate"><span class="pre">lambda</span></code>.</p>
 </div>
 </div>
 
@@ -312,7 +314,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="bg_exvol.html" class="btn btn-neutral float-right" title="bg_exvol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="bg_hom3d.html" class="btn btn-neutral float-right" title="bg_hom3d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../bgmodels.html" class="btn btn-neutral float-left" title="Background models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

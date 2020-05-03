@@ -139,20 +139,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -230,7 +225,7 @@
 <span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;regtype&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 <span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;regtype&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 <span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;regtype&#39;</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
-<span class="p">[</span><span class="n">P</span><span class="p">,</span><span class="n">Pci</span><span class="p">,</span><span class="n">alpha</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+<span class="p">[</span><span class="n">P</span><span class="p">,</span><span class="n">Pci</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -249,6 +244,7 @@
 <li><code class="docutils literal notranslate"><span class="pre">P</span></code> - Distance distribution (<em>M</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">Pci</span></code> - Estimated confidence intervals (<em>2xM</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">alpha</span></code> - regularization parameter (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">stats</span></code> - Goodness-of-fit statistics (structure)</li>
 </ul>
 </dd>
 </dl>
@@ -260,7 +256,7 @@
 </pre></div>
 </div>
 <p>Fits a distance distribution <code class="docutils literal notranslate"><span class="pre">P</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> given the kernel matrix <code class="docutils literal notranslate"><span class="pre">K</span></code>, using Tikhonov regularization using an AIC-optimized regularization parameter.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Pci</span></code> output contains the upper and lower 99%-confidence bands of the fitted distance distribution. The upper confidence band can be accessed via  <code class="docutils literal notranslate"><span class="pre">Pci(1,:)</span></code> and the lower confidence band via <code class="docutils literal notranslate"><span class="pre">Pci(2,:)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Pci</span></code> output contains the upper and lower 95%-confidence bands of the fitted distance distribution. The upper confidence band can be accessed via  <code class="docutils literal notranslate"><span class="pre">Pci(:,1)</span></code> and the lower confidence band via <code class="docutils literal notranslate"><span class="pre">Pci(:,2)</span></code>.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">P</span><span class="p">,</span><span class="n">Pci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;regtype&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
 </pre></div>
@@ -283,6 +279,21 @@
 </pre></div>
 </div>
 <p>Passing multiple signals and kernels enables global fitting of a kernel model to a single distribution. The global fit weights are automatically computed according to their contribution to ill-posedness. The multiple signals are passed as a cell array of arrays of sizes <img class="math" src="../_images/math/13c592eed12d9c039b5772c54f6daf3d3d5dd51f.svg" alt="N_1"/>, <img class="math" src="../_images/math/d25345d1ab35abe9778b7010aabe7f6e90bbf2b7.svg" alt="N_2"/>,… and a cell array of kernel matrices with sizes <img class="math" src="../_images/math/72161435446bcf6ffa23feee290a5698aefabb89.svg" alt="N_1 \times M"/>, <img class="math" src="../_images/math/5e125f98c5b45504d45e0fb735a112f6eeb39592.svg" alt="N_2 \times M"/>,… must be passed as well.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">P</span><span class="p">,</span><span class="n">Pci</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure provides several statistical metric which allow judgment on the quality of the fitted signal on the experimental data <code class="docutils literal notranslate"><span class="pre">V</span></code> and allows comparison between fits. The structure contains the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">.chi2red</span></code> - Reduced <img class="math" src="../_images/math/b0a677c7b64a9ce46bca897eabaf2af1c84de1a5.svg" alt="\chi^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.R2</span></code> - <img class="math" src="../_images/math/04795deba2b8ef377e574a90eaa907b273b9ce68.svg" alt="R^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.RMSD</span></code> - Root-mean squared deviation (RMSD)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AIC</span></code> - Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AICc</span></code> - Corrected Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.BIC</span></code> - Bayesian information criterion</li>
+</ul>
+</div></blockquote>
 </div>
 <hr class="docutils" />
 <div class="section" id="additional-settings">
@@ -346,11 +357,13 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'ConfidenceLevel'</span></code> -  Level for parameter confidence bands</dt>
-<dd><p class="first">Level of the confidence bands computed for each fitted parameter. Must be a scalar value between 0 and 1.</p>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.99</span></code> (99% confidence bands)</p>
+<dd><p class="first">Confidence level(s) of the confidence intervals computed for each fitted parameter. Must be an array containing values between 0 and 1. If more than one confidence level is requested, <code class="docutils literal notranslate"><span class="pre">Pci</span></code> is returned as a cell array containing the confidence intervals at the different requested levels.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.95</span></code> (95% confidence bands)</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ConfidenceLevel&#39;</span><span class="p">,</span><span class="mf">0.95</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ConfidenceLevel&#39;</span><span class="p">,[</span><span class="mf">0.99</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">Pci99</span> <span class="p">=</span> <span class="n">Pci</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="n">Pci50</span> <span class="p">=</span> <span class="n">Pci</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span>
 </pre></div>
 </div>
 </div></blockquote>

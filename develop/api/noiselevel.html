@@ -139,20 +139,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -221,24 +216,30 @@
             
   <div class="section" id="noiselevel">
 <span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">noiselevel</span></code><a class="headerlink" href="#noiselevel" title="Permalink to this headline">¶</a></h1>
-<p>Estimate the noise level (standard deviation) on a signal.</p>
+<p>Estimate the noise standard deviation on a signal.</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Level</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
-<span class="n">Level</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">M</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V2D</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">Vc</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">filter</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">Vref</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">S</span></code> - Signal vector (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">M</span></code> -  Number of points considered (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">V2D</span></code> - 2D-dataset of scans of a dipolar signal (<em>NxM</em>-element matrix)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Vc</span></code> - 1D complex valued dipolar signal (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - 1D dipolar signal (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">filter</span></code> - Filtering method (string)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Vref</span></code> - Reference signal (<em>N</em>-element array)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
 <dd><ul class="first last simple">
-<li>Noise level (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">sigma</span></code> - Estimated noise standard deviation (scalar)</li>
 </ul>
 </dd>
 </dl>
@@ -246,21 +247,32 @@
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>The function can be called as follows</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Level</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V2D</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns the standard deviation estimation of the noise in the signal <code class="docutils literal notranslate"><span class="pre">S</span></code>. The estimation is done from the last quarter of the signal, i.e. <code class="docutils literal notranslate"><span class="pre">M=3/4*N</span></code>.</p>
+<p>If a 2D-dataset <code class="docutils literal notranslate"><span class="pre">V2D</span></code> of different scans for a signal is provided, the noise standard deviation is estimated from the deviations between scans. The second dimension of <code class="docutils literal notranslate"><span class="pre">V2D</span></code> must contain the different scans. The function returns the standard deviation of the averaged signal not of the individual scans.</p>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Level</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">M</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">Vc</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If parameter <code class="docutils literal notranslate"><span class="pre">M</span></code> is specified, the noise level estimation is done from the last <code class="docutils literal notranslate"><span class="pre">M</span></code> points of the N-point signal.</p>
+<p>If a complex-valued signal <code class="docutils literal notranslate"><span class="pre">Vc</span></code> is provided, the imaginary component is minimzed via phase correction and the noise standard deviation is estimated from the phase-corrected imaginary component.</p>
 <hr class="docutils" />
-<div class="admonition hint">
-<p class="first admonition-title">Hint</p>
-<p class="last">This function returns the estimation of the noise standard deviation (called noise level in DeerLab). This definition of noise level is used throughout DeerLab.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">filter</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>If a real-valued signal <code class="docutils literal notranslate"><span class="pre">V</span></code> is provided, the noise standard deviation is estimated from the deviation obtained via application of a moving mean filter. The nature of the filter can specified by setting <code class="docutils literal notranslate"><span class="pre">filter</span></code> to one of the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'movmean'</span></code> - Moving mean filter (default)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'savgol'</span></code> - Savitzky-Golay filter</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="p">=</span> <span class="n">noiselevel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">Vref</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a reference model signal <code class="docutils literal notranslate"><span class="pre">Vref</span></code> is given, the noise level is estimated from the difference between both signals.</p>
 </div>
 </div>
 

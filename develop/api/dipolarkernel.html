@@ -139,20 +139,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -288,6 +283,7 @@
 <p>For a multi-pathway DEER signal (e.g, 4-pulse DEER with 2+1 contribution; 5-pulse DEER with 4-pulse DEER residual signal, and more complicated experiments), <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> is a 2D array that contains a list of modulation depths (amplitudes), refocusing times (in microseconds), and optional harmonics for all modulated pathway signals.</p>
 <p>Each row of <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> contains two values: one modulation depth and one refocusing time. For a pathway with unmodulated signal, set the refocusing time to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
 <p>Optionally, the harmonic (1 = fundamental, 2 = first overtone, etc.) can be given as a third value in each row. This can be useful for modeling RIDME signals. If not given, the harmonic is 1 for all pathways.</p>
+<p>In these cases, the background model must be specified as a function handle accepting the time-axis <code class="docutils literal notranslate"><span class="pre">t</span></code> and pathway amplitude <code class="docutils literal notranslate"><span class="pre">lambda</span></code> as inputs, i.e. <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">&#64;(t,lambda)</span> <span class="pre">bg_model(t,param,lambda)</span></code>.</p>
 <dl class="docutils">
 <dt>Example 1:</dt>
 <dd>To specify the standard model for 4-pulse DEER with an unmodulated offset and a single dipolar pathway that refocuses at time 0, use</dd>
@@ -336,7 +332,7 @@
 <p><img src="../_images/math/65c804118f9e22ab3ccb05666fd082b177274d1f.svg" alt="K_{\Delta\omega}(t,r)  = \mathrm{exp}\left(-\frac{\omega_\mathrm{dd}^2}{\Delta\omega^2}\right)K(t,r)"/></p>
 </div><p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
-<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;ExcitationBandwidth&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>     <span class="c">% 50 MHz excitation bandwidth</span>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ExcitationBandwidth&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>     <span class="c">% 50 MHz excitation bandwidth</span>
 </pre></div>
 </div>
 </dd>
@@ -351,7 +347,7 @@
 <p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;OvertoneCoeffs&#39;</span><span class="p">,[</span><span class="mf">0.4</span> <span class="mf">0.2</span> <span class="mf">0.4</span><span class="p">])</span>   <span class="c">% fundamental, 1st, and 2nd overtone</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;OvertoneCoeffs&#39;</span><span class="p">,[</span><span class="mf">0.4</span> <span class="mf">0.2</span> <span class="mf">0.4</span><span class="p">])</span>   <span class="c">% fundamental, 1st, and 2nd overtone</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -364,7 +360,7 @@
 <p><em>Default:</em> free-electron g value</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">,[</span><span class="mf">2.01</span> <span class="mf">2.1</span><span class="p">])</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">,[</span><span class="mf">2.01</span> <span class="mf">2.1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -382,7 +378,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'fresnel'</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;integral&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;integral&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -394,7 +390,7 @@
 <dd><p class="first">If the kernel is computed using <code class="docutils literal notranslate"><span class="pre">'grid'</span></code>, this options specifies the number of orientations between <img class="math" src="../_images/math/6ec2bbf7a32453b73f5491ba196a2337f6ed8454.svg" alt="\theta=0"/> and <img class="math" src="../_images/math/a36212354b76eb8fc2775b00942add57dd68a3c6.svg" alt="\theta=\pi/2"/> used for orientation averaging.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">5001</span></code></p>
 <p><em>Example:</em></p>
-<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;grid&#39;</span><span class="p">,</span><span class="s">&#39;nKnots&#39;</span><span class="p">,</span><span class="mf">1e4</span><span class="p">)</span>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Method&#39;</span><span class="p">,</span><span class="s">&#39;grid&#39;</span><span class="p">,</span><span class="s">&#39;nKnots&#39;</span><span class="p">,</span><span class="mf">1e4</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>
@@ -405,7 +401,7 @@
 <dd><p class="first">If the kernel is computed for a multi-pathway model via the <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> variable, the kernel does not necessarily satisfy <code class="docutils literal notranslate"><span class="pre">V(0)</span> <span class="pre">==</span> <span class="pre">1</span></code>. This option enables(<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables(<code class="docutils literal notranslate"><span class="pre">false</span></code>) a re-normalization to ensure that equality is satisfied.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
 <p><em>Example:</em></p>
-<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">args</span><span class="p">,</span><span class="s">&#39;Renormalize&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Renormalize&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </dd>

@@ -139,20 +139,15 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="bg_exp.html"><code class="docutils literal notranslate"><span class="pre">bg_exp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_exvol.html"><code class="docutils literal notranslate"><span class="pre">bg_exvol</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly1.html"><code class="docutils literal notranslate"><span class="pre">bg_poly1</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly2.html"><code class="docutils literal notranslate"><span class="pre">bg_poly2</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_poly3.html"><code class="docutils literal notranslate"><span class="pre">bg_poly3</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_prodstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_prodstrexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_strexp.html"><code class="docutils literal notranslate"><span class="pre">bg_strexp</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="bg_sumstrexp.html"><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../expmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="exp_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="exp_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">exp_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -247,7 +242,7 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/1e8d3e5dac7593e8646d254dcc68f97ae928469f.svg" alt="P(r) = A_1 R(r,\nu_1,\sigma_1) + (1-A_1) R(r,\nu_2,\sigma_2)"/></p>
+<p><img class="math" src="../_images/math/5659e0fbc3cd0a172f487ce174df488a35d2a022.svg" alt="P(r) = a_1 R(r,\nu_1,\sigma_1) + (1-a_1) R(r,\nu_2,\sigma_2)"/></p>
 <p><img class="math" src="../_images/math/6d0392126ab3e8c39966a1e53ec04d24e225a46b.svg" alt="R(r,\nu,\sigma) = \frac{\nu^{n/2-1}}{\sigma^2}r^{n/2}\exp\left(-\frac{(r^2+\nu^2)}{2\sigma^2}\right)I_{n/2-1}\left(\frac{r\nu}{\sigma^2} \right)"/></p>
 <p>where <img class="math" src="../_images/math/17c82847c57fff9f831a1bf935975491d5ce5d33.svg" alt="n=3"/> and <img class="math" src="../_images/math/942744093cfed8167cbfece38cf958a99b2e6f46.svg" alt="I_{n/2-1}(x)"/> is the modified Bessel function of the first kind with order <img class="math" src="../_images/math/5990638f4aef06fe2c0c275720e4ee6727b9da83.svg" alt="n/2-1"/>.
 This is a three-dimensional non-central chi distribution, the 3D generalization of the 2D Rice distribution.</p>
@@ -285,25 +280,25 @@ This is a three-dimensional non-central chi distribution, the 3D generalization 
 <td>width, 1st component</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
+<td><img class="math" src="../_images/math/a852b5a7e66b16beb10f265228178f02f46744f7.svg" alt="a_1"/></td>
+<td>0.5</td>
+<td>0</td>
+<td>1</td>
+<td>amplitude, 1st component</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
 <td><img class="math" src="../_images/math/befe3d4e546310a206f0a743b383d66ad830fd18.svg" alt="\nu_2"/></td>
 <td>4.0</td>
 <td>1.0</td>
 <td>10</td>
 <td>center, 2nd component</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
 <td><img class="math" src="../_images/math/b97d12e01f1724ae73034f757af071455c55425f.svg" alt="\sigma_2"/></td>
 <td>0.7</td>
 <td>0.1</td>
 <td>5</td>
 <td>width, 2nd component</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
-<td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
-<td>0.5</td>
-<td>0</td>
-<td>1</td>
-<td>amplitude, 1st component</td>
 </tr>
 </tbody>
 </table>
