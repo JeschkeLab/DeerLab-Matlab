@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dipolarbackground &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="whitegaussnoise" href="whitenoise.html" />
+    <link rel="prev" title="dipolarsignal" href="dipolarsignal.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9</option>
+        <option value="../../develop/functions/dipolarbackground.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../functions.html">Functions</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">dipolarbackground</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dipolarbackground">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">dipolarbackground</span></code><a class="headerlink" href="#dipolarbackground" title="Permalink to this headline">¶</a></h1>
+<p>Constructs the total multi-pathway background function</p>
+<hr class="docutils" />
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">,</span><span class="n">Bmodel</span><span class="p">)</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code>        - Time axis vector (<em>N</em>-element array), in microseconds</li>
+<li><code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> - Modulation depths, refocusing times, and harmonics (<em>px2</em> or <em>px3</em> array) for multiple dipolar pathways</li>
+<li><code class="docutils literal notranslate"><span class="pre">Bmodel</span></code>        - Background model function handle</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">B</span></code> - Multi-pathway background (<em>N</em>-element array)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">,</span><span class="n">Bmodel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Computes the multipathway background <code class="docutils literal notranslate"><span class="pre">B</span></code> for the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in microseconds) corresponding to the dipolar pathways specified in <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code>. The total background is computed from the basis background function model specified in <code class="docutils literal notranslate"><span class="pre">Bmodel</span></code>. This model must be a function handle of the type <code class="docutils literal notranslate"><span class="pre">Bmodel</span> <span class="pre">&#64;(t,lambda)</span> <span class="pre">bg_model(t,params,lambda)</span></code>.</p>
+<p>For a multi-pathway DEER signal (e.g, 4-pulse DEER with 2+1 contribution; 5-pulse DEER with 4-pulse DEER residual signal, and more complicated experiments), <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> is a 2D array that contains a list of modulation depths (amplitudes), refocusing times (in microseconds), and optional harmonics for all modulated pathway signals.</p>
+<p>Each row of <code class="docutils literal notranslate"><span class="pre">pathinfo</span></code> contains two values: one modulation depth and one refocusing time. For a pathway with unmodulated signal, set the refocusing time to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p>
+<p>Optionally, the harmonic (1 = fundamental, 2 = first overtone, etc.) can be given as a third value in each row. This can be useful for modeling RIDME signals. If not given, the harmonic is 1 for all pathways.</p>
+<dl class="docutils">
+<dt>Example:</dt>
+<dd>To calculate the background for the standard model for 4-pulse DEER with an unmodulated offset and a single dipolar pathway that refocuses at time 0, use</dd>
+</dl>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">501</span><span class="p">);</span>
+<span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.4</span><span class="p">;</span> <span class="c">% modulation depth main signal</span>
+<span class="n">conc</span> <span class="p">=</span> <span class="mi">200</span><span class="p">;</span>   <span class="c">% spin concentration (uM)</span>
+
+<span class="n">pathinfo</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span> <span class="n">NaN</span><span class="p">;</span> <span class="n">lambda</span> <span class="s">0]</span><span class="p">;</span>
+
+<span class="c">% alternative input</span>
+<span class="n">pathinfo</span><span class="p">(</span><span class="mi">1</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span> <span class="n">NaN</span><span class="p">];</span>    <span class="c">% unmodulated part, gives offset</span>
+<span class="n">pathinfo</span><span class="p">(</span><span class="mi">2</span><span class="p">,:)</span> <span class="p">=</span> <span class="p">[</span><span class="n">lambda</span> <span class="mi">0</span><span class="p">];</span>        <span class="c">% main modulation, refocusing at time zero</span>
+
+<span class="n">Bmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">t</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span> <span class="n">bg_hom3d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">conc</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
+
+<span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">pathinfo</span><span class="p">,</span><span class="n">Bmodel</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'OvertoneCoeffs'</span></code> - RIDME overtone coefficients</dt>
+<dd><p class="first">1D array containing the overtone coefficients for RIDME experiments.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;OvertoneCoeffs&#39;</span><span class="p">,[</span><span class="mf">0.4</span> <span class="mf">0.2</span> <span class="mf">0.4</span><span class="p">])</span>   <span class="c">% fundamental, 1st, and 2nd overtone</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Renormalize'</span></code> - Re-normalization of multi-pathway background</dt>
+<dd><p class="first">The multi-pathway background does not necessarily satisfy <code class="docutils literal notranslate"><span class="pre">V(0)</span> <span class="pre">==</span> <span class="pre">1</span></code>. This option enables(<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables(<code class="docutils literal notranslate"><span class="pre">false</span></code>) a re-normalization to ensure that equality is satisfied.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p><em>Example:</em></p>
+<div class="last highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">dipolarbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Renormalize&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="whitenoise.html" class="btn btn-neutral float-right" title="whitegaussnoise" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dipolarsignal.html" class="btn btn-neutral float-left" title="dipolarsignal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

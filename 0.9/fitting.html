@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fitting &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Uncertainty" href="uncertainty.html" />
+    <link rel="prev" title="Loading and preprocessing" href="preprocess.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9</option>
+        <option value="../develop/fitting.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Fitting</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fitting">
+<h1>Fitting<a class="headerlink" href="#fitting" title="Permalink to this headline">¶</a></h1>
+<p>DeerLab provides a wide range of functionality to analyze experimental dipolar EPR data using least-squares fitting. For fitting, the experimental data is assumed to be properly phased, shifted, and scaled.</p>
+<p>The main fitting function is <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code>. It can fit either parameter-free and parametric distance distributions, and it fits the distribution, the background, and the modulation depth in a single step. It provides uncertainty estimates for all fitted quantities.</p>
+<p>The older two-step workflow of fitting the background in a separate step is supported as well, but not recommended.</p>
+<div class="section" id="picking-the-model">
+<h2>Picking the model<a class="headerlink" href="#picking-the-model" title="Permalink to this headline">¶</a></h2>
+<p>After preprocessing the experimental data, the next important step is to decide on the model to be fitted. This consists of four separate choices</p>
+<ol class="arabic simple">
+<li>Choose a <strong>distance range</strong> <code class="docutils literal notranslate"><span class="pre">r</span></code>. The distance range is an important choice, as any distance distibution is truncated to this range. The lower limit of the distance range is determined by the bandwidth of the pulses, and also on the time increment. Typically, 1.5 nm is reasonable. The upper limit depends on the length of the experimental time trace. One possible heuristic is <code class="docutils literal notranslate"><span class="pre">rmax</span> <span class="pre">=</span> <span class="pre">6*(tmax/2)^(1/3)</span></code>. The number of points in <code class="docutils literal notranslate"><span class="pre">r</span></code> is usually set equal to the number of time points.</li>
+<li>Choose a <strong>distribution model</strong>. Generally, a parameter-free distribution is preferred. If there a reasons to believe the distances distribution has a specific shape, use the associated <a class="reference internal" href="modelsref.html#modelsref-dd"><span class="std std-ref">parametric distance distibution model</span></a>.</li>
+<li>Choose a <strong>background model</strong>. Typically, a homogeneous 3D background (<code class="docutils literal notranslate"><span class="pre">bg_hom3d</span></code>) is sufficient, but other <a class="reference internal" href="modelsref.html#modelsref-bg"><span class="std std-ref">background models</span></a> could be needed.</li>
+<li>Select an <strong>experiment model</strong>. If analyzing a standard 4-pulse DEER trace without 2+1 component at the end, use <code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code>. If the 2+1 components should be fitted as well, use <code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code>. There are <a class="reference internal" href="modelsref.html#modelsref-ex"><span class="std std-ref">experimental models</span></a> for more complicated signals.</li>
+</ol>
+</div>
+<div class="section" id="parameter-free-distribution">
+<h2>Parameter-free distribution<a class="headerlink" href="#parameter-free-distribution" title="Permalink to this headline">¶</a></h2>
+<p>To fit a signal with a parameter-free distance distribution, the simplest possible call is</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This fits the signal in <code class="docutils literal notranslate"><span class="pre">Vexp</span></code> (defined over the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code>) with a parameter-free distance distribution defined over distance vector <code class="docutils literal notranslate"><span class="pre">r</span></code>, a homogeneous 3D spin distribution for the background, and a modulation depth (assuming a standard 4-pulse DEER).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> is not asked for an output, the results of the fit, including uncertainty, are plotted in a figure and printed to the command window.</p>
+<p>To obtain the fitted signal, use</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vfit</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With additional inputs, you can specify which <a class="reference internal" href="modelsref.html#modelsref-dd"><span class="std std-ref">distance distribution model</span></a>, <a class="reference internal" href="modelsref.html#modelsref-bg"><span class="std std-ref">background model</span></a>, and <a class="reference internal" href="modelsref.html#modelsref-ex"><span class="std std-ref">experiment model</span></a> to use for fitting:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vfit</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">'P'</span></code> specifies that a parameter-free distribution (defined over <code class="docutils literal notranslate"><span class="pre">r</span></code>) should be fitted. <code class="docutils literal notranslate"><span class="pre">&#64;bg_hom3d</span></code> is a function handle to the background model function. If you want to fit a signal that doesn’t have a background, use  <code class="docutils literal notranslate"><span class="pre">'none'</span></code> instead.  <code class="docutils literal notranslate"><span class="pre">&#64;ex_4pdeer</span></code> is a function handle to the particular experiment model. <code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code> consists of the main dipolar modulation function centered at time zero with an ampltitude <code class="docutils literal notranslate"><span class="pre">lambda</span></code> plus a constant offset of amplitude <code class="docutils literal notranslate"><span class="pre">1-lambda</span></code>. If you want to fit a simple dipolar evolution function with 100% modulation depth, use <code class="docutils literal notranslate"><span class="pre">'none'</span></code> as the experiment model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> uses a least-squares fitting algorithm to determine the optimal distribution, background parameters, and experiment parameters that fit the experiment data. To determine the parameter-free distribution, it internally uses Tikhnonov regularization with a regularization parameter optimized using the Akaike Information Criterion (AIC). These settings can be changed:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">regtype</span> <span class="p">=</span> <span class="s">&#39;tv&#39;</span><span class="p">;</span>     <span class="c">% use total variation instead of Tikhonov regularization</span>
+<span class="n">alpha</span> <span class="p">=</span> <span class="mf">0.8</span><span class="p">;</span>        <span class="c">% manually set regularization parameter</span>
+<span class="n">Vfit</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">,</span><span class="s">&#39;RegType&#39;</span><span class="p">,</span><span class="n">regtype</span><span class="p">,</span><span class="s">&#39;RegParam&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> can return additional outputs: the fitted background (<code class="docutils literal notranslate"><span class="pre">Bfit</span></code>), the fitted distribution (<code class="docutils literal notranslate"><span class="pre">Pfit</span></code>), the fitted parameters (<code class="docutils literal notranslate"><span class="pre">parfit</span></code>), and confidence intervals for all parameters (<code class="docutils literal notranslate"><span class="pre">parci</span></code>):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">parci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parametric-distributions">
+<h2>Parametric distributions<a class="headerlink" href="#parametric-distributions" title="Permalink to this headline">¶</a></h2>
+<p>To use a parametric distance distribution model, provide <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> with a function handle to the <a class="reference internal" href="modelsref.html#modelsref-dd"><span class="std std-ref">distance distribution models</span></a> instead of <code class="docutils literal notranslate"><span class="pre">'P'</span></code>. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">parci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_gauss2</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will fit a two-Gauss distribution over <code class="docutils literal notranslate"><span class="pre">r</span></code>. The fitted distribution parameters are returned in <code class="docutils literal notranslate"><span class="pre">parfit</span></code>, and the corresponding distribution in <code class="docutils literal notranslate"><span class="pre">Pfit</span></code>.</p>
+</div>
+<div class="section" id="background-fitting">
+<h2>Background fitting<a class="headerlink" href="#background-fitting" title="Permalink to this headline">¶</a></h2>
+<p>Although a fitted background can be obtained directly in a one-step analysis from <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> (see above), for compatibility with other programs such as DeerLab, DeerLab also allows to fit a background function separately to a dipolar signal. This is the first step in the traditional two-step analysis.</p>
+<p>To fit a homogeneous 3D background and a modulation amplitude to a dipolar signal, use</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Bfit</span><span class="p">,</span><span class="n">lamfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Other background models can be fitted as well. If the modulation depth is known, it can be provided to <code class="docutils literal notranslate"><span class="pre">fitbackground</span></code>.
+<code class="docutils literal notranslate"><span class="pre">fitbackground</span></code> fits the background to the tail of the dipolar signal. The fitting range can be adjusted by providing a starting and an end point:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Bfit</span><span class="p">,</span><span class="n">lamfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,[</span><span class="n">tstart</span> <span class="n">tend</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>If these are not provided, <code class="docutils literal notranslate"><span class="pre">fitbackground</span></code> tries to determine an optimal range automatically.</p>
+<p>Once a background and a modulation ampltiude are obtained, the second step in the traditional two-step approach is either to divide out the background and the modulation amplitude and then fit the remaining signal <code class="docutils literal notranslate"><span class="pre">D</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="p">=</span> <span class="p">(</span><span class="n">V</span><span class="o">./</span><span class="n">Bfit</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">lamfit</span><span class="p">))</span><span class="o">/</span><span class="n">lamfit</span><span class="p">;</span>
+<span class="n">K0</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">K0</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or to include the background decay and modulation amplitude into the kernel:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lamfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">);</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For long signals with many oscillations or a long stretch of background-only decay, the two-step analysis and the one-step analysis give similar results. For truncated signals that are only a few oscillation periods long (or less), the one-step analysis with <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> is significantly more robust.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="uncertainty.html" class="btn btn-neutral float-right" title="Uncertainty" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="preprocess.html" class="btn btn-neutral float-left" title="Loading and preprocessing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
