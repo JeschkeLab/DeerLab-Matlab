@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Multi-Gauss fitting of a 4-pulse DEER signal &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Multi-Gauss fitting of a 4-pulse DEER signal</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="multi-gauss-fitting-of-a-4-pulse-deer-signal">
+<span id="example-multigauss-4pdeer"></span><h1>Multi-Gauss fitting of a 4-pulse DEER signal<a class="headerlink" href="#multi-gauss-fitting-of-a-4-pulse-deer-signal" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Multi-Gauss fitting of a 4-pulse DEER signal</span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This example showcases how to fit a simple 4-pulse DEER signal with</span>
+<span class="c">% background using a multi-Gauss model, i.e automatically optimizing the</span>
+<span class="c">% number of Gaussians in the model.</span>
+
+<span class="n">clear</span><span class="p">,</span> <span class="n">clc</span><span class="p">,</span> <span class="n">clf</span>
+
+<span class="c">%==================</span>
+<span class="c">% Generate data</span>
+<span class="c">%==================</span>
+
+<span class="n">rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.25</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span> <span class="c">% time axis, us</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span> <span class="c">% distance axes</span>
+<span class="n">param0</span> <span class="p">=</span> <span class="p">[</span><span class="mi">3</span> <span class="mf">0.3</span> <span class="mf">0.2</span> <span class="mf">3.5</span> <span class="mf">0.3</span> <span class="mf">0.65</span> <span class="mi">4</span> <span class="mf">0.2</span><span class="p">];</span> <span class="c">% parameters for three-Gaussian model</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss3</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param0</span><span class="p">);</span> <span class="c">% model distance distribution</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="mf">0.25</span><span class="p">;</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">0.05</span><span class="p">);</span>
+
+<span class="c">% Generate dipolar signal with noise</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;NoiseLevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
+
+<span class="c">%=========================</span>
+<span class="c">% Run multi-Gauss fitting</span>
+<span class="c">%=========================</span>
+<span class="n">NGauss</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c">% maximum number of Gaussians</span>
+
+<span class="c">% Launch a multi-Gauss fit, including the fitting of an exponential background </span>
+<span class="p">[</span><span class="n">Pfit</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">Pci</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">Nopt</span><span class="p">,</span><span class="n">metrics</span><span class="p">,</span><span class="n">Peval</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitmultimodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_gauss</span><span class="p">,</span><span class="n">NGauss</span><span class="p">,</span><span class="c">...</span>
+    <span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;background&#39;</span><span class="p">,@</span><span class="n">bg_exp</span><span class="p">,</span><span class="s">&#39;confidencelevel&#39;</span><span class="p">,</span><span class="mf">0.95</span><span class="p">,</span><span class="s">&#39;multistart&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="c">% Construct the fitted dipolar kernel</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">(</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">(</span><span class="k">end</span><span class="p">)));</span>
+<span class="n">Vfit</span> <span class="p">=</span> <span class="n">K</span><span class="o">*</span><span class="n">Pfit</span><span class="p">;</span>
+
+<span class="c">% When comparing different parametric models is always a good idea to look</span>
+<span class="c">% at the Akaike weights for each model. They basically tell you the</span>
+<span class="c">% probability of a model being the most optimal choice.</span>
+
+<span class="c">% Compute the Akaike weights</span>
+<span class="n">d</span> <span class="p">=</span> <span class="n">metrics</span> <span class="o">-</span> <span class="n">min</span><span class="p">(</span><span class="n">metrics</span><span class="p">);</span>
+<span class="n">w</span> <span class="p">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">d</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">sum</span><span class="p">(</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">d</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>
+
+<span class="c">% Plot results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">321</span><span class="p">),</span> <span class="n">cla</span>
+<span class="n">hold</span> <span class="s">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">param</span><span class="p">(</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">(</span><span class="k">end</span><span class="p">)),</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,legend(&#39;model&#39;,&#39;fit&#39;)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;time (\mus)&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;S(t)&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">322</span><span class="p">),</span> <span class="n">cla</span>
+<span class="n">hold</span> <span class="s">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">fill</span><span class="p">([</span><span class="n">r</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">r</span><span class="p">)],</span> <span class="p">[</span><span class="n">Pci</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">Pci</span><span class="p">(:,</span><span class="mi">2</span><span class="p">))],</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;Linestyle&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">,</span><span class="s">&#39;facealpha&#39;</span><span class="p">,</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,</span> <span class="s">axis</span> <span class="s">tight</span> 
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;model&#39;</span><span class="p">,</span><span class="s">&#39;optimal fit&#39;</span><span class="p">,</span><span class="s">&#39;95%-CI&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;distance (nm)&#39;</span><span class="p">),</span> <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r)&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">323</span><span class="p">),</span> <span class="n">cla</span>
+<span class="n">hold</span> <span class="s">on</span>
+<span class="n">ax</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">metrics</span><span class="p">);</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="s">&#39;-o&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,axis</span> <span class="s">tight</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Akaike Weight [%]&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Number of Gaussians in model&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">4</span> <span class="mi">6</span><span class="p">]),</span> <span class="n">cla</span>
+<span class="n">hold</span> <span class="s">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">Peval</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">NGauss</span><span class="p">).</span><span class="o">&#39;</span><span class="p">,</span><span class="s">&#39;b-&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">box</span> <span class="s">on,axis</span> <span class="s">tight</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;ytick&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="n">NGauss</span><span class="p">,</span><span class="s">&#39;yticklabel&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="n">NGauss</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;distance (nm)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Number of Gaussians in model&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Computing the Pake pattern of a dipolar signal &mdash; DeerLab  documentation</title>
+  <title>Analyzing the Pake pattern of a dipolar signal &mdash; DeerLab  documentation</title>
   
 
   
@@ -42,9 +42,7 @@
   <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Simple processing with the approximate Pake transformation (APT)" href="example_aptsimple.html" />
-    <link rel="prev" title="Sensitivity analysis - RIDME overtone coefficients" href="example_sensitivan_ridmecoeff.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -75,8 +73,6 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.8.beta/examples/example_pakepattern.html">0.8.beta</option>
-        <option value="../../0.6.beta/examples/example_pakepattern.html">0.6.beta</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -102,12 +98,9 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
-</ul>
-<p class="caption"><span class="caption-text">User guide</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
 </ul>
@@ -117,11 +110,37 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -131,23 +150,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -195,9 +212,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../examples.html">Tutorials</a> &raquo;</li>
-        
-      <li>Computing the Pake pattern of a dipolar signal</li>
+      <li>Analyzing the Pake pattern of a dipolar signal</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -214,121 +229,104 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="computing-the-pake-pattern-of-a-dipolar-signal">
-<span id="example-pakepattern"></span><h1>Computing the Pake pattern of a dipolar signal<a class="headerlink" href="#computing-the-pake-pattern-of-a-dipolar-signal" title="Permalink to this headline">¶</a></h1>
-<br>
-<p align="center">
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/pakepattern/pakepattern.pdf" title="Download PDF file" target="_blank" download>
-                <img src="../_static/img/download_pdf_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/pakepattern/pakepattern.mlx" title="Download Live Script" target="_blank">
-                <img src="../_static/img/download_live_button.png" class="tutorial_buttons";" alt="live">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/pakepattern/pakepattern.m" title="Download Source File" target="_blank">
-                <img src="../_static/img/download_source_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-</p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2019b"><title>Computing the Pake pattern of a dipolar signal</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
-.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
-.S2 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
-.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
-.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S4 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S5 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S6 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>Computing the Pake pattern of a dipolar signal</span></h1><div  class = 'S1'><span>Author: Luis Fabregas A very basic example for displaying the frequency-domain Pake pattern (spectrum) of a given dipolar signal.</span></div><h2  class = 'S2'><span>Generate a dipolar signal</span></h2><div  class = 'S1'><span>Let's start by simulating a dipolar signal with some background and noise.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Prepare components</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>t = linspace(0,5,400);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>r = time2dist(t);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>P = dd_gauss2(r,[3.5 0.3 4 0.2 0.2]);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>B = bg_exp(t,0.2);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>V = dipolarsignal(t,r,P,</span><span style="color: rgb(160, 32, 240);">'moddepth'</span><span>,0.3,</span><span style="color: rgb(160, 32, 240);">'background'</span><span>,B,</span><span style="color: rgb(160, 32, 240);">'noiselevel'</span><span>,0.01);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Plot</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>figure(</span><span style="color: rgb(160, 32, 240);">'position'</span><span>,[0 0 500 200])</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>plot(t,V,</span><span style="color: rgb(160, 32, 240);">'Linewidth'</span><span>,1.5)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>set(gca,</span><span style="color: rgb(160, 32, 240);">'fontsize'</span><span>,14)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>axis </span><span style="color: rgb(160, 32, 240);">tight</span><span>, grid </span><span style="color: rgb(160, 32, 240);">on</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>xlabel(</span><span style="color: rgb(160, 32, 240);">'Time [\mus]'</span><span>),ylabel(</span><span style="color: rgb(160, 32, 240);">'V(t)'</span><span>)</span></span></div></div></div><h2  class = 'S6'><span>Prepare the signal</span></h2><div  class = 'S1'><span>Since experimental dipolar signals contain the background, this must be fitted removed prior to Fourier transform.</span></div><div  class = 'S1'><span>First we proceed to fit the background function using some time-domain parametric model. In this example we will use a stretched exponential function </span><span>(</span><span style=' font-family: monospace;'>bg_strexp</span><span>). Using the</span><span> </span><span style=' font-family: monospace;'>fitbackground</span><span> function we obtain the fitted background as well as the fitted modulation depth.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Fit the background function</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>[B,lambda] = fitbackground(V,t,@bg_exp);</span></span></div></div></div><div  class = 'S1'><span>Now we can use these fitted variables to isolate the dipolar evolution function from the primary data. Removal of the background via division leads to a noise increase at later times and thus to an approximation</span><span> </span><span style=' font-family: monospace;'>Dcorr</span><span> of the real dipolar evolution function.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%"Correct" for the background and modulation depth</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>Dcorr = (V./B - (1 - lambda))/lambda;</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>figure(</span><span style="color: rgb(160, 32, 240);">'position'</span><span>,[0 0 500 200])</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>plot(t,Dcorr,</span><span style="color: rgb(160, 32, 240);">'Linewidth'</span><span>,1.5)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>set(gca,</span><span style="color: rgb(160, 32, 240);">'fontsize'</span><span>,14)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>axis </span><span style="color: rgb(160, 32, 240);">tight</span><span>, grid </span><span style="color: rgb(160, 32, 240);">on</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>xlabel(</span><span style="color: rgb(160, 32, 240);">'Time [\mus]'</span><span>),ylabel(</span><span style="color: rgb(160, 32, 240);">'D_{corr}(t)'</span><span>)</span></span></div></div></div><h2  class = 'S6'><span>Generating the Pake pattern</span></h2><div  class = 'S1'><span>Now that the signal has the appropiate structure for Fourier transform it, we can call the</span><span> </span><span style=' font-family: monospace;'>fftspec</span><span> function to obtained the Pake pattern.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Compute spectrum</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>[nu,pake] = fftspec(t,Dcorr);</span></span></div></div></div><div  class = 'S1'><span>In order to avoid truncation ripples in the Fourier spectrum and at the same time to compensate for the increase of noise, we recommend the use of apodization using the appropiate option in</span><span> </span><span style=' font-family: monospace;'>fftspec</span><span>.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Compute spectrum with apodization</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>[nu,pake] = fftspec(t,Dcorr,</span><span style="color: rgb(160, 32, 240);">'Apodization'</span><span>,true);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Plot results</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>figure(</span><span style="color: rgb(160, 32, 240);">'position'</span><span>,[0 0 500 200])</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>plot(nu,pake,</span><span style="color: rgb(160, 32, 240);">'Linewidth'</span><span>,1.5)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>axis </span><span style="color: rgb(160, 32, 240);">tight</span><span>, grid </span><span style="color: rgb(160, 32, 240);">on</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>set(gca,</span><span style="color: rgb(160, 32, 240);">'xlim'</span><span>,[-10 10],</span><span style="color: rgb(160, 32, 240);">'fontsize'</span><span>,14)</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>xlabel(</span><span style="color: rgb(160, 32, 240);">'Frequency [MHz]'</span><span>),ylabel(</span><span style="color: rgb(160, 32, 240);">'Intensity [a.u.]'</span><span>)</span></span></div></div></div><div  class = 'S1'><span>We do not need to worry about the zero-filling since</span><span> </span><span style=' font-family: monospace;'>fftspec</span><span> takes care of setting it to twice the amount of points in the signal, to preserve all information. Adding more points will artificially increase the resolution of the Pake pattern. The improvement will only be visual as no further information can be gained from additional zero-filling.</span></div></div>
-<br>
-<!-- 
-##### SOURCE BEGIN #####
-%% Computing the Pake pattern of a dipolar signal
-% Author: Luis Fabregas A very basic example for displaying the frequency-domain 
-% Pake pattern (spectrum) of a given dipolar signal.
-%% Generate a dipolar signal
-% Let's start by simulating a dipolar signal with some background and noise.
+  <div class="section" id="analyzing-the-pake-pattern-of-a-dipolar-signal">
+<span id="example-pakepattern"></span><h1>Analyzing the Pake pattern of a dipolar signal<a class="headerlink" href="#analyzing-the-pake-pattern-of-a-dipolar-signal" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Computing the Pake pattern of a dipolar signal</span>
+<span class="c">%============================================================================</span>
 
-%Prepare components
-t = linspace(0,5,400);
-r = time2dist(t);
-P = dd_gauss2(r,[3.5 0.3 4 0.2 0.2]);
-B = bg_exp(t,0.2);
-V = dipolarsignal(t,r,P,'moddepth',0.3,'background',B,'noiselevel',0.01);
+<span class="c">% A very basic example for displaying the frequency-domain Pake pattern (spectrum) </span>
+<span class="c">% of a given dipolar signal.</span>
 
-%Plot
-figure('position',[0 0 500 200])
-plot(t,V,'Linewidth',1.5)
-set(gca,'fontsize',14)
-axis tight, grid on
-xlabel('Time [\mus]'),ylabel('V(t)')
-%% Prepare the signal
-% Since experimental dipolar signals contain the background, this must be fitted 
-% removed prior to Fourier transform.
-% 
-% First we proceed to fit the background function using some time-domain parametric 
-% model. In this example we will use a stretched exponential function (|bg_strexp|). 
-% Using the |fitbackground| function we obtain the fitted background as well as 
-% the fitted modulation depth.
+<span class="c">%==========================</span>
+<span class="c">% Generate a dipolar signal</span>
+<span class="c">%==========================</span>
+<span class="c">% Let&#39;s start by simulating a dipolar signal with some background and noise.</span>
 
-%Fit the background function
-[B,lambda] = fitbackground(V,t,@bg_exp);
-%% 
-% Now we can use these fitted variables to isolate the dipolar evolution function 
-% from the primary data. Removal of the background via division leads to a noise 
-% increase at later times and thus to an approximation |Dcorr| of the real dipolar 
-% evolution function.
+<span class="n">clear</span><span class="p">,</span><span class="n">clc</span><span class="p">,</span><span class="n">clf</span>
 
-%"Correct" for the background and modulation depth
-Dcorr = (V./B - (1 - lambda))/lambda;
+<span class="c">% Prepare components</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">500</span><span class="p">);</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="mf">3.5</span> <span class="mf">0.3</span> <span class="mi">4</span> <span class="mf">0.2</span> <span class="mf">0.2</span><span class="p">]);</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">0.2</span><span class="p">);</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
 
-figure('position',[0 0 500 200])
-plot(t,Dcorr,'Linewidth',1.5)
-set(gca,'fontsize',14)
-axis tight, grid on
-xlabel('Time [\mus]'),ylabel('D_{corr}(t)')
-%% Generating the Pake pattern
-% Now that the signal has the appropiate structure for Fourier transform it, 
-% we can call the |fftspec| function to obtained the Pake pattern.
+<span class="c">% Plot</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
 
-%Compute spectrum
-[nu,pake] = fftspec(t,Dcorr);
-%% 
-% In order to avoid truncation ripples in the Fourier spectrum and at the same 
-% time to compensate for the increase of noise, we recommend the use of apodization 
-% using the appropiate option in |fftspec|.
+<span class="c">%==========================</span>
+<span class="c">% Prepare the signal</span>
+<span class="c">%==========================</span>
+<span class="c">% Since experimental dipolar signals contain the background, this must be fitted </span>
+<span class="c">% removed prior to Fourier transform.</span>
+<span class="c">% </span>
+<span class="c">% First we proceed to fit the background function using some time-domain parametric </span>
+<span class="c">% model. In this example we will use a stretched exponential function (|td_strexp|). </span>
+<span class="c">% Using the |fitbackground| function we obtain the fitted background as well as </span>
+<span class="c">% the fitted modulation depth.</span>
 
-%Compute spectrum with apodization
-[nu,pake] = fftspec(t,Dcorr,'Apodization',true);
+<span class="c">% Fit the background function</span>
+<span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">lambda</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_exp</span><span class="p">);</span> 
 
-%Plot results
-figure('position',[0 0 500 200])
-plot(nu,pake,'Linewidth',1.5)
-axis tight, grid on
-set(gca,'xlim',[-10 10],'fontsize',14)
-xlabel('Frequency [MHz]'),ylabel('Intensity [a.u.]')
-%% 
-% We do not need to worry about the zero-filling since |fftspec| takes care 
-% of setting it to twice the amount of points in the signal, to preserve all information. 
-% Adding more points will artificially increase the resolution of the Pake pattern. 
-% The improvement will only be visual as no further information can be gained 
-% from additional zero-filling.
-##### SOURCE END #####
---></body></html></div>
+
+<span class="c">% Now we can use these fitted variables to isolate the dipolar evolution function </span>
+<span class="c">% from the primary data. Removal of the background via division leads to a noise </span>
+<span class="c">% increase at later times and thus to an approximation |Dcorr| of the real dipolar </span>
+<span class="c">% evolution function.</span>
+
+<span class="c">% &quot;Correct&quot; for the background and modulation depth</span>
+<span class="n">Dcorr</span> <span class="p">=</span> <span class="p">(</span><span class="n">V</span><span class="o">./</span><span class="n">B</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lambda</span><span class="p">))</span><span class="o">/</span><span class="n">lambda</span><span class="p">;</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Dcorr</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;D_{corr}(t)&#39;</span><span class="p">)</span>
+
+<span class="c">%=============================</span>
+<span class="c">% Generating the Pake pattern</span>
+<span class="c">%=============================</span>
+
+<span class="c">% Now that the signal has the appropiate structure for Fourier transform it, </span>
+<span class="c">% we can call the |fftspec| function to obtained the Pake pattern.</span>
+
+<span class="c">% Compute spectrum</span>
+<span class="p">[</span><span class="n">nu</span><span class="p">,</span><span class="n">pake</span><span class="p">]</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Dcorr</span><span class="p">,</span><span class="s">&#39;Apodization&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">);</span>
+ 
+<span class="c">% In order to avoid truncation ripples in the Fourier spectrum and at the same </span>
+<span class="c">% time to compensate for the increase of noise, we recommend the use of apodization </span>
+<span class="c">% using the appropiate option in |fftspec|.</span>
+
+<span class="c">% Compute spectrum with apodization</span>
+<span class="p">[</span><span class="n">nuapo</span><span class="p">,</span><span class="n">pakeapo</span><span class="p">]</span> <span class="p">=</span> <span class="n">fftspec</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Dcorr</span><span class="p">,</span><span class="s">&#39;Apodization&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
+
+<span class="c">% Plot results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">pake</span><span class="p">,</span><span class="n">nuapo</span><span class="p">,</span><span class="n">pakeapo</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Frequency [MHz]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Intensity [a.u.]&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;Raw&#39;</span><span class="p">,</span><span class="s">&#39;Apodized&#39;</span><span class="p">)</span>
+
+<span class="c">% We do not need to worry about the zero-filling since |fftspec| takes care </span>
+<span class="c">% of setting it to twice the amount of points in the signal, to preserve all information. </span>
+<span class="c">% Adding more points will artificially increase the resolution of the Pake pattern. </span>
+<span class="c">% The improvement will only be visual as no further information can be gained </span>
+<span class="c">% from additional zero-filling.</span>
+</pre></div>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="example_aptsimple.html" class="btn btn-neutral float-right" title="Simple processing with the approximate Pake transformation (APT)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="example_sensitivan_ridmecoeff.html" class="btn btn-neutral float-left" title="Sensitivity analysis - RIDME overtone coefficients" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

@@ -43,7 +43,7 @@
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Experiment models" href="../exmodels.html" />
+    <link rel="next" title="ex_4pdeer" href="ex_4pdeer.html" />
     <link rel="prev" title="bg_strexp" href="bg_strexp.html" /> 
 </head>
 
@@ -75,8 +75,6 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.8.beta/models/bg_sumstrexp.html">0.8.beta</option>
-        <option value="../../0.6.beta/models/bg_sumstrexp.html">0.6.beta</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -102,12 +100,9 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
-</ul>
-<p class="caption"><span class="caption-text">User guide</span></p>
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
 </ul>
@@ -117,11 +112,37 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul class="current">
@@ -131,23 +152,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../modelsref.html">Models</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../bgmodels.html">Background models</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -195,7 +214,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../bgmodels.html">Background models</a> &raquo;</li>
+          <li><a href="../modelsref.html">Models</a> &raquo;</li>
         
       <li><code class="docutils literal notranslate"><span class="pre">bg_sumstrexp</span></code></li>
     
@@ -221,8 +240,8 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">bg_sumstrexp</span><span class="p">()</span>
-<span class="n">P</span> <span class="p">=</span> <span class="n">bg_sumstrexp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
-<span class="n">P</span> <span class="p">=</span> <span class="n">bg_sumstrexp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">bg_sumstrexp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">bg_sumstrexp</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -244,7 +263,7 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/81aa5a086de544d4b2d67cf7729f55493404bd3e.svg" alt="B(t) = A_1\exp \left(-\lambda\kappa_1 \vert t \vert^{d_1}\right) + (1-A_1)\exp\left(-\lambda\kappa_2 \vert t \vert^{d_2}\right)"/></p>
+<p><img class="math" src="../_images/math/d068849a5ab6018312305a7e084a7c84b4a0a42d.svg" alt="B(t) = A_1\exp \left(-\lambda\kappa_1 \vert t \vert^{d_1}\right) + (1-A_1)\exp\left(-\lambda\kappa_2 \vert t \vert^{d_2}\right)"/></p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="14%" />
@@ -265,35 +284,35 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(1)</span></code></td>
-<td><img class="math" src="../_images/math/bcb6bc0901f57264c4c5dfc97e5f007acf28c871.svg" alt="\kappa_1"/></td>
+<td><img class="math" src="../_images/math/c574afa8962a22369214e71fd206f5b8bb1c9b4a.svg" alt="\kappa_1"/></td>
 <td>3.5</td>
 <td>0</td>
 <td>200</td>
 <td>1st strexp decay rate</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(2)</span></code></td>
-<td><img class="math" src="../_images/math/a5046a27fb20484be8144bd8f9e3a76c52577923.svg" alt="d_1"/></td>
+<td><img class="math" src="../_images/math/dfb116111efb97336b1ff46c62af10186906619d.svg" alt="d_1"/></td>
 <td>1</td>
 <td>0</td>
 <td>6</td>
 <td>1st strexp stretch factor</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(3)</span></code></td>
-<td><img class="math" src="../_images/math/7d6ba1020406178f343589d14193200551e58741.svg" alt="\kappa_2"/></td>
+<td><img class="math" src="../_images/math/fcdc96a95bb94756dc9656644159fa3d12c14708.svg" alt="\kappa_2"/></td>
 <td>3.5</td>
 <td>0</td>
 <td>200</td>
 <td>2nd strexp decay rate</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
-<td><img class="math" src="../_images/math/6615979d4e36d5f55b0205c5d6b1bba5d552f8c5.svg" alt="d_2"/></td>
+<td><img class="math" src="../_images/math/397acce07c04adea43858ba5bd5596b05060ae05.svg" alt="d_2"/></td>
 <td>1</td>
 <td>0</td>
 <td>6</td>
 <td>2nd strexp stretch factor</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(5)</span></code></td>
-<td><img class="math" src="../_images/math/7d8779e6ecd1c1c63865faf316bf1f533efafc4b.svg" alt="A_1"/></td>
+<td><img class="math" src="../_images/math/8cef82817e49aadea8625cde9f442bbfe3c707e6.svg" alt="A_1"/></td>
 <td>0.5</td>
 <td>0</td>
 <td>1</td>
@@ -335,7 +354,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../exmodels.html" class="btn btn-neutral float-right" title="Experiment models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ex_4pdeer.html" class="btn btn-neutral float-right" title="ex_4pdeer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="bg_strexp.html" class="btn btn-neutral float-left" title="bg_strexp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

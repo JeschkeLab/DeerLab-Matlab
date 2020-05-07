@@ -42,9 +42,7 @@
   <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Global fit of a dipolar evolution function using regularization" href="example_globalfit_regularization.html" />
-    <link rel="prev" title="Fitting a custom time-domain model of a 4-pulse DEER signal" href="example_timedomainfitting.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -75,8 +73,6 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.8.beta/examples/example_selectmodel.html">0.8.beta</option>
-        <option value="../../0.6.beta/examples/example_selectmodel.html">0.6.beta</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -102,12 +98,9 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
-</ul>
-<p class="caption"><span class="caption-text">User guide</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
 </ul>
@@ -117,11 +110,37 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -131,23 +150,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -195,8 +212,6 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../examples.html">Tutorials</a> &raquo;</li>
-        
       <li>Selecting an optimal parametric model for fitting a dipolar signal</li>
     
     
@@ -216,116 +231,111 @@
             
   <div class="section" id="selecting-an-optimal-parametric-model-for-fitting-a-dipolar-signal">
 <span id="example-modelselection"></span><h1>Selecting an optimal parametric model for fitting a dipolar signal<a class="headerlink" href="#selecting-an-optimal-parametric-model-for-fitting-a-dipolar-signal" title="Permalink to this headline">¶</a></h1>
-<br>
-<p align="center">
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/modelselection/modelselection.pdf" title="Download PDF file" target="_blank" download>
-                <img src="../_static/img/download_pdf_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/modelselection/modelselection.mlx" title="Download Live Script" target="_blank">
-                <img src="../_static/img/download_live_button.png" class="tutorial_buttons";" alt="live">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/modelselection/modelselection.m" title="Download Source File" target="_blank">
-                <img src="../_static/img/download_source_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-</p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2019b"><title>Selecting an optimal parametric model for fitting a dipolar signals</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
-.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
-.S2 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
-.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
-.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S4 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S5 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S6 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
-.S7 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 14px;  }
-.S8 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>Selecting an optimal parametric model for fitting a dipolar signals</span></h1><div  class = 'S1'><span>Author: Luis Fabregas In this tutorial we will show how to optimally select a parametric model for a given dipolar signal.</span></div><h2  class = 'S2'><span>Simulating a dipolar signal</span></h2><div  class = 'S1'><span>Let's start by constructing a simple dipolar signal with some noise arising from a bimodal Gaussian distance distribution.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>clear,clc,clf</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Prepare the signal components</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>t = linspace(-0.1,6,200);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>r = linspace(2,8,200);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>P = dd_gauss2(r,[4 0.2 4.5 0.4 0.5]);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Simulate the signal</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>V = dipolarsignal(t,r,P,</span><span style="color: rgb(160, 32, 240);">'noiselevel'</span><span>,0.05);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Plot</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>figure(</span><span style="color: rgb(160, 32, 240);">'position'</span><span>,[0 0 500 200])</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>plot(t,V,</span><span style="color: rgb(160, 32, 240);">'k'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Linewidth'</span><span>,1.5)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>set(gca,</span><span style="color: rgb(160, 32, 240);">'fontsize'</span><span>,14)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>axis </span><span style="color: rgb(160, 32, 240);">tight</span><span>, grid </span><span style="color: rgb(160, 32, 240);">on</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>xlabel(</span><span style="color: rgb(160, 32, 240);">'Time [\mus]'</span><span>),ylabel(</span><span style="color: rgb(160, 32, 240);">'V(t)'</span><span>)</span></span></div></div></div><h2  class = 'S6'><span>Selecting the optimal model</span></h2><div  class = 'S1'><span>Even though we know the ground truth, in this example we will cosider the following set of potential parametric models: </span></div><ul  class = 'S7'><li  class = 'S8'><span>Unimodal Rician distribution</span></li><li  class = 'S8'><span>Bimodal Rician distribution</span></li><li  class = 'S8'><span>Trimodal Rician distribution</span></li><li  class = 'S8'><span>Unimodal Gaussian distribution</span></li><li  class = 'S8'><span>Bimodal Gaussian distribution</span></li><li  class = 'S8'><span>Trimodal Gaussian distribution</span></li><li  class = 'S8'><span>Mixed bimodal Gaussian/Rician distribution</span></li></ul><div  class = 'S1'><span>The first six models have built-in parametric models which we can use directly. The last model we can construct from built-in models using the</span><span> </span><span style=' font-family: monospace;'>mixmodels</span><span> function.</span></div><div  class = 'S1'><span>As expected the AIC criterion identifies the bimodal Gaussian model as the optimal one. The successful identification is facilitated by the relatively low noise level in the signal. However, for different noise realization this may fail.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Prepare the mixed model</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>dd_mix = mixmodels(@dd_rice,@dd_gauss);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Prepare list of candidate parametric models</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>Models = {@dd_rice,@dd_rice2,@dd_rice3,</span><span style="color: rgb(0, 0, 255);">...</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>          @dd_gauss,@dd_gauss2,@dd_gauss3,dd_mix};</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>     </span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Prepare the dipolar kernel</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>K = dipolarkernel(t,r);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Optimize the selection</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>[optIdx,metric] = selectmodel(Models,V,r,K,</span><span style="color: rgb(160, 32, 240);">'aic'</span><span>);</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Plot the results</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>figure(</span><span style="color: rgb(160, 32, 240);">'position'</span><span>,[0 0 500 300])</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>clf,hold </span><span style="color: rgb(160, 32, 240);">on</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>plot(metric - min(metric),</span><span style="color: rgb(160, 32, 240);">'b-o'</span><span>,</span><span style="color: rgb(160, 32, 240);">'LineWidth'</span><span>,1.5)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>grid </span><span style="color: rgb(160, 32, 240);">on</span><span>, box </span><span style="color: rgb(160, 32, 240);">on</span><span>,axis </span><span style="color: rgb(160, 32, 240);">tight</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>ylabel(</span><span style="color: rgb(160, 32, 240);">'\DeltaAIC'</span><span>)</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>tags = {</span><span style="color: rgb(160, 32, 240);">'One Rice'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Two Rice'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Three Rice'</span><span>,</span><span style="color: rgb(160, 32, 240);">'One Gaussian'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Two Gaussian'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Three Gaussian'</span><span>,</span><span style="color: rgb(160, 32, 240);">'Mixed Rice/Gaussian'</span><span>};</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>set(gca,</span><span style="color: rgb(160, 32, 240);">'xtick'</span><span>,1:length(Models),</span><span style="color: rgb(160, 32, 240);">'xticklabel'</span><span>,tags,</span><span style="color: rgb(160, 32, 240);">'fontsize'</span><span>,14)</span></span></div></div><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>xtickangle(45)</span></span></div></div></div></div>
-<br>
-<!-- 
-##### SOURCE BEGIN #####
-%% Selecting an optimal parametric model for fitting a dipolar signals
-% Author: Luis Fabregas In this tutorial we will show how to optimally select 
-% a parametric model for a given dipolar signal.
-%% Simulating a dipolar signal
-% Let's start by constructing a simple dipolar signal with some noise arising 
-% from a bimodal Gaussian distance distribution.
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Selecting an optimal parametric model for fitting a dipolar signal</span>
+<span class="c">%============================================================================</span>
 
-clear,clc,clf
+<span class="c">% In this example we will show how to optimally select a parametric model for </span>
+<span class="c">% a given dipolar signal.</span>
 
-%Prepare the signal components
-t = linspace(-0.1,6,200);
-r = linspace(2,8,200);
-P = dd_gauss2(r,[4 0.2 4.5 0.4 0.5]);
+<span class="n">clear</span><span class="p">,</span><span class="n">clc</span><span class="p">,</span><span class="n">clf</span>
 
-%Simulate the signal
-V = dipolarsignal(t,r,P,'noiselevel',0.05);
+<span class="c">% Data Generation</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
 
-%Plot
-figure('position',[0 0 500 200])
-plot(t,V,'k','Linewidth',1.5)
-set(gca,'fontsize',14)
-axis tight, grid on
-xlabel('Time [\mus]'),ylabel('V(t)')
-%% Selecting the optimal model
-% Even though we know the ground truth, in this example we will cosider the 
-% following set of potential parametric models: 
-%% 
-% * Unimodal Rician distribution
-% * Bimodal Rician distribution
-% * Trimodal Rician distribution
-% * Unimodal Gaussian distribution
-% * Bimodal Gaussian distribution
-% * Trimodal Gaussian distribution
-% * Mixed bimodal Gaussian/Rician distribution
-%% 
-% The first six models have built-in parametric models which we can use directly. 
-% The last model we can construct from built-in models using the |mixmodels| function.
-% 
-% As expected the AIC criterion identifies the bimodal Gaussian model as the 
-% optimal one. The successful identification is facilitated by the relatively 
-% low noise level in the signal. However, for different noise realization this 
-% may fail.
+<span class="c">% Let&#39;s start by constructing a simple dipolar signal with some noise arising </span>
+<span class="c">% from a bimodal Gaussian distance distribution.</span>
 
-%Prepare the mixed model
-dd_mix = mixmodels(@dd_rice,@dd_gauss);
+<span class="c">% Prepare the signal components</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="mi">4</span> <span class="mf">0.7</span> <span class="mf">0.3</span> <span class="mf">4.5</span> <span class="mf">0.3</span><span class="p">]);</span>
 
-%Prepare list of candidate parametric models
-Models = {@dd_rice,@dd_rice2,@dd_rice3,...
-          @dd_gauss,@dd_gauss2,@dd_gauss3,dd_mix};
+<span class="c">% Simulate the signal</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.03</span><span class="p">);</span>
+
+<span class="c">% Plot</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;Linewidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm^{-1}]&#39;</span><span class="p">)</span>
+
+<span class="c">% Selecting an optimal model</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% Even though we know the ground truth, in this example we will cosider the </span>
+<span class="c">% following set of potential parametric models: </span>
+<span class="c">% - Unimodal Rician distribution</span>
+<span class="c">% - Bimodal Rician distribution</span>
+<span class="c">% - Trimodal Rician distribution</span>
+<span class="c">% - Unimodal Gaussian distribution</span>
+<span class="c">% - Bimodal Gaussian distribution</span>
+<span class="c">% - Trimodal Gaussian distribution</span>
+<span class="c">% - Mixed bimodal Gaussian/Rician distribution</span>
+
+<span class="c">% The first six models have built-in parametric models which we can use directly. </span>
+<span class="c">% The last model we can construct from built-in models using the |mixmodels| function.</span>
+
+<span class="c">% Prepare the mixed model</span>
+<span class="n">dd_rice_gauss</span> <span class="p">=</span> <span class="n">mixmodels</span><span class="p">(@</span><span class="n">dd_rice</span><span class="p">,@</span><span class="n">dd_gauss</span><span class="p">);</span>
+ 
+<span class="c">% Prepare list of candidate parametric models</span>
+<span class="n">Models</span> <span class="p">=</span> <span class="p">{@</span><span class="n">dd_rice</span><span class="p">,@</span><span class="n">dd_rice2</span><span class="p">,@</span><span class="n">dd_rice3</span><span class="p">,</span><span class="c">...</span>
+          <span class="p">@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">dd_gauss2</span><span class="p">,@</span><span class="n">dd_gauss3</span><span class="p">,</span><span class="n">dd_rice_gauss</span><span class="p">};</span>
      
-%Prepare the dipolar kernel
-K = dipolarkernel(t,r);
+<span class="c">% Prepare the dipolar kernel</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
 
-%Optimize the selection
-[optIdx,metric] = selectmodel(Models,V,r,K,'aic');
+<span class="c">% Optimize the selection</span>
+<span class="p">[</span><span class="n">optIdx</span><span class="p">,</span><span class="n">AIC</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">Models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">);</span>
 
-%Plot the results
-figure('position',[0 0 500 300])
-clf,hold on
-plot(metric - min(metric),'b-o','LineWidth',1.5)
-grid on, box on,axis tight
-ylabel('\DeltaAIC')
-tags = {'One Rice','Two Rice','Three Rice','One Gaussian','Two Gaussian','Three Gaussian','Mixed Rice/Gaussian'};
-set(gca,'xtick',1:length(Models),'xticklabel',tags,'fontsize',14)
-xtickangle(45)
-##### SOURCE END #####
---></body></html></div>
+<span class="n">dAIC</span> <span class="p">=</span> <span class="n">AIC</span> <span class="o">-</span> <span class="n">min</span><span class="p">(</span><span class="n">AIC</span><span class="p">);</span>
+
+<span class="c">% Plot the results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">bar</span><span class="p">(</span><span class="n">dAIC</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on,axis</span> <span class="s">tight</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;\DeltaAIC&#39;</span><span class="p">)</span>
+<span class="n">tags</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;R_1&#39;</span><span class="p">,</span><span class="s">&#39;R_2&#39;</span><span class="p">,</span><span class="s">&#39;R_3&#39;</span><span class="p">,</span><span class="s">&#39;G_1&#39;</span><span class="p">,</span><span class="s">&#39;G_2&#39;</span><span class="p">,</span><span class="s">&#39;G_3&#39;</span><span class="p">,</span><span class="s">&#39;R/G&#39;</span><span class="p">};</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;xtick&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">Models</span><span class="p">),</span><span class="s">&#39;xticklabel&#39;</span><span class="p">,</span><span class="n">tags</span><span class="p">)</span>
+
+
+<span class="c">% Akaike Weights</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% It is often more useful to look at these results from the perspective of</span>
+<span class="c">% Akaike weights, i.e. the probabilities of a model being the most optimal.</span>
+
+<span class="n">weights</span> <span class="p">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">dAIC</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="n">sum</span><span class="p">(</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dAIC</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>
+
+<span class="c">% Plot the results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">5</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">bar</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on,axis</span> <span class="s">tight</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Akaike Weights [%]&#39;</span><span class="p">)</span>
+<span class="n">tags</span> <span class="p">=</span> <span class="p">{</span><span class="s">&#39;R_1&#39;</span><span class="p">,</span><span class="s">&#39;R_2&#39;</span><span class="p">,</span><span class="s">&#39;R_3&#39;</span><span class="p">,</span><span class="s">&#39;G_1&#39;</span><span class="p">,</span><span class="s">&#39;G_2&#39;</span><span class="p">,</span><span class="s">&#39;G_3&#39;</span><span class="p">,</span><span class="s">&#39;R/G&#39;</span><span class="p">};</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;xtick&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">Models</span><span class="p">),</span><span class="s">&#39;xticklabel&#39;</span><span class="p">,</span><span class="n">tags</span><span class="p">)</span>
+
+<span class="c">% Typically there is not a single optimal model unless the noise level is very</span>
+<span class="c">% low. Usually several models have similar probabilities and should therefore be presented together. </span>
+</pre></div>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="example_globalfit_regularization.html" class="btn btn-neutral float-right" title="Global fit of a dipolar evolution function using regularization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="example_timedomainfitting.html" class="btn btn-neutral float-left" title="Fitting a custom time-domain model of a 4-pulse DEER signal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>

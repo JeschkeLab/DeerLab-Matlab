@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Basic signal processing of experimental 4-pulse DEER data (Regularization) &mdash; DeerLab  documentation</title>
+  <title>Basic fitting of a 4-pulse DEER signal, parameter-free distribution &mdash; DeerLab  documentation</title>
   
 
   
@@ -42,9 +42,7 @@
   <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
   <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Basic signal processing of experimental 4-pulse DEER data (Multi-Gauss)" href="example_basicprocessing_multigauss.html" />
-    <link rel="prev" title="Basics of 4-pulse DEER signal simulation (2)" href="example_simulation_4deer_part2.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -75,8 +73,6 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.8.beta/examples/example_basicprocessing.html">0.8.beta</option>
-        <option value="../../0.6.beta/examples/example_basicprocessing.html">0.6.beta</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -102,12 +98,9 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a></li>
-</ul>
-<p class="caption"><span class="caption-text">User guide</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../download.html">Downloads</a><ul>
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
 </ul>
@@ -117,11 +110,37 @@
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../examples.html#tutorials-basics">Tutorials - Basics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../examples.html#tutorials-advanced">Tutorials - Advanced</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Reference</span></p>
 <ul>
@@ -131,23 +150,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ddmodels.html">Distribution models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parameter-free-distance-distributions">Parameter-free distance distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ddmodels.html#parametric-distance-distributions">Parametric distance distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../bgmodels.html">Background models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#physical-models">Physical models</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bgmodels.html#phenomenological-models">Phenomenological models</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../exmodels.html">Experiment models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_4pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_5pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_5pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_7pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_7pdeer</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../models/ex_ovl4pdeer.html"><code class="docutils literal notranslate"><span class="pre">ex_ovl4pdeer</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -195,9 +212,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../examples.html">Tutorials</a> &raquo;</li>
-        
-      <li>Basic signal processing of experimental 4-pulse DEER data (Regularization)</li>
+      <li>Basic fitting of a 4-pulse DEER signal, parameter-free distribution</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -214,123 +229,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="basic-signal-processing-of-experimental-4-pulse-deer-data-regularization">
-<span id="example-basicprocessing"></span><h1>Basic signal processing of experimental 4-pulse DEER data (Regularization)<a class="headerlink" href="#basic-signal-processing-of-experimental-4-pulse-deer-data-regularization" title="Permalink to this headline">¶</a></h1>
-<br>
-<p align="center">
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/basicprocessing_regularization/basicprocessing_regularization.pdf" title="Download PDF file" target="_blank" download>
-                <img src="../_static/img/download_pdf_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/basicprocessing_regularization/basicprocessing_regularization.mlx" title="Download Live Script" target="_blank">
-                <img src="../_static/img/download_live_button.png" class="tutorial_buttons";" alt="live">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="https://deertutorials.s3.eu-central-1.amazonaws.com/basicprocessing_regularization/basicprocessing_regularization.m" title="Download Source File" target="_blank">
-                <img src="../_static/img/download_source_button.png" class="tutorial_buttons";" alt="pdf">
-        </a>
-        &nbsp;&nbsp;&nbsp;
-</p><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2019b"><title>Basic signal processing of experimental 4-pulse DEER data (Regularization)</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
-.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
-.S2 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
-.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
-.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px; padding: 6px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S4 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: 700; text-align: left;  }
-.S5 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 14px;  }
-.S6 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }
-.S7 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S8 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
-.S9 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 16.996px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>Basic signal processing of experimental 4-pulse DEER data (Regularization)</span></h1><div  class = 'S1'><span>Author: Luis Fabregas A very basic example of dipolar data processing using Tikhonov regularization for a simple evaluation of experimental data.</span></div><h2  class = 'S2'><span>Load the data</span></h2><div  class = 'S1'><span>Let's start by extracting the primary data from the spectrometer file using </span><span> </span><span style=' font-family: monospace;'>deerload.</span><span> </span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>[traw,Vraw] = deerload(</span><span style="color: rgb(160, 32, 240);">'DeerLab/tutorials/data/experiment_example.DTA'</span><span>);</span></span></div></div></div><div  class = 'S1'><span>The function returns the experimental X-axis as</span><span> </span><span style=' font-family: monospace;'>traw</span><span> and the Y-axis as</span><span> </span><span style=' font-family: monospace;'>Vraw.</span></div><div  class = 'S1'><span>At this point it is important to check the units of the time-axis vecor</span><span> </span><span style=' font-family: monospace;'>traw.</span><span> While some commercial spectrometers return the time-axis data in nanoseconds, DeerLab employs microseconds as physical unit.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>traw = traw/1000; </span><span style="color: rgb(60, 118, 61);">%ns -&gt; us</span></span></div></div></div><div  class = 'S1'><span>Now we can also define the distance-axis vector</span><span> </span><span style=' font-family: monospace;'>r</span><span> of our distance distribution. A simple approach is to call the</span><span> </span><span style=' font-family: monospace;'>time2dist</span><span> function which will create a distance-axis adapted to the time-axis.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>r = time2dist(traw);</span></span></div></div></div><h2  class = 'S4'><span>Pre-Processing</span></h2><div  class = 'S1'><span>Before the data can be fitted it (usually) needs to undergo a set of pre-processing steps: </span></div><ol  class = 'S5'><li  class = 'S6'><span>The dipolar signal is usually complex, the first step if to perform a phase correction which will minimize the imaginary component / maximize the real component.</span></li><li  class = 'S6'><span>In common commercial spectrometers, the time-axes are measured in absolute values. This step aims to optimally determine and correct for the zero-time of the time axis.</span></li><li  class = 'S6'><span>The intensity of the signal is fiven in some arbitrary units (usually some kind voltage). All functions in DeerLab require the dipolar signal to be scaled such that</span><span> </span><span style=' font-family: monospace;'>V(0)=1</span><span>. This last set requires a fit of the scale require to correct the Y-axis of the dipolar signal.</span></li></ol><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S7'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Optimization &amp; Correction of phase</span></span></div></div><div class="inlineWrapper"><div  class = 'S8'><span style="white-space: pre;"><span>V = correctphase(Vraw);</span></span></div></div><div class="inlineWrapper"><div  class = 'S8'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Optimization &amp; Correctionof zero-time</span></span></div></div><div class="inlineWrapper"><div  class = 'S8'><span style="white-space: pre;"><span>t = correctzerotime(V,traw);</span></span></div></div><div class="inlineWrapper"><div  class = 'S8'><span style="white-space: pre;"><span style="color: rgb(60, 118, 61);">%Optimization &amp; Correction of Y-axis scale</span></span></div></div><div class="inlineWrapper"><div  class = 'S9'><span style="white-space: pre;"><span>V = correctscale(V,t);</span></span></div></div></div><h2  class = 'S4'><span>Prepare the dipolar kernel</span></h2><div  class = 'S1'><span>Since experimental dipolar signals contain a inter-molecular contribution, i.e. a background, this must be fitted and included into the dipolar kernel before the regularization.</span></div><div  class = 'S1'><span>First we proceed to fit the background function using some time-domain parametric model. In this example we will use a stretched exponential function </span><span>(</span><span style=' font-family: monospace;'>bg_strexp</span><span>). Using the</span><span> </span><span style=' font-family: monospace;'>fitbackground</span><span> function we obtain the fitted background as well as the fitted modulation depth.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>[B,lambda] = fitbackground(V,t,@bg_strexp);</span></span></div></div></div><div  class = 'S1'><span>Now we can use these fitted variables to generate the dipolar kernel which describes our signal.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>KB = dipolarkernel(t,r,lambda,B);</span></span></div></div></div><h2  class = 'S4'><span>Tikhonov regularization</span></h2><div  class = 'S1'><span>We now have all the elements required to fit our distance distribution via Tikhonov regularization. For basic data analysis with Tikhonov it is recommended to use the Akaike information criterion (AIC) for the</span><span> </span><span texencoding="\alpha \;" style="vertical-align:-5px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAkCAYAAABxE+FXAAABzElEQVRYR+3VT4iOURTH8c+ULIiNjLBgZVhpslAkYmMlSRlJKcpK+ZdEkZRkN0hCyZ+ZmsUoSSyslJIssJGUskLJgsiC6NSZenu6pudhmnfhOfVs7nPu+Z37Peee26OL1tNFba14V+i32Fvsk0qgbbhJxT0m1mIfD/ssbMV6vEIfPuMMnmEetmAqXuIuftap43jYp2AbTuAhDuE9ZuIcVmM7FuMSnmeSkUAt+5N4CB/AadzGbnzoiLgJo7iF2ViFvTiLX7WUKb7nkVBgvohPefpHlYDLcAdzcz1Q70oydbWL4gtxEytxCsfxoxIx6j6CpfiS+INQIyth34kreIeNeFKI2Hny69iTTfhP4tMwmAjv54k+FiJGD0RZ3mIznjZSTefqyePaDGENLmTTfa8E7sVlbMjrdrRQllq5VMU7a3kMJytRwj+u341cL/nUEg6nqvgCDGMFSoGX4CqWp0LMgPjWYk7u/Wvx6TiPHQXs8S+m2kB2ejTjY+zP8sS+mIC1rdTtMbmu4VsKvcAMHME6HMab7I0g9DppRGK1xupYdiXxWOvHQSzCA8zHvZx2XxETcF/6RJmiRHHfG1n7pDbCNVHOLfaJItkozv+L/TcOClQlARE4YgAAAABJRU5ErkJggg==" width="15.5" height="18" /></span><span>- selection.</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>Pfit = fitregmodel(V,KB,r,</span><span style="color: rgb(160, 32, 240);">'tikhonov'</span><span>,</span><span style="color: rgb(160, 32, 240);">'aic'</span><span>);</span></span></div></div></div><div  class = 'S1'><span>With our fitted distance distribution</span><span> </span><span style=' font-family: monospace;'>Pfit</span><span> we can forward-calculate the fit of the dipolar signal by simply computing</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>Vfit = KB*Pfit;</span></span></div></div></div></div>
-<br>
-<!-- 
-##### SOURCE BEGIN #####
-%% Basic signal processing of experimental 4-pulse DEER data (Regularization)
-% Author: Luis Fabregas A very basic example of dipolar data processing using 
-% Tikhonov regularization for a simple evaluation of experimental data.
-%% Load the data
-% Let's start by extracting the primary data from the spectrometer file using  
-% |deerload.| 
+  <div class="section" id="basic-fitting-of-a-4-pulse-deer-signal-parameter-free-distribution">
+<span id="example-basicprocessing"></span><h1>Basic fitting of a 4-pulse DEER signal, parameter-free distribution<a class="headerlink" href="#basic-fitting-of-a-4-pulse-deer-signal-parameter-free-distribution" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Basic fitting of a 4-pulse DEER signal, parameter-free distribution</span>
+<span class="c">%============================================================================</span>
 
-[traw,Vraw] = deerload('DeerLab/tutorials/data/experiment_example.DTA');
-%% 
-% The function returns the experimental X-axis as |traw| and the Y-axis as |Vraw.|
-% 
-% At this point it is important to check the units of the time-axis vecor |traw.| 
-% While some commercial spectrometers return the time-axis data in nanoseconds, 
-% DeerLab employs microseconds as physical unit.
+<span class="c">% This example shows how to fit a simple 4-pulse DEER signal with a parameter-</span>
+<span class="c">% free distribution, a background, and a modulation amplitude.</span>
 
-traw = traw/1000; %ns -> us
-%% 
-% Now we can also define the distance-axis vector |r| of our distance distribution. 
-% A simple approach is to call the |time2dist| function which will create a distance-axis 
-% adapted to the time-axis.
+<span class="n">clear</span><span class="p">,</span> <span class="n">clc</span><span class="p">,</span> <span class="n">clf</span>
 
-r = time2dist(traw);
-%% Pre-Processing
-% Before the data can be fitted it (usually) needs to undergo a set of pre-processing 
-% steps: 
-%% 
-% # The dipolar signal is usually complex, the first step if to perform a phase 
-% correction which will minimize the imaginary component / maximize the real component.
-% # In common commercial spectrometers, the time-axes are measured in absolute 
-% values. This step aims to optimally determine and correct for the zero-time 
-% of the time axis.
-% # The intensity of the signal is fiven in some arbitrary units (usually some 
-% kind voltage). All functions in DeerLab require the dipolar signal to be 
-% scaled such that |V(0)=1|. This last set requires a fit of the scale require 
-% to correct the Y-axis of the dipolar signal.
+<span class="c">% Generate data</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="n">rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="p">=</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">:</span><span class="mf">0.02</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>                 <span class="c">% time axis, us</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="nb">numel</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>    <span class="c">% distance axis, ns</span>
+<span class="n">param0</span> <span class="p">=</span> <span class="p">[</span><span class="mi">3</span> <span class="mf">0.3</span> <span class="mf">0.2</span> <span class="mf">3.5</span> <span class="mf">0.3</span> <span class="mf">0.65</span> <span class="mf">3.8</span> <span class="mf">0.2</span><span class="p">];</span> <span class="c">% parameters for three-Gaussian model</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss3</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param0</span><span class="p">);</span>         <span class="c">% model distance distribution</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span>                       <span class="c">% modulation depth</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">bg_hom3d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="n">lam</span><span class="p">);</span>         <span class="c">% background decay</span>
+<span class="n">Vexp</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;NoiseLevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
 
-%Optimization & Correction of phase
-V = correctphase(Vraw);
-%Optimization & Correctionof zero-time
-t = correctzerotime(V,traw);
-%Optimization & Correction of Y-axis scale
-V = correctscale(V,t);
-%% Prepare the dipolar kernel
-% Since experimental dipolar signals contain a inter-molecular contribution, 
-% i.e. a background, this must be fitted and included into the dipolar kernel 
-% before the regularization.
-% 
-% First we proceed to fit the background function using some time-domain parametric 
-% model. In this example we will use a stretched exponential function (|bg_strexp|). 
-% Using the |fitbackground| function we obtain the fitted background as well as 
-% the fitted modulation depth.
+<span class="c">% Run fit</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">parci</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
+    <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3dex</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">);</span>
 
-[B,lambda] = fitbackground(V,t,@bg_strexp);
-%% 
-% Now we can use these fitted variables to generate the dipolar kernel which 
-% describes our signal.
 
-KB = dipolarkernel(t,r,lambda,B);
-%% Tikhonov regularization
-% We now have all the elements required to fit our distance distribution via 
-% Tikhonov regularization. For basic data analysis with Tikhonov it is recommended 
-% to use the Akaike information criterion (AIC) for the $\alpha \;$- selection.
+<span class="c">% Plot results</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Vexp</span><span class="p">,</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">Vfit</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
 
-Pfit = fitregmodel(V,KB,r,'tikhonov','aic');
-%% 
-% With our fitted distance distribution |Pfit| we can forward-calculate the 
-% fit of the dipolar signal by simply computing
-
-Vfit = KB*Pfit;
-##### SOURCE END #####
---></body></html></div>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">);</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;model&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="example_basicprocessing_multigauss.html" class="btn btn-neutral float-right" title="Basic signal processing of experimental 4-pulse DEER data (Multi-Gauss)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="example_simulation_4deer_part2.html" class="btn btn-neutral float-left" title="Basics of 4-pulse DEER signal simulation (2)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
   
 
   <hr/>
