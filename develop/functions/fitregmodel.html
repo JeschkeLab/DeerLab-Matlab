@@ -337,6 +337,19 @@
 </dl>
 </li>
 <li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'NormP'</span></code> - Normalize distance distribution</dt>
+<dd><p class="first">Specifies whether the fitted distance distribution should be normalized (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>). If set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">Pfit</span></code> is normalized such that <code class="docutils literal notranslate"><span class="pre">sum(Pfit)*mean(diff(r))==1</span></code>.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;NormP&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'HuberParam'</span></code> - Huber parameter value</dt>
 <dd><p class="first">Value of the super-parameter used in pseudo-Huber regularization.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1.35</span></code></p>

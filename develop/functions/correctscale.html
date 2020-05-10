@@ -240,15 +240,19 @@
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vc</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 <span class="p">[</span><span class="n">Vc</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="p">[</span><span class="n">Vc</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">tmax</span><span class="p">)</span>
+<span class="p">[</span><span class="n">Vc</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Signal (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">t</span></code> - Time axis (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> – Signal (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code> – Time axis (<em>N</em>-element array), in microseconds</li>
+<li><code class="docutils literal notranslate"><span class="pre">tmax</span></code> – Time cutoff for fit range (scalar), in microseconds; default 0.2</li>
+<li><code class="docutils literal notranslate"><span class="pre">model</span></code> – model to fit: <code class="docutils literal notranslate"><span class="pre">'deer'</span></code> simple DEER model (default), <code class="docutils literal notranslate"><span class="pre">'gauss'</span></code> raised Gaussian</li>
 </ul>
 </dd>
 <dt>Returns</dt>
@@ -262,10 +266,14 @@
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vc</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vc</span><span class="p">,</span><span class="n">V0</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">model</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Determines the amplitude scale <code class="docutils literal notranslate"><span class="pre">V0</span></code> of a dipolar signal <code class="docutils literal notranslate"><span class="pre">V</span></code> and time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in ns/us). The output signal <code class="docutils literal notranslate"><span class="pre">Vc</span></code> is normalized by the scale via <code class="docutils literal notranslate"><span class="pre">Vc</span> <span class="pre">=</span> <span class="pre">V/V0</span></code>. The amplitude scale is determined by fitting a single-Gaussian distance distribution parametric model with exponential background to the signal.</p>
+<p>Determines the amplitude scale <code class="docutils literal notranslate"><span class="pre">V0</span></code> of a dipolar signal <code class="docutils literal notranslate"><span class="pre">V</span></code> and time axis <code class="docutils literal notranslate"><span class="pre">t</span></code>. The output signal <code class="docutils literal notranslate"><span class="pre">Vc</span></code> is normalized by the scale via <code class="docutils literal notranslate"><span class="pre">Vc</span> <span class="pre">=</span> <span class="pre">V/V0</span></code>. The amplitude scale is determined by fitting the model specified in <code class="docutils literal notranslate"><span class="pre">model</span></code> over a time interval determined by <code class="docutils literal notranslate"><span class="pre">abs(t)&lt;=tmax</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">tmax</span><span class="p">,</span><span class="n">model</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If no outputs are specified, the results are plotted.</p>
 </div>
 </div>
 
