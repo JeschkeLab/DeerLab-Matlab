@@ -75,7 +75,7 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.9/models/bg_hom3d.html">0.9</option>
+        <option value="../../0.9.0/models/bg_hom3d.html">0.9.0</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -264,10 +264,12 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<p>This model describes the inter-molecular interaction of one observer spin with a 3D homogenous distribution of pump-spins of concentration <img class="math" src="../_images/math/d673fb5f50efdaa5fe96d9ddbe83abf2ac746af3.svg" alt="c_p"/></p>
+<a class="reference internal image-reference" href="../_images/model_scheme_bg_hom3d.png"><img alt="../_images/model_scheme_bg_hom3d.png" src="../_images/model_scheme_bg_hom3d.png" style="width: 350px;" /></a>
 <p>The expression for this model is</p>
 <div class="math">
-<p><img src="../_images/math/586c22798788ec8aec8675c2823ce8540d57974d.svg" alt="B(t) = \mathrm{exp}\left(-\frac{8\pi^2}{9\sqrt{3}}\lambda c D |t|\right)`"/></p>
-</div><p>where c is the spin concentration (entered in spins/m<sup>3</sup> into this expression) and D is the dipolar constant</p>
+<p><img src="../_images/math/f11e868699d8a2f621643f82091a4fac0f5ea382.svg" alt="B(t) = \mathrm{exp}\left(-\frac{8\pi^2}{9\sqrt{3}}\lambda c_p D |t|\right)`"/></p>
+</div><p>where <img class="math" src="../_images/math/d673fb5f50efdaa5fe96d9ddbe83abf2ac746af3.svg" alt="c_p"/> is the pumped-spin concentration (entered in spins/m<sup>3</sup> into this expression) and D is the dipolar constant</p>
 <div class="math">
 <p><img src="../_images/math/0e12865d4611b18b213b828df16842f550dea3c8.svg" alt="D = \frac{\mu_0}{4\pi}\frac{(g_\mathrm{e}\mu_\mathrm{B})^2}{\hbar}"/></p>
 </div><table border="1" class="docutils">
@@ -290,11 +292,11 @@
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(1)</span></code></td>
-<td><img class="math" src="../_images/math/4544efee3c4d7e12386f82ea17ca334bc3eef0ad.svg" alt="c"/></td>
+<td><img class="math" src="../_images/math/d673fb5f50efdaa5fe96d9ddbe83abf2ac746af3.svg" alt="c_p"/></td>
 <td>50</td>
 <td>0.01</td>
 <td>5000</td>
-<td>Spin concentration (μM)</td>
+<td>Pumped spin concentration (μM)</td>
 </tr>
 </tbody>
 </table>

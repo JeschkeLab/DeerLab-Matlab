@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Global model fits with global, local and fixed parameters &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.0/examples/example_globalfit_localglobal_vars.html">0.9.0</option>
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9.0</option>
+        <option value="../../develop/examples/example_globalfit_localglobal_vars.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Global model fits with global, local and fixed parameters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="global-model-fits-with-global-local-and-fixed-parameters">
+<span id="example-globalfit-localglobal-vars"></span><h1>Global model fits with global, local and fixed parameters<a class="headerlink" href="#global-model-fits-with-global-local-and-fixed-parameters" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Global model fits with global, local and fixed parameters</span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This example shows how to fit multiple signals to a global model, which</span>
+<span class="c">% may depend on some parameters which need to be globally fitted, some</span>
+<span class="c">% locally and some might be fixed and not fitted. </span>
+<span class="c">% This kind of script is the basis for the analysis of pseudo-titration</span>
+<span class="c">% curves or dose-response curves.</span>
+
+<span class="n">clc</span><span class="p">,</span><span class="n">clear</span><span class="p">,</span><span class="n">clf</span>
+
+<span class="c">% Generate two datasets</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% For this example we will simulate a system containing two states A and B</span>
+<span class="c">% both havng a Gaussian distribution of known width but unknown mean</span>
+<span class="c">% distance. For this system we have two measurements V1 amd V2 measured</span>
+<span class="c">% under two different conditions leading to different fractions of states A</span>
+<span class="c">% and B. </span>
+
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span> <span class="c">% distance axis [nm]</span>
+<span class="n">t1</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span> <span class="c">% time axis of first measurement [us]</span>
+<span class="n">t2</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">150</span><span class="p">);</span> <span class="c">% time axis of first measurement [us]</span>
+
+<span class="c">% Parameters</span>
+<span class="n">rmeanA</span> <span class="p">=</span> <span class="mf">3.45</span><span class="p">;</span> <span class="c">% mean distance state A [nm]</span>
+<span class="n">rmeanB</span> <span class="p">=</span> <span class="mf">5.05</span><span class="p">;</span> <span class="c">% mean distance state B [nm]</span>
+<span class="n">fwhmA</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span> <span class="c">% FWHM state A [nm]</span>
+<span class="n">fwhmB</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span> <span class="c">% FWHM state B [nm]</span>
+
+<span class="n">fracA1</span> <span class="p">=</span> <span class="mf">0.8</span><span class="p">;</span> <span class="c">% Molar fraction of state A under conditions 1</span>
+<span class="n">fracA2</span> <span class="p">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="c">% Molar fraction of state A under conditions 2</span>
+<span class="c">% The molar fraction of state B is not required as it follows fracB = 1 - fracA</span>
+
+<span class="c">% Generate the two distributions for conditions 1 &amp; 2</span>
+<span class="n">P1</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="n">rmeanA</span> <span class="n">fwhmA</span> <span class="n">fracA1</span> <span class="n">rmeanB</span> <span class="n">fwhmB</span><span class="p">]);</span>
+<span class="n">P2</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="n">rmeanA</span> <span class="n">fwhmA</span> <span class="n">fracA2</span> <span class="n">rmeanB</span> <span class="n">fwhmB</span><span class="p">]);</span>
+
+<span class="c">% ...and the two corresponding signals</span>
+<span class="n">V1</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P1</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
+<span class="n">V2</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P2</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
+<span class="c">% (for the sake of simplicity no background and 100% modulation depth are assumed)</span>
+
+
+<span class="c">% Globa fit</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% Now when considering such systems is always important to (1) identify the</span>
+<span class="c">% parameters which must be fitted and (2) identify which parameters are the</span>
+<span class="c">% same for all signals (global) and which are specific for a individual</span>
+<span class="c">% signal (local). </span>
+
+<span class="c">% In this examples we have the following parameters:</span>
+<span class="c">%   - fixed: fwhmA, fwhmB (known paramters)</span>
+<span class="c">%   - global: rmeanA, rmeanB (same for both signals)</span>
+<span class="c">%   - local: fracA1, fracA2 (different for both signals/conditions)</span>
+
+<span class="c">% The next step is to construct the model function which describes our</span>
+<span class="c">% system (see function definition of myABmodel() below)</span>
+
+<span class="c">% Generate the corresponding dipolar kernels</span>
+<span class="n">K1</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<span class="n">K2</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+
+<span class="c">%-----------------------------------------</span>
+<span class="c">%                Fit parameters </span>
+<span class="c">%-----------------------------------------</span>
+<span class="c">%        [rmeanA rmeanB fracA1 fracA2]</span>
+<span class="c">%-----------------------------------------</span>
+<span class="n">par0</span> <span class="p">=</span>   <span class="p">[</span><span class="mi">2</span>        <span class="mi">2</span>     <span class="mf">0.5</span>    <span class="mf">0.5</span><span class="p">];</span>
+<span class="n">lower</span> <span class="p">=</span>  <span class="p">[</span><span class="mi">1</span>        <span class="mi">1</span>      <span class="mi">0</span>      <span class="mi">0</span><span class="p">];</span>
+<span class="n">upper</span> <span class="p">=</span>  <span class="p">[</span><span class="mi">20</span>       <span class="mi">20</span>     <span class="mi">1</span>      <span class="mi">1</span><span class="p">];</span>
+<span class="c">%-----------------------------------------</span>
+
+<span class="c">% ollect data for global fit into cell arrays</span>
+<span class="n">Ks</span> <span class="p">=</span> <span class="p">{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">};</span>
+<span class="n">Vs</span> <span class="p">=</span> <span class="p">{</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">};</span>
+<span class="n">ts</span> <span class="p">=</span> <span class="p">{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">};</span>
+
+<span class="c">% Prepare the model function, when using local fit parameters is very </span>
+<span class="c">% important to request the |idx| variable (see below). </span>
+<span class="n">model</span> <span class="p">=</span> <span class="p">@(</span><span class="n">t</span><span class="p">,</span><span class="n">par</span><span class="p">,</span><span class="n">idx</span><span class="p">)</span> <span class="n">myABmodel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">par</span><span class="p">,</span><span class="n">idx</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Ks</span><span class="p">);</span>
+
+<span class="c">% Fit the global parametric model to both signals</span>
+<span class="n">parfit</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">Vs</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">ts</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="s">&#39;lower&#39;</span><span class="p">,</span><span class="n">lower</span><span class="p">,</span><span class="s">&#39;upper&#39;</span><span class="p">,</span><span class="n">upper</span><span class="p">,</span><span class="s">&#39;multistart&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+
+<span class="c">% The use of the option &#39;multistart&#39; will help the solver to find the</span>
+<span class="c">% global minimum and not to get stuck at local minima.</span>
+
+<span class="c">% Get the fitted models </span>
+<span class="p">[</span><span class="n">Vfit1</span><span class="p">,</span><span class="n">Pfit1</span><span class="p">]</span> <span class="p">=</span> <span class="n">myABmodel</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Ks</span><span class="p">);</span>
+<span class="p">[</span><span class="n">Vfit2</span><span class="p">,</span><span class="n">Pfit2</span><span class="p">]</span> <span class="p">=</span> <span class="n">myABmodel</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Ks</span><span class="p">);</span>
+
+<span class="c">% Plot results</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P1</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit1</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [nm]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm]^{-1}&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Conditions #1&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;truth&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">V1</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="n">t1</span><span class="p">,</span><span class="n">Vfit1</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P2</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit2</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [nm]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm]^{-1}&#39;</span><span class="p">)</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Conditions #2&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;truth&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">Vfit2</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+
+<span class="c">% Model definition</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="k">function</span><span class="w"> </span>[Vfit,Pfit] <span class="p">=</span><span class="w"> </span><span class="nf">myABmodel</span><span class="p">(</span>~,par,idx,r,Ks<span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="c">% This function models the signals in our A-B system, and it is used to</span>
+    <span class="c">% simulate all signals passed to fitparamodel(). </span>
+    <span class="c">% To be able to distinguish which signal is being analyzed at the</span>
+    <span class="c">% moment by fitparamodel(), the function will provide the variable</span>
+    <span class="c">% |idx| which identifys the signal, i.e.</span>
+    <span class="c">%   idx = 1 ---&gt; Vs{1}</span>
+    <span class="c">%   idx = 2 ---&gt; Vs{2}</span>
+
+    <span class="c">%Fixed parameters</span>
+    <span class="n">fwhmA</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span>
+    <span class="n">fwhmB</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span>
+    <span class="c">%Global parameters</span>
+    <span class="n">rmeanA</span> <span class="p">=</span> <span class="n">par</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">rmeanB</span> <span class="p">=</span> <span class="n">par</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="c">%Local parameters</span>
+    <span class="n">fracA1</span> <span class="p">=</span> <span class="n">par</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="n">fracA2</span> <span class="p">=</span> <span class="n">par</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+
+    <span class="c">% Depending on which signal is being simulated at the moment, use the</span>
+    <span class="c">% corresponding fraction</span>
+    <span class="nf">if</span> <span class="s">idx</span> <span class="s">==</span> <span class="s">1</span>
+        <span class="c">%Use fracA1 for signal Vs{1}</span>
+        <span class="n">fraction</span> <span class="p">=</span> <span class="n">fracA1</span><span class="p">;</span>
+    <span class="nf">else</span>
+        <span class="s">%Use</span> <span class="s">fracA2</span> <span class="s">for</span> <span class="s">signal</span> <span class="s">Vs{2}</span>
+        <span class="n">fraction</span> <span class="p">=</span> <span class="n">fracA2</span><span class="p">;</span>
+    <span class="nf">end</span>
+    
+    <span class="s">%</span> <span class="s">Generate</span> <span class="s">the</span> <span class="s">signal-specific</span> <span class="s">distribution</span>
+    <span class="n">Pfit</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="n">rmeanA</span> <span class="n">fwhmA</span> <span class="n">fraction</span> <span class="n">rmeanB</span> <span class="n">fwhmB</span><span class="p">]);</span>
+    
+    <span class="c">% Generate the corresponding signal (either V{1} or V{2}) by using the</span>
+    <span class="c">% appropiate dipolar kernel</span>
+    <span class="n">Vfit</span> <span class="p">=</span> <span class="n">Ks</span><span class="p">{</span><span class="n">idx</span><span class="p">}</span><span class="o">*</span><span class="n">Pfit</span><span class="p">;</span>
+
+<span class="nf">end</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

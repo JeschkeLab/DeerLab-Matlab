@@ -75,7 +75,7 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.9/functions/correctphase.html">0.9</option>
+        <option value="../../0.9.0/functions/correctphase.html">0.9.0</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -250,8 +250,8 @@
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Complex-valued signal (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">ph</span></code> - Correction phase (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Complex-valued signal (<em>N</em>-element array or <em>NxM</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ph</span></code> - Correction phase (scalar), in radians</li>
 <li><code class="docutils literal notranslate"><span class="pre">oc</span></code> - Imaginary offset correction (boolean)</li>
 </ul>
 </dd>
@@ -259,7 +259,7 @@
 <dd><ul class="first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">Vr</span></code> - Real part of the phase-corrected signal (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">Vi</span></code> - Imaginary part of the phase-corrected signal (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">ph</span></code> - Correction phase (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ph</span></code> - Correction phase (scalar), in radians</li>
 <li><code class="docutils literal notranslate"><span class="pre">io</span></code>  - Imaginary offset (scalar)</li>
 </ul>
 </dd>
@@ -271,23 +271,24 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vr</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Performs a phase correction of the complex-valued data <code class="docutils literal notranslate"><span class="pre">V</span></code> that minimizes the norm of the imaginary component of the data. The phase-corrected data <code class="docutils literal notranslate"><span class="pre">Vr</span></code> is returned normalized.</p>
+<p>Performs a phase correction of the complex-valued data <code class="docutils literal notranslate"><span class="pre">V</span></code> that minimizes the norm of the imaginary component of the data. The phase-corrected data is returned in <code class="docutils literal notranslate"><span class="pre">Vr</span></code>.</p>
+<p>If a two-dimensional complex-valued dataset <code class="docutils literal notranslate"><span class="pre">V</span></code> of size <em>NxM</em> is provided, the phase correction is performed individually on each of the <em>M</em> columns.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vr</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">ph</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Applied a phase correction with a given phase angle <code class="docutils literal notranslate"><span class="pre">ph</span></code> (in radians) to input data vector <code class="docutils literal notranslate"><span class="pre">V</span></code>.</p>
+<p>Applies a phase correction with a given phase angle <code class="docutils literal notranslate"><span class="pre">ph</span></code> (in radians) to input data vector <code class="docutils literal notranslate"><span class="pre">V</span></code>. If a two-dimensional complex-valued dataset <code class="docutils literal notranslate"><span class="pre">V</span></code> is provided, the number of elements in <code class="docutils literal notranslate"><span class="pre">ph</span></code> must match the number of columns in <code class="docutils literal notranslate"><span class="pre">V</span></code>.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vr</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">ph</span><span class="p">,</span><span class="n">oc</span><span class="p">)</span>
 <span class="n">Vr</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">,[],</span><span class="n">oc</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A third boolean argument <code class="docutils literal notranslate"><span class="pre">oc</span></code> can be passed to enable/disable the fitting of a possible offset on the imaginary component of the data (defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>). This is compatible with both automatic and manual phase correction.</p>
+<p>A third boolean argument <code class="docutils literal notranslate"><span class="pre">oc</span></code> can be passed to enable/disable the fitting of a possible offset on the imaginary component of the data (defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>). This works with both automatic and manual phase correction.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vr</span><span class="p">,</span><span class="n">Vi</span><span class="p">,</span><span class="n">ph</span><span class="p">,</span><span class="n">io</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Returns, in addition to <code class="docutils literal notranslate"><span class="pre">Vr</span></code>, the imaginary-part of the corrected signal <code class="docutils literal notranslate"><span class="pre">Vi</span></code>, the fitted or applied phase angle <code class="docutils literal notranslate"><span class="pre">ph</span></code> (in radians), and the fitted imaginary offset <code class="docutils literal notranslate"><span class="pre">io</span></code>.</p>
+<p>Returns, in addition to <code class="docutils literal notranslate"><span class="pre">Vr</span></code>, the imaginary part of the corrected signal <code class="docutils literal notranslate"><span class="pre">Vi</span></code>, the fitted or applied phase angle <code class="docutils literal notranslate"><span class="pre">ph</span></code> (in radians), and the fitted imaginary offset <code class="docutils literal notranslate"><span class="pre">io</span></code>.</p>
 </div>
 </div>
 

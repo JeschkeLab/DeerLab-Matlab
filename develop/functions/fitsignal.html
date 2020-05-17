@@ -75,7 +75,7 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../../0.9/functions/fitsignal.html">0.9</option>
+        <option value="../../0.9.0/functions/fitsignal.html">0.9.0</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -442,6 +442,46 @@
 <p><em>Example:</em></p>
 <blockquote class="last">
 <div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;alphaOptThreshold&#39;</span><span class="p">,</span><span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'MultiStart'</span></code> -  Multi-start global optimization</dt>
+<dd><p class="first">Number of initial points to be generated for a global search. For each start point, a local minimum is searched, and the solution with the lowest objective function value is selected as the global optimum.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1</span></code> (No global optimization)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MultiStart&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Rescale'</span></code> -  Rescaling of fitted dipolar signal</dt>
+<dd><p class="first">This enables/disables the automatic optimization of the dipolar signal scale. If enabled (<code class="docutils literal notranslate"><span class="pre">true</span></code>) the experimental dipolar signal does not need to fulfill <code class="docutils literal notranslate"><span class="pre">V(t=0)</span> <span class="pre">=</span> <span class="pre">1</span></code>, if disabled (<code class="docutils literal notranslate"><span class="pre">false</span></code>) it needs to be fulfilled.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">fitsignal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Rescale&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'normP'</span></code> -  Renormalization of the distance distribution</dt>
+<dd><p class="first">This enables/disables the re-normalization of the fitted distance distribution such that <code class="docutils literal notranslate"><span class="pre">sum(Pfit)*dr</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;normP&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

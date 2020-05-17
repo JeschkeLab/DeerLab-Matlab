@@ -75,7 +75,7 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
-        <option value="../0.9/uncertainty.html">0.9</option>
+        <option value="../0.9.0/uncertainty.html">0.9.0</option>
         <option selected value="">develop</option>
     </select>
     <div class="select_arrow">
@@ -250,18 +250,18 @@
 <p>Here is an example for a parametric model:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootci</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
 
-<span class="n">function</span> <span class="s">parfit</span> <span class="s">=</span> <span class="s">fitfcn(Vin,r,K)</span>
+<span class="nf">function</span> <span class="s">parfit</span> <span class="s">=</span> <span class="s">fitfcn(Vin,r,K)</span>
        <span class="n">parfit</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">Vin</span><span class="p">,@</span><span class="n">dd_gauss</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">);</span>
-<span class="n">end</span>
+<span class="nf">end</span>
 </pre></div>
 </div>
 <p>The output <code class="docutils literal notranslate"><span class="pre">bootci</span></code> contains calculated bootstrap 50%, 90%, and 95% confidence intervals for all parameters.</p>
 <p>Here is an example for a model with a parameter-free distribution:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootci</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
 
-<span class="n">function</span> <span class="s">[Pfit,</span> <span class="s">parfit.bg,</span> <span class="s">parfit.ex]</span> <span class="s">=</span> <span class="s">fitfcn(Vin,t,r)</span>
+<span class="nf">function</span> <span class="s">[Pfit,</span> <span class="s">parfit.bg,</span> <span class="s">parfit.ex]</span> <span class="s">=</span> <span class="s">fitfcn(Vin,t,r)</span>
        <span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">parfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">,[],</span><span class="s">&#39;RegParam&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-<span class="n">end</span>
+<span class="nf">end</span>
 </pre></div>
 </div>
 <p>To plot the resulting CIs for the parameter-free distance distribution, use</p>
