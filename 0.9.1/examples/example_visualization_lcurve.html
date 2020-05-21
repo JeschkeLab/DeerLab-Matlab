@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Visualization of the regularization parameter selection on the L-curve &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9.1</option>
+        <option value="../../0.9.0/examples/example_visualization_lcurve.html">0.9.0</option>
+        <option value="../../develop/examples/example_visualization_lcurve.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Visualization of the regularization parameter selection on the L-curve</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="visualization-of-the-regularization-parameter-selection-on-the-l-curve">
+<span id="example-visualization-lcurve"></span><h1>Visualization of the regularization parameter selection on the L-curve<a class="headerlink" href="#visualization-of-the-regularization-parameter-selection-on-the-l-curve" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Visualization of the regularization parameter selection on the L-curve</span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This quick tutorial will show how to construct the so-called L-curve for the </span>
+<span class="c">% selection of the optimal regularization parameter.</span>
+
+<span class="c">%=============================</span>
+<span class="c">% Simulating a dipolar signal</span>
+<span class="c">%=============================</span>
+
+<span class="c">% Let&#39;s start by simulating a simple dipolar signal with some background and </span>
+<span class="c">% noise arising from a Gaussian distance distribution.</span>
+
+<span class="n">clear</span><span class="p">,</span> <span class="n">clc</span><span class="p">,</span> <span class="n">clf</span>
+
+<span class="c">% Prepare the signal components</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">bg_strexp</span><span class="p">(</span><span class="n">t</span><span class="p">,[</span><span class="mf">0.05</span> <span class="mi">1</span><span class="p">]);</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="mi">4</span> <span class="mf">0.2</span><span class="p">]);</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span>
+
+<span class="c">% Simulate the signal</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.02</span><span class="p">);</span>
+
+<span class="c">% Plot</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;Linewidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;fontsize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+
+<span class="c">%=========================================</span>
+<span class="c">% Optimizing the regularization parameter</span>
+<span class="c">%=========================================</span>
+
+<span class="c">% The first step is to choose the optimal regularization parameter using the </span>
+<span class="c">% |selregparam| function. In this case we want to compare the Akaike information </span>
+<span class="c">% criterion (AIC), Bayesian information criterion (BIC), Mallow&#39;s CL-method (MCL), </span>
+<span class="c">% generalized maximum likelihood (GML) and L-curve radius (LR) selection methods. </span>
+<span class="c">% The |selregparam| first output argument will return an array containing the </span>
+<span class="c">% optimal values for each of the input methods. </span>
+ 
+<span class="c">% In order to construct the L-curve we require the third to fitfth output arguments. </span>
+<span class="c">% The |alphas| variable contains all the evaluated regularization parameter values, </span>
+<span class="c">% and the |Res| |and Pen| contain the penalty and residual terms.</span>
+
+<span class="c">% Also, isnce by default, the alpha-search is performed via optimization,</span>
+<span class="c">% to scan the whole L-curve, the grid-search method has to be specified as</span>
+<span class="c">% an option.</span>
+
+<span class="c">% Generate the appropiate dipolar kernel</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+
+<span class="c">% Get the optimal regularization parameters for Tikhonov regularization</span>
+<span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">Res</span><span class="p">,</span><span class="n">Pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;tikh&#39;</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;gml&#39;</span><span class="p">,</span><span class="s">&#39;lr&#39;</span><span class="p">},</span><span class="s">&#39;Search&#39;</span><span class="p">,</span><span class="s">&#39;Grid&#39;</span><span class="p">);</span>
+
+<span class="c">%=============================</span>
+<span class="c">% Constructing the L-curve</span>
+<span class="c">%=============================</span>
+
+<span class="c">% With all components in hand we can construct the L-curve. Since the L-curve </span>
+<span class="c">% is obtained from a log-log plot of the residual vs penalty terms we can easily </span>
+<span class="c">% construct them from the outputs of |selregparam.|</span>
+
+<span class="c">% Construct the vector of the L-curve</span>
+<span class="n">lgRes</span> <span class="p">=</span> <span class="nb">log10</span><span class="p">(</span><span class="n">Res</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">lgPen</span> <span class="p">=</span> <span class="nb">log10</span><span class="p">(</span><span class="n">Pen</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c">% Plot the L-curve</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lgRes</span><span class="p">,</span><span class="n">lgPen</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">grid</span> <span class="s">on,axis</span> <span class="s">tight,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;lg(||KP - V||^2)&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;lg(||LP||^2)&#39;</span><span class="p">)</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="c">%============================================</span>
+<span class="c">% Comparing selection methods on the L-curve</span>
+<span class="c">%============================================</span>
+<span class="c">% Finally we can compare the optimal values selected by the different selection </span>
+<span class="c">% methods on the L-curve.</span>
+<span class="c">% </span>
+<span class="c">% To do this we need to locate the optimal values of each method on the array </span>
+<span class="c">% |alphas.| This way we can obtain the indices of the optimal parameters and plot </span>
+<span class="c">% them on the L-curve.</span>
+
+
+<span class="c">% Find the positions of the different optimal regularizfation parameters </span>
+<span class="c">% on the L-curve</span>
+<span class="n">AICidx</span> <span class="p">=</span> <span class="n">alphas</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="o">==</span><span class="n">alpha</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">GMLidx</span> <span class="p">=</span> <span class="n">alphas</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span><span class="o">==</span><span class="n">alpha</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">LRidx</span>  <span class="s">=</span> <span class="s">alphas{3}==alpha(3)</span><span class="p">;</span>
+
+<span class="c">% Plot the L-cruve and the optimal parameters</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lgRes</span><span class="p">(</span><span class="n">AICidx</span><span class="p">),</span><span class="n">lgPen</span><span class="p">(</span><span class="n">AICidx</span><span class="p">),</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lgRes</span><span class="p">(</span><span class="n">GMLidx</span><span class="p">),</span><span class="n">lgPen</span><span class="p">(</span><span class="n">GMLidx</span><span class="p">),</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lgRes</span><span class="p">(</span><span class="n">LRidx</span><span class="p">),</span><span class="n">lgPen</span><span class="p">(</span><span class="n">LRidx</span><span class="p">),</span><span class="s">&#39;.&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;L-curve&#39;</span><span class="p">,</span><span class="s">&#39;AIC&#39;</span><span class="p">,</span><span class="s">&#39;GML&#39;</span><span class="p">,</span><span class="s">&#39;LR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

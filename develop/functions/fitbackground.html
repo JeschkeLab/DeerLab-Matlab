@@ -75,6 +75,7 @@
           
 <div class="select">
     <select onChange="window.location.href=this.value">
+        <option value="../../0.9.1/functions/fitbackground.html">0.9.1</option>
         <option value="../../0.9.0/functions/fitbackground.html">0.9.0</option>
         <option selected value="">develop</option>
     </select>
@@ -280,7 +281,7 @@
 </div>
 <p>The time at which the background starts to be fitted can be passed as an additional argument <code class="docutils literal notranslate"><span class="pre">tstart</span></code>.</p>
 <hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">param</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">model</span><span class="p">,[</span><span class="n">tstart</span> <span class="n">tend</span><span class="p">])</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">param</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">model</span><span class="p">,[</span><span class="n">tstart</span> <span class="n">tend</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>The start and end times of the fitting can be specified by passing a two-element array <code class="docutils literal notranslate"><span class="pre">[tstart,</span> <span class="pre">tend]</span></code> as the argument. If <code class="docutils literal notranslate"><span class="pre">tend</span></code> is not specified, the end of the signal is selected as the default.</p>
@@ -299,7 +300,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty) (automatically fitted)</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,</span><span class="n">tstart</span><span class="p">,</span><span class="s">&#39;ModDepth&#39;</span><span class="p">,</span><span class="mf">0.45</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ModDepth&#39;</span><span class="p">,</span><span class="mf">0.45</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -312,7 +313,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">[]</span></code> (empty)</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,</span><span class="n">tstart</span><span class="p">,</span><span class="s">&#39;InitialGuess&#39;</span><span class="p">,[</span><span class="mf">0.75</span> <span class="mi">3</span><span class="p">])</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;InitialGuess&#39;</span><span class="p">,[</span><span class="mf">0.75</span> <span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -325,7 +326,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,</span><span class="n">tstart</span><span class="p">,</span><span class="s">&#39;LogFit&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="n">tstart</span><span class="p">,</span><span class="s">&#39;LogFit&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -338,7 +339,7 @@
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> (Optimization Toolbox installed) or <code class="docutils literal notranslate"><span class="pre">'fminsearchcon'</span></code> (Optimization Toolbox not installed)</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,</span><span class="n">tstart</span><span class="p">,</span><span class="s">&#39;Solver&#39;</span><span class="p">,</span><span class="s">&#39;nlsqbnd&#39;</span><span class="p">)</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Solver&#39;</span><span class="p">,</span><span class="s">&#39;nlsqbnd&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
