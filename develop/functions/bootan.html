@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -309,7 +309,7 @@
 </pre></div>
 </div>
 <p>From the evaluation of all level-combinations an ensemble of outputs is obtained on which statistical estimators are used. The 99%, 95% and 50% confidence intervals of all output variables are returned in a structure <code class="docutils literal notranslate"><span class="pre">bootci</span></code>. The summary of these statistics is returned in the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure. This summary contains the mean, median, standard deviation, 99t, 75th, 25th and 1st percentile values for all outputs.</p>
-<p>For non-vectorial variables (e.g. parameter-free distributions, background functions,etc.) the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure will contain an histogram of the distribution of values for the different outputs as well as a corresponding probability density function obtained from a kernel densitiy estimation of the histogram data.</p>
+<p>For non-vectorial variables (e.g. non-parametric distributions, background functions,etc.) the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure will contain an histogram of the distribution of values for the different outputs as well as a corresponding probability density function obtained from a kernel densitiy estimation of the histogram data.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Nsamples</span><span class="p">)</span>
 </pre></div>

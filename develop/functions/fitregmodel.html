@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -237,7 +237,7 @@
             
   <div class="section" id="fitregmodel">
 <span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">fitregmodel</span></code><a class="headerlink" href="#fitregmodel" title="Permalink to this headline">¶</a></h1>
-<p>Fits a parameter-free distance distribution to one (or several) signals using regularization.</p>
+<p>Fits a non-parametric distance distribution to one (or several) signals using regularization.</p>
 <hr class="docutils" />
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
@@ -486,7 +486,7 @@
 </li>
 <li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'normP'</span></code> -  Renormalization of the distance distribution</dt>
-<dd><p class="first">This enables/disables the re-normalization of the fitted distance distribution such that <code class="docutils literal notranslate"><span class="pre">sum(P)*dr=1</span></code>.</p>
+<dd><p class="first">This enables/disables the re-normalization of the fitted distance distribution such that <code class="docutils literal notranslate"><span class="pre">trapz(r,P)==1</span></code>.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
 <p><em>Example:</em></p>
 <blockquote class="last">

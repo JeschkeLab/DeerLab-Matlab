@@ -246,7 +246,7 @@
 <ul class="simple">
 <li>Since the dipolar signal is usually complex, the first step if to perform a phase correction which will minimize the imaginary component / maximize the real component.</li>
 <li>In common commercial spectrometers, the time-axes are measured in absolute values. This step aims to optimally determine and correct for the zero-time of the time axis.</li>
-<li>The intensity of the signal is fiven in some arbitrary units (usually some kind voltage). All functions in DeerLab are agnostic with respect to this scaling and do not require the dipolar signal to be scaled such that V(0)=1. This scale is optimized by all fit functions in DeerLab, yet it can still be corrected by pre-processing.</li>
+<li>The intensity of the signal is fiven in some arbitrary units (usually some kind voltage). All functions in DeerAnalysis are agnostic with respect to this scaling and do not require the dipolar signal to be scaled such that V(0)=1. This scale is optimized by all fit functions in DeerLab, yet it can still be corrected by pre-processing.</li>
 </ul>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>           <span class="c">% phase correction</span>
 <span class="n">t</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>      <span class="c">% zero-time adjustment</span>

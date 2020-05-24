@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -240,21 +240,19 @@
 <p>Computes the discrete approximation to the derivative regularization operators.</p>
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="p">=</span> <span class="n">regoperator</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">order</span><span class="p">)</span>
-<span class="n">L</span> <span class="p">=</span> <span class="n">regoperator</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">order</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="p">=</span> <span class="n">regoperator</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">order</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
 <dt>Parameters</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">N</span></code> -  Distance domain size (scalar)</li>
-<li><code class="docutils literal notranslate"><span class="pre">d</span></code> - Derivative order (0, 1, 2 or 3)</li>
-<li><code class="docutils literal notranslate"><span class="pre">r</span></code> - Distance axis (N array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">d</span></code> - Derivative order (integer scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code> - Distance axis (<em>N</em>-array)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
 <dd><ul class="first last simple">
-<li><code class="docutils literal notranslate"><span class="pre">L</span></code> - Regularization operator matrix ((N-d)xN matrix)</li>
+<li><code class="docutils literal notranslate"><span class="pre">L</span></code> - Regularization operator matrix (<em>(N-d)xN</em>-matrix)</li>
 </ul>
 </dd>
 </dl>
@@ -262,14 +260,10 @@
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>The function can be called as follows</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="p">=</span> <span class="n">regoperator</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Computes the discrete approximation <code class="docutils literal notranslate"><span class="pre">L</span></code> to the derivative operator of order <code class="docutils literal notranslate"><span class="pre">d</span></code> on a regular grid with <code class="docutils literal notranslate"><span class="pre">N</span></code> points.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="p">=</span> <span class="n">regoperator</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For simplicity, the distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code> can also be passed, and the number of points <code class="docutils literal notranslate"><span class="pre">N</span></code> is computed from the length of <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<p>Computes the discrete approximation <code class="docutils literal notranslate"><span class="pre">L</span></code> to the derivative operator of order <code class="docutils literal notranslate"><span class="pre">d</span></code> on an arbitrarily incremented distance vector <code class="docutils literal notranslate"><span class="pre">r</span></code> with <code class="docutils literal notranslate"><span class="pre">N</span></code> points. All finite difference matrix coefficients are computed via Fornberg’s method.</p>
 </div>
 </div>
 

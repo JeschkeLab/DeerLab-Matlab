@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -272,7 +272,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Computes the elementary kernel matrix <code class="docutils literal notranslate"><span class="pre">K</span></code> for the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in microseconds) and distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code> (in nanometers).The dipolar kernel is normalized by <img class="math" src="../_images/math/a23c49817f47563aba88f51b566743391be34a7c.svg" alt="\Delta r"/>, such that it returns a dipolar signal with amplitude 1 at time zero for a normalized distance distribution (i.e. <code class="docutils literal notranslate"><span class="pre">sum(P)*dr==1</span></code>).</p>
+<p>Computes the elementary kernel matrix <code class="docutils literal notranslate"><span class="pre">K</span></code> for the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in microseconds) and distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code> (in nanometers).The dipolar kernel is normalized by <img class="math" src="../_images/math/a23c49817f47563aba88f51b566743391be34a7c.svg" alt="\Delta r"/>, such that it returns a dipolar signal with amplitude 1 at time zero for a normalized distance distribution (i.e. <code class="docutils literal notranslate"><span class="pre">trapz(r,P)==1</span></code>).</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lambda</span><span class="p">)</span>
 </pre></div>

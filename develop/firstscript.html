@@ -134,7 +134,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -260,7 +260,7 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">lambda</span><span class="p">)</span><span class="o">*</span><span class="n">B</span><span class="p">)</span>     <span class="c">% plotting</span>
 </pre></div>
 </div>
-<p>Now that we have a noisy DEER trace, we fit it (in a single step) with a parameter-free distance distribution and a homogeneous 3D background.</p>
+<p>Now that we have a noisy DEER trace, we fit it (in a single step) with a non-parametric distance distribution and a homogeneous 3D background.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">);</span>  <span class="c">% fitting</span>
 </pre></div>
 </div>

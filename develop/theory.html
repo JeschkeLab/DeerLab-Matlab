@@ -133,7 +133,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="fitting.html">Fitting</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#picking-the-model">Picking the model</a></li>
-<li class="toctree-l2"><a class="reference internal" href="fitting.html#parameter-free-distribution">Parameter-free distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#parametric-distributions">Parametric distributions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="fitting.html#background-fitting">Background fitting</a></li>
 </ul>
@@ -315,7 +315,7 @@ P_j = P(r_j)"/></p>
 </div></div>
 <div class="section" id="least-squares-fitting">
 <h2>Least-squares fitting<a class="headerlink" href="#least-squares-fitting" title="Permalink to this headline">¶</a></h2>
-<p>DeerLab uses dedicated least-squares solvers to fit models to data. The objective function and the solver depend on whether the distance distribution is parametric or parameter-free, and on whether there are background and experiment parameters to fit alongside the distance distribution.</p>
+<p>DeerLab uses dedicated least-squares solvers to fit models to data. The objective function and the solver depend on whether the distance distribution is parametric or non-parametric, and on whether there are background and experiment parameters to fit alongside the distance distribution.</p>
 <div class="section" id="parametric-distribution">
 <h3>Parametric distribution<a class="headerlink" href="#parametric-distribution" title="Permalink to this headline">¶</a></h3>
 <p>To fit a model with a parametric distance distribution to an experimental signal, DeerLab solves</p>
@@ -325,9 +325,9 @@ P_j = P(r_j)"/></p>
 \|\vc{V}_\mr{exp}-\mx{K}[\vc{\theta}]\vc{P}[\vc{\theta}]\|^2"/></p>
 </div><p>where <img class="math" src="_images/math/5920a4f5a34d2aae7a28200aec40c48096125f21.svg" alt="\vc{V}_\mr{exp}"/> indicates the experimental data and <img class="math" src="_images/math/1b4931116dfcc855ea66608f89b33f8a917f291a.svg" alt="\vc{\theta}"/> is a vector of all parameters (distribution parameters, background parameters, experiment parameters). Various constrained least-squares solvers are implemented.</p>
 </div>
-<div class="section" id="parameter-free-distribution">
-<h3>Parameter-free distribution<a class="headerlink" href="#parameter-free-distribution" title="Permalink to this headline">¶</a></h3>
-<p>To fit a model with a parameter-free distribution and no additional fitting parameters to an experimental signal, DeerLab implements several regularization approaches. The most common one is Tikhonov regularization. For this, the minimization problem is</p>
+<div class="section" id="non-parametric-distribution">
+<h3>Non-parametric distribution<a class="headerlink" href="#non-parametric-distribution" title="Permalink to this headline">¶</a></h3>
+<p>To fit a model with a non-parametric distribution and no additional fitting parameters to an experimental signal, DeerLab implements several regularization approaches. The most common one is Tikhonov regularization. For this, the minimization problem is</p>
 <div class="math">
 <p><img src="_images/math/4b2032c5f41539183baf665d14f906c4e89fec96.svg" alt="\vc{P}_\mathrm{fit} =
 \argmin_{\vc{P}\ge0}
@@ -338,7 +338,7 @@ P_j = P(r_j)"/></p>
 \|\mx{L}\vc{P}\|^2
 \right)"/></p>
 </div><p><img class="math" src="_images/math/4dce32165f8f19cca59299293bc01e93d85675a5.svg" alt="\alpha"/> is the regularization parameter, and <img class="math" src="_images/math/6f7a9a69e2ec127cd6b58b300501e929e3c0022f.svg" alt="\mx{L}"/> is the regularization operator matrix. DeerLab implements the linear non-negative least-squares solver FNNLS, as well as a few others. The <img class="math" src="_images/math/4dce32165f8f19cca59299293bc01e93d85675a5.svg" alt="\alpha"/> parameter can be optimized using a range of criteria, including L-curve, Akaike information criterion (AIC), and generalized cross validation (GCV).</p>
-<p>To fit a  model with a parameter-free distance distribution and other parameters to an experimental signal, DeerLab solves</p>
+<p>To fit a  model with a non-parametric distance distribution and other parameters to an experimental signal, DeerLab solves</p>
 <div class="math">
 <p><img src="_images/math/baf54afd446395f6d441103c3c180b033a6f8d0a.svg" alt="(\vc{\theta}_\mathrm{fit},\vc{P}_\mr{fit})
 =
