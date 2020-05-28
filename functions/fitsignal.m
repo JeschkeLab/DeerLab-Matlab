@@ -394,7 +394,7 @@ else
                 L = regoperator(r,2);
                 Kmod = @(par)Kmodels{i}({par(exidx{i}),par(bgidx{i})});
                 J = [jacobianest(@(p)Kmod(p)*Pfit,parfit_), Kmod(parfit_);
-                    zeros(size(L,1),numel(parfit_)), regparam_prev.^2*L];
+                    zeros(size(L,1),numel(parfit_)), regparam_prev*L];
                 subidx_P = numel(parfit_)+[1:numel(Pfit)];
                 subidx_theta = 1:numel(parfit_);
             else
