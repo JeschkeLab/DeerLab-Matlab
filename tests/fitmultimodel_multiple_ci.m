@@ -2,6 +2,7 @@ function [pass,maxerr] = test(opt)
 
 % Test that multiple confidence levels can be requested via options
 
+rng(1)
 t = linspace(0,8,300);
 r = linspace(1,8,300);
 parIn  = [4.5,0.5];
@@ -10,13 +11,13 @@ P = dd_gauss(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P + whitegaussnoise(t,0.05);
 
-[Pfit,parfit,Pci,parci] = fitmultimodel(S,K,r,@dd_gauss,3,'aic','confidencelevel',[0.5 0.95]);
+[Pfit,parfit,Pci,parci] = fitmultimodel(S,K,r,@dd_gauss,3,'aic');
 
-parci50 = parci{1};
-parci95 = parci{2};
+parci50 = parci.ci(0.50);
+parci95 = parci.ci(0.95);
 
-Pci50 = Pci{1};
-Pci95 = Pci{2};
+Pci50 = Pci.ci(0.50);
+Pci95 = Pci.ci(0.95);
 
 % Pass 1-2: confidence intervals behave as expected
 pass(1) = all(all(abs(parfit - parci50.') < abs(parfit - parci95.')));

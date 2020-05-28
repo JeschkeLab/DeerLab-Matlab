@@ -191,9 +191,9 @@ end
 % Parse the optional parameters in varargin
 optionalProperties = {'Solver','Algorithm','MaxIter','Verbose','MaxFunEvals',...
     'TolFun','GlobalWeights','Upper','Lower','MultiStart',...
-    'ConfidenceLevel','Rescale','internal::returncovariancematrix'};
+    'Rescale','internal::returncovariancematrix'};
 [Solver,Algorithm,maxIter,Verbose,maxFunEvals,TolFun,GlobalWeights,...
-    upperBounds,lowerBounds,MultiStart,ConfidenceLevel,Rescale,returnCovariance] = ...
+    upperBounds,lowerBounds,MultiStart,Rescale,returnCovariance] = ...
     parseoptional(optionalProperties,varargin);
 
 % Validate optional inputs
@@ -226,14 +226,6 @@ if isempty(Verbose)
     Verbose = 'off';
 else
     validateattributes(Verbose,{'char'},{'nonempty'},mfilename,'Verbose')
-end
-if isempty(ConfidenceLevel)
-    ConfidenceLevel = 0.95;
-else
-    validateattributes(ConfidenceLevel,{'numeric'},{'nonnegative','nonempty'},mfilename,'ConfidenceLevel')
-    if any(ConfidenceLevel>1 | ConfidenceLevel<0)
-        error('The confidence level option must have values between 0 and 1.')
-    end
 end
 if isempty(Rescale)
     Rescale = true;
@@ -407,34 +399,9 @@ if calcParamUncertainty
         lastwarn('');
     end
     
-    % Set significance level for confidence intervals
-    alpha = 1 - ConfidenceLevel;
-    p = 1 - alpha/2; % percentile
-    N = numel(residuals) - numel(parfit); % degrees of freedom
-    
-    parci = cell(numel(p),1);
-    z = zeros(numel(p),1);
-    %Get the CI at requested confidence levels
-    for j=1:numel(p)
-        
-        % Get Student's t critical value
-        z(j) = t_inv(p(j),N);
-        % Compute bounds of confidence intervals
-        parci{j} = parfit.' + z(j)*sqrt(diag(covmatrix)).*[-1 +1];
-        parci{j} = max(parci{j},lowerBounds.');
-        parci{j} = min(parci{j},upperBounds.');
-    end
-    
-    %Do not return a cell if only one confidence level is requested
-    if numel(p)==1
-        parci = parci{1};
-    end
-    
-    % If wrapper functions internally request the covariance matrix, pack it up
-    if returnCovariance
-        parci = {parci, covmatrix, z};
-    end
-    
+    % Construct confidence interval structure
+    parci = cist('covariance',parfit,covmatrix,lowerBounds,upperBounds);
+
 end
 
 % Evaluate fitted model and model confidence intervals
@@ -460,20 +427,13 @@ if computeModelCI
     modelci = cell(nAxes,1);
     %Loop over different signals
     for i = 1:nAxes
-        cont = cell(numel(z),1);
-        %Loop over different confidence levels requested
-        for j=1:numel(z)
-            % Compute Jacobian for time/distance-model
-            jacobian = jacobianest(@(par)model(ax{i},par,Labels{i}),parfit);
-            modelvariance = arrayfun(@(idx)full(jacobian(idx,:))*covmatrix*full(jacobian(idx,:)).',1:numel(ax{i})).';
-            upper = modelfit{i} + z(j)*sqrt(modelvariance);
-            lower = modelfit{i} - z(j)*sqrt(modelvariance);
-            cont{j} = [lower(:) upper(:)];
+        if isDistanceDomain
+            lb = zeros(numel(ax{i}),1);
+        else
+            lb = zeros(numel(ax{i}),1) - realmax;
         end
-        if numel(z)==1
-            cont = cont{1};
-        end
-        modelci{i} = cont;
+        ub = realmax + zeros(numel(ax{i}),1);
+        modelci{i} = parci.propagate(@(par)model(ax{i},par,Labels{i}),lb,ub);
     end
 end
 

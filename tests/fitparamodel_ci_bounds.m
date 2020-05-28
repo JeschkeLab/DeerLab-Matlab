@@ -15,8 +15,9 @@ Vmodel  = @(t,par) 1 - par(1) + par(1)*dipolarkernel(t,r)*dd_gauss(r,par(2:3));
 par0 = [0.5 4 0.5];
 upper = [0.3 20 0.6];
 lower = [0.1 1 0.1];
-[~,~,parCI] = fitparamodel(V,Vmodel,t,par0,'lower',lower,'upper',upper);
+[~,~,cistruct] = fitparamodel(V,Vmodel,t,par0,'lower',lower,'upper',upper);
 
+parCI = cistruct.ci(0.95);
 
 % Pass 1-2: confidence intervals are within the bounds
 pass(1) = all(all(parCI <= upper.'));

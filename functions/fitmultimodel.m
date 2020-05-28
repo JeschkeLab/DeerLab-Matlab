@@ -255,7 +255,7 @@ end
 
 % Calculate the distance distribution for the optimal multi-Gauss model
 param = fitparams{nGaussOpt};
-paramci = paramcis{nGaussOpt}{1};
+paramci = paramcis{nGaussOpt};
 optModel = multiModels{nGaussOpt};
 info = optModel();
 Pfit = optModel(r,param(1:info.nparam));
@@ -264,24 +264,24 @@ stats = stats{nGaussOpt};
 % Uncertainty estimation
 %--------------------------------------------------------------
 if nargin>3
-    % Compute Jacobian for current multi-Gauss model
-    covmatrix = paramcis{nGaussOpt}{2};
-    critical = paramcis{nGaussOpt}{3};
-    covmatrix = covmatrix(1:info.nparam,1:info.nparam);
-    jacobian = jacobianest(@(par)optModel(r,par),param(1:info.nparam));
-    % Calculate the confidence bands for the distance distribution
-    modelvariance = arrayfun(@(idx)full(jacobian(idx,:))*covmatrix*full(jacobian(idx,:)).',1:numel(r)).';
+    %Loop over different signals
+    lb = zeros(numel(r),1);
+    Pfitci = paramci.propagate(@(par)optModel(r,par(1:info.nparam)),lb,[]);
     
-    Pfitci = cell(numel(critical),1);
-    for j=1:numel(critical)
-        upperci = Pfit + critical(j)*sqrt(modelvariance);
-        lowerci = max(0,Pfit - critical(j)*sqrt(modelvariance));
-        Pfitci{j} = [upperci(:) lowerci(:)];
-    end
-    %Do not return a cell if only one confidence level is requested
-    if numel(critical)==1
-        Pfitci = Pfitci{1};
-    end
+%     jacobian = jacobianest(@(par)optModel(r,par),param(1:info.nparam));
+%     % Calculate the confidence bands for the distance distribution
+%     modelvariance = arrayfun(@(idx)full(jacobian(idx,:))*covmatrix*full(jacobian(idx,:)).',1:numel(r)).';
+%     
+%     Pfitci = cell(numel(critical),1);
+%     for j=1:numel(critical)
+%         upperci = Pfit + critical(j)*sqrt(modelvariance);
+%         lowerci = max(0,Pfit - critical(j)*sqrt(modelvariance));
+%         Pfitci{j} = [upperci(:) lowerci(:)];
+%     end
+%     %Do not return a cell if only one confidence level is requested
+%     if numel(critical)==1
+%         Pfitci = Pfitci{1};
+%     end
 end
 
 if nargout>6

@@ -307,9 +307,10 @@ if getConfidenceIntervals
      warning('off','MATLAB:nearlySingularMatrix')
      
     % Estimate the contribution to P variance from the different signals
-    sigP = 0;
+    covmat = 0;
     for i = 1:numel(V)
-        % Estimate the residual standard deviation
+        
+        % Estimate noise standard deviation from residual
         sig = std(V{i} - K{i}*P);
         
         % Get the regularized pseudoinverse
@@ -317,29 +318,14 @@ if getConfidenceIntervals
         pKinv = KtKreg\K{i}.';
         
         % Get standard error from covariance matrix
-        covP = pKinv*pKinv.';
-        sigP_ = sig*sqrt(diag(covP));
-        
-        sigP = sigP + GlobalWeights(i)*sigP_;
+        covmat_ = sig^2*pKinv*pKinv.';
+        covmat = covmat + GlobalWeights(i)*covmat_;
     end
     
-    % Get the Gaussian quantile according to requested coverage
-    p = 1 - (1 - ConfidenceLevel)/2;
+    % Construct confidence interval structure for P
+    NonNegConst = zeros(nr,1);
+    Pci = cist('covariance',P,covmat,NonNegConst,[]);
     
-    Pci = cell(numel(p),1);
-    % Get the confidence intervals at the requested confidence levels
-    for j = 1:numel(p)
-        % Get the critical value of corresponding normal distribution
-        z = norm_inv(p(j));
-        % Compute the standard confidence intervals, constrained to be nonnegative
-        Pci{j}(:,1) = max(P - z*sigP,0);
-        Pci{j}(:,2) = P + z*sigP;
-    end
-    
-    % Do not return a cell if only one confidence level is requested
-    if numel(p)==1
-        Pci = Pci{1};
-    end
 end
 
 
@@ -348,13 +334,7 @@ if NormP
     Pnorm = trapz(r,P);
     P = P/Pnorm;
     if getConfidenceIntervals
-        if iscell(Pci)
-            for j = 1:numel(Pci)
-                Pci{j} = Pci{j}/Pnorm;
-            end
-        else
-            Pci = Pci/Pnorm;
-        end
+        Pci.ci = @(p)Pci.ci(p)/Pnorm;
     end
 end
 
