@@ -389,6 +389,7 @@ else
         % Compute the jacobian of the signal fit with respect to parameter set
         for i = 1:nSignals
             
+            subidx_theta = 1:numel(parfit_);
             if parfreeDistribution
                 % Mixed signal - augmented Jacobian
                 L = regoperator(r,2);
@@ -396,7 +397,6 @@ else
                 J = [jacobianest(@(p)Kmod(p)*Pfit,parfit_), Kmod(parfit_);
                     zeros(size(L,1),numel(parfit_)), regparam_prev*L];
                 subidx_P = numel(parfit_)+[1:numel(Pfit)];
-                subidx_theta = 1:numel(parfit_);
             else
                 % Full parametric signal - numerical Jacobian
                 J = jacobianest(@(par)Vmodel([],par,i),parfit_);
