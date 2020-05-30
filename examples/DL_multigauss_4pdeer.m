@@ -31,7 +31,7 @@ NGauss = 5; % maximum number of Gaussians
 
 % Launch a multi-Gauss fit, including the fitting of an exponential background 
 [Pfit,param,Pci,paramci,Nopt,metrics,Peval] = fitmultimodel(V,t,r,@dd_gauss,NGauss,...
-    'aic','background',@bg_exp,'confidencelevel',0.95,'multistart',1);
+    'aic','background',@bg_exp);
 
 % Construct the fitted dipolar kernel
 K = dipolarkernel(t,r,param(end-1),bg_exp(t,param(end)));
@@ -59,7 +59,10 @@ subplot(322), cla
 hold on
 plot(r,P,'k','LineWidth',1.5)
 plot(r,Pfit,'b','LineWidth',1.5)
-fill([r fliplr(r)], [Pci(:,1); flipud(Pci(:,2))],'b','Linestyle','none','facealpha',0.25)
+Pci95 = Pci.ci(0.95);
+Pci50 = Pci.ci(0.50);
+fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'b','Linestyle','none','facealpha',0.45)
+fill([r fliplr(r)], [Pci95(:,1); flipud(Pci95(:,2))],'b','Linestyle','none','facealpha',0.25)
 box on, axis tight 
 legend('model','optimal fit','95%-CI')
 xlabel('distance (nm)'), ylabel('P(r)')

@@ -58,7 +58,7 @@ Opt.Verbosity = Opt.Display;
 % Get internal options
 displayErrors = contains(params,'-p') | contains(params,'--perform');
 displayTimings = contains(params,'-t') | contains(params,'--time');
-runTutorials = contains(params,'-u') | contains(params,'--tutorials');
+runExamples = contains(params,'-e') | contains(params,'--examples');
 runCodeCoverage = contains(params,'-c') | contains(params,'--coverage');
 makeBadges = contains(params,'-b') | contains(params,'--badge');
 
@@ -250,7 +250,7 @@ fid = 1;
 allErrors = [];
 
 % Test that tutorials run without errors
-if runTutorials
+if runExamples
     
     fprintf(fid,'-----------------------------------------------------------------------\n');
     fprintf(fid,'Tutorials tests \n');

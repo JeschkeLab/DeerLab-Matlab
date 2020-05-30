@@ -61,7 +61,10 @@ legend('Truth','Fit')
 subplot(312)
 cla,hold on
 plot(r,P,'k',r,Pfit,'r','LineWidth',1)
-fill([r fliplr(r)],[Pci(:,1); flipud(Pci(:,2))],'r','FaceAlpha',0.2,'LineStyle','none')
+Pci95 = Pci.ci(0.95);
+Pci50 = Pci.ci(0.50);
+fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'b','Linestyle','none','facealpha',0.45)
+fill([r fliplr(r)], [Pci95(:,1); flipud(Pci95(:,2))],'b','Linestyle','none','facealpha',0.25)
 grid on, axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
@@ -80,7 +83,8 @@ legend('Truth','Fit','95%-CI')
 % Launch bootstrapping
 Nsamples = 100;
 booci = bootan(@(V)mybootfcn(V,K,r),V,Vfit,Nsamples);
-Pci = booci{1}.ci95;
+Pci95 = booci{1}.ci(0.95);
+Pci50 = booci{1}.ci(0.50);
 
 % By plotting the results, one can see that the bootstrapped confidence intervals 
 % are narrower in comparison to the ones obtained via the curvature
@@ -89,7 +93,8 @@ Pci = booci{1}.ci95;
 subplot(313)
 cla,hold on
 plot(r,P,'k',r,Pfit,'b','LineWidth',1)
-fill([r fliplr(r)],[Pci(:,1); flipud(Pci(:,2))],'b','FaceAlpha',0.2,'LineStyle','none')
+fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'b','Linestyle','none','facealpha',0.45)
+fill([r fliplr(r)], [Pci95(:,1); flipud(Pci95(:,2))],'b','Linestyle','none','facealpha',0.25)
 grid on, axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
