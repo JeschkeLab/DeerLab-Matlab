@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set environmental variables
-        run: echo '::set-env name=RELEASE_TAG::0.9.1'
+        run: echo '::set-env name=RELEASE_TAG::0.9.2'
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Prepare Python
@@ -53,6 +53,8 @@ jobs:
           files: 'DeerLab_${{ env.RELEASE_TAG }}.zip'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           release-tag: ${{ env.RELEASE_TAG }}
+      - name: Fetch history
+        run: git fetch --prune --unshallow
       - name: Build webpage
         if: success()
         run: |
