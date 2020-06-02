@@ -30,8 +30,13 @@ path = os.path.join('..','multidocs')
 if os.path.exists(path):
     shutil.rmtree(path)
 
-#Get tag of most modern version
-mostrecent = subprocess.check_output (["git", "describe", "--tags", "--abbrev=0"])
+#Get tag of most recent version
+hash = subprocess.check_output (["git", "rev-list", "--tags", "--max-count=1"])
+#Format output
+hash = formatProcOut(hash)
+hash = hash.replace("\\n","")
+
+mostrecent = subprocess.check_output (["git", "describe", "--tags", hash])
 #Format output
 mostrecent = formatProcOut(mostrecent)
 mostrecent = mostrecent.replace("\\n","")
