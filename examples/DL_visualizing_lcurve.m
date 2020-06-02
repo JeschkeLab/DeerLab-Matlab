@@ -55,7 +55,7 @@ xlabel('Time [\mus]'),ylabel('V(t)')
 K = dipolarkernel(t,r,lam,B);
 
 % Get the optimal regularization parameters for Tikhonov regularization
-[alpha,~,alphas,Res,Pen] = selregparam(V,K,'tikh',{'aic','gml','lr'},'Search','Grid');
+[alpha,~,alphas,Res,Pen] = selregparam(V,K,r,'tikh',{'aic','gml','lr'},'Search','Grid');
 
 %=============================
 % Constructing the L-curve

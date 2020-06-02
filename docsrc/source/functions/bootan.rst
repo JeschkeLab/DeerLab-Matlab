@@ -26,31 +26,7 @@ Parameters
     *   ``Nsamples`` - Number of bootstrap samples (scalar)
 
 Returns
-    *   ``bootci`` - Bootstrapped confidence intervals (struct)
-
-         *   ``.ci50`` - 50%-confidence intervals of the output variables
-         *   ``.ci95`` - 95%-confidence intervals of the output variables
-         *   ``.ci99`` - 99%-confidence intervals of the output variables
-
-    *   ``stats`` - Summary statistics (struct)
-
-         *   ``.median`` - Median of output the variables
-         *   ``.mean`` - Mean of the output variables
-         *   ``.std`` - Standard deviation of the output variables
-         *   ``.p1``  - 1st percentile of the output variables
-         *   ``.p25`` - 25th percentile of the output variables
-         *   ``.p75`` - 75th percentile of the output variables
-         *   ``.p99`` - 99th percentile of the output variables
-         *   ``.boothist`` - Bootstrap histogram of the output variables
-
-             *   ``.edges`` - Histogram edges
-             *   ``.bins`` - Histogram bins
-
-         *   ``.bootdist`` - Bootstrap KDE distribution of the output variables
-
-             *   ``.values`` - Evaluated values
-             *   ``.pdf`` - Estimated probability density function
-
+    *   ``bootci`` - Bootstrapped confidence intervals (struct or cell array)
 
 ------------------------
 
@@ -74,9 +50,7 @@ Performs a uncertainty analysis of the output variables of the function ``fcn`` 
     end
 
 
-From the evaluation of all level-combinations an ensemble of outputs is obtained on which statistical estimators are used. The 99%, 95% and 50% confidence intervals of all output variables are returned in a structure ``bootci``. The summary of these statistics is returned in the ``stats`` structure. This summary contains the mean, median, standard deviation, 99t, 75th, 25th and 1st percentile values for all outputs.
-
-For non-vectorial variables (e.g. non-parametric distributions, background functions,etc.) the ``stats`` structure will contain an histogram of the distribution of values for the different outputs as well as a corresponding probability density function obtained from a kernel densitiy estimation of the histogram data.
+The output ``bootci`` is a single (in case of a single evaluated variable) or a cell array (in case of multiple evaluated variables) of confidence intervals structures (see :ref:`cireference`).
 
 ------------------------
 

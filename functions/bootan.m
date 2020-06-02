@@ -52,7 +52,7 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [ci,stats] = bootan(fcn,Vexp,Vfit,nSamples,varargin)
+function stats = bootan(fcn,Vexp,Vfit,nSamples,varargin)
 
 % Parse input scheme: bootan(fcn,Vexp,Vfit,'prop',value,___)
 if nargin>=4 && ischar(nSamples)
@@ -186,62 +186,8 @@ warning('on','all')
 % Compile statistics for all parameters from bootstrap samples
 %-------------------------------------------------------------------------------
 for iOut = 1:numel(evals)
-    
     boots = evals{iOut};
-    means = mean(boots);
-    medians = median(boots);
-    stds = std(boots);
-    
-    ci{iOut}.ci50(:,1) = percentile(boots,25,1);
-    ci{iOut}.ci50(:,2) = percentile(boots,75,1);
-    ci{iOut}.ci95(:,1) = percentile(boots,2.5,1);
-    ci{iOut}.ci95(:,2) = percentile(boots,97.5,1);
-    ci{iOut}.ci99(:,1) = percentile(boots,0.5,1);
-    ci{iOut}.ci99(:,2) = percentile(boots,99.5,1);
-    
-    if nargout>1
-        for i = 1:nParam(iOut)
-            booti = boots(:,i);
-            
-            % Store the statistical metrics in structure
-            stats{iOut}(i).mean = means(i);
-            stats{iOut}(i).median = medians(i);
-            stats{iOut}(i).std = stds(i);
-            
-            % Percentiles
-            stats{iOut}(i).p1  = percentile(booti,1,1);
-            stats{iOut}(i).p25 = percentile(booti,25,1);
-            stats{iOut}(i).p75 = percentile(booti,75,1);
-            stats{iOut}(i).p99 = percentile(booti,99,1);
-            
-            %Compute the bootstrapped distributions for non-vectorial variables
-            if nParam(iOut)<50
-                
-                % Kernel-density estimation
-                xmin = 0.9*stats{iOut}(i).p1;
-                xmax = 1.1*stats{iOut}(i).p99;
-                if all(diff(booti)==0)
-                    pdf = 1;
-                    values = 0;
-                else
-                    [~,pdf,values] = kde(booti,100,xmin,xmax);
-                end
-                stats{iOut}(i).bootdist.values = values;
-                stats{iOut}(i).bootdist.pdf = pdf;
-                
-                %Determine optimal bins for histogram via Freedman-Diaconis rule
-                nbins = round(range(booti)/(2*iqr(booti)/(numel(booti)).^(1/3)),0);
-                if isinf(nbins) || isnan(nbins)
-                    nbins = 20;
-                end
-                
-                % Get the distribution histogram
-                [bins,edges] = histcounts(booti,nbins,'Normalization','probability');
-                stats{iOut}(i).boothist.bins = bins;
-                stats{iOut}(i).boothist.edges = edges;
-            end
-        end
-    end
+    stats{iOut} = cist('bootstrap',boots);
 end
 
 end

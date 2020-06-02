@@ -115,7 +115,7 @@ The initial guess values for the parameters of each model can be passed as a cel
 
     [opt,f,param,paramcis] = selectmodel(___)
 
-Additional outputs include: the evaluated method selection functionals ``f`` for the different methods, a cell array ``params`` with the fitted parameters for each of the evaluated models, as well as their confidence intervals ``paramcis``.
+Additional outputs include: the evaluated method selection functionals ``f`` for the different methods, a cell array ``params`` with the fitted parameters for each of the evaluated models, as well as their confidence intervals ``paramcis`` (see :ref:`cireference`).
 
 -----------------------------
 

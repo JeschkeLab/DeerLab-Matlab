@@ -1,7 +1,7 @@
 %
 % FITSIGNAL  Fit model to dipolar time-domain trace
 %
-%   [Vfit,Pfit,Bfit,parfit,parci,stats] = FITSIGNAL(V,t,r,dd,bg,ex,par0)
+%   [Vfit,Pfit,Bfit,parfit,modfitci,parci,stats] = FITSIGNAL(V,t,r,dd,bg,ex,par0)
 %   __ = FITSIGNAL(V,t,r,dd,bg,ex)
 %   __ = FITSIGNAL(V,t,r,dd,bg)
 %   __ = FITSIGNAL(V,t,r,dd)
@@ -50,6 +50,7 @@
 %           .dd  fitted parameters for distance distribution model
 %           .bg  fitted parameters for background model
 %           .ex  fitted parameters for experiment model
+%    modfitci structure with confidence intervals for Vfit, Bfit and Pfit
 %    parci structure with confidence intervals for parameter, similar to parfit
 %    stats goodness of fit statistical estimators, N-element structure array
 %
@@ -377,6 +378,10 @@ else
         [Vfit{i},Bfit{i},Pfit] = Vmodel([],parfit_,i);
     end
     
+    
+    % Uncertainty estimation
+    %----------------------------------------------------------------------
+    
     if calculateCI
         Weights = globalweights(Vexp);
         covmatrix = 0;
@@ -384,6 +389,7 @@ else
         % Compute the jacobian of the signal fit with respect to parameter set
         for i = 1:nSignals
             
+            subidx_theta = 1:numel(parfit_);
             if parfreeDistribution
                 % Mixed signal - augmented Jacobian
                 L = regoperator(r,2);
@@ -391,7 +397,6 @@ else
                 J = [jacobianest(@(p)Kmod(p)*Pfit,parfit_), Kmod(parfit_);
                     zeros(size(L,1),numel(parfit_)), regparam_prev*L];
                 subidx_P = numel(parfit_)+[1:numel(Pfit)];
-                subidx_theta = 1:numel(parfit_);
             else
                 % Full parametric signal - numerical Jacobian
                 J = jacobianest(@(par)Vmodel([],par,i),parfit_);
@@ -420,55 +425,27 @@ else
             covmatrix = covmatrix + Weights(i)*covmatrix_;
         end
         
-        % Set significance level for confidence intervals
-        ConfidenceLevel = [0.95 0.5];
-        cov = 1 - ConfidenceLevel;
-        p = 1 - cov/2; % percentile
-        N = numel(Vexp{1}) - numel(parfit_); % degrees of freedom
+        % Construct CI-structure for fitted parameters
+        parci_ = cist('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
         
-        parci_ = cell(numel(p),1);
-        z = zeros(numel(p),1);
-        % Get the CI at requested confidence levels
-        for jj = 1:numel(p)
-            if parfreeDistribution
-                % Get Gaussian critical value
-                z(jj) = norm_inv(p(jj));
-
-                % Compute (unconstrained) CI for parameters
-                covmatsub = covmatrix(subidx_theta,subidx_theta);
-                parci_{jj} = parfit_.' + z(jj)*sqrt(diag(covmatsub)).*[-1 +1];
-                
-                % Compute CI for non-parametric distribution
-                covmatsub = covmatrix(subidx_P,subidx_P);
-                PfitCI{jj}(:,1) = Pfit + z(jj)*sqrt(diag(covmatsub));
-                PfitCI{jj}(:,2) = max(0,Pfit - z(jj)*sqrt(diag(covmatsub)));
-            else
-                % Get Student's t critical value
-                z(jj) = t_inv(p(jj),N);
-                
-                % Compute (unconstrained) CI for parameters
-                parci_{jj} = parfit_.' + z(jj)*sqrt(diag(covmatrix)).*[-1 +1];
-            end
-            % Constrain parameter CIs to model boundaries
-            parci_{jj} = max(parci_{jj},lb.');
-            parci_{jj} = min(parci_{jj},ub.');
+        % Lower bound for distribution CIs
+        Plo = zeros(numel(r),1);
+        if parfreeDistribution
+            % Construct CI-structure for non-parametric distribution
+            PfitCI = cist('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
+        else
+            % Construct CI-structure for parametric distribution           
+            PfitCI = parci_.propagate(@(parfit)dd_model(r,parfit_(ddidx)),Plo,[]);
         end
-        parci_ = parci_{1};
         
         VfitCI = cell(nSignals,1);
         BfitCI = cell(nSignals,1);
         for idx = 1:nSignals
-            for i=1:numel(z)
-                %Propagate errors in the parameter sets to the signal model
-                VfitCI{idx}{i} = propagateCI(covmatrix,J,parfit_,Vfit{idx},z(i),t{idx});
-                bgidx_ = bgidx{idx};
-                BfitCI{i} = propagateCI(covmatrix(bgidx_,bgidx_),bg_model{idx},parfit_(bgidx_),Bfit{idx},z(i),t{idx});
-            end
-        end
-        if ~parfreeDistribution
-            for i=1:numel(z)
-                PfitCI{i} = max(propagateCI(covmatrix(ddidx,ddidx),dd_model,parfit_(ddidx),Pfit,z(i),r),0);
-            end
+            % Propagate uncertainty to the dipolar signal model
+            VfitCI{idx} = parci_.propagate(@(par)Kmodels{idx}({par(exidx{idx}),par(bgidx{idx})})*Pfit,[],[]);
+            
+            % Propagate uncertainty to the background model
+            BfitCI{idx} = parci_.propagate(@(par)bg_model{idx}(t{idx},par(bgidx{idx})),[],[]);
         end
     else
         parci_ = [];
@@ -487,7 +464,7 @@ if normP && includeForeground
                 PfitCI{j} = PfitCI{j}/Pnorm;
             end
         else
-            PfitCI = PfitCI/Pnorm;
+            PfitCI.ci = @(p) PfitCI.ci(p)/Pnorm;
         end
     end
 end
@@ -513,6 +490,7 @@ for i = 1:nSignals
     parfit.ex{i} = parfit_(exidx{i});
 end
 if calculateCI
+    parci_ = parci_.ci(0.95);
     parci.dd = parci_(ddidx,:);
     modfitci.Pfit = PfitCI;
     for i = 1:nSignals
@@ -530,8 +508,10 @@ if nargout==0
         subplot(2,nSignals,i);
         plot(t{i},Vexp{i},'k.',t{i},Vfit{i},'r','LineWidth',1.5)
         hold on
-        fill([t{i}; flipud(t{i})],[VfitCI{i}{1}(:,1); flipud(VfitCI{i}{1}(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
-        fill([t{i}; flipud(t{i})],[VfitCI{i}{2}(:,1); flipud(VfitCI{i}{2}(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
+        Vci95 = VfitCI{i}.ci(0.95);
+        Vci50 = VfitCI{i}.ci(0.50);
+        fill([t{i}; flipud(t{i})],[Vci95(:,1); flipud(Vci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
+        fill([t{i}; flipud(t{i})],[Vci50(:,1); flipud(Vci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
         hold off
         axis tight
         grid on
@@ -542,8 +522,10 @@ if nargout==0
     subplot(2,1,2);
     plot(r,Pfit,'k','LineWidth',1.5);
     hold on
-    fill([r fliplr(r)],[PfitCI{1}(:,1); flipud(PfitCI{1}(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
-    fill([r fliplr(r)],[PfitCI{2}(:,1); flipud(PfitCI{2}(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
+    Pci95 = PfitCI.ci(0.95);
+    Pci50 = PfitCI.ci(0.50);
+    fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
+    fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
     hold off
     xlabel('Distance [nm]');
     ylabel('P [nm^{-1}]');
@@ -692,21 +674,6 @@ lo = range(1:2:end-1);
 up = range(2:2:end);
 N = numel(par0);
 
-end
-
-%===============================================================================
-
-function modelFitCI = propagateCI(covmatrix,model,param,modelFit,z,ax)
-
-if isnumeric(model)
-    jacobian = model;
-else
-    jacobian = jacobianest(@(par)model(ax,par),param);
-end
-modelvariance = arrayfun(@(idx)full(jacobian(idx,:))*covmatrix*full(jacobian(idx,:)).',1:numel(ax)).';
-upper = modelFit + z*sqrt(modelvariance);
-lower = modelFit - z*sqrt(modelvariance);
-modelFitCI = [upper lower];
 end
 
 %===============================================================================
