@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data analysis with the approximate Pake transformation (APT) &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9.2</option>
+        <option value="../../0.9.1/examples/example_aptsimple.html">0.9.1</option>
+        <option value="../../0.9.0/examples/example_aptsimple.html">0.9.0</option>
+        <option value="../../develop/examples/example_aptsimple.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Data analysis with the approximate Pake transformation (APT)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-analysis-with-the-approximate-pake-transformation-apt">
+<span id="example-aptsimple"></span><h1>Data analysis with the approximate Pake transformation (APT)<a class="headerlink" href="#data-analysis-with-the-approximate-pake-transformation-apt" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Data analysis with the approximate Pake transformation (APT)</span>
+<span class="c">%============================================================================</span>
+ 
+<span class="c">% This examples focuses on how to use the old approximate Pake transformation </span>
+<span class="c">% (APT) technique, which was commonly found in the old DeerAnalysis. Although </span>
+<span class="c">% fast, its results can be very rough approximations of the underlying truth and </span>
+<span class="c">% hence its use its not recomended for routine analysis of experimental data.</span>
+
+<span class="n">clear</span><span class="p">,</span> <span class="n">clc</span><span class="p">,</span> <span class="n">clf</span>
+
+<span class="c">%==============================</span>
+<span class="c">% Simulating a dipolar signal</span>
+<span class="c">%==============================</span>
+
+<span class="c">% Let&#39;s start by simulating a very simple dipolar evolution function (i.e. no </span>
+<span class="c">% background and 100% modulation depth), whose parameters we know. </span>
+
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">250</span><span class="p">);</span>
+
+<span class="c">% Generate the distance distribution and signal</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="mf">3.5</span> <span class="mf">0.3</span><span class="p">]);</span>
+<span class="n">D</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.05</span><span class="p">);</span>
+
+<span class="c">% Plot</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">D</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+
+<span class="c">%==============================</span>
+<span class="c">% Generating the APT kernel</span>
+<span class="c">%==============================</span>
+
+<span class="c">% The APT relies on an integral transformation from time-domain to frequency-domain </span>
+<span class="c">% with a posterior mapping to distance-domain. This means that the kernel describing </span>
+<span class="c">% this trasnformation cannot be constructed via the |dipolarkernel| function. </span>
+<span class="c">% For this the |aptkernel| function must be used.</span>
+
+<span class="c">%Generate the APT kernel</span>
+<span class="n">Kapt</span> <span class="p">=</span> <span class="n">aptkernel</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+
+<span class="c">% With the APT kernel in hand we can proceed to run the APT and obtain the approximation </span>
+<span class="c">% of the underlying distance distribution.</span>
+
+<span class="c">%Compute the APT</span>
+<span class="p">[</span><span class="n">Papt</span><span class="p">,</span><span class="n">rapt</span><span class="p">]</span> <span class="p">=</span> <span class="n">apt</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Kapt</span><span class="p">);</span>
+
+<span class="c">% Since in this examples we know the ground truth we can compare the results</span>
+
+<span class="c">% Plot results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">rapt</span><span class="p">,</span><span class="n">Papt</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">legend(&#39;Truth&#39;,&#39;APT Fit&#39;,&#39;Location&#39;,&#39;eastoutside&#39;)</span>
+<span class="n">xlim</span><span class="p">([</span><span class="mi">2</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Distance [nm]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm^{-1}]&#39;</span><span class="p">)</span>
+
+<span class="c">%================================</span>
+<span class="c">% Playing with the DDS parameter</span>
+<span class="c">%================================</span>
+
+<span class="c">% While the APT is fully described and defined by the APT-kernel, we can control </span>
+<span class="c">% the shape of the distance distribution to some degree by means of the so-called </span>
+<span class="c">% distance-domain smoothing (DDS) parameter. In this section we will experiment </span>
+<span class="c">% with the influence the DDS-values have on the APT results. By default, if not </span>
+<span class="c">% specified the |apt| function uses a DDS of 0.05, so let&#39;s see what larger values </span>
+<span class="c">% lead to. We can see that increasing the DDS parameter helps supressing the oscillations </span>
+<span class="c">% at shorter distances at the cost of a considerable broadening of the distribution.</span>
+
+<span class="c">% Compute the APT</span>
+<span class="n">Papt1</span> <span class="p">=</span> <span class="n">apt</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Kapt</span><span class="p">,</span><span class="mf">0.005</span><span class="p">);</span>
+<span class="n">Papt2</span> <span class="p">=</span> <span class="n">apt</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Kapt</span><span class="p">,</span><span class="mf">0.1</span><span class="p">);</span>
+<span class="n">Papt3</span> <span class="p">=</span> <span class="n">apt</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">Kapt</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+
+<span class="c">% Plot results</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">rapt</span><span class="p">,</span><span class="n">Papt</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">rapt</span><span class="p">,</span><span class="n">Papt2</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="n">rapt</span><span class="p">,</span><span class="n">Papt3</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">legend(&#39;DDS = 0.05&#39;,&#39;DDS = 0.1&#39;,&#39;DDS = 0.5&#39;,&#39;Location&#39;,&#39;eastoutside&#39;)</span>
+<span class="n">xlim</span><span class="p">([</span><span class="mi">2</span> <span class="mi">5</span><span class="p">])</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Distance [nm]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm^{-1}]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

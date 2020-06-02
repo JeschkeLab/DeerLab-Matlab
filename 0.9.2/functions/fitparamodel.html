@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fitparamodel &mdash; DeerLab  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fitregmodel" href="fitregmodel.html" />
+    <link rel="prev" title="fitmultimodel" href="fitmultimodel.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option selected value="">0.9.2</option>
+        <option value="../../0.9.1/functions/fitparamodel.html">0.9.1</option>
+        <option value="../../0.9.0/functions/fitparamodel.html">0.9.0</option>
+        <option value="../../develop/functions/fitparamodel.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../functions.html">Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../functions.html">Functions</a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">fitparamodel</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fitparamodel">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">fitparamodel</span></code><a class="headerlink" href="#fitparamodel" title="Permalink to this headline">¶</a></h1>
+<p>Fits a time- or distance-domain parametric model to one (or several) signals.</p>
+<hr class="docutils" />
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">param0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">param0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Input signal (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">model</span></code> - Parametric model (function handle)</li>
+<li><code class="docutils literal notranslate"><span class="pre">t</span></code> -  Model time axis (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">r</span></code> -  Model distance axis (<em>M</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">K</span></code> -  Dipolar kernel (<em>NxM</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">param0</span></code> -  Model parameter initial guess (<em>W</em>-array)</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">param</span></code> - Fitted model parameters (<em>W</em>-array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">fit</span></code> - Parametric model fit (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">paramci</span></code> - Fit confidence intervals (<em>Wx2</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">fitci</span></code> - Model fit confidence bands (<em>Nx2</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">stats</span></code> - Goodness-of-fit statistics (structure)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Fits the <strong>time-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a time axis <code class="docutils literal notranslate"><span class="pre">t</span></code>. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
+<p>The fitted parameters as well as their 95% confidence intervals are returned as the <code class="docutils literal notranslate"><span class="pre">param</span></code> and <code class="docutils literal notranslate"><span class="pre">paramci</span></code> outputs, respectively. The fitted model and its confidence bands are returned as the <code class="docutils literal notranslate"><span class="pre">fit</span></code> and <code class="docutils literal notranslate"><span class="pre">fitci</span></code> outputs, respectively.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">)</span>
+<span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Fits the <strong>distance-domain</strong> parametric model <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> on a distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code>. The dipolar kernel <code class="docutils literal notranslate"><span class="pre">K</span></code> is required as in input for distance-domain fitting. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require <code class="docutils literal notranslate"><span class="pre">param0</span></code> to be passed.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">})</span>
+<span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},@</span><span class="n">model</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">param0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Passing multiple signals/kernels enables <strong>distance-domain global fitting</strong> of the parametric model to a single distribution. The global fit weights are automatically computed according to their contribution to ill-posedness. The multiple signals are passed as a cell array of arrays of sizes <em>N1</em>, <em>N2</em>,… and a cell array of Kernel matrices with sizes <em>N1xM</em>, <em>N2xM</em>, … must be passed as well.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">V3</span><span class="p">},@</span><span class="n">model</span><span class="p">,{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">t3</span><span class="p">})</span>
+<span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">V3</span><span class="p">},@</span><span class="n">model</span><span class="p">,{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">t3</span><span class="p">},</span><span class="n">param0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly, <strong>time-domain global fitting</strong> can be used when passing a time-domain <code class="docutils literal notranslate"><span class="pre">&#64;model</span></code> and the model time axes <code class="docutils literal notranslate"><span class="pre">{t1,t2,___}</span></code> of the corresponding signals.</p>
+<hr class="docutils" />
+<p>User-defined parametric models must have the following function definition structure:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vfit</span> <span class="p">=</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">model</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where the <code class="docutils literal notranslate"><span class="pre">r</span></code> and <code class="docutils literal notranslate"><span class="pre">t</span></code> depend on whether the parametric model is a distance or time-domain model, respectively. Additionally the parametric model can accept a third input argument <code class="docutils literal notranslate"><span class="pre">idx</span></code> as follows</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Vfit</span> <span class="p">=</span> <span class="n">model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">idx</span><span class="p">)</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">model</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">idx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By doing so, <code class="docutils literal notranslate"><span class="pre">fitparamodel</span></code> will automatically pass the index <code class="docutils literal notranslate"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">(1,2,...,N)</span></code> of the input signal cell array
+<code class="docutils literal notranslate"><span class="pre">{S1,S2,...,SN}</span></code> being currently processed. This allows for implementation different routines in the parametric model for different signals during global fitting.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure provides several statistical metric which allow judgment on the quality of the fitted <code class="docutils literal notranslate"><span class="pre">Vfit</span></code> on the experimental data <code class="docutils literal notranslate"><span class="pre">V</span></code> and allows comparison between fits. The structure contains the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">.chi2red</span></code> - Reduced <img class="math" src="../_images/math/609261ef04c55100e8ef73bea359a3a860baf8cb.svg" alt="\chi^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.R2</span></code> - <img class="math" src="../_images/math/1d31674441504377bbb9f0094982bc25b92a0792.svg" alt="R^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.RMSD</span></code> - Root-mean squared deviation (RMSD)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AIC</span></code> - Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AICc</span></code> - Corrected Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.BIC</span></code> - Bayesian information criterion</li>
+</ul>
+</div></blockquote>
+</div>
+<hr class="docutils" />
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Property2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Upper'</span></code> - Parameters upper bound constraints</dt>
+<dd><p class="first">Array of upper bounds for the model parameters.</p>
+<p><em>Default:</em> unbounded or automatically set</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Upper&#39;</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Lower'</span></code> - Parameters lower bound constraints</dt>
+<dd><p class="first">Array of lower bounds for the model parameters.</p>
+<p><em>Default:</em> unbounded or automatically set</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Lower&#39;</span><span class="p">,[</span><span class="mi">0</span> <span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Solver'</span></code> - Optimization solver</dt>
+<dd><p class="first">Numerical solver employed for fitting the model to the data.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> - Non-linear least squares (requires Optimization toolbox)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'lmlsqnonlin'</span></code> - Levenberg-Marquardt non-linear least squares (free)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'nlsqbnd'</span></code> - Non-linear least squares (free, Windows OS only)</li>
+</ul>
+</div></blockquote>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> (Optimization Toolbox installed) or <code class="docutils literal notranslate"><span class="pre">'lmlsqnonlin'</span></code> (Optimization Toolbox not installed)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Solver&#39;</span><span class="p">,</span><span class="s">&#39;lmlsqnonlin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Algorithm'</span></code> - Numerical solver algorithm</dt>
+<dd><p class="first">Algorithm to be used by the solvers (see <code class="docutils literal notranslate"><span class="pre">lsqnonlin</span></code> MATLAB documentation)</p>
+<p><em>Default:</em> see MATLAB documentation</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Algorithm&#39;</span><span class="p">,</span><span class="s">&#39;trust-region-reflective&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'GlobalWeights'</span></code> - Global analysis weights</dt>
+<dd><p class="first">Array of weighting coefficients for the individual signals in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">S3</span><span class="p">},@</span><span class="n">dd_gauss</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">K3</span><span class="p">},</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'TolFun'</span></code> -  Optimizer tolerance value</dt>
+<dd><p class="first">Optimizer function tolerance. The solver stops once the fitting functional evaluation reaches a value lower than this tolerance. Lower values increase the precision of the result, albeit at the cost of longer computation times.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e-9</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;TolFun&#39;</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'MaxIter'</span></code> - Maximal solver iterations</dt>
+<dd><p class="first">Maximum number of iterations of the solver. After the solver exceeds this number the optimization will stop. This option is only relevant for the <code class="docutils literal notranslate"><span class="pre">'fmincon'</span></code>  and <code class="docutils literal notranslate"><span class="pre">'lsqnonneg'</span></code> solvers.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2e7</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MaxIter&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'MaxFunEval'</span></code> -  Maximal solver function evaluations</dt>
+<dd><p class="first">Maximum number of function evaluation of the solver. After the solver exceeds this number the optimization will stop. This option is only relevant for the <code class="docutils literal notranslate"><span class="pre">'fmincon'</span></code>  and <code class="docutils literal notranslate"><span class="pre">'lsqnonneg'</span></code> solvers.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2e7</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MaxFunEval&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Rescale'</span></code> -  Rescaling of fitted dipolar signal</dt>
+<dd><p class="first">This enables/disables the automatic optimization of the dipolar signal scale. If enabled (<code class="docutils literal notranslate"><span class="pre">true</span></code>) the experimental dipolar signal does not need to fulfill <code class="docutils literal notranslate"><span class="pre">V(t=0)=1</span></code>, if disabled (<code class="docutils literal notranslate"><span class="pre">false</span></code>) it needs to be fulfilled.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">true</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="p">=</span> <span class="n">correctscale</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Rescale&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'ConfidenceLevel'</span></code> -  Confidence level of confidence intervals</dt>
+<dd><p class="first">Confidence level(s) of the confidence intervals computed for each fitted parameter. Must be an array containing values between 0 and 1. If more than one confidence level is requested, the <code class="docutils literal notranslate"><span class="pre">paramci</span></code> and <code class="docutils literal notranslate"><span class="pre">fitci</span></code> variables are returned as cell arrays containing the confidence intervals at the different requested levels.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.95</span></code> (95% confidence intervals)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">param</span><span class="p">,</span><span class="n">fit</span><span class="p">,</span><span class="n">paramci</span><span class="p">,</span><span class="n">fitci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ConfidenceLevel&#39;</span><span class="p">,[</span><span class="mf">0.99</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">paramci99</span> <span class="p">=</span> <span class="n">paramci</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="n">paramci50</span> <span class="p">=</span> <span class="n">paramci</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'MultiStart'</span></code> -  Multi-start global optimization</dt>
+<dd><p class="first">Number of initial points to be generated for a global search. For each start point, a local minimum is searched, and the solution with the lowest objective function value is selected as the global optimum.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1</span></code> (No global optimization)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MultiStart&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'Verbose'</span></code> -  Information display</dt>
+<dd><p class="first">Set the level of detail display for the solvers:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'off'</span></code> - No information displayed</li>
+<li><code class="docutils literal notranslate"><span class="pre">'final'</span></code> - Display solver exit message</li>
+<li><code class="docutils literal notranslate"><span class="pre">'iter-detailed'</span></code> - display state of solver at each iteration</li>
+</ul>
+</div></blockquote>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'off'</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Verbose&#39;</span><span class="p">,</span><span class="s">&#39;iter-detailed&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fitregmodel.html" class="btn btn-neutral float-right" title="fitregmodel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fitmultimodel.html" class="btn btn-neutral float-left" title="fitmultimodel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
