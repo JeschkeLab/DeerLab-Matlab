@@ -73,7 +73,6 @@ Function                                         Description
 :ref:`fitmultimodel`                             Multi-component model fitting engine
 :ref:`fitparamodel`                              Parametric model fitting engine
 :ref:`fitregmodel`                               Regularization fitting engine
-:ref:`obir`                                      Osher-Bregman iterative regularization
 :ref:`regoperator`                               Regularization operator constructor
 =============================================  ============================================================
 

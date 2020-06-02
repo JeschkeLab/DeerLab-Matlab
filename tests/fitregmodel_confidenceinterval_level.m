@@ -9,7 +9,8 @@ P = dd_gauss(r,[3,0.5]);
 K = dipolarkernel(t,r);
 S = K*P + whitegaussnoise(t,0.02);
 
-[Pfit,Pci] = fitregmodel(S,K,r,'tikhonov','aic','confidencelevel',0.90);
+[Pfit,Pci] = fitregmodel(S,K,r,'tikhonov','aic');
+Pci = Pci.ci(0.9);
 
 %Pass : fnnls manages to fit the distribution
 pass = all(abs(Pfit - P) < 3e-1);

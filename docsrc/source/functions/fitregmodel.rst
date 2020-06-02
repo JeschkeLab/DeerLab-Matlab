@@ -132,6 +132,18 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 				P = fitregmodel(___,'NormP',false)
 
+
+- ``'obir'`` - Osher's Bregman iterated regularization algorithm
+    Enables (``true``) or disables (``false``) the use of the Osher's Bregman iterated regularization (OBIR) algorithm for fitting the distance distribution.
+
+    *Default:* ``false``
+
+    *Example:*
+
+		.. code-block:: matlab
+
+				P = fitregmodel(___,'obir',true)
+
 - ``'HuberParam'`` - Huber parameter value
     Value of the super-parameter used in pseudo-Huber regularization.
 

@@ -14,7 +14,8 @@ t2 = linspace(0,6,200);
 K2 = dipolarkernel(t2,r);
 S2 = K2*P + whitegaussnoise(t2,0.03);
 
-[Pfit,Pci] = fitregmodel({S1,S2},{K1,K2},r,'tikhonov','aic','confidencelevel',0.90);
+[Pfit,Pci] = fitregmodel({S1,S2},{K1,K2},r,'tikhonov','aic');
+Pci = Pci.ci(0.9);
 
 %Pass : fnnls manages to fit the distribution
 pass = all(abs(Pfit - P) < 3e-1);
