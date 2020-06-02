@@ -13,7 +13,7 @@
 %   infinity or -infinity, respectively, if no constraints are binding. 
 %   opt allows to pass on other arguments as explained below.
 %
-%   Assembled from the code from the following projects:
+%   Assembled from the following projects:
 %   
 %   - Levenberg-Marquardt toolbox (version 3.0) by Alexander Dentler (BSD license)
 %   - Jacobian toolbox (version 3.0) by Alexander Dentler (BSD license)
@@ -80,7 +80,7 @@ IncrTol = 1e-6;               % new evaluated point shows enough improvement to 
 TolFun = 1e-6;                 % breakup optimization if absolute Resnorm improvement falls below this level
 RelTolFun = 1e-6;              % breakup optimization if relative Resnorm improvement falls below this level
 TolX = 1e-6;                  % breakup optimization if all absolute changes in parameters fall below this level
-RelTolX = 1e-6;               % breakup optimization if all relative changes in parameters fall below this level
+RelTolX = 1e-5;               % breakup optimization if all relative changes in parameters fall below this level
 
 %--------------------------------------------------------------------------
 %   Levenberg-Marquardt parameters
@@ -96,7 +96,7 @@ MinDamping = 1e-7;            % minimal dampening
 MaxDamping = 1e7;             % maximal dampening
 FactDamping = 10;             % increases or decreases dampening in loop
 MaxEigTol = 1e-6;             % if largest eigenvalue becomes smaller than this value we attempt to use contraction mapping
-Broyden_updates = 'on';       % set to 'on' it gives Broyden updates for the Jacobian for every 2*n steps, set to 'off' it requires updates in each iteration,
+Broyden_updates = 'off';       % set to 'on' it gives Broyden updates for the Jacobian for every 2*n steps, set to 'off' it requires updates in each iteration,
 conservative_updates = 1;     % set to 1 it will only enforce the tolerances for foo, stepsize or eigenvalue when we just updated Jacobian
 
 %==================================================
@@ -136,13 +136,16 @@ if (numel(lb)>0 || numel(lb)>0) && (numel(x0)~=numel(lb) || numel(x0)~=numel(ub)
     error('Number of bounds does not correspond to number of variable to optimize, or bounds are reversed.')
 end
 
-lb=lb(:);
-ub=ub(:);
-if any(x0<lb) || any(x0>ub)
-    warning('The guess is outside the specified domain. We correct for this. But don''t let that happen again.')
-    x0(x0<lb)=lb(x0<lb)+eps;
-    x0(x0>ub)=lb(x0>ub)-eps;
+lb = lb(:);
+ub = ub(:);
+% Adjust the initial guess to the boundaries
+if any(x0<=lb) || any(x0>=ub)
+    warning('[lmlsqnonlin] Some guess values are outside the specified domain. Reseting affected values at center.')
+    affected = x0<=lb | any(x0>=ub);
+    x0(affected)= (ub(affected) - lb(affected))/2;
+%     x0(x0>=ub)= lb(x0>=ub) - eps;
 end
+
 % Variable transformations
 unbndguess = bnd2unbnd(x0);
 transformback = @(y)unbnd2bnd(y);
@@ -214,7 +217,7 @@ flag_nochange = 1;
 h=NaN(n,1);E=NaN(n,1);
 iteration=0;funccount=1;Jacobian_counter=1;how='Initial evaluation';
 xLMstep=NaN(n,1);yLMstep=NaN(n,1);newtonianstep=NaN(n,1);xgradient=NaN(n,1);
-rho=NaN;ratio=NaN;fun_improv=NaN;rel_fun_improv=NaN;maxFoo=NaN;maxrelFoo=NaN;
+rho=NaN;ratio=NaN;DiffFun=NaN;RelDiffFun=NaN;maxFoo=NaN;maxrelFoo=NaN;
 maxAbsStep=NaN;maxAbsRelStep=NaN;MaxEigJJ=NaN;
 
 %--------------------------------------------------------------------------
@@ -225,14 +228,14 @@ if ~isempty(fval) && (~isempty(J) || (isempty(J) && Jacobian_method<4))
 else
     [fval,Resnorm,J,extra_arguments]=eval_fun(unbndguess,extra_arguments);
 end
-option_Jacobian.m=numel(fval);
+option_Jacobian.m = numel(fval);
 
 % Initial display
 if prnt>1
     disp(header)
     prnt_fun(MaxIter,MaxFunEvals,AccTol,TolFun,RelTolFun,TolX,RelTolX,FooTol,RelFooTol,...
         MaxEigTol,MaxDamping,IncrTol,NaN,'Thresholds');
-    prnt_first={iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+    prnt_first={iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
         MaxEigJJ,lambda,rho,ratio,how};
     prnt_fun(prnt_first{:});
 end
@@ -251,7 +254,7 @@ if strcmp(DerivativeCheck,'on') && Jacobian_method==4
     option_Jacobian_check=option_Jacobian;
     option_Jacobian_check.Jacobian_method=3;
     J_check=eval_Jacobian(@(x)objunbdn(x,extra_arguments),unbndguess,fval,option_Jacobian_check);
-    dh=D_unbnd2bnd(unbndguess,lb,ub);
+    dh=D_unbnd2bnd(unbndguess);
     err=bsxfun(@times,(J-J_check),1./dh);
     relerr=err./bsxfun(@plus,abs(transformback(unbndguess)),abs(transformback(unbndguess)'))/2;
     disp(horzcat('Derivative check gives largest error with ',...
@@ -274,7 +277,7 @@ OtptFcnVl.xLMstep=xLMstep;OtptFcnVl.yLMstep=yLMstep;
 OtptFcnVl.newtonianstep=newtonianstep;OtptFcnVl.xgradient=xgradient;
 OtptFcnVl.extra_arguments=extra_arguments;
 OtptFcnVl.rho=rho;OtptFcnVl.ratio=ratio;OtptFcnVl.lambda=lambda;
-OtptFcnVl.fun_improv=fun_improv;OtptFcnVl.rel_fun_improv=rel_fun_improv;
+OtptFcnVl.fun_improv=DiffFun;OtptFcnVl.rel_fun_improv=RelDiffFun;
 OtptFcnVl.maxFoo=maxFoo;OtptFcnVl.maxrelFoo=maxrelFoo;
 OtptFcnVl.maxabsstep=maxAbsStep;OtptFcnVl.maxabsrelstep=maxAbsRelStep;
 OtptFcnVl.MaxEigJJ=MaxEigJJ;
@@ -289,7 +292,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     % Start new iteration
     iteration=iteration+1;
     maxAbsStep=NaN;maxAbsRelStep=NaN;MaxEigJJ=NaN;
-    rho=NaN;ratio=NaN;fun_improv=NaN;rel_fun_improv=NaN;
+    rho=NaN;ratio=NaN;DiffFun=NaN;RelDiffFun=NaN;
     
     
     % Evaluate Jacobian at current point
@@ -381,27 +384,37 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
         disp(horzcat('New norm of residuals           :',num2str(LM_Resnorm)))
         disp(horzcat('Old norm of residuals           :',num2str(Resnorm)))
     end
-    %  evaluate dampening
-    fun_improv=LM_Resnorm-Resnorm;
-    rel_fun_improv=LM_Resnorm/Resnorm-1;
-    rho=(Resnorm-LM_Resnorm)/(2*yLMstep'*(lambda*yLMstep+ygradient));
-    ratio=(Resnorm-sum((fval+J*yLMstep).^2))/(Resnorm-LM_Resnorm);
-    lambda_old=lambda;
-    if rho>IncrTol || TolFun>fun_improv || RelTolFun>rel_fun_improv
-        %   note
+    
+    % Evaluate dampening
+    %---------------------------------------
+
+    % Get change in objective function
+    DiffFun = LM_Resnorm - Resnorm;
+    RelDiffFun = LM_Resnorm/Resnorm-1;
+    rho = (Resnorm-LM_Resnorm)/(2*yLMstep'*(lambda*yLMstep+ygradient));
+    ratio = (Resnorm - sum((fval+J*yLMstep).^2))/(Resnorm-LM_Resnorm);
+    lambda_old = lambda;
+    
+    stepSuccessful = DiffFun < 0; 
+    
+    if stepSuccessful || rho>IncrTol
+        % note
         how = horzcat('*',how);
-        %   good evaluation, decrease dampening
-        lambda=max(lambda/FactDamping,MinDamping);
+        
+        % If F(x + d) < F(x), decrease dampening
+        lambda = max(lambda/FactDamping,MinDamping);
+        
         flag_nochange=0;
-        %  Jacobian update
+        % Jacobian update
+        
         if Jacobian_method==4
-            %  user supplied function also updated Jacobian
+            % User-supplied function also updated Jacobian
             J=LM_J;
             howJ='user-supplied Jacobian';
         else
-            %  update jacobian or destroy it
-            Jacobian_counter=Jacobian_counter+1;
-            if Jacobian_counter>=Broyden_updates || isempty(J)%(2*n) || ~Broyden_updates
+            % Update jacobian or destroy it
+            Jacobian_counter = Jacobian_counter+1;
+            if Jacobian_counter >= Broyden_updates || isempty(J)%(2*n) || ~Broyden_updates
                 J=[];
                 howJ='full Jacobian update';
             else
@@ -409,32 +422,43 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
                 howJ='Broyden-type update';
             end
         end
-        %  other values
+        % Others
         fval=LM_fval;
-        Resnorm=LM_Resnorm;
-        unbndguess=unbndguess+yLMstep;
-        extra_arguments=LM_extra_arguments;
+        Resnorm = LM_Resnorm;
+        unbndguess = unbndguess + yLMstep;
+        extra_arguments = LM_extra_arguments;
+        
     elseif lambda==MaxDamping && (Jacobian_counter<=2 || ~conservative_updates)
-        how='dampening';
+        % If F(x + d) >= F(x), but maximal dampening reached, stop
+        how='max. dampening';
         break
+        
     else
-        %   bad evaluation, increase dampening
+        
+        % If F(x + d) >= F(x), increase dampening
         if Jacobian_counter>1 && Jacobian_method<4 && lambda==MaxDamping
             J=[];
             lambda=InitDamping;
-            howJ='full Jacobian update';
+            howJ = 'full Jacobian update';
         elseif Jacobian_counter>1 && Jacobian_method<4
             %   quick dampening as we use a Broyden updated jacobian which
             %   is quick, but suboptimal so we dont want to waste time with
             %   large steps that are imprecise.
             lambda=min(lambda*(FactDamping^2),MaxDamping);
-            howJ='quick dampening';
+            howJ = 'quick dampening';
         else
-            lambda=min(lambda*FactDamping,MaxDamping);
-            howJ='soft dampening';
+            lambda = min(lambda*FactDamping,MaxDamping);
+            howJ = 'soft dampening';
         end
     end
-    if Resnorm<=AccTol
+    
+    % Check function optimality tolerance
+    if abs(DiffFun) < TolFun || abs(RelDiffFun) < RelTolFun
+        how = 'function tolerance';
+        break;
+    end
+    
+    if Resnorm <= AccTol
         break
     end
     
@@ -445,7 +469,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
             prnt_fun(MaxIter,MaxFunEvals,AccTol,TolFun,RelTolFun,TolX,RelTolX,FooTol,RelFooTol,...
                 MaxEigTol,MaxDamping,IncrTol,NaN,'Thresholds');
         end
-        prnt_fun(iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+        prnt_fun(iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
             MaxEigJJ,lambda_old,rho,ratio,how);
     end
     %  OUTPUT FUNCTIONS
@@ -456,7 +480,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     OtptFcnVl.xLMstep=xLMstep;OtptFcnVl.yLMstep=yLMstep;
     OtptFcnVl.newtonianstep=newtonianstep;OtptFcnVl.xgradient=xgradient;
     OtptFcnVl.rho=rho;OtptFcnVl.ratio=ratio;OtptFcnVl.lambda=lambda_old;
-    OtptFcnVl.fun_improv=fun_improv;OtptFcnVl.rel_fun_improv=rel_fun_improv;
+    OtptFcnVl.fun_improv=DiffFun;OtptFcnVl.rel_fun_improv=RelDiffFun;
     OtptFcnVl.maxFoo=maxFoo;OtptFcnVl.maxrelFoo=maxrelFoo;
     OtptFcnVl.maxabsstep=maxAbsStep;OtptFcnVl.maxabsrelstep=maxAbsRelStep;
     OtptFcnVl.MaxEigJJ=MaxEigJJ;
@@ -476,7 +500,7 @@ OtptFcnVl.iteration=iteration;OtptFcnVl.funccount=funccount;
 if Resnorm<=AccTol
     how='FULL CONVERGENCE';
     exitflag=1;
-elseif fun_improv>-TolFun || rel_fun_improv>-RelTolFun ...
+elseif DiffFun>-TolFun || RelDiffFun>-RelTolFun ...
         || maxFoo<FooTol || maxrelFoo<RelFooTol || maxAbsStep<TolX ...
         || maxAbsRelStep<RelTolX ||  MaxEigJJ<MaxEigTol ...
         || lambda==MaxDamping || rho<IncrTol
@@ -508,7 +532,7 @@ if nargout>5
             [J,h,E,func_evals_Jacobian]=eval_Jacobian(@(x)objunbdn(x,extra_arguments),unbndguess,fval,option_Jacobian);
             funccount=funccount+func_evals_Jacobian;
         end
-        dh=D_unbnd2bnd(unbndguess,lb,ub);
+        dh=D_unbnd2bnd(unbndguess);
         Jx=bsxfun(@times,J,1./dh);
         output.firstorder=(Jx'*fval);
         output.firstorderopt=max(abs((Jx'*fval)));
@@ -532,7 +556,7 @@ if prnt>0
         disp(header_wo_title)
         %prnt_fun(prnt_first{:})
     end
-    prnt_fun(iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+    prnt_fun(iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
         MaxEigJJ,lambda_old,rho,ratio,how);
 end
 
@@ -587,11 +611,11 @@ end
         switch JacobianMethod
             case 'simple'
                 E=[];
-                [J,h,func_evals_Jacobian]=jacobiansimple(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian] = jacobiansimple(ObjFcn,boundedGuess,opts);
             case 'limit'
-                [J,h,func_evals_Jacobian,E]=jacobianlim(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian,E] = jacobianlim(ObjFcn,boundedGuess,opts);
             case 'extrapolation'
-                [J,h,func_evals_Jacobian,E]=jacobianext(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian,E] = jacobianext(ObjFcn,boundedGuess,opts);
         end
         
         % Transform back to y space
@@ -609,13 +633,13 @@ end
         X=NaN(size(Y));
         for kk=1:numel(Y)
             if isfinite(lb(kk)) && isfinite(ub(kk)) % ...lower and upper bound
-                X(kk) = (lb(kk)+ub(kk))/2+ (ub(kk)-lb(kk))/2*sin(2*Y(kk)/(ub(kk)-lb(kk)));
+                X(kk) = (lb(kk) + ub(kk))/2 + (ub(kk) - lb(kk))/2*sin(2*Y(kk)/(ub(kk) - lb(kk)));
             elseif isfinite(lb(kk)) && ~isfinite(ub(kk)) % ...just lower bound
-                X(kk)= lb(kk)-1 + sqrt(Y(kk).^2+1);
+                X(kk) = lb(kk) - 1 + sqrt(Y(kk).^2 + 1);
             elseif ~isfinite(lb(kk)) && isfinite(ub(kk)) % ...just upper bound
-                X(kk)= ub(kk)+1 - sqrt(Y(kk).^2+1);
+                X(kk) = ub(kk) + 1 - sqrt(Y(kk).^2 + 1);
             else % ...no bounds
-                X(kk)=Y(kk);
+                X(kk) = Y(kk);
             end
         end
     end
@@ -623,26 +647,26 @@ end
     %==================================================
     % BOUND -> UNBOUND VARIABLE TRANSFORMATION
     %==================================================
-    function    Y = bnd2unbnd(X)
+    function Y = bnd2unbnd(X)
         % Transforms variable from [lb,ub] to domain -infinity to infinity
         % complements unbnd2bnd
         Y=NaN(size(X));
         for jj=1:numel(X)
             if isfinite(lb(jj)) && isfinite(ub(jj)) % ...bounded on both ends
-                Y(jj)=(ub(jj)-lb(jj))/2*asin((2*X(jj)-(ub(jj)+lb(jj)))/(ub(jj)-lb(jj)));
+                Y(jj) = real((ub(jj)-lb(jj))/2*asin((2*X(jj)-(ub(jj)+lb(jj)))/(ub(jj)-lb(jj))));
             elseif isfinite(lb(jj)) && ~isfinite(ub(jj)) % ...just lower bound
-                Y(jj)=sqrt((lb(jj) -1 - X(jj)).^2-1);
+                Y(jj) = sqrt((lb(jj) -1 - X(jj)).^2-1);
             elseif ~isfinite(lb(jj)) && isfinite(ub(jj)) % ...just upper bound
-                Y(jj)=sqrt((ub(jj) +1 - X(jj)).^2-1);
+                Y(jj) = sqrt((ub(jj) +1 - X(jj)).^2-1);
             else % ...no boundaries
-                Y(jj)=X(jj);
+                Y(jj) = X(jj);
             end
         end
     end
 
 
 
-    function    df=D_unbnd2bnd(Y)
+    function df=D_unbnd2bnd(Y)
         df=NaN(1,numel(Y));
         for ii=1:numel(Y)
             if isfinite(lb(ii)) && isfinite(ub(ii)) % ...lower and upper bound
@@ -834,7 +858,10 @@ for k=1:n
     %   final increment in kth independent variable
     x1(k)=x1(k)+h(k);   
     %  step differentiation 
-    J(:,k)=(func(x1)-f_0)/h(k);     
+    J(:,k)=(func(x1)-f_0)/h(k);  
+    if any(isnan(J(:,k))) || any(isinf(J(:,k))) 
+       J(isnan(J(:,k))|isinf(J(:,k)),k) = 0;
+    end
     func_evals=func_evals+1;
     h(k)=abs(h(k));
 end
