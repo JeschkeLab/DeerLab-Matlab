@@ -13,7 +13,7 @@
 %   infinity or -infinity, respectively, if no constraints are binding. 
 %   opt allows to pass on other arguments as explained below.
 %
-%   Assembled from the code from the following projects:
+%   Assembled from the following projects:
 %   
 %   - Levenberg-Marquardt toolbox (version 3.0) by Alexander Dentler (BSD license)
 %   - Jacobian toolbox (version 3.0) by Alexander Dentler (BSD license)
@@ -80,7 +80,7 @@ IncrTol = 1e-6;               % new evaluated point shows enough improvement to 
 TolFun = 1e-6;                 % breakup optimization if absolute Resnorm improvement falls below this level
 RelTolFun = 1e-6;              % breakup optimization if relative Resnorm improvement falls below this level
 TolX = 1e-6;                  % breakup optimization if all absolute changes in parameters fall below this level
-RelTolX = 1e-6;               % breakup optimization if all relative changes in parameters fall below this level
+RelTolX = 1e-5;               % breakup optimization if all relative changes in parameters fall below this level
 
 %--------------------------------------------------------------------------
 %   Levenberg-Marquardt parameters
@@ -96,7 +96,7 @@ MinDamping = 1e-7;            % minimal dampening
 MaxDamping = 1e7;             % maximal dampening
 FactDamping = 10;             % increases or decreases dampening in loop
 MaxEigTol = 1e-6;             % if largest eigenvalue becomes smaller than this value we attempt to use contraction mapping
-Broyden_updates = 'on';       % set to 'on' it gives Broyden updates for the Jacobian for every 2*n steps, set to 'off' it requires updates in each iteration,
+Broyden_updates = 'off';       % set to 'on' it gives Broyden updates for the Jacobian for every 2*n steps, set to 'off' it requires updates in each iteration,
 conservative_updates = 1;     % set to 1 it will only enforce the tolerances for foo, stepsize or eigenvalue when we just updated Jacobian
 
 %==================================================
@@ -346,9 +346,6 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     end
     
     LMstepFcn = @(lambda)pinv((JJ+lambda*T),eps)*ygradient;
-    if any(isnan(JJ))
-        a =1;
-    end
     MaxEigJJ = max(eig(JJ));
     if MaxEigJJ<MaxEigTol && (Jacobian_counter==1 || ~conservative_updates)
         how='largest eigenvalue';
@@ -421,26 +418,26 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
         unbndguess = unbndguess + yLMstep;
         extra_arguments = LM_extra_arguments;
     elseif lambda==MaxDamping && (Jacobian_counter<=2 || ~conservative_updates)
-        how='dampening';
+        how='max. dampening';
         break
     else
-        %   bad evaluation, increase dampening
+        % bad evaluation, increase dampening
         if Jacobian_counter>1 && Jacobian_method<4 && lambda==MaxDamping
             J=[];
             lambda=InitDamping;
-            howJ='full Jacobian update';
+            howJ = 'full Jacobian update';
         elseif Jacobian_counter>1 && Jacobian_method<4
             %   quick dampening as we use a Broyden updated jacobian which
             %   is quick, but suboptimal so we dont want to waste time with
             %   large steps that are imprecise.
             lambda=min(lambda*(FactDamping^2),MaxDamping);
-            howJ='quick dampening';
+            howJ = 'quick dampening';
         else
-            lambda=min(lambda*FactDamping,MaxDamping);
-            howJ='soft dampening';
+            lambda = min(lambda*FactDamping,MaxDamping);
+            howJ = 'soft dampening';
         end
     end
-    if Resnorm<=AccTol
+    if Resnorm <= AccTol
         break
     end
     
