@@ -136,13 +136,16 @@ if (numel(lb)>0 || numel(lb)>0) && (numel(x0)~=numel(lb) || numel(x0)~=numel(ub)
     error('Number of bounds does not correspond to number of variable to optimize, or bounds are reversed.')
 end
 
-lb=lb(:);
-ub=ub(:);
-if any(x0<lb) || any(x0>ub)
-    warning('The guess is outside the specified domain. We correct for this. But don''t let that happen again.')
-    x0(x0<lb)=lb(x0<lb)+eps;
-    x0(x0>ub)=lb(x0>ub)-eps;
+lb = lb(:);
+ub = ub(:);
+% Adjust the initial guess to the boundaries
+if any(x0<=lb) || any(x0>=ub)
+    warning('[lmlsqnonlin] Some guess values are outside the specified domain. Reseting affected values at center.')
+    affected = x0<=lb | any(x0>=ub);
+    x0(affected)= (ub(affected) - lb(affected))/2;
+%     x0(x0>=ub)= lb(x0>=ub) - eps;
 end
+
 % Variable transformations
 unbndguess = bnd2unbnd(x0);
 transformback = @(y)unbnd2bnd(y);
@@ -225,7 +228,7 @@ if ~isempty(fval) && (~isempty(J) || (isempty(J) && Jacobian_method<4))
 else
     [fval,Resnorm,J,extra_arguments]=eval_fun(unbndguess,extra_arguments);
 end
-option_Jacobian.m=numel(fval);
+option_Jacobian.m = numel(fval);
 
 % Initial display
 if prnt>1
@@ -251,7 +254,7 @@ if strcmp(DerivativeCheck,'on') && Jacobian_method==4
     option_Jacobian_check=option_Jacobian;
     option_Jacobian_check.Jacobian_method=3;
     J_check=eval_Jacobian(@(x)objunbdn(x,extra_arguments),unbndguess,fval,option_Jacobian_check);
-    dh=D_unbnd2bnd(unbndguess,lb,ub);
+    dh=D_unbnd2bnd(unbndguess);
     err=bsxfun(@times,(J-J_check),1./dh);
     relerr=err./bsxfun(@plus,abs(transformback(unbndguess)),abs(transformback(unbndguess)'))/2;
     disp(horzcat('Derivative check gives largest error with ',...
@@ -343,6 +346,9 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     end
     
     LMstepFcn = @(lambda)pinv((JJ+lambda*T),eps)*ygradient;
+    if any(isnan(JJ))
+        a =1;
+    end
     MaxEigJJ = max(eig(JJ));
     if MaxEigJJ<MaxEigTol && (Jacobian_counter==1 || ~conservative_updates)
         how='largest eigenvalue';
@@ -400,8 +406,8 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
             howJ='user-supplied Jacobian';
         else
             %  update jacobian or destroy it
-            Jacobian_counter=Jacobian_counter+1;
-            if Jacobian_counter>=Broyden_updates || isempty(J)%(2*n) || ~Broyden_updates
+            Jacobian_counter = Jacobian_counter+1;
+            if Jacobian_counter >= Broyden_updates || isempty(J)%(2*n) || ~Broyden_updates
                 J=[];
                 howJ='full Jacobian update';
             else
@@ -411,9 +417,9 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
         end
         %  other values
         fval=LM_fval;
-        Resnorm=LM_Resnorm;
-        unbndguess=unbndguess+yLMstep;
-        extra_arguments=LM_extra_arguments;
+        Resnorm = LM_Resnorm;
+        unbndguess = unbndguess + yLMstep;
+        extra_arguments = LM_extra_arguments;
     elseif lambda==MaxDamping && (Jacobian_counter<=2 || ~conservative_updates)
         how='dampening';
         break
@@ -508,7 +514,7 @@ if nargout>5
             [J,h,E,func_evals_Jacobian]=eval_Jacobian(@(x)objunbdn(x,extra_arguments),unbndguess,fval,option_Jacobian);
             funccount=funccount+func_evals_Jacobian;
         end
-        dh=D_unbnd2bnd(unbndguess,lb,ub);
+        dh=D_unbnd2bnd(unbndguess);
         Jx=bsxfun(@times,J,1./dh);
         output.firstorder=(Jx'*fval);
         output.firstorderopt=max(abs((Jx'*fval)));
@@ -587,11 +593,11 @@ end
         switch JacobianMethod
             case 'simple'
                 E=[];
-                [J,h,func_evals_Jacobian]=jacobiansimple(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian] = jacobiansimple(ObjFcn,boundedGuess,opts);
             case 'limit'
-                [J,h,func_evals_Jacobian,E]=jacobianlim(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian,E] = jacobianlim(ObjFcn,boundedGuess,opts);
             case 'extrapolation'
-                [J,h,func_evals_Jacobian,E]=jacobianext(ObjFcn,boundedGuess,opts);
+                [J,h,func_evals_Jacobian,E] = jacobianext(ObjFcn,boundedGuess,opts);
         end
         
         % Transform back to y space
@@ -609,13 +615,13 @@ end
         X=NaN(size(Y));
         for kk=1:numel(Y)
             if isfinite(lb(kk)) && isfinite(ub(kk)) % ...lower and upper bound
-                X(kk) = (lb(kk)+ub(kk))/2+ (ub(kk)-lb(kk))/2*sin(2*Y(kk)/(ub(kk)-lb(kk)));
+                X(kk) = (lb(kk) + ub(kk))/2 + (ub(kk) - lb(kk))/2*sin(2*Y(kk)/(ub(kk) - lb(kk)));
             elseif isfinite(lb(kk)) && ~isfinite(ub(kk)) % ...just lower bound
-                X(kk)= lb(kk)-1 + sqrt(Y(kk).^2+1);
+                X(kk) = lb(kk) - 1 + sqrt(Y(kk).^2 + 1);
             elseif ~isfinite(lb(kk)) && isfinite(ub(kk)) % ...just upper bound
-                X(kk)= ub(kk)+1 - sqrt(Y(kk).^2+1);
+                X(kk) = ub(kk) + 1 - sqrt(Y(kk).^2 + 1);
             else % ...no bounds
-                X(kk)=Y(kk);
+                X(kk) = Y(kk);
             end
         end
     end
@@ -623,26 +629,26 @@ end
     %==================================================
     % BOUND -> UNBOUND VARIABLE TRANSFORMATION
     %==================================================
-    function    Y = bnd2unbnd(X)
+    function Y = bnd2unbnd(X)
         % Transforms variable from [lb,ub] to domain -infinity to infinity
         % complements unbnd2bnd
         Y=NaN(size(X));
         for jj=1:numel(X)
             if isfinite(lb(jj)) && isfinite(ub(jj)) % ...bounded on both ends
-                Y(jj)=(ub(jj)-lb(jj))/2*asin((2*X(jj)-(ub(jj)+lb(jj)))/(ub(jj)-lb(jj)));
+                Y(jj) = real((ub(jj)-lb(jj))/2*asin((2*X(jj)-(ub(jj)+lb(jj)))/(ub(jj)-lb(jj))));
             elseif isfinite(lb(jj)) && ~isfinite(ub(jj)) % ...just lower bound
-                Y(jj)=sqrt((lb(jj) -1 - X(jj)).^2-1);
+                Y(jj) = sqrt((lb(jj) -1 - X(jj)).^2-1);
             elseif ~isfinite(lb(jj)) && isfinite(ub(jj)) % ...just upper bound
-                Y(jj)=sqrt((ub(jj) +1 - X(jj)).^2-1);
+                Y(jj) = sqrt((ub(jj) +1 - X(jj)).^2-1);
             else % ...no boundaries
-                Y(jj)=X(jj);
+                Y(jj) = X(jj);
             end
         end
     end
 
 
 
-    function    df=D_unbnd2bnd(Y)
+    function df=D_unbnd2bnd(Y)
         df=NaN(1,numel(Y));
         for ii=1:numel(Y)
             if isfinite(lb(ii)) && isfinite(ub(ii)) % ...lower and upper bound
@@ -834,7 +840,10 @@ for k=1:n
     %   final increment in kth independent variable
     x1(k)=x1(k)+h(k);   
     %  step differentiation 
-    J(:,k)=(func(x1)-f_0)/h(k);     
+    J(:,k)=(func(x1)-f_0)/h(k);  
+    if any(isnan(J(:,k))) || any(isinf(J(:,k))) 
+       J(isnan(J(:,k))|isinf(J(:,k)),k) = 0;
+    end
     func_evals=func_evals+1;
     h(k)=abs(h(k));
 end
