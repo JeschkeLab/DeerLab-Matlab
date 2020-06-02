@@ -217,7 +217,7 @@ flag_nochange = 1;
 h=NaN(n,1);E=NaN(n,1);
 iteration=0;funccount=1;Jacobian_counter=1;how='Initial evaluation';
 xLMstep=NaN(n,1);yLMstep=NaN(n,1);newtonianstep=NaN(n,1);xgradient=NaN(n,1);
-rho=NaN;ratio=NaN;fun_improv=NaN;rel_fun_improv=NaN;maxFoo=NaN;maxrelFoo=NaN;
+rho=NaN;ratio=NaN;DiffFun=NaN;RelDiffFun=NaN;maxFoo=NaN;maxrelFoo=NaN;
 maxAbsStep=NaN;maxAbsRelStep=NaN;MaxEigJJ=NaN;
 
 %--------------------------------------------------------------------------
@@ -235,7 +235,7 @@ if prnt>1
     disp(header)
     prnt_fun(MaxIter,MaxFunEvals,AccTol,TolFun,RelTolFun,TolX,RelTolX,FooTol,RelFooTol,...
         MaxEigTol,MaxDamping,IncrTol,NaN,'Thresholds');
-    prnt_first={iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+    prnt_first={iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
         MaxEigJJ,lambda,rho,ratio,how};
     prnt_fun(prnt_first{:});
 end
@@ -277,7 +277,7 @@ OtptFcnVl.xLMstep=xLMstep;OtptFcnVl.yLMstep=yLMstep;
 OtptFcnVl.newtonianstep=newtonianstep;OtptFcnVl.xgradient=xgradient;
 OtptFcnVl.extra_arguments=extra_arguments;
 OtptFcnVl.rho=rho;OtptFcnVl.ratio=ratio;OtptFcnVl.lambda=lambda;
-OtptFcnVl.fun_improv=fun_improv;OtptFcnVl.rel_fun_improv=rel_fun_improv;
+OtptFcnVl.fun_improv=DiffFun;OtptFcnVl.rel_fun_improv=RelDiffFun;
 OtptFcnVl.maxFoo=maxFoo;OtptFcnVl.maxrelFoo=maxrelFoo;
 OtptFcnVl.maxabsstep=maxAbsStep;OtptFcnVl.maxabsrelstep=maxAbsRelStep;
 OtptFcnVl.MaxEigJJ=MaxEigJJ;
@@ -292,7 +292,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     % Start new iteration
     iteration=iteration+1;
     maxAbsStep=NaN;maxAbsRelStep=NaN;MaxEigJJ=NaN;
-    rho=NaN;ratio=NaN;fun_improv=NaN;rel_fun_improv=NaN;
+    rho=NaN;ratio=NaN;DiffFun=NaN;RelDiffFun=NaN;
     
     
     % Evaluate Jacobian at current point
@@ -384,25 +384,35 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
         disp(horzcat('New norm of residuals           :',num2str(LM_Resnorm)))
         disp(horzcat('Old norm of residuals           :',num2str(Resnorm)))
     end
-    %  evaluate dampening
-    fun_improv=LM_Resnorm-Resnorm;
-    rel_fun_improv=LM_Resnorm/Resnorm-1;
-    rho=(Resnorm-LM_Resnorm)/(2*yLMstep'*(lambda*yLMstep+ygradient));
-    ratio=(Resnorm-sum((fval+J*yLMstep).^2))/(Resnorm-LM_Resnorm);
-    lambda_old=lambda;
-    if rho>IncrTol || TolFun>fun_improv || RelTolFun>rel_fun_improv
-        %   note
+    
+    % Evaluate dampening
+    %---------------------------------------
+
+    % Get change in objective function
+    DiffFun = LM_Resnorm - Resnorm;
+    RelDiffFun = LM_Resnorm/Resnorm-1;
+    rho = (Resnorm-LM_Resnorm)/(2*yLMstep'*(lambda*yLMstep+ygradient));
+    ratio = (Resnorm - sum((fval+J*yLMstep).^2))/(Resnorm-LM_Resnorm);
+    lambda_old = lambda;
+    
+    stepSuccessful = DiffFun < 0; 
+    
+    if stepSuccessful || rho>IncrTol
+        % note
         how = horzcat('*',how);
-        %   good evaluation, decrease dampening
-        lambda=max(lambda/FactDamping,MinDamping);
+        
+        % If F(x + d) < F(x), decrease dampening
+        lambda = max(lambda/FactDamping,MinDamping);
+        
         flag_nochange=0;
-        %  Jacobian update
+        % Jacobian update
+        
         if Jacobian_method==4
-            %  user supplied function also updated Jacobian
+            % User-supplied function also updated Jacobian
             J=LM_J;
             howJ='user-supplied Jacobian';
         else
-            %  update jacobian or destroy it
+            % Update jacobian or destroy it
             Jacobian_counter = Jacobian_counter+1;
             if Jacobian_counter >= Broyden_updates || isempty(J)%(2*n) || ~Broyden_updates
                 J=[];
@@ -412,16 +422,20 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
                 howJ='Broyden-type update';
             end
         end
-        %  other values
+        % Others
         fval=LM_fval;
         Resnorm = LM_Resnorm;
         unbndguess = unbndguess + yLMstep;
         extra_arguments = LM_extra_arguments;
+        
     elseif lambda==MaxDamping && (Jacobian_counter<=2 || ~conservative_updates)
+        % If F(x + d) >= F(x), but maximal dampening reached, stop
         how='max. dampening';
         break
+        
     else
-        % bad evaluation, increase dampening
+        
+        % If F(x + d) >= F(x), increase dampening
         if Jacobian_counter>1 && Jacobian_method<4 && lambda==MaxDamping
             J=[];
             lambda=InitDamping;
@@ -437,6 +451,13 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
             howJ = 'soft dampening';
         end
     end
+    
+    % Check function optimality tolerance
+    if abs(DiffFun) < TolFun || abs(RelDiffFun) < RelTolFun
+        how = 'function tolerance';
+        break;
+    end
+    
     if Resnorm <= AccTol
         break
     end
@@ -448,7 +469,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
             prnt_fun(MaxIter,MaxFunEvals,AccTol,TolFun,RelTolFun,TolX,RelTolX,FooTol,RelFooTol,...
                 MaxEigTol,MaxDamping,IncrTol,NaN,'Thresholds');
         end
-        prnt_fun(iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+        prnt_fun(iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
             MaxEigJJ,lambda_old,rho,ratio,how);
     end
     %  OUTPUT FUNCTIONS
@@ -459,7 +480,7 @@ while Resnorm>AccTol && funccount< MaxFunEvals && iteration < MaxIter && stop==f
     OtptFcnVl.xLMstep=xLMstep;OtptFcnVl.yLMstep=yLMstep;
     OtptFcnVl.newtonianstep=newtonianstep;OtptFcnVl.xgradient=xgradient;
     OtptFcnVl.rho=rho;OtptFcnVl.ratio=ratio;OtptFcnVl.lambda=lambda_old;
-    OtptFcnVl.fun_improv=fun_improv;OtptFcnVl.rel_fun_improv=rel_fun_improv;
+    OtptFcnVl.fun_improv=DiffFun;OtptFcnVl.rel_fun_improv=RelDiffFun;
     OtptFcnVl.maxFoo=maxFoo;OtptFcnVl.maxrelFoo=maxrelFoo;
     OtptFcnVl.maxabsstep=maxAbsStep;OtptFcnVl.maxabsrelstep=maxAbsRelStep;
     OtptFcnVl.MaxEigJJ=MaxEigJJ;
@@ -479,7 +500,7 @@ OtptFcnVl.iteration=iteration;OtptFcnVl.funccount=funccount;
 if Resnorm<=AccTol
     how='FULL CONVERGENCE';
     exitflag=1;
-elseif fun_improv>-TolFun || rel_fun_improv>-RelTolFun ...
+elseif DiffFun>-TolFun || RelDiffFun>-RelTolFun ...
         || maxFoo<FooTol || maxrelFoo<RelFooTol || maxAbsStep<TolX ...
         || maxAbsRelStep<RelTolX ||  MaxEigJJ<MaxEigTol ...
         || lambda==MaxDamping || rho<IncrTol
@@ -535,7 +556,7 @@ if prnt>0
         disp(header_wo_title)
         %prnt_fun(prnt_first{:})
     end
-    prnt_fun(iteration,funccount,Resnorm,fun_improv,rel_fun_improv,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
+    prnt_fun(iteration,funccount,Resnorm,DiffFun,RelDiffFun,maxAbsStep,maxAbsRelStep,maxFoo,maxrelFoo,...
         MaxEigJJ,lambda_old,rho,ratio,how);
 end
 
