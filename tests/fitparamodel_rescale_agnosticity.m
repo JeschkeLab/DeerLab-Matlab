@@ -12,14 +12,14 @@ K = dipolarkernel(t,r,0.3,B);
 
 scale = 1e9;
 V = K*P + whitegaussnoise(t,0.005);
-InitialGuess = [0.5 0.5 2 0.3];
+par0 = [0.5 0.5 2 0.3];
 
 lower = [0 0 1 0.1];
 upper = [1 1 20 5];
 mymodel = @(t,param)dipolarkernel(t,r,param(1),bg_exp(t,param(2)))*dd_gauss(r,param(3:4));
 
-[parfit1,Vfit1] = fitparamodel(V*scale,mymodel,t,InitialGuess,'Rescale',true,'MultiStart',5,'Lower',lower,'Upper',upper);
-[parfit2,Vfit2] = fitparamodel(V,mymodel,t,InitialGuess,'Rescale',false,'MultiStart',5,'Lower',lower,'Upper',upper);
+[parfit1,Vfit1] = fitparamodel(V*scale,mymodel,t,par0,lower,upper,'Rescale',true,'MultiStart',5);
+[parfit2,Vfit2] = fitparamodel(V,mymodel,t,par0,lower,upper,'Rescale',false,'MultiStart',5);
 
 Pfit1 = dd_gauss(r,parfit1(3:4));
 Pfit2 = dd_gauss(r,parfit2(3:4));

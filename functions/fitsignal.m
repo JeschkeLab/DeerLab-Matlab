@@ -1,11 +1,13 @@
 %
 % FITSIGNAL  Fit model to dipolar time-domain trace
 %
-%   [Vfit,Pfit,Bfit,parfit,modfitci,parci,stats] = FITSIGNAL(V,t,r,dd,bg,ex,par0)
+%   [Vfit,Pfit,Bfit,parfit,modfitci,parci,stats] = FITSIGNAL(V,t,r,dd,bg,ex,par0,lb,ub)
+%   __ = FITSIGNAL(V,t,r,dd,bg,ex,par0)
 %   __ = FITSIGNAL(V,t,r,dd,bg,ex)
 %   __ = FITSIGNAL(V,t,r,dd,bg)
 %   __ = FITSIGNAL(V,t,r,dd)
 %   __ = FITSIGNAL(V,t,r)
+%   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,,lb,ub)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__})
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},ex)
@@ -39,25 +41,27 @@
 %    ex     experiment model (default @ex_4pdeer)
 %           - function handle to experiment model (e.g. @ex_4pdeer)
 %           - 'none' to indicate simple dipolar oscillation (mod.depth = 1)
-%    par0   starting parameters, 3-element cell array {par0_dd,par0_bd,par0_ex}
+%    par0   starting parameters, 3-element cell array {par0_dd,par0_bg,par0_ex}
+%           default: {[],[],[]} (automatic choice)
+%    lb     lower bounds for parameters, 3-element cell array (lb_dd,lb_bg,lb_ex)
+%           default: {[],[],[]} (automatic choice)
+%    ub     upper bounds for parameters, 3-element cell array (ub_dd,ub_bg,ub_ex)
 %           default: {[],[],[]} (automatic choice)
 %
 %  Output:
-%    Vfit   fitted time-domain signal
-%    Pfit   fitted distance distribution
-%    Bfit   fitted background decay
-%    parfit structure with fitted parameters
-%           .dd  fitted parameters for distance distribution model
-%           .bg  fitted parameters for background model
-%           .ex  fitted parameters for experiment model
+%    Vfit     fitted time-domain signal
+%    Pfit     fitted distance distribution
+%    Bfit     fitted background decay
+%    parfit   structure with fitted parameters
+%                .dd  fitted parameters for distance distribution model
+%                .bg  fitted parameters for background model
+%                .ex  fitted parameters for experiment model
 %    modfitci structure with confidence intervals for Vfit, Bfit and Pfit
-%    parci structure with confidence intervals for parameter, similar to parfit
-%    stats goodness of fit statistical estimators, N-element structure array
+%    parci    structure with confidence intervals for parameter, similar to parfit
+%    stats    goodness of fit statistical estimators, N-element structure array
 %
 %  Name-value pairs:
 %
-%   'Lower'         - Lower bounds for parameters, cell array {lb_dd,lb_bg,lb_ex}
-%   'Upper'         - Upper bounds for parameters, cell array {ub_dd,ub_bg,ub_ex}
 %   'TolFun'        - Optimizer function tolerance
 %   'RegType'       - Regularization functional type ('tikh','tv','huber')
 %   'RegParam'      - Regularization parameter selection ('lr','lc','cv','gcv',
@@ -89,11 +93,13 @@ dd_model = [];
 bg_model = [];
 ex_model = [];
 par0 = [];
+lb = [];
+ub = [];
 % Parse the varargin cell array
 optionstart = numel(varargin);
 for i=1:numel(varargin)
     if i<4 && ischar(varargin{i}) && ~any(strcmp(varargin{i},{'P','none'})) || ...
-            i>3 && ischar(varargin{i})
+       i>3 && ischar(varargin{i})
         optionstart = i-1;
         break
     end
@@ -106,15 +112,18 @@ for i=1:numel(varargin)
             ex_model = varargin{3};
         case 4
             par0 = varargin{4};
+        case 5
+            lb = varargin{5};
+        case 6
+            ub = varargin{6};
     end
 end
 varargin(1:optionstart) = [];
 
-
 % Parse the optional parameters in varargin
 %-------------------------------------------------------------------------------
-optionalProperties = {'RegParam','RegType','alphaOptThreshold','TolFun','Lower','Upper','Rescale','normP','MultiStart'};
-[regparam,regtype,alphaOptThreshold,TolFun,lb,ub,Rescale,normP,MultiStart] = parseoptional(optionalProperties,varargin);
+optionalProperties = {'RegParam','RegType','alphaOptThreshold','TolFun','Rescale','normP','MultiStart'};
+[regparam,regtype,alphaOptThreshold,TolFun,Rescale,normP,MultiStart] = parseoptional(optionalProperties,varargin);
 
 % Validation of Vexp, t, r
 %-------------------------------------------------------------------------------
@@ -367,7 +376,7 @@ else
     B_cached = [];
     
     % Fit the parameters
-    args = {Vexp,@Vmodel,t,par0,'Lower',lb,'Upper',ub,'TolFun',TolFun,...
+    args = {Vexp,@Vmodel,t,par0,lb,ub,'TolFun',TolFun,...
         'Verbose',verbose,'Rescale',Rescale,'MultiStart',MultiStart};
     [parfit_] = fitparamodel(args{:});
     

@@ -12,7 +12,7 @@ V = K*P;
 rng(67)
 lb = parIn - [0.5 0.2 0.2 1 0.2 0.2 0.5 0.2];
 ub = parIn + [0.5 0.2 0.2 1 0.2 0.2 1   0.2];
-[~,FitP] = fitparamodel(V,@dd_gauss3,r,K,'multistart',5,'Lower',lb,'Upper',ub);
+[~,FitP] = fitparamodel(V,@dd_gauss3,r,K,[],lb,ub,'multistart',5);
 
 % Pass: distance distribution is well fitted
 pass = all(abs(FitP - P) < 1e-10);

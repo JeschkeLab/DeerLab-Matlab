@@ -1,8 +1,17 @@
 %
 % FITPARAMODEL Fits a time- or distance-domain parametric model to one (or several) signals
 %
-%   [param,Vfit,paramci,modelci,stats] = FITPARAMODEL(V,@model,t)
-%   [param,Vfit,paramci,modelci,stats] = FITPARAMODEL(V,@model,r,K)
+%   [param,fit,paramci,modelci,stats] = FITPARAMODEL(V,@model,t,par0,lb,ub)
+%   __ = FITPARAMODEL(V,@model,r,K,par0,lb,ub)
+%   __ = FITPARAMODEL(V,@model,r,K,par0)
+%   __ = FITPARAMODEL(V,@model,r,K)
+%   __ = FITPARAMODEL(V,@model,t,par0,lb,ub)
+%   __ = FITPARAMODEL(V,@model,t,par0)
+%   __ = FITPARAMODEL(V,@model,t)
+%   __ = FITPARAMODEL({V1,V2,___},@model,{t1,t2,___},par0,lb,ub)
+%   __ = FITPARAMODEL({V1,V2,___},@model,r,{K1,K2,___},par0,lb,ub)
+%   __ = FITPARAMODEL(___,'Property',Values)
+%
 %   Fits the N-point signal (V) to a M-point parametric model (@model) given an
 %   M-point distance/time axis (r/t). For distance-domain fitting, provide
 %   the NxM point kernel matrix (K). The fitted model corresponds to a parametric model
@@ -15,19 +24,16 @@
 %   confidence levels. A structure containing different statistical
 %   estimators of goodness of fit is returned as (stats).
 %
-%   [param,Vfit,paramci,modelci] = FITPARAMODEL(V,@model,t,param0)
-%   [param,Vfit,paramci,modelci] = FITPARAMODEL(V,@model,r,K,param0)
-%   The initial guess of the model parameters can be passed as a last
+%   The initial guess of the model parameters can be passed as an
 %   argument (param0). This is optional for DeerLab model functions. If (@model)
-%   is a user-defined function handle, (param0) is required.
+%   is a user-defined function handle, (param0) is required. Similarly, the
+%   upper and lower bounds for the parameters can be passed as the last
+%   arguments (ub) and (lb). This is optional for all model functions.
 %
-%   [param,Vfit,paramci,modelci] = FITPARAMODEL({V1,V2,___},@model,{t1,t2,___},param0)
-%   [param,Vfit,paramci,modelci] = FITPARAMODEL({V1,V2,___},@model,r,{K1,K2,___},param0)
 %   Pass multiple signals/kernels to enable global fitting of a single parametric
 %   model to all data. The global fit weights are automatically computed according
 %   to their contribution to ill-posedness.
 %
-%   [param,Vfit,paramci,modelci] = FITPARAMODEL(___,'Property',Values)
 %   Additional (optional) arguments can be passed as name-value pairs.
 %
 % The properties to be passed as options can be set in any order.
@@ -42,8 +48,6 @@
 %                     global fitting.
 %   'Algorithm' - Algorithm to be used by the solvers (see fmincon or
 %                 lsqnonlin documentation)
-%   'Lower' - Lower bound on the model parameters
-%   'Upper' - Upper bound on the model parameters
 %   'TolFun' - Optimizer function tolerance
 %   'MaxIter' - Maximum number of optimizer iterations
 %   'MaxFunEvals' - Maximum number of optimizer function evaluations
@@ -60,39 +64,54 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [parfit,modelfit,parci,modelci,stats] = fitparamodel(V,model,ax,K,StartParameters,varargin)
+function [parfit,modelfit,parci,modelci,stats] = fitparamodel(V,model,ax,varargin)
 
 % Input parsing & validation
 %-------------------------------------------------------------------------------
 if nargin<3
-    error('At least three inputs (V, model, t) are required.');
+    error('At least three inputs (V,model,t) are required.');
 end
 
-% Parse the different styles of input
-if nargin<4 || isempty(K)
-    % fitparamodel(V,model,t)
-    Kpassed = false;
-elseif nargin>3 && ischar(K) && ~iscell(K)
-    % fitparamodel(V,model,t,'Property',Value)
-    if nargin>4
-        varargin = [{K} {StartParameters} varargin];
+% Parse input schemes
+%-------------------------------------------------------------------------------
+% Prepare empty containers
+K = [];
+par0 = [];
+lb = [];
+ub = [];
+
+%Check if kernel is passed
+input = varargin{1};
+Kpassed = false;
+if ~ischar(input)
+    if all(size(input)>1) || iscell(input)
+        Kpassed = true;
+        K = varargin{1};
+        varargin(1) = [];
     end
-    StartParameters = [];
-    Kpassed = false;
-elseif nargin>3 &&  ~all(size(K)>1) && ~iscell(K)
-    % fitparamodel(V,model,t,StartParameters,'Property',Value)
-    if nargin>4
-        varargin = [{StartParameters} varargin];
-    end
-    StartParameters = K;
-    Kpassed = false;
-else
-    % fitparamodel(V,model,r,K,StartParameters,'Property',Value)
-    Kpassed = true;
 end
 isDistanceDomain = Kpassed;
 
-% Validate input signals
+% Parse the varargin cell array
+optionstart = numel(varargin);
+for i=1:numel(varargin)
+    if ischar(varargin{i})
+        optionstart = i-1;
+        break
+    end
+    switch i
+        case 1
+            par0 = varargin{1};
+        case 2
+            lb = varargin{2};
+        case 3
+            ub = varargin{3};
+    end
+end
+varargin(1:optionstart) = [];
+
+% Validate required inputs
+%-------------------------------------------------------------------------------
 if ~iscell(V)
     V = {V(:)};
 end
@@ -130,9 +149,9 @@ end
 
 if isDistanceDomain
     % Input #5 fitparamodel(V,model,r,K,'Property',Value)
-    if nargin>4 && ischar(StartParameters)
-        varargin = [{StartParameters},varargin];
-        StartParameters = [];
+    if nargin>4 && ischar(par0)
+        varargin = [{par0},varargin];
+        par0 = [];
     end
 end
 
@@ -142,6 +161,7 @@ if ~isa(model,'function_handle')
 end
 
 % Get information about the parametric model
+%-------------------------------------------------------------------------------
 try
     % Check whether model is a DeerLab model function
     paraminfo = model();
@@ -154,16 +174,17 @@ try
     
 catch
     % If not, require user to pass the inital values
-    if ~exist('StartParameters','var') || isempty(StartParameters) || ischar(StartParameters)
+    if ~exist('par0','var') || isempty(par0) || ischar(par0)
         error('For this model, please provide the required inital guess parameters.')
     end
     % Wrap the function handle into a DeerLab model function
-    model = paramodel(model,StartParameters,[],[],isDistanceDomain);
+    model = paramodel(model,par0,[],[],isDistanceDomain);
     paraminfo = model();
     paraminfo = paraminfo.parameters;
 end
 
 % Validate kernel
+%-------------------------------------------------------------------------------
 if isDistanceDomain
     if ~iscell(K)
         K = {K};
@@ -178,22 +199,23 @@ if isDistanceDomain
     end
 end
 
-if nargin<5 || isempty(StartParameters)
+if nargin<5 || isempty(par0)
     % If user does not give parameters, use the defaults of the model
-    StartParameters =  [paraminfo(:).default];
-elseif nargin>4 && ischar(StartParameters)
-    varargin = [{StartParameters} varargin];
-    StartParameters = [paraminfo(:).default];
+    par0 =  [paraminfo(:).default];
+elseif nargin>4 && ischar(par0)
+    varargin = [{par0} varargin];
+    par0 = [paraminfo(:).default];
 else
-    validateattributes(StartParameters,{'numeric'},{'2d','nonempty'},mfilename,'StartParameters')
+    validateattributes(par0,{'numeric'},{'2d','nonempty'},mfilename,'StartParameters')
 end
 
 % Parse the optional parameters in varargin
+%-------------------------------------------------------------------------------
 optionalProperties = {'Solver','Algorithm','MaxIter','Verbose','MaxFunEvals',...
-    'TolFun','GlobalWeights','Upper','Lower','MultiStart',...
-    'Rescale','internal::returncovariancematrix'};
+    'TolFun','GlobalWeights','MultiStart',...
+    'Rescale'};
 [Solver,Algorithm,maxIter,Verbose,maxFunEvals,TolFun,GlobalWeights,...
-    upperBounds,lowerBounds,MultiStart,Rescale,returnCovariance] = ...
+    MultiStart,Rescale] = ...
     parseoptional(optionalProperties,varargin);
 
 % Validate optional inputs
@@ -201,11 +223,6 @@ if isempty(MultiStart)
     MultiStart = 1;
 else
     validateattributes(MultiStart,{'numeric'},{'scalar','nonnegative'},mfilename,'MultiStarts')
-end
-if isempty(returnCovariance)
-    returnCovariance = false;
-else
-    validateattributes(returnCovariance,{'logical'},{'nonempty'},mfilename,'returnCovariance')
 end
 if isempty(TolFun)
     TolFun = 1e-10;
@@ -291,23 +308,23 @@ Labels = num2cell(1:nSignals);
 
 % Prepare upper/lower bounds on parameter search range
 Ranges =  [paraminfo(:).range];
-if isempty(lowerBounds)
-    lowerBounds = Ranges(1:2:end-1);
+if isempty(lb)
+    lb = Ranges(1:2:end-1);
 end
-if isempty(upperBounds)
-    upperBounds = Ranges(2:2:end);
+if isempty(ub)
+    ub = Ranges(2:2:end);
 end
-if any(upperBounds==realmax) || any(lowerBounds==-realmax)
+if any(ub==realmax) || any(lb==-realmax)
     unboundedparams = true;
     warning('Some model parameters are unbounded. Use ''Lower'' and ''Upper'' options to pass parameter boundaries.')
 else
     unboundedparams = false;
 end
-if  numel(StartParameters)~=numel(upperBounds) || ...
-        numel(StartParameters)~=numel(lowerBounds)
+if  numel(par0)~=numel(ub) || ...
+        numel(par0)~=numel(lb)
     error('The inital guess and upper/lower boundaries must have equal length.')
 end
-if any(upperBounds<lowerBounds)
+if any(ub<lb)
     error('Lower bound values cannot be larger than upper bound values.')
 end
 
@@ -315,7 +332,7 @@ end
 if MultiStart>1 && unboundedparams
     error('Multistart optimization cannot be used with unconstrained parameters.')
 end
-MultiStartParameters = multistarts(MultiStart,StartParameters,lowerBounds,upperBounds);
+MultiStartParameters = multistarts(MultiStart,par0,lb,ub);
 
 
 
@@ -355,14 +372,14 @@ fvals = zeros(1,MultiStart);
 parfits = cell(1,MultiStart);
 for runIdx = 1:MultiStart
     
-    StartParameters = MultiStartParameters(runIdx,:);
+    par0 = MultiStartParameters(runIdx,:);
     
-    [parfit,fval,~,exitflag]  = solverFcn(@ResidualsFcn,StartParameters,lowerBounds,upperBounds,solverOpts);
+    [parfit,fval,~,exitflag]  = solverFcn(@ResidualsFcn,par0,lb,ub,solverOpts);
     if exitflag==0
         % if maxIter exceeded, doube iterations and continue
         solverOpts.MaxIter = 2*maxIter;
         solverOpts.MaxFunEvals = 2*maxFunEvals;
-        [parfit,fval]  = solverFcn(@ResidualsFcn,parfit,lowerBounds,upperBounds,solverOpts);
+        [parfit,fval]  = solverFcn(@ResidualsFcn,parfit,lb,ub,solverOpts);
     end
     
     fvals(runIdx) = fval;
@@ -400,8 +417,8 @@ if calcParamUncertainty
     end
     
     % Construct confidence interval structure
-    parci = cist('covariance',parfit,covmatrix,lowerBounds,upperBounds);
-
+    parci = cist('covariance',parfit,covmatrix,lb,ub);
+    
 end
 
 % Evaluate fitted model and model confidence intervals
@@ -448,7 +465,7 @@ if computeStats
         else
             Vfit = modelfit{i};
         end
-        Ndof = numel(V{i}) - numel(StartParameters);
+        Ndof = numel(V{i}) - numel(par0);
         stats{i} = gof(V{i},Vfit,Ndof);
     end
     
@@ -470,9 +487,9 @@ end
 warning('on','MATLAB:nearlySingularMatrix')
 warning('on','MATLAB:singularMatrix')
 warning('on','MATLAB:rankDeficientMatrix')
-    
-    % Function that provides vector of residuals, which is the objective
-    % function for the least-squares solvers
+
+% Function that provides vector of residuals, which is the objective
+% function for the least-squares solvers
     function r = ResidualsFcn(p)
         r_ = cell(nSignals,1);
         t = ax{1};
@@ -492,5 +509,5 @@ warning('on','MATLAB:rankDeficientMatrix')
         end
         r = vertcat(r_{:});
     end
-    
+
 end

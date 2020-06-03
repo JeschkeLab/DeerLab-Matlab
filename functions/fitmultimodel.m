@@ -97,11 +97,6 @@ for i = 1:numel(optionalProperties)
     varargin(Idx:Idx+1) = [];
 end
 
-if nargin>3
-    % Include internal option in order for fitparamodel to return the covariance matrix
-    varargin = [varargin {'internal::returncovariancematrix'} {true}];
-end
-
 %Parse the required inputs for global fitting
 if ~iscell(Vs)
    Vs = {Vs}; 
@@ -248,9 +243,9 @@ end
 
 % Run fitting and model selection to see which multi-Gauss model is optimal
 if ~isempty(BckgModel)
-    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(timeMultiGaussModels,Vs,ts,method,param0,'Lower',LowerBounds,'Upper',UpperBounds,varargin);
+    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(timeMultiGaussModels,Vs,ts,method,param0,LowerBounds,UpperBounds,varargin);
 else
-    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(multiModels,Vs,r,Ks,method,'Lower',LowerBounds,'Upper',UpperBounds,varargin);
+    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(multiModels,Vs,r,Ks,method,[],LowerBounds,UpperBounds,varargin);
 end
 
 % Calculate the distance distribution for the optimal multi-Gauss model

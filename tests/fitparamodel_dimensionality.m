@@ -19,10 +19,10 @@ mymodel = @(t,param)K*dd_gauss(r,param);
 
 param0 = [4 0.3];
 
-[~,Vfit1] = fitparamodel(S,mymodel,t,param0,'upper',[100 100],'lower',[0 0]);
-[~,Vfit2] = fitparamodel(S.',mymodel,t,param0.','upper',[100 100],'lower',[0 0]);
-[~,Vfit3] = fitparamodel(S,mymodel,t.',param0,'upper',[100 100],'lower',[0 0]);
-[~,Vfit4] = fitparamodel(S.',mymodel,t.',param0.','upper',[100 100],'lower',[0 0]);
+[~,Vfit1] = fitparamodel(S,mymodel,t,param0,[0 0],[100 100]);
+[~,Vfit2] = fitparamodel(S.',mymodel,t,param0.',[0 0],[100 100]);
+[~,Vfit3] = fitparamodel(S,mymodel,t.',param0,[0 0],[100 100]);
+[~,Vfit4] = fitparamodel(S.',mymodel,t.',param0.',[0 0],[100 100]);
 
 % Pass 1: all distributions are equal
 pass(1) = isequal(Pfit1,Pfit2,Pfit3,Pfit4);

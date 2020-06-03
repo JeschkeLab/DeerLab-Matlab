@@ -9,8 +9,8 @@ P = dd_gauss(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P;
 
-InitialGuess = [2 0.1];
-[parFit,Pfit] = fitparamodel(S,@dd_gauss,r,K,InitialGuess,'Upper',[realmax realmax],'Lower',[-realmax -realmax]);
+par0 = [2 0.1];
+[parFit,Pfit] = fitparamodel(S,@dd_gauss,r,K,par0,[-realmax -realmax],[realmax realmax]);
 
 
 % Pass 1: distance distribution is well fitted

@@ -25,6 +25,7 @@ Syntax
     [opt,f,param,paramcis] = selectmodel(models,V,t,'method')
     [opt,f,param,paramcis] = selectmodel(models,{V1,V2,___},{t1,t2,___},'method')
     [opt,f,param,paramcis] = selectmodel(models,V,t,'method',param0)
+    [opt,f,param,paramcis] = selectmodel(models,V,t,'method',param0,lb,ub)
     [opt,f,param,paramcis] = selectmodel(___,'Property',Value)
 
 
@@ -36,6 +37,9 @@ Parameters
     *   ``t`` -  Time axis (*N*-array), in microseconds
     *   ``method`` - Model selection type(s) (string or cell array of strings)
     *   ``param0`` -  Initial parameter values for each model (cell array of numerical vectors)
+    *   ``lb`` -  Lower bounds of parameter values for each model (cell array of numerical vectors)
+    *   ``ub`` -  Upper bounds of parameter values for each model (cell array of numerical vectors)
+
 Returns
     *  ``opt`` - Index of optimal parametric model (scalar)
     *  ``f`` - Evaluated model selection functionals (cell array)
@@ -105,7 +109,19 @@ Similarly, time-domain global fitting can be used when passing time-domain ``mod
     opt = selectmodel(models,V,t,{'aic',___},{par1,___,parN})
 
 
-The initial guess values for the parameters of each model can be passed as a cell array ``{par1,___,parN}`` of value vectors.
+The initial guess values for the parameters of each model can be passed as a cell array ``{par1,___,parN}`` of value vectors. If not, specified the initial values are taken from the info of each parametric model.
+
+-----------------------------
+
+
+.. code-block:: matlab
+
+    opt = selectmodel(models,V,r,K,{'aic',___},{par1,___,parN},{lb1,___,lbN},{ub1,___,ubN})
+    opt = selectmodel(models,V,t,{'aic',___},{par1,___,parN},[],{ub1,___,ubN})
+    opt = selectmodel(models,V,t,{'aic',___},{par1,___,parN},{lb1,___,lbN})
+
+
+Similarly, the lower and upper bounds for the parameters of each model can be passed as cell arrays ``{lb1,___,lbN}`` and ``{ub1,___,ubN}``, where ``lbi`` and ``ubi`` are the lower and upper boundaries of the parameters for the i-th model, respectively. If not, specified the boundaries are taken from the info of each parametric model.
 
 
 -----------------------------
@@ -130,26 +146,15 @@ Additional settings can be specified via name-value pairs. All property names ar
 
     opt = selectmodel(___,'Property1',Value1,'Property2',Value2,___)
 
-- ``'Upper'`` - Parameter upper bound constraints
-    Cell array containing the upper bound values for the parameters of the evaluated parametric models.
+- ``'GlobalWeights'`` - Weights for global fitting
+    Array of weighting coefficients for the individual signals in global fitting regularization. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. Weight values do not need to be normalized. The same number of weights as number of input signals is required.
 
-    *Default:* [*empty*] - Uses the model's default upper bound values
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			opt = selectmodel({@dd_gauss,@dd_rice},V,r,K,'aicc','Upper',{[10 1],[10 2]})
-
-- ``'Lower'`` - Parameter lower bound constraints
-    Cell array containing the lower bound values for the parameters of the evaluated parametric models.
-
-    *Default:* [*empty*] - Uses the model's default lower bound values
+    *Default:* [*empty*]
 
     *Example:*
 
 		.. code-block:: matlab
 
-			opt = selectmodel({@dd_gauss,@dd_rice},V,r,K,'aicc','Lower',{[1 0.1],[10 0.2]})
+			___ = selectmodel(___,'GlobalWeights',[0.1 0.6 0.3]])
 
 See :ref:`fitparamodel` for a detailed list of other name-value pairs accepted by the function.

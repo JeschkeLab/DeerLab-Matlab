@@ -16,12 +16,15 @@ Syntax
 .. code-block:: matlab
 
     [param,fit,paramci,fitci,stats] = fitparamodel(V,@model,t)
-    [param,fit,paramci,fitci,stats] = fitparamodel(V,@model,t,param0)
-    [param,fit,paramci,fitci,stats] = fitparamodel({V1,V2,___},@model,{t1,t2,___},param0)
-    [param,fit,paramci,fitci,stats] = fitparamodel(V,@model,r,K)
-    [param,fit,paramci,fitci,stats] = fitparamodel(V,@model,r,K,param0)
-    [param,fit,paramci,fitci,stats] = fitparamodel({V1,V2,___},@model,r,{K1,K2,___},param0)
-    [param,fit,paramci,fitci,stats] = fitparamodel(___,'Property',Value)
+    __ = fitparamodel(V,@model,r,K,par0,lb,ub)
+    __ = fitparamodel(V,@model,r,K,par0)
+    __ = fitparamodel(V,@model,r,K)
+    __ = fitparamodel(V,@model,t,par0,lb,ub)
+    __ = fitparamodel(V,@model,t,par0)
+    __ = fitparamodel(V,@model,t)
+    __ = fitparamodel({V1,V2,___},@model,{t1,t2,___},par0,lb,ub)
+    __ = fitparamodel({V1,V2,___},@model,r,{K1,K2,___},par0,lb,ub)
+    __ = fitparamodel(___,'Property',Values)
 
 
 Parameters
@@ -30,7 +33,10 @@ Parameters
     *   ``t`` -  Model time axis (*N*-element array)
     *   ``r`` -  Model distance axis (*M*-element array)
     *   ``K`` -  Dipolar kernel (*NxM*-element array)
-    *   ``param0`` -  Model parameter initial guess (*W*-array)
+    *   ``param0`` -  Model parameters initial guess (*W*-array)
+    *   ``lb`` -  Model parameters lower bounds (*W*-array)
+    *   ``ub`` -  Model parameters upper bounds (*W*-array)
+
 Returns
     *  ``param`` - Fitted model parameters (*W*-array)
     *  ``fit`` - Parametric model fit (*N*-element array)
@@ -87,6 +93,14 @@ Similarly, **time-domain global fitting** can be used when passing a time-domain
 
 -----------------------------
 
+.. code-block:: matlab
+
+    param = fitparamodel(V,@model,t,param0,lb,ub)
+    param = fitparamodel(V,@model,r,K,param0,lb,ub)
+
+Optionally, the lower and upper boundaries of all model parameters can be specified as the arrays ``lb`` and ``ub``. If not specified, these are taken automatically from the model function (for built-in models) or set as unbounded (for user-defined models).
+
+-----------------------------
 
 User-defined parametric models must have the following function definition structure:
 
@@ -134,28 +148,6 @@ Additional settings can be specified via name-value pairs. All property names ar
 
     param = fitparamodel(___,'Property1',Value1,'Property2',Value2,___)
 
-
-- ``'Upper'`` - Parameters upper bound constraints
-    Array of upper bounds for the model parameters.
-
-    *Default:* unbounded or automatically set
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			param = fitparamodel(___,'Upper',[1 100])
-
-- ``'Lower'`` - Parameters lower bound constraints
-    Array of lower bounds for the model parameters.
-
-    *Default:* unbounded or automatically set
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			param = fitparamodel(___,'Lower',[0 3])
 
 - ``'Solver'`` - Optimization solver
     Numerical solver employed for fitting the model to the data.

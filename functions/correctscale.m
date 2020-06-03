@@ -84,7 +84,7 @@ switch lower(model)
 end
 
 % Run the parametric model fitting
-parfit = fitparamodel(V_,fitmodel,t_,par0,'Upper',ub,'Lower',lb,'Rescale',false);
+parfit = fitparamodel(V_,fitmodel,t_,par0,lb,ub,'Rescale',false);
 
 % Get the fitted signal amplitude and scale the signal
 V0 = Amp0*parfit(1);

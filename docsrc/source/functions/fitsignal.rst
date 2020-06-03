@@ -16,11 +16,13 @@ Syntax
 .. code-block:: matlab
 
     fitsignal(V,t,r,dd,bg,ex,par0)
-    [Vfit,Pfit,Bfit,parfit,parci,stats] = fitsignal(V,t,r,dd,bg,ex,par0)
+    [Vfit,Pfit,Bfit,parfit,modfitci,parci,stats] = fitsignal(V,t,r,dd,bg,ex,par0,lb,ub)
+    __ = fitsignal(V,t,r,dd,bg,ex,par0)
     __ = fitsignal(V,t,r,dd,bg,ex)
     __ = fitsignal(V,t,r,dd,bg)
     __ = fitsignal(V,t,r,dd)
     __ = fitsignal(V,t,r)
+    __ = fitsignal({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,lb,ub)
     __ = fitsignal({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0)
     __ = fitsignal({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__})
     __ = fitsignal({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},ex)
@@ -48,7 +50,9 @@ Parameters
 
                  -- ``@ex_model`` function handle for parametric experiment model
                  -- ``'none'`` to indicate simple dipolar oscillation (mod.depth = 1)
-    *   ``par0`` -- Starting parameters ``{par0_dd,par0_bg,par0_ex}`` (3-element array)
+    *   ``par0`` -- Starting parameters ``{par0_dd,par0_bg,par0_ex}`` (3-element cell array)
+    *   ``lb`` -- Lower bounds for parameters ``{lb_dd,lb_bg,lb_ex}`` (3-element cell array)
+    *   ``ub`` -- Upper bounds for parameters ``{lb_dd,lb_bg,lb_ex}`` (3-element cell array)
 
 
 Returns
@@ -61,6 +65,7 @@ Returns
                  * ``.bg`` -- Fitted parameters for background model
                  * ``.ex`` -- Fitted parameters for experiment model
 
+    *   ``modfitci`` -- Confidence interval structures for Vfit, Bfit and Pfit
     *   ``parci`` -- Structure with confidence intervals for parameters (similar to ``parfit``)
     *   ``stats`` -- Goodness of fit statistical estimators (struct)
 
@@ -99,6 +104,21 @@ Examples:
 
 ------------------------
 
+    __ = fitsignal(V,t,r,dd,bg,ex,par0)
+
+The starting values of the parameter search can be specified via ``par0``. It must be 3-element cell arrays of the form ``{par0_dd,par0_bg,par0_ex}``, where the elements are arrays that give the initial values for the distance distribution parameters, background parameters, and experiment parameters, respectively. If not specified or passed empty, these values are automatically taken from the info structures of the parametric models.
+
+
+------------------------
+
+    __ = fitsignal(V,t,r,dd,bg,ex,par0,lb,ub)
+    __ = fitsignal(V,t,r,dd,bg,ex,par0,[],ub)
+    __ = fitsignal(V,t,r,dd,bg,ex,par0,lb)
+
+The lower/upper bounds for the parameter search range can be specified via ``lb`` and ``ub``. These inputs must be 3-element cell arrays of the form ``{ub_dd,ub_bg,ub_ex}`` and ``{lb_dd,lb_bg,lb_ex}``, where the elements are arrays that give the upper/lower bounds for the distance distribution parameters, background parameters, and experiment parameters, respectively. If not specified or passed empty, the boundaries are automatically taken from the info structures of the parametric models.
+
+------------------------
+
 .. code-block:: matlab
 
     __ = fitsignal({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__})
@@ -131,7 +151,6 @@ Additional Settings
 =========================================
 
 Additional settings can be specified via name-value pairs. All property names are case insensitive and the name-value pairs can be passed in any order after the required input arguments have been passed.
-
 
 
 .. code-block:: matlab

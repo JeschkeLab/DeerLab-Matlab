@@ -29,8 +29,8 @@ InitialGuess = [2 0.1 5 0.1 0.5];
 range = [info.parameters(:).range];
 upper = range(2:2:end);
 lower = range(1:2:end-1);
-parglobal = fitparamodel(Ss,mymodel,{t1,t2,t3},InitialGuess,'Upper',upper,'lower',lower);
-parlocal = fitparamodel(S3,mymodel,t3,InitialGuess,'Upper',upper,'lower',lower);
+parglobal = fitparamodel(Ss,mymodel,{t1,t2,t3},InitialGuess,lower,upper);
+parlocal = fitparamodel(S3,mymodel,t3,InitialGuess,lower,upper);
 
 Pglobal = dd_gauss2(r,parglobal);
 Plocal = dd_gauss2(r,parlocal);
