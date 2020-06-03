@@ -110,8 +110,4 @@ P = P/trapz(r,P);
 end
 output = P;
 
-if ~iscolumn(P)
-    P = P.';
-end
-
 return
