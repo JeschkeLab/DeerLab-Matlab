@@ -17,8 +17,8 @@ Syntax
 .. code-block:: matlab
 
         info = bg_strexp()
-        P = bg_strexp(r,param)
-        P = bg_strexp(r,param,lambda)
+        P = bg_strexp(t,param)
+        P = bg_strexp(t,param,lambda)
 
 Inputs
     *   ``t`` -- Time axis (N-array)
