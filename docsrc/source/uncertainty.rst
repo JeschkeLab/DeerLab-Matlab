@@ -3,8 +3,7 @@ Uncertainty
 
 After fitting experimental data with a distance distribution, a background, and a modulation depth, it is important to assess the uncertainty (i.e. the error) in the fitted parameters.
 
-DeerLab provides uncertainty estimates for all parameters in the form of confidence intervals (CIs). They can be calculated in two ways: either using the covariance matrix, or using bootstrap. The first method is fast, but is not entirely accurate, whereas bootstrap is much slower, but more robust.
-
+DeerLab provides uncertainty estimates for all parameters in the form of confidence intervals (CIs). They can be calculated in two ways: either using the covariance matrix, or using bootstrap. The first method is fast, but is not entirely accurate, whereas bootstrap is much slower, but more robust. All confidence intervals provided by DeerLab functions describe the range of values which might contain the ground truth with a ceratin probability.
 
 Covariance CIs
 ------------------------------------------

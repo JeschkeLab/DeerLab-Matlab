@@ -33,7 +33,7 @@ Syntax
 Parameters
     *   ``V`` -- Time-domain signal to fit (*N*-element array)
     *   ``t`` -- Time axis, in microseconds (*N*-element array)
-    *   ``r`` -- Distance axis, in nanoseconds (*M*-element array)
+    *   ``r`` -- Distance axis, in nanometers (*M*-element array)
     *   ``dd`` -- Distance distribution model, can be...
 
                  * ``@dd_model`` function handle for parametric distribution model
