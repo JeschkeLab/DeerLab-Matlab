@@ -71,8 +71,9 @@
 %   'Rescale'       - Enable/Disable optimization of the signal scale
 %   'normP'         - Enable/Disable re-normalization of the fitted distribution
 %   'MultiStart'    - Number of starting points for global optimization
+%   'GlobalWeights' - Array of weighting coefficients for the individual signals in
+%                     global fitting.
 %
-
 % Example:
 %    Vfit = fitsignal(Vexp,t,r,@dd_gauss,@bg_hom3d,@ex_4pdeer)
 %
@@ -122,8 +123,8 @@ varargin(1:optionstart) = [];
 
 % Parse the optional parameters in varargin
 %-------------------------------------------------------------------------------
-optionalProperties = {'RegParam','RegType','alphaOptThreshold','TolFun','Rescale','normP','MultiStart'};
-[regparam,regtype,alphaOptThreshold,TolFun,Rescale,normP,MultiStart] = parseoptional(optionalProperties,varargin);
+optionalProperties = {'RegParam','RegType','alphaOptThreshold','TolFun','Rescale','normP','MultiStart','GlobalWeights'};
+[regparam,regtype,alphaOptThreshold,TolFun,Rescale,normP,MultiStart,Weights] = parseoptional(optionalProperties,varargin);
 
 % Validation of Vexp, t, r
 %-------------------------------------------------------------------------------
@@ -169,6 +170,16 @@ else
     validateattributes(TolFun,{'numeric'},{'scalar','nonnegative'},mfilename,'TolFun option');
 end
 
+if isempty(Weights)
+    Weights = globalweights(Vexp);
+end
+if ~isempty(Weights)
+    validateattributes(Weights,{'numeric'},{'nonnegative'})
+    if numel(Weights)~=nSignals
+        error('The number of global fit weights and signals must be equal.')
+    end
+    Weights = Weights/sum(Weights);
+end
 if isempty(normP)
     normP = true;
 else
@@ -392,7 +403,6 @@ else
     %----------------------------------------------------------------------
     
     if calculateCI
-        Weights = globalweights(Vexp);
         covmatrix = 0;
         
         % Compute the jacobian of the signal fit with respect to parameter set

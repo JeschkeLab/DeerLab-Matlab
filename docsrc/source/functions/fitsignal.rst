@@ -232,6 +232,17 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 			fitsignal(___,'alphaOptThreshold',1e-4)
 
+- ``'GlobalWeights'`` - Global analysis weights
+    Array of weighting coefficients for the individual signals in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.
+
+    *Default:* [*empty*]
+
+    *Example:*
+
+		.. code-block:: matlab
+
+			param = fitparamodel({S1,S2,S3},@dd_gauss,r,{K1,K2,K3},'GlobalWeights',[0.1 0.6 0.3]])
+
 - ``'MultiStart'`` -  Multi-start global optimization
     Number of initial points to be generated for a global search. For each start point, a local minimum is searched, and the solution with the lowest objective function value is selected as the global optimum.
 
