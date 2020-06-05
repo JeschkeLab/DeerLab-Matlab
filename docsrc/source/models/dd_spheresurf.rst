@@ -25,7 +25,7 @@ Parameters
     *   ``param`` - Model parameters
 Returns
     *   ``P`` - Distance distribution (N-array)
-    *   ``info`` - Model information (struct)
+    *   ``info`` - Model information (table)
 
 -----------------------------
 
@@ -61,11 +61,14 @@ Description
 
         info = dd_spheresurf()
 
-Returns an ``info`` structure containing the specifics of the model:
+Returns an ``info`` table containing the information of the model parameters and boundaries.
 
-* ``info.model`` -  Full name of the parametric model.
-* ``info.nparam`` -  Total number of adjustable parameters.
-* ``info.parameters`` - Structure array with information on individual parameters.
+The table contents can be accessed as follows:
+* ``info.Index`` -  Indices of the parameters in the ``param`` array
+* ``info.Parameter`` -  Names of the model parameters
+* ``info.Lower`` - Lower bounds for the parameters
+* ``info.Upper`` - Upper bounds for the parameters
+* ``info.Start`` - Start values for optimization
 
 -----------------------------
 

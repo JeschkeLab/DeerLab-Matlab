@@ -24,7 +24,7 @@ Parameters
     *   ``param`` - Model parameters (array)
 Returns
     *   ``pathways`` - Dipolar pathways (array)
-    *   ``info`` - Model information (struct)
+    *   ``info`` - Model information (table)
 
 
 
@@ -73,7 +73,7 @@ Description
 
         info = ex_ovl4pdeer(t)
 
-Returns an ``info`` structure containing the specifics of the model:
+Returns an ``info`` table containing the information of the model parameters and boundaries.
 
 * ``info.model`` -  Full name of the parametric model.
 * ``info.nparam`` -  Total number of adjustable parameters.
