@@ -2,7 +2,7 @@
 % DD_RICE3 Sum of three 3D-Rice distributions parametric model
 %
 %   info = DD_RICE3
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_RICE3(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to
@@ -10,17 +10,18 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name      symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  nu1      2.5     1.0        10         center of 1st component
-% param(2)  sigma1   0.7     0.1        5          spread of 1st component
-% param(3)  a1       0.3     0          1          amplitude of 1st component
-% param(4)  nu2      4.0     1.0        10         center of 2nd component
-% param(5)  sigma2   0.7     0.1        5          spread of 2nd component
-% param(6)  a2       0.3     0          1          amplitude of 2nd component
-% param(7)  nu3      5.0     1.0        10         center of 3rd component
-% param(8)  sigma3   0.7     0.1        5          spread of 3rd component
-% --------------------------------------------------------------------------
+%    ----------------------------------------------------------------
+%     Index  Parameter                Units   Lower    Upper    Start
+%    ----------------------------------------------------------------
+%       1    Center of 1st Rician      nm       1       10       2.5 
+%       2    Width of 1st Rician       nm      0.1       5       0.7 
+%       3    Amplitude of 1st Rician            0        1       0.3 
+%       4    Center of 2nd Rician      nm       1       10        4 
+%       5    Width of 2nd Rician       nm      0.1       5       0.7 
+%       6    Amplitude of 2nd Rician            0        1       0.3 
+%       7    Center of 3rd Rician      nm       1       10        5 
+%       8    Width of 3rd Rician       nm      0.1       5       0.7 
+%    ----------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -36,48 +37,63 @@ end
 
 if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = 'Three 3D-Rice distributions';
-    info.nparam  = nParam;
+    info(1).Index = 1;
+    info(1).Parameter = 'Center of 1st Rician';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 10;
+    info(1).Start = 2.5;
     
-    info.parameters(1).name = ['Center ',char(957),'1 1st component'];
-    info.parameters(1).range = [1 10];
-    info.parameters(1).default = 2.0;
-    info.parameters(1).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'Width of 1st Rician';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 5;
+    info(2).Start = 0.7;
     
-    info.parameters(2).name = ['Spread ',char(963),'1 1st component'];
-    info.parameters(2).range = [0.1 5];
-    info.parameters(2).default = 0.7;
-    info.parameters(2).units = 'nm';
+    info(3).Index = 3;
+    info(3).Parameter = 'Amplitude of 1st Rician';
+    info(3).Units = '  ';
+    info(3).Lower = 0;
+    info(3).Upper = 1;
+    info(3).Start = 0.3;
     
-    info.parameters(3).name = 'Relative amplitude a1 1st component';
-    info.parameters(3).range = [0 1];
-    info.parameters(3).default = 0.3;
+    info(4).Index = 4;
+    info(4).Parameter = 'Center of 2nd Rician';
+    info(4).Units = 'nm';
+    info(4).Lower = 1;
+    info(4).Upper = 10;
+    info(4).Start = 4;
     
-    info.parameters(4).name = ['Center ',char(957),'2 2nd component'];
-    info.parameters(4).range = [1 10];
-    info.parameters(4).default = 4.0;
-    info.parameters(4).units = 'nm';
+    info(5).Index = 5;
+    info(5).Parameter = 'Width of 2nd Rician';
+    info(5).Units = 'nm';
+    info(5).Lower = 0.1;
+    info(5).Upper = 5;
+    info(5).Start = 0.7;
     
-    info.parameters(5).name = ['Spread ',char(963),'2 2nd component'];
-    info.parameters(5).range = [0.1 5];
-    info.parameters(5).default = 0.7;
-    info.parameters(5).units = 'nm';
+    info(6).Index = 6;
+    info(6).Parameter = 'Amplitude of 2nd Rician';
+    info(6).Units = '  ';
+    info(6).Lower = 0;
+    info(6).Upper = 1;
+    info(6).Start = 0.3;
     
-    info.parameters(6).name = 'Relative amplitude a2 2nd component';
-    info.parameters(6).range = [0 1];
-    info.parameters(6).default = 0.3;
+    info(7).Index = 7;
+    info(7).Parameter = 'Center of 3rd Rician';
+    info(7).Units = 'nm';
+    info(7).Lower = 1;
+    info(7).Upper = 10;
+    info(7).Start = 5;
     
-    info.parameters(7).name = ['Center ',char(957),'3 3rd component'];
-    info.parameters(7).range = [1 10];
-    info.parameters(7).default = 5.0;
-    info.parameters(7).units = 'nm';
+    info(8).Index = 8;
+    info(8).Parameter = 'Width of 3rd Rician';
+    info(8).Units = 'nm';
+    info(8).Lower = 0.1;
+    info(8).Upper = 5;
+    info(8).Start = 0.7;
     
-    info.parameters(8).name = ['Spread ',char(963),'3 3rd component'];
-    info.parameters(8).range = [0.1 5];
-    info.parameters(8).default = 0.7;
-    info.parameters(8).units = 'nm';
-
-    output = info;
+    output = struct2table(info);
     return
 end
 

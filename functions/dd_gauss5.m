@@ -2,7 +2,7 @@
 % DD_GAUSS5 Sum of five Gaussian distributions parametric model
 %
 %   info = DD_GAUSS5
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_GAUSS5(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,23 +10,24 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name      symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  <r1>   2.5     1.5         20         center of 1st Gaussian
-% param(2)  fwhm1  0.5     0.2         5          FWHM of 1st Gaussian
-% param(3)  a1     0.2     0           1          amplitude of 1st Gaussian
-% param(4)  <r2>   3.0     1.5         20         center of 2nd Gaussian
-% param(5)  fwhm2  0.5     0.2         5          FWHM of 2nd Gaussian
-% param(6)  a2     0.2     0           1          amplitude of 2nd Gaussian
-% param(7)  <r3>   3.5     1.5         20         center of 3rd Gaussian
-% param(8)  fwhm3  0.5     0.2         5          FWHM of 3rd Gaussian
-% param(9)  a3     0.2     0           1          amplitude of 3rd Gaussian
-% param(10) <r4>   4.5     1.5         20         center of 4th Gaussian
-% param(11) fwhm4  0.5     0.2         5          FWHM of 4th Gaussian
-% param(12) a4     0.2     0           1          amplitude of 4th Gaussian
-% param(13) <r5>   5.0     1.5         20         center of 5th Gaussian
-% param(14) fwhm5  0.5     0.2         5          FWHM of 5th Gaussian
-%--------------------------------------------------------------------------
+%    ------------------------------------------------------------------
+%     Index  Parameter                  Units   Lower   Upper    Start
+%    ------------------------------------------------------------------
+%       1    Center of 1st Gaussian      nm      1       20       2.5 
+%       2    FWHM of 1st Gaussian        nm     0.2       5       0.5 
+%       3    Amplitude of 1st Gaussian           0        1       0.2 
+%       4    Center of 2nd Gaussian      nm      1       20        3 
+%       5    FWHM of 2nd Gaussian        nm     0.2       5       0.5 
+%       6    Amplitude of 2nd Gaussian           0        1       0.2 
+%       7    Center of 3rd Gaussian      nm      1       20       3.5 
+%       8    FWHM of 3rd Gaussian        nm     0.2       5       0.5 
+%       9    Amplitude of 3rd Gaussian           0        1       0.2 
+%      10    Center of 4th Gaussian      nm      1       20        4 
+%      11    FWHM of 4th Gaussian        nm     0.2       5       0.5 
+%      12    Amplitude of 4th Gaussian           0        1       0.2 
+%      13    Center of 5th Gaussian      nm      1       20        5 
+%      14    FWHM of 5th Gaussian        nm     0.2       5       0.5 
+%    ------------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -42,77 +43,109 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Five-Gaussian distribution';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Center <r1> of 1st Gaussian';
-    info.parameters(1).range = [1 20];
-    info.parameters(1).default = 2.5;
-    info.parameters(1).units = 'nm';
-    
-    info.parameters(2).name = 'FWHM w1 of 1st Gaussian';
-    info.parameters(2).range = [0.2 5];
-    info.parameters(2).default = 0.5;
-    info.parameters(2).units = 'nm';
-        
-    info.parameters(3).name = 'Relative amplitude a1 of 1st Gaussian';
-    info.parameters(3).range = [0 1];
-    info.parameters(3).default = 0.2;
-    
-    info.parameters(4).name = 'Center <r2> of 2nd Gaussian';
-    info.parameters(4).range = [1 20];
-    info.parameters(4).default = 3;
-    info.parameters(4).units = 'nm';
-    
-    info.parameters(5).name = 'FWHM w2 of 2nd Gaussian';
-    info.parameters(5).range = [0.2 5];
-    info.parameters(5).default = 0.5;
-    info.parameters(5).units = 'nm';
-    
-    info.parameters(6).name = 'Relative amplitude a2 of 2nd Gaussian';
-    info.parameters(6).range = [0 1];
-    info.parameters(6).default = 0.2;
-    
-    info.parameters(7).name = 'Center <r3> of 3rd Gaussian';
-    info.parameters(7).range = [1 20];
-    info.parameters(7).default = 3.5;
-    info.parameters(7).units = 'nm';
-    
-    info.parameters(8).name = 'FWHM w3 of 3rd Gaussian';
-    info.parameters(8).range = [0.2 5];
-    info.parameters(8).default = 0.5;
-    info.parameters(8).units = 'nm';
-       
-    info.parameters(9).name = 'Relative amplitude a3 of 3rd Gaussian';
-    info.parameters(9).range = [0 1];
-    info.parameters(9).default = 0.2;
-       
-    info.parameters(10).name = 'Center <r4> of 4th Gaussian';
-    info.parameters(10).range = [1 20];
-    info.parameters(10).default = 4;
-    info.parameters(10).units = 'nm';
-    
-    info.parameters(11).name = 'FWHM w4 of 4th Gaussian';
-    info.parameters(11).range = [0.2 5];
-    info.parameters(11).default = 0.5;
-    info.parameters(11).units = 'nm';
-    
-    info.parameters(12).name = 'Relative amplitude a4 of 4th Gaussian';
-    info.parameters(12).range = [0 1];
-    info.parameters(12).default = 0.2;
-    
-    info.parameters(13).name = 'Center <r4> of 4th Gaussian';
-    info.parameters(13).range = [1 20];
-    info.parameters(13).default = 5;
-    info.parameters(13).units = 'nm';
-    
-    info.parameters(14).name = 'FWHM w4 of 4th Gaussian';
-    info.parameters(14).range = [0.2 5];
-    info.parameters(14).default = 0.5;
-    info.parameters(14).units = 'nm';
 
-    output = info;
+    %If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Center of 1st Gaussian';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 20;
+    info(1).Start = 2.5;
+    
+    info(2).Index = 2;
+    info(2).Parameter = 'FWHM of 1st Gaussian';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.2;
+    info(2).Upper = 5;
+    info(2).Start = 0.5;
+    
+    info(3).Index = 3;
+    info(3).Parameter = 'Amplitude of 1st Gaussian';
+    info(3).Units = '  ';
+    info(3).Lower = 0;
+    info(3).Upper = 1;
+    info(3).Start = 0.2;
+    
+    info(4).Index = 4;
+    info(4).Parameter = 'Center of 2nd Gaussian';
+    info(4).Units = 'nm';
+    info(4).Lower = 1;
+    info(4).Upper = 20;
+    info(4).Start = 3.0;
+    
+    info(5).Index = 5;
+    info(5).Parameter = 'FWHM of 2nd Gaussian';
+    info(5).Units = 'nm';
+    info(5).Lower = 0.2;
+    info(5).Upper = 5;
+    info(5).Start = 0.5;
+
+    info(6).Index = 6;
+    info(6).Parameter = 'Amplitude of 2nd Gaussian';
+    info(6).Units = '  ';
+    info(6).Lower = 0;
+    info(6).Upper = 1;
+    info(6).Start = 0.2;
+
+    info(7).Index = 7;
+    info(7).Parameter = 'Center of 3rd Gaussian';
+    info(7).Units = 'nm';
+    info(7).Lower = 1;
+    info(7).Upper = 20;
+    info(7).Start = 3.5;
+    
+    info(8).Index = 8;
+    info(8).Parameter = 'FWHM of 3rd Gaussian';
+    info(8).Units = 'nm';
+    info(8).Lower = 0.2;
+    info(8).Upper = 5;
+    info(8).Start = 0.5;
+    
+    info(9).Index = 9;
+    info(9).Parameter = 'Amplitude of 3rd Gaussian';
+    info(9).Units = '  ';
+    info(9).Lower = 0;
+    info(9).Upper = 1;
+    info(9).Start = 0.2;    
+    
+    info(10).Index = 10;
+    info(10).Parameter = 'Center of 4th Gaussian';
+    info(10).Units = 'nm';
+    info(10).Lower = 1;
+    info(10).Upper = 20;
+    info(10).Start = 4.0;
+    
+    info(11).Index = 11;
+    info(11).Parameter = 'FWHM of 4th Gaussian';
+    info(11).Units = 'nm';
+    info(11).Lower = 0.2;
+    info(11).Upper = 5;
+    info(11).Start = 0.5;
+
+    info(12).Index = 12;
+    info(12).Parameter = 'Amplitude of 4th Gaussian';
+    info(12).Units = '  ';
+    info(12).Lower = 0;
+    info(12).Upper = 1;
+    info(12).Start = 0.2; 
+    
+    info(13).Index = 13;
+    info(13).Parameter = 'Center of 5th Gaussian';
+    info(13).Units = 'nm';
+    info(13).Lower = 1;
+    info(13).Upper = 20;
+    info(13).Start = 5.0;
+    
+    info(14).Index = 14;
+    info(14).Parameter = 'FWHM of 5th Gaussian';
+    info(14).Units = 'nm';
+    info(14).Lower = 0.2;
+    info(14).Upper = 5;
+    info(14).Start = 0.5;
+    
+    output = struct2table(info);
     return
+
 end
 
 if nargin~=2

@@ -2,7 +2,7 @@
 % DD_SKEWGAUSS Skew Gaussian distribution parametric model
 %
 %   info = DD_SKEWGAUSS
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_SKEWGAUSS(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,12 +10,13 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)   r0    3.5     1.0         20         location (nm)
-% param(2)   w     0.5     0.2         5          FWHM (nm)
-% param(3)  alpha  5.0     -15         15         skewness
-% --------------------------------------------------------------------------
+%    -----------------------------------------------------
+%     Index  Parameter   Units   Lower    Upper    Start
+%    -----------------------------------------------------
+%       1    Location     nm       1       20       3.5 
+%       2    FWHM         nm      0.2      5        0.5 
+%       3    Skewness             -25      25        5 
+%    -----------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -32,25 +33,28 @@ end
 
 if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = 'Skew Gaussian distribution';
-    info.nparam  = nParam;
+    info(1).Index = 1;
+    info(1).Parameter = 'Location';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 20;
+    info(1).Start = 3.5;
     
-    info.parameters(1).name = 'Location r0';
-    info.parameters(1).range = [1 20];
-    info.parameters(1).default = 3.5;
-    info.parameters(1).units = 'nm';
-    
-    info.parameters(2).name = 'FWHM w';
-    info.parameters(2).range = [0.2 5];
-    info.parameters(2).default = 0.5;
-    info.parameters(2).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'FWHM';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.2;
+    info(2).Upper = 5;
+    info(2).Start = 0.5;
  
-    info.parameters(3).name = 'skewness alpha';
-    info.parameters(3).range = [-25 25];
-    info.parameters(3).default = 5;
-    info.parameters(3).units = '';
+    info(3).Index = 3;
+    info(3).Parameter = 'Skewness';
+    info(3).Units = '  ';
+    info(3).Lower = -25;
+    info(3).Upper = 25;
+    info(3).Start = 5;
     
-    output = info;
+    output = struct2table(info);
     return
 end
 

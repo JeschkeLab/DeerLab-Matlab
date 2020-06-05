@@ -2,7 +2,7 @@
 % DD_SHELL Uniform spherical shell
 %
 %   info = DD_SHELL
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_SHELL(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,11 +10,12 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)   R    1.5       0.1         20         inner shell radius
-% param(2)   w    0.5       0.1         20         shell thickness
-% --------------------------------------------------------------------------
+%    --------------------------------------------------------
+%     Index  Parameter       Units  Lower    Upper    Start
+%    --------------------------------------------------------
+%       1    Shell radius    nm     0.1      20       1.5 
+%       2    Shell thickness  nm     0.1      20       0.5 
+%    --------------------------------------------------------
 %
 %   See: D.R. Kattnig, D. Hinderberger, Journal of Magnetic Resonance, 230 (2013), 50-63 
 %        http://doi.org/10.1016/j.jmr.2013.01.007
@@ -33,19 +34,22 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Uniform spherical shell';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Sphere radius R';
-    info.parameters(1).range = [0.1 20];
-    info.parameters(1).default = 1.5;
-    info.parameters(1).units = 'nm';
-
-    info.parameters(2).name = 'Shell thickness';
-    info.parameters(2).range = [0.1 20];
-    info.parameters(2).default = 0.5;
-    info.parameters(2).units = 'nm';
-    output = info;
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Sphere radius';
+    info(1).Units = 'nm';
+    info(1).Lower = 0.1;
+    info(1).Upper = 20;
+    info(1).Start = 1.5;
+    
+    info(2).Index = 2;
+    info(2).Parameter = 'Shell thickness';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 20;
+    info(2).Start = 0.5;
+    
+    output = struct2table(info);
     return
 end
 

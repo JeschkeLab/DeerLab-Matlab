@@ -6,10 +6,10 @@ model = @bg_exp;
 info = model();
 
 t = linspace(-5,5,500);
-par0 = [info.parameters(:).default];
-bounds = [info.parameters(:).range];
-lower = bounds(1:2:end);
-upper = bounds(2:2:end);
+par0 = info.Start;
+
+lower = info.Lower;
+upper = info.Upper;
 
 B1 = model(t,par0);
 B2 = model(t.',par0);

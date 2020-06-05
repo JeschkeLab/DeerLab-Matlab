@@ -2,7 +2,7 @@
 % DD_GAUSS Gaussian distribution parametric model
 %
 %   info = DD_GAUSS
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_GAUSS(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,12 +10,12 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  r0     3.5     1.0         20         center (nm)
-% param(2)  fwhm   0.5     0.2         5          FWHM (nm)
-% --------------------------------------------------------------------------
-%
+%    -----------------------------------------------------------
+%     Index    Parameter     Units     Lower    Upper    Start
+%    -----------------------------------------------------------
+%       1       Center        nm        1        20       3.5 
+%       2       FWHM          nm       0.2       5        0.5 
+%    -----------------------------------------------------------
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
@@ -30,21 +30,23 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
+    
     % If no inputs given, return info about the parametric model
-    info.model  = 'Single Gaussian distribution';
-    info.nparam  = nParam;
+    info(1).Index = 1;
+    info(1).Parameter = 'Center';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 20;
+    info(1).Start = 3.5;
     
-    info.parameters(1).name = 'Center r0';
-    info.parameters(1).range = [1 20];
-    info.parameters(1).default = 3.5;
-    info.parameters(1).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'FWHM';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.2;
+    info(2).Upper = 5;
+    info(2).Start = 0.5;
     
-    info.parameters(2).name = 'FWHM w';
-    info.parameters(2).range = [0.2 5];
-    info.parameters(2).default = 0.5;
-    info.parameters(2).units = 'nm';
-    
-    output = info;
+    output = struct2table(info);
     return
 end
 

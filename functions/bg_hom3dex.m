@@ -2,7 +2,7 @@
 % BG_HOM3DEX Excluded-volume model
 %
 %   info = BG_HOM3DEX
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_HOM3DEX(t,param)
 %   B = BG_HOM3DEX(t,param,lambda)
@@ -12,11 +12,12 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol  default lower bound upper bound
-% ----------------------------------------------------------------------------
-% PARAM(1)  c       50        0.01       1000       concentration (uM)
-% PARAM(2)  R       1         0.1         20        distance of closest approach (nm)
-% ----------------------------------------------------------------------------
+%    ---------------------------------------------------------
+%     Index  Parameter          Units   Lower   Upper   Start
+%    ---------------------------------------------------------
+%       1    Spin concentration  uM     0.01     1000    50  
+%       2    Exclusion distance  nm     0.1       20     1 
+%    ---------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -33,20 +34,21 @@ end
 
 if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = 'homogenous distribution in 3D, with excluded volume';
-    info.nparam  = nParam;
+    info(1).Index = 1;
+    info(1).Parameter = 'Spin concentration';
+    info(1).Units = 'uM';
+    info(1).Lower = 0.01;
+    info(1).Upper = 1000;
+    info(1).Start = 50;
     
-    info.parameters(1).name = 'spin concentration c';
-    info.parameters(1).range = [0.01 1000];
-    info.parameters(1).default = 50;
-    info.parameters(1).units = 'uM';
+    info(2).Index = 2;
+    info(2).Parameter = 'Exclusion distance';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 20;
+    info(2).Start = 1;
     
-    info.parameters(2).name = 'distance of closest approach R';
-    info.parameters(2).range = [0.1 20];
-    info.parameters(2).default = 1;
-    info.parameters(2).units = 'nm';
-    
-    output = info;
+    output = struct2table(info);
     return
 end
 

@@ -2,7 +2,7 @@
 % DD_UNIFORM Uniform distribution parametric model
 %
 %   info = DD_UNIFORM
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_UNIFORM(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,11 +10,12 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  rL     2.5     0.1         6           left edge
-% param(2)  rR     3.0     0.2         20          right edge
-% --------------------------------------------------------------------------
+%    --------------------------------------------------
+%     Index  Parameter   Units   Lower   Upper   Start
+%    --------------------------------------------------
+%       1    Left edge    nm      0.1     6       2.5 
+%       2    Right edge   nm      0.2     20       3 
+%    --------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -30,20 +31,22 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Uniform distribution';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'left edge rL';
-    info.parameters(1).range = [0.1 6];
-    info.parameters(1).default = 2.5;
-    info.parameters(1).units = 'nm';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Left edge';
+    info(1).Units = 'nm';
+    info(1).Lower = 0.1;
+    info(1).Upper = 6;
+    info(1).Start = 2.5;
     
-    info.parameters(2).name = 'right edge rR';
-    info.parameters(2).range = [0.2 20];
-    info.parameters(2).default = 3.0;
-    info.parameters(2).units = 'nm';
-        
-    output = info;
+    info(2).Index = 2;
+    info(2).Parameter = 'Right edge';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.2;
+    info(2).Upper = 20;
+    info(2).Start = 3;
+    
+    output = struct2table(info);
     return
 end
 

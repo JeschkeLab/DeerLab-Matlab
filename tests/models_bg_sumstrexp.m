@@ -6,10 +6,10 @@ model = @bg_sumstrexp;
 info = model();
 
 t = linspace(-5,5,500);
-par0 = [info.parameters(:).default];
-bounds = [info.parameters(:).range];
-lower = bounds(1:2:end);
-upper = bounds(2:2:end);
+par0 = info.Start;
+
+lower = info.Lower;
+upper = info.Upper;
 
 B1 = model(t,par0);
 B2 = model(t.',par0);
@@ -18,10 +18,10 @@ B4 = model(t,upper);
  
 t0 = 2.5;
 B5 = model(t0,par0);
-Bval0 = 1.584613251157513e-04;
+Bval0 = 0.535261428518990;
 
 B6 = model(t,par0,1);
-B7 = model(t,par0.*[2 1 2 1 1],0.5);
+B7 = model(t,par0.*[2; 1; 1; 2; 1;],0.5);
 
 % Pass 1: dimensionality is correct
 pass(1) = isequal(B1,B2);

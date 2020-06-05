@@ -11,10 +11,11 @@
 %
 %
 % PARAMETERS
-% name     symbol default lower bound upper bound
-% -----------------------------------------------------------------------
-% PARAM(1)  lam     0.3       0            1    modulated pathway amplitude (modulation depth)
-% -----------------------------------------------------------------------
+%    -----------------------------------------------------------------
+%     Index  Parameter           Units    Lower    Upper    Start
+%    -----------------------------------------------------------------
+%       1    Modulation depth               0        1       0.3 
+%    -----------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -30,14 +31,14 @@ end
 
 if nargin==1
     % If no inputs given, return info about the parametric model
-    info.model  = '4-pulse DEER experiment (single pathway)';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'modulation depth';
-    info.parameters(1).range = [0 1];
-    info.parameters(1).default = 0.3;
-    info.parameters(1).units = '';
+    info(1).Index = 1;
+    info(1).Parameter = "Modulation depth";
+    info(1).Units = '  ';
+    info(1).Lower = 0;
+    info(1).Upper = 1;
+    info(1).Start = 0.3;
     
-    output = info;
+    output = struct2table(info);
     return
 end
 

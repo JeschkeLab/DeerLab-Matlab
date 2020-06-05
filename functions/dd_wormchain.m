@@ -3,7 +3,7 @@ function output = dd_wormchain(r,param)
 % WORMCHAIN Worm-like chain model near the rigid limit
 %
 %   info = WORMCHAIN
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = WORMCHAIN(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to
@@ -11,11 +11,12 @@ function output = dd_wormchain(r,param)
 %   in the (info) structure.
 %
 % PARAMETERS
-% name      symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  L      3.7     1.5         10             length of the worm-like chain
-% param(2)  Lp     10      2           100            persistence length
-% --------------------------------------------------------------------------
+%    ----------------------------------------------------------
+%     Index  Parameter           Units   Lower   Upper   Start
+%    ----------------------------------------------------------
+%       1    Chain length         nm      1.5     20      3.7 
+%       2    Persistence length   nm       2      100     10 
+%    ----------------------------------------------------------
 %
 % See: J. Wilhelm, E. Frey, Phys. Rev. Lett. 77(12), 2581-2584 (1996)
 %      https://doi.org/10.1103/PhysRevLett.77.2581
@@ -32,20 +33,22 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Worm-like chain model near rigid limit';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Contour length';
-    info.parameters(1).range = [1.5 10];
-    info.parameters(1).default = 3.7;
-    info.parameters(1).units = 'nm';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Chain length';
+    info(1).Units = 'nm';
+    info(1).Lower = 1.5;
+    info(1).Upper = 20;
+    info(1).Start = 3.7;
     
-    info.parameters(2).name = 'Persistence length';
-    info.parameters(2).range = [2 100];
-    info.parameters(2).default = 10;
-    info.parameters(2).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'Persistence length';
+    info(2).Units = 'nm';
+    info(2).Lower = 2;
+    info(2).Upper = 100;
+    info(2).Start = 10;
     
-    output = info;
+    output = struct2table(info);
     return
 end
 

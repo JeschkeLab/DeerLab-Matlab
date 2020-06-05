@@ -2,7 +2,7 @@
 % BG_HOMFRACTAL Multi-pulse DEER background in a fractal medium
 %
 %   info = BG_HOMFRACTAL
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_HOMFRACTAL(t,param)
 %   B = BG_HOMFRACTAL(t,param,lambda)
@@ -12,6 +12,14 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
+%    --------------------------------------------------------------
+%     Index  Parameter           Units      Lower    Upper   Start
+%    --------------------------------------------------------------
+%       1    Spin concentration  umol/dm^d   0.01    5000     50  
+%       2    Dimension                        0      6        3  
+%    --------------------------------------------------------------
+
+
 % name    symbol default lower bound upper bound
 % ------------------------------------------------------------------
 % PARAM(1)  c       50        0.01       5000     fractal spin concentration (umol/dm^d)
@@ -32,20 +40,22 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'homogenous distribution in d dimensions (0<d<6)';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'spin concentration c';
-    info.parameters(1).range = [0.01 5000];
-    info.parameters(1).default = 50;
-    info.parameters(1).units = 'umol dm^-d';
-        
-    info.parameters(2).name = 'dimension d';
-    info.parameters(2).range = [eps 6-6*eps];
-    info.parameters(2).default = 3;
-    info.parameters(2).units = ' ';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Spin concentration';
+    info(1).Units = 'umol/dm^d';
+    info(1).Lower = 0.01;
+    info(1).Upper = 5000;
+    info(1).Start = 50;
     
-    output = info;
+    info(2).Index = 2;
+    info(2).Parameter = 'Dimension';
+    info(2).Units = '         ';
+    info(2).Lower = eps;
+    info(2).Upper = 6-6*eps;
+    info(2).Start = 3;
+    
+    output = struct2table(info);
     return
 end
 
