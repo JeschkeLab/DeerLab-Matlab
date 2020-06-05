@@ -37,33 +37,29 @@ nModels = numel(models);
 
 % Combine the information structures of the models
 %-------------------------------------------------------------------------------
-Info.model = 'Mixed model';
-Info.models = {};
-
 % Add amplitudes for each model except last
 for j = 1:nModels-1
-    Info.parameters(j).name = sprintf('Component %i: Relative amplitude',j);
-    Info.parameters(j).range = [0 1];
-    Info.parameters(j).default = 1/nModels;
-    Info.parameters(j).units = '';
+    Info(j,1).Index = j;
+    Info(j,1).Parameter = sprintf('Model %i: Amplitude',j);
+    Info(j,1).Units = '  ';
+    Info(j,1).Lower = 0;
+    Info(j,1).Upper = 1;
+    Info(j,1).Start = 1/nModels;
 end
 pidx_amp = 1:nModels-1;
 
 % Combine info structures from all models
 idx = pidx_amp(end);
 for i = 1:nModels
-    info = models{i}();
-    pidx{i} = idx + (1:info.nparam);
-    idx = idx + info.nparam;
-    Info.models{i} = info.model;
-    param_ = info.parameters;
-    for j = 1:info.nparam
-        param_(j).name = sprintf('Component %i: %s',i,param_(j).name);
+    info = table2struct(models{i}());
+    nparam = numel(info);
+    pidx{i} = idx + (1:nparam);
+    idx = idx + nparam;
+    for j = 1:nparam
+        info(j).Parameter = sprintf('Model %i: %s',i,info(j).Parameter);
     end
-    Info.parameters = [Info.parameters param_];
+    Info = [Info; info];
 end
-
-Info.nparam = numel(Info.parameters);
 
 % Mixed model function handle
 %-------------------------------------------------------------------------------
@@ -73,7 +69,7 @@ mixModelFcn = @mixedFunction;
   function output = mixedFunction(varargin)
 
         if nargin==0
-            output = Info;
+            output = struct2table(Info);
             return
         end
         

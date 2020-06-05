@@ -26,9 +26,8 @@ Ss = {S1,S2,S3};
 info = dd_gauss2();
 mymodel = @(t,param)dipolarkernel(t,r)*dd_gauss2(r,param);
 InitialGuess = [2 0.1 5 0.1 0.5];
-range = [info.parameters(:).range];
-upper = range(2:2:end);
-lower = range(1:2:end-1);
+upper = info.Upper;
+lower = info.Lower;
 parglobal = fitparamodel(Ss,mymodel,{t1,t2,t3},InitialGuess,lower,upper);
 parlocal = fitparamodel(S3,mymodel,t3,InitialGuess,lower,upper);
 

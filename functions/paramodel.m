@@ -51,17 +51,16 @@ model = @myparametricmodel;
         
         if nargin==0
             % If no inputs given, return info about the parametric model
-            info.Model  = 'Automatically converted parametric model';
-            info.Equation  = 'custom';
-            info.nparam  = nParam;
             for i = 1:nParam
-                info.parameters(i).name = ' ';
-                info.parameters(i).range = [lower(i) upper(i)];
-                info.parameters(i).default = param0(i);
-                info.parameters(i).units = ' ';
+                info(i).Index = i;
+                info(i).Parameter = ' ';
+                info(i).Units = ' ';
+                info(i).Lower = lower(i);
+                info(i).Upper = upper(i);
+                info(i).Start = param0(i);
             end
             
-            Output = info;
+            Output = struct2table(info);
             
         elseif nargin >= 2
             

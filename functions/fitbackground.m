@@ -146,10 +146,8 @@ end
 
 % Initialize bounds and initial parameter values
 info = bgmodel();
-parinfo = info.parameters;
-Ranges = cat(1,parinfo.range);
-lowerBounds = Ranges(:,1);
-upperBounds = Ranges(:,2);
+lowerBounds = info.Lower;
+upperBounds = info.Upper;
 if fitModDepth
     lowerBounds(end+1) = 0;
     upperBounds(end+1) = 1;
@@ -157,7 +155,7 @@ end
 if ~isempty(InitialGuess)
     StartParameters = InitialGuess;
 else
-    StartParameters =  [parinfo.default];
+    StartParameters =  info.Start;
     if fitModDepth
         StartParameters(end+1) = 0.5;
     end
@@ -197,6 +195,7 @@ if fitModDepth
     ModDepth = FitParam(end);
     FitParam = FitParam(1:end-1);
 end
+FitParam = FitParam(:).';
 
 % Extrapolate fitted background to whole time axis
 B = bgmodel(t,FitParam,ModDepth);

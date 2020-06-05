@@ -76,8 +76,8 @@ optionalProperties = {'Upper','Lower','Background','internal::parselater'};
 
 % Control that the boundaries match the model and are appropiate
 modelInfo = model();
-nparam =  modelInfo.nparam;
-paramNames = [{modelInfo.parameters(:).name}];
+nparam =  height(modelInfo);
+paramNames = modelInfo.Parameter;
 str = [];
 for i=1:numel(paramNames), str = [str paramNames{i} ', ']; end, str(end-1:end) = ''; 
 if ~isempty(Upper) && isempty(BckgModel) && length(Upper)~=nparam
@@ -157,11 +157,12 @@ if ~isempty(Upper) || ~isempty(Lower)
     for i = 1:maxModels
         % Get the info about the models
         info = multiModels{i}();
-        boundary = zeros(1,info.nparam);
-        ParamNames = {info.parameters(:).name};
+        modelnparam = height(info);
+        boundary = zeros(1,modelnparam);
+        paramNames = info.Parameter;
 
         %Get the indices of the different parameters on the mixed models
-        paramidx = (1:nparam+1:info.nparam) + (0:nparam).';
+        paramidx = (1:nparam+1:modelnparam) + (0:nparam).';
         ampidx = paramidx(end,1:end-1);
         if ~isempty(Upper)
             for j=1:nparam
@@ -175,7 +176,7 @@ if ~isempty(Upper) || ~isempty(Lower)
         else
             UpperBounds = [];
         end
-        boundary = zeros(1,info.nparam);
+        boundary = zeros(1,modelnparam);
         if ~isempty(Lower)
             for j=1:nparam
                 boundary(paramidx(j,:)) = Lower(j);
@@ -226,15 +227,15 @@ if ~isempty(BckgModel)
     for i = 1:maxModels
         DistModel = multiModels{i};
         info = DistModel();
-        Nparam = info.nparam;
-        Pparam = [info.parameters(:).default];
+        Nparam = height(info);
+        Pparam = info.Start;
         infoB = BckgModel();
-        Bparam = [infoB.parameters(:).default];
+        Bparam = infoB.Start;
         lampars = Nparam + (1+numel(Bparam))*(1:Nsignals)-numel(Bparam);
         Bpars = lampars + 1;
         lam0 = 0.25;
         timeMultiGaussModels{i} = @(t,param,idx) (1 - param(lampars(idx)) + param(lampars(idx))*dipolarkernel(t,r)*DistModel(r,param(1:Nparam)) ).*BckgModel(t,param(Bpars(idx):Bpars(idx)+numel(Bparam)-1));
-        param0{i} = [Pparam repmat([lam0 Bparam],1,Nsignals)];
+        param0{i} = [Pparam; repmat([lam0; Bparam],Nsignals,1)];
     end
 end
 
@@ -253,7 +254,8 @@ param = fitparams{nGaussOpt};
 paramci = paramcis{nGaussOpt};
 optModel = multiModels{nGaussOpt};
 info = optModel();
-Pfit = optModel(r,param(1:info.nparam));
+nparam = height(info);
+Pfit = optModel(r,param(1:nparam));
 stats = stats{nGaussOpt};
 
 % Uncertainty estimation
@@ -261,7 +263,7 @@ stats = stats{nGaussOpt};
 if nargin>3
     %Loop over different signals
     lb = zeros(numel(r),1);
-    Pfitci = paramci.propagate(@(par)optModel(r,par(1:info.nparam)),lb,[]);
+    Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb,[]);
     
 %     jacobian = jacobianest(@(par)optModel(r,par),param(1:info.nparam));
 %     % Calculate the confidence bands for the distance distribution
@@ -283,8 +285,9 @@ if nargout>6
     Peval = zeros(maxModels,numel(r));
     for i = 1:maxModels
         info = multiModels{i}();
+        nparam = height(info);
         p = fitparams{i};
-        Peval(i,:) = multiModels{i}(r,p(1:info.nparam));
+        Peval(i,:) = multiModels{i}(r,p(1:nparam));
     end
 end
 

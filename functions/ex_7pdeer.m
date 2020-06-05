@@ -122,6 +122,7 @@ end
 if length(param)~=nParam
     error('The number of input parameters does not match the number of model parameters.')
 end
+param = param(:).';
 
 % Extract parameters
 lambda = param(1:4);
