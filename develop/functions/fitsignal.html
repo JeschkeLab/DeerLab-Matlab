@@ -143,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -243,11 +244,13 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">,</span><span class="n">par0</span><span class="p">)</span>
-<span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">parci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">,</span><span class="n">par0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">modfitci</span><span class="p">,</span><span class="n">parci</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">,</span><span class="n">par0</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,{</span><span class="n">bg1</span><span class="p">,</span><span class="n">bg2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">ex1</span><span class="p">,</span><span class="n">ex2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,{</span><span class="n">bg1</span><span class="p">,</span><span class="n">bg2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">ex1</span><span class="p">,</span><span class="n">ex2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">par0</span><span class="p">)</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,{</span><span class="n">bg1</span><span class="p">,</span><span class="n">bg2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">ex1</span><span class="p">,</span><span class="n">ex2</span><span class="p">,</span><span class="n">__</span><span class="p">})</span>
 <span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,{</span><span class="n">bg1</span><span class="p">,</span><span class="n">bg2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">ex</span><span class="p">)</span>
@@ -263,7 +266,7 @@
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">t</span></code> – Time axis, in microseconds (<em>N</em>-element array)</p>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">r</span></code> – Distance axis, in nanoseconds (<em>M</em>-element array)</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">r</span></code> – Distance axis, in nanometers (<em>M</em>-element array)</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">dd</span></code> – Distance distribution model, can be…</p>
 <blockquote>
@@ -286,7 +289,11 @@
 – <code class="docutils literal notranslate"><span class="pre">'none'</span></code> to indicate simple dipolar oscillation (mod.depth = 1)</p>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">par0</span></code> – Starting parameters <code class="docutils literal notranslate"><span class="pre">{par0_dd,par0_bg,par0_ex}</span></code> (3-element array)</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">par0</span></code> – Starting parameters <code class="docutils literal notranslate"><span class="pre">{par0_dd,par0_bg,par0_ex}</span></code> (3-element cell array)</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">lb</span></code> – Lower bounds for parameters <code class="docutils literal notranslate"><span class="pre">{lb_dd,lb_bg,lb_ex}</span></code> (3-element cell array)</p>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">ub</span></code> – Upper bounds for parameters <code class="docutils literal notranslate"><span class="pre">{lb_dd,lb_bg,lb_ex}</span></code> (3-element cell array)</p>
 </li>
 </ul>
 </dd>
@@ -306,6 +313,8 @@
 <li><code class="docutils literal notranslate"><span class="pre">.ex</span></code> – Fitted parameters for experiment model</li>
 </ul>
 </div></blockquote>
+</li>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">modfitci</span></code> – Confidence interval structures for Vfit, Bfit and Pfit</p>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">parci</span></code> – Structure with confidence intervals for parameters (similar to <code class="docutils literal notranslate"><span class="pre">parfit</span></code>)</p>
 </li>
@@ -338,6 +347,14 @@
 <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_gauss2</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>    <span class="c">% Fit a 4pDEER form factor (no background) with bimodal Gaussian distribution</span>
 </pre></div>
 </div>
+<hr class="docutils" />
+<blockquote>
+<div></div></blockquote>
+<p>The starting values of the parameter search can be specified via <code class="docutils literal notranslate"><span class="pre">par0</span></code>. It must be 3-element cell arrays of the form <code class="docutils literal notranslate"><span class="pre">{par0_dd,par0_bg,par0_ex}</span></code>, where the elements are arrays that give the initial values for the distance distribution parameters, background parameters, and experiment parameters, respectively. If not specified or passed empty, these values are automatically taken from the info structures of the parametric models.</p>
+<hr class="docutils" />
+<blockquote>
+<div></div></blockquote>
+<p>The lower/upper bounds for the parameter search range can be specified via <code class="docutils literal notranslate"><span class="pre">lb</span></code> and <code class="docutils literal notranslate"><span class="pre">ub</span></code>. These inputs must be 3-element cell arrays of the form <code class="docutils literal notranslate"><span class="pre">{ub_dd,ub_bg,ub_ex}</span></code> and <code class="docutils literal notranslate"><span class="pre">{lb_dd,lb_bg,lb_ex}</span></code>, where the elements are arrays that give the upper/lower bounds for the distance distribution parameters, background parameters, and experiment parameters, respectively. If not specified or passed empty, the boundaries are automatically taken from the info structures of the parametric models.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">__</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">({</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">__</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,{</span><span class="n">bg1</span><span class="p">,</span><span class="n">bg2</span><span class="p">,</span><span class="n">__</span><span class="p">},{</span><span class="n">ex1</span><span class="p">,</span><span class="n">ex2</span><span class="p">,</span><span class="n">__</span><span class="p">})</span>
 </pre></div>
@@ -444,6 +461,19 @@
 <p><em>Example:</em></p>
 <blockquote class="last">
 <div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;alphaOptThreshold&#39;</span><span class="p">,</span><span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'GlobalWeights'</span></code> - Global analysis weights</dt>
+<dd><p class="first">Array of weighting coefficients for the individual signals in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">({</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">S3</span><span class="p">},@</span><span class="n">dd_gauss</span><span class="p">,</span><span class="n">r</span><span class="p">,{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">K3</span><span class="p">},</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div></blockquote>

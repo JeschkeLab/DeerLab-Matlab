@@ -143,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -278,7 +279,7 @@
 </pre></div>
 </div>
 <p>Fits a distance distribution <code class="docutils literal notranslate"><span class="pre">P</span></code> to the input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> given the kernel matrix <code class="docutils literal notranslate"><span class="pre">K</span></code>, using Tikhonov regularization using an AIC-optimized regularization parameter.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Pci</span></code> output contains the upper and lower 95%-confidence bands of the fitted distance distribution. The upper confidence band can be accessed via  <code class="docutils literal notranslate"><span class="pre">Pci(:,1)</span></code> and the lower confidence band via <code class="docutils literal notranslate"><span class="pre">Pci(:,2)</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Pci</span></code> output contains the confidence intervals structure (see <a class="reference internal" href="../uncertainty.html#cireference"><span class="std std-ref">CI Reference</span></a>) of the fitted distance distribution.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">P</span><span class="p">,</span><span class="n">Pci</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;regtype&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
 </pre></div>
@@ -352,6 +353,19 @@
 </dl>
 </li>
 <li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'obir'</span></code> - Osher’s Bregman iterated regularization algorithm</dt>
+<dd><p class="first">Enables (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or disables (<code class="docutils literal notranslate"><span class="pre">false</span></code>) the use of the Osher’s Bregman iterated regularization (OBIR) algorithm for fitting the distance distribution.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">false</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;obir&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
 <dt><code class="docutils literal notranslate"><span class="pre">'HuberParam'</span></code> - Huber parameter value</dt>
 <dd><p class="first">Value of the super-parameter used in pseudo-Huber regularization.</p>
 <p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1.35</span></code></p>
@@ -384,21 +398,6 @@
 <p><em>Example:</em></p>
 <blockquote class="last">
 <div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">({</span><span class="n">S1</span><span class="p">,</span><span class="n">S2</span><span class="p">,</span><span class="n">S3</span><span class="p">},{</span><span class="n">K1</span><span class="p">,</span><span class="n">K2</span><span class="p">,</span><span class="n">K3</span><span class="p">},</span><span class="n">r</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="s">&#39;tikhonov&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div></blockquote>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'ConfidenceLevel'</span></code> -  Level for parameter confidence bands</dt>
-<dd><p class="first">Confidence level(s) of the confidence intervals computed for each fitted parameter. Must be an array containing values between 0 and 1. If more than one confidence level is requested, <code class="docutils literal notranslate"><span class="pre">Pci</span></code> is returned as a cell array containing the confidence intervals at the different requested levels.</p>
-<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">0.95</span></code> (95% confidence bands)</p>
-<p><em>Example:</em></p>
-<blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;ConfidenceLevel&#39;</span><span class="p">,[</span><span class="mf">0.99</span> <span class="mf">0.5</span><span class="p">])</span>
-<span class="n">Pci99</span> <span class="p">=</span> <span class="n">Pci</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
-<span class="n">Pci50</span> <span class="p">=</span> <span class="n">Pci</span><span class="p">{</span><span class="mi">2</span><span class="p">};</span>
 </pre></div>
 </div>
 </div></blockquote>

@@ -143,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -257,39 +258,8 @@
 </ul>
 </dd>
 <dt>Returns</dt>
-<dd><ul class="first last">
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">bootci</span></code> - Bootstrapped confidence intervals (struct)</p>
-<blockquote>
-<div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">.ci50</span></code> - 50%-confidence intervals of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.ci95</span></code> - 95%-confidence intervals of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.ci99</span></code> - 99%-confidence intervals of the output variables</li>
-</ul>
-</div></blockquote>
-</li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">stats</span></code> - Summary statistics (struct)</p>
-<blockquote>
-<div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">.median</span></code> - Median of output the variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.mean</span></code> - Mean of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.std</span></code> - Standard deviation of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.p1</span></code>  - 1st percentile of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.p25</span></code> - 25th percentile of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.p75</span></code> - 75th percentile of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.p99</span></code> - 99th percentile of the output variables</li>
-<li><code class="docutils literal notranslate"><span class="pre">.boothist</span></code> - Bootstrap histogram of the output variables<ul>
-<li><code class="docutils literal notranslate"><span class="pre">.edges</span></code> - Histogram edges</li>
-<li><code class="docutils literal notranslate"><span class="pre">.bins</span></code> - Histogram bins</li>
-</ul>
-</li>
-<li><code class="docutils literal notranslate"><span class="pre">.bootdist</span></code> - Bootstrap KDE distribution of the output variables<ul>
-<li><code class="docutils literal notranslate"><span class="pre">.values</span></code> - Evaluated values</li>
-<li><code class="docutils literal notranslate"><span class="pre">.pdf</span></code> - Estimated probability density function</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</li>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">bootci</span></code> - Bootstrapped confidence intervals (struct or cell array)</li>
 </ul>
 </dd>
 </dl>
@@ -309,8 +279,7 @@
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>From the evaluation of all level-combinations an ensemble of outputs is obtained on which statistical estimators are used. The 99%, 95% and 50% confidence intervals of all output variables are returned in a structure <code class="docutils literal notranslate"><span class="pre">bootci</span></code>. The summary of these statistics is returned in the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure. This summary contains the mean, median, standard deviation, 99t, 75th, 25th and 1st percentile values for all outputs.</p>
-<p>For non-vectorial variables (e.g. non-parametric distributions, background functions,etc.) the <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure will contain an histogram of the distribution of values for the different outputs as well as a corresponding probability density function obtained from a kernel densitiy estimation of the histogram data.</p>
+<p>The output <code class="docutils literal notranslate"><span class="pre">bootci</span></code> is a single (in case of a single evaluated variable) or a cell array (in case of multiple evaluated variables) of confidence intervals structures (see <a class="reference internal" href="../uncertainty.html#cireference"><span class="std std-ref">CI Reference</span></a>).</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(</span><span class="n">fcn</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Nsamples</span><span class="p">)</span>
 </pre></div>

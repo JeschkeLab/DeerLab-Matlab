@@ -143,6 +143,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -250,6 +251,7 @@
 <span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 <span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,{</span><span class="n">V1</span><span class="p">,</span><span class="n">V2</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">t1</span><span class="p">,</span><span class="n">t2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="s">&#39;method&#39;</span><span class="p">)</span>
 <span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span><span class="n">param0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="s">&#39;method&#39;</span><span class="p">,</span><span class="n">param0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
 <span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Property&#39;</span><span class="p">,</span><span class="n">Value</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -263,6 +265,8 @@
 <li><code class="docutils literal notranslate"><span class="pre">t</span></code> -  Time axis (<em>N</em>-array), in microseconds</li>
 <li><code class="docutils literal notranslate"><span class="pre">method</span></code> - Model selection type(s) (string or cell array of strings)</li>
 <li><code class="docutils literal notranslate"><span class="pre">param0</span></code> -  Initial parameter values for each model (cell array of numerical vectors)</li>
+<li><code class="docutils literal notranslate"><span class="pre">lb</span></code> -  Lower bounds of parameter values for each model (cell array of numerical vectors)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ub</span></code> -  Upper bounds of parameter values for each model (cell array of numerical vectors)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
@@ -311,12 +315,19 @@
 <span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">par1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">parN</span><span class="p">})</span>
 </pre></div>
 </div>
-<p>The initial guess values for the parameters of each model can be passed as a cell array <code class="docutils literal notranslate"><span class="pre">{par1,___,parN}</span></code> of value vectors.</p>
+<p>The initial guess values for the parameters of each model can be passed as a cell array <code class="docutils literal notranslate"><span class="pre">{par1,___,parN}</span></code> of value vectors. If not, specified the initial values are taken from the info of each parametric model.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">par1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">parN</span><span class="p">},{</span><span class="n">lb1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">lbN</span><span class="p">},{</span><span class="n">ub1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">ubN</span><span class="p">})</span>
+<span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">par1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">parN</span><span class="p">},[],{</span><span class="n">ub1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">ubN</span><span class="p">})</span>
+<span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">models</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="n">___</span><span class="p">},{</span><span class="n">par1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">parN</span><span class="p">},{</span><span class="n">lb1</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="n">lbN</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Similarly, the lower and upper bounds for the parameters of each model can be passed as cell arrays <code class="docutils literal notranslate"><span class="pre">{lb1,___,lbN}</span></code> and <code class="docutils literal notranslate"><span class="pre">{ub1,___,ubN}</span></code>, where <code class="docutils literal notranslate"><span class="pre">lbi</span></code> and <code class="docutils literal notranslate"><span class="pre">ubi</span></code> are the lower and upper boundaries of the parameters for the i-th model, respectively. If not, specified the boundaries are taken from the info of each parametric model.</p>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">opt</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">paramcis</span><span class="p">]</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Additional outputs include: the evaluated method selection functionals <code class="docutils literal notranslate"><span class="pre">f</span></code> for the different methods, a cell array <code class="docutils literal notranslate"><span class="pre">params</span></code> with the fitted parameters for each of the evaluated models, as well as their confidence intervals <code class="docutils literal notranslate"><span class="pre">paramcis</span></code>.</p>
+<p>Additional outputs include: the evaluated method selection functionals <code class="docutils literal notranslate"><span class="pre">f</span></code> for the different methods, a cell array <code class="docutils literal notranslate"><span class="pre">params</span></code> with the fitted parameters for each of the evaluated models, as well as their confidence intervals <code class="docutils literal notranslate"><span class="pre">paramcis</span></code> (see <a class="reference internal" href="../uncertainty.html#cireference"><span class="std std-ref">CI Reference</span></a>).</p>
 </div>
 <hr class="docutils" />
 <div class="section" id="additional-settings">
@@ -327,25 +338,12 @@
 </div>
 <ul>
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'Upper'</span></code> - Parameter upper bound constraints</dt>
-<dd><p class="first">Cell array containing the upper bound values for the parameters of the evaluated parametric models.</p>
-<p><em>Default:</em> [<em>empty</em>] - Uses the model’s default upper bound values</p>
+<dt><code class="docutils literal notranslate"><span class="pre">'GlobalWeights'</span></code> - Weights for global fitting</dt>
+<dd><p class="first">Array of weighting coefficients for the individual signals in global fitting regularization. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. Weight values do not need to be normalized. The same number of weights as number of input signals is required.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
 <p><em>Example:</em></p>
 <blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">dd_rice</span><span class="p">},</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Upper&#39;</span><span class="p">,{[</span><span class="mi">10</span> <span class="mi">1</span><span class="p">],[</span><span class="mi">10</span> <span class="mi">2</span><span class="p">]})</span>
-</pre></div>
-</div>
-</div></blockquote>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">'Lower'</span></code> - Parameter lower bound constraints</dt>
-<dd><p class="first">Cell array containing the lower bound values for the parameters of the evaluated parametric models.</p>
-<p><em>Default:</em> [<em>empty</em>] - Uses the model’s default lower bound values</p>
-<p><em>Example:</em></p>
-<blockquote class="last">
-<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">({@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">dd_rice</span><span class="p">},</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;aicc&#39;</span><span class="p">,</span><span class="s">&#39;Lower&#39;</span><span class="p">,{[</span><span class="mi">1</span> <span class="mf">0.1</span><span class="p">],[</span><span class="mi">10</span> <span class="mf">0.2</span><span class="p">]})</span>
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">selectmodel</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div></blockquote>

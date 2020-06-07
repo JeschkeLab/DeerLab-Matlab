@@ -141,6 +141,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -291,7 +292,7 @@
 <span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
 
 <span class="c">% Get the optimal regularization parameters for Tikhonov regularization</span>
-<span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">Res</span><span class="p">,</span><span class="n">Pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="s">&#39;tikh&#39;</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;gml&#39;</span><span class="p">,</span><span class="s">&#39;lr&#39;</span><span class="p">},</span><span class="s">&#39;Search&#39;</span><span class="p">,</span><span class="s">&#39;Grid&#39;</span><span class="p">);</span>
+<span class="p">[</span><span class="n">alpha</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">alphas</span><span class="p">,</span><span class="n">Res</span><span class="p">,</span><span class="n">Pen</span><span class="p">]</span> <span class="p">=</span> <span class="n">selregparam</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;tikh&#39;</span><span class="p">,{</span><span class="s">&#39;aic&#39;</span><span class="p">,</span><span class="s">&#39;gml&#39;</span><span class="p">,</span><span class="s">&#39;lr&#39;</span><span class="p">},</span><span class="s">&#39;Search&#39;</span><span class="p">,</span><span class="s">&#39;Grid&#39;</span><span class="p">);</span>
 
 <span class="c">%=============================</span>
 <span class="c">% Constructing the L-curve</span>
