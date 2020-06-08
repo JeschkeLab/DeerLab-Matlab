@@ -78,7 +78,7 @@ mixModelFcn = @mixedFunction;
         end
         
         if nargin<2
-            error('At least two input arguments (r,param) are required.')
+            error('At least two input arguments are required.')
         elseif  nargin>3
             error('Only two input arguments are allows.')
         end
