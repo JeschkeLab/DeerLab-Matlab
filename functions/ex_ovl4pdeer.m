@@ -1,11 +1,10 @@
 %
 % EX_OVL4PDEER 4-pulse DEER with band overlap experiment model 
 %
-%   info = EX_OVL4PDEER(t)
-%   Returns an (info) structure containing the specifics of the model, including
-%   a list of parameters.
+%   info = EX_OVL4PDEER()
+%   Returns an (info) table of model parameters and boundaries.
 %
-%   pathways = EX_OVL4PDEER(t,param)
+%   pathways = EX_OVL4PDEER(param)
 %   Computes the dipolar pathway information array according to the paramater
 %   array (param).
 %
@@ -17,22 +16,22 @@
 %       1    Amplitude of unmodulated components                   0        1        0.3
 %       2    Amplitude of 1st modulated pathway                    0        1        0.3
 %       3    Amplitude of 2nd modulated pathway                    0        1        0.3
-%       4    Refocusing time of 2nd modulated pathway   us     max(t)-2  max(t)+2   max(t)
+%       4    Refocusing time of 2nd modulated pathway   us         0       20         5
 %    ----------------------------------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function output = ex_ovl4pdeer(t,param)
+function output = ex_ovl4pdeer(param)
 
 nParam = 4;
 
-if nargin==1 && nargin>2
-    error('Model requires at two input arguments.')
+if nargin>1
+    error('Model requires one input argument.')
 end
 
-if nargin==1
+if nargin==0
     % If no inputs given, return info about the parametric model
     info(1).Index = 1;
     info(1).Parameter = 'Amplitude of unmodulated components';
@@ -58,9 +57,9 @@ if nargin==1
     info(4).Index = 4;
     info(4).Parameter = 'Refocusing time of 2nd modulated pathway';
     info(4).Units = 'us';
-    info(4).Lower = max(t) - 2;
-    info(4).Upper = max(t) + 2;
-    info(4).Start = max(t);
+    info(4).Lower = 0;
+    info(4).Upper = 20;
+    info(4).Start = 5;
 
     output = struct2table(info);
     return

@@ -7,7 +7,7 @@
 %   __ = FITSIGNAL(V,t,r,dd,bg)
 %   __ = FITSIGNAL(V,t,r,dd)
 %   __ = FITSIGNAL(V,t,r)
-%   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,,lb,ub)
+%   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,lb,ub)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__})
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},ex)
@@ -345,7 +345,7 @@ for j = 1:nSignals
     end
     
     if includeExperiment(j)
-        Exfcn = @(par)ex_model{j}(t{j},par);
+        Exfcn = @(par)ex_model{j}(par);
         Bmodels{j} = @(par) dipolarbackground(t{j},Exfcn(par{1}),@(t,lam)Bfcn(t,lam,par{2}));
         Kmodels{j} = @(par) dipolarkernel(t{j},r,Exfcn(par{1}),@(t,lam)Bfcn(t,lam,par{2}));
     else
@@ -581,7 +581,7 @@ if nargout==0
     end
     if numel(parfit.ex)>0
         for i = 1:nSignals
-            info = ex_model{i}(t{i});
+            info = ex_model{i}();
             info = table2struct(info);
             for p = 1:numel(parfit.ex{i})
                 c = parfit.ex{i}(p);
@@ -682,11 +682,7 @@ end
 
 function [par0,lo,up,N] = getmodelparams(model,t)
 
-if contains(func2str(model),'ex_')
-    info = model(t);
-else
-    info = model();
-end
+info = model();
 par0 = info.Start(:).';
 lo = info.Lower(:).';
 up = info.Upper(:).';

@@ -16,11 +16,10 @@ Syntax
 
 .. code-block:: matlab
 
-        info = ex_5pdeer(t)
-        pathways = ex_5pdeer(t,param)
+        info = ex_5pdeer()
+        pathways = ex_5pdeer(param)
 
 Parameters
-    *   ``t`` - Time axis (*M*-array), in microseconds
     *   ``param`` - Model parameters (array)
 Returns
     *   ``pathways`` - Dipolar pathways (array)
@@ -49,10 +48,10 @@ where :math:`T_0^{(1)}=0` and :math:`T_0^{(2)}` are the refocusing times of the 
 ============== ======================== ================= ==================== ==================== =============================================
  Variable        Symbol                   Default          Lower                Upper                Description
 ============== ======================== ================= ==================== ==================== =============================================
-``param(1)``   :math:`\varLambda_0`     0.4                0                    1                     unmodulated pathways, amplitude
-``param(2)``   :math:`\lambda_1`        0.4                0                    1                     1st modulated pathway, amplitude
-``param(3)``   :math:`\lambda_2`        0.2                0                    1                     2nd modulated pathway, amplitude
-``param(4)``   :math:`T_0^{(2)}`        :math:`\max(t)/2`  :math:`\max(t)/2-2`  :math:`\max(t)/2+2`   2nd modulated pathway, refocusing time (us)
+``param(1)``   :math:`\varLambda_0`     0.4                0                    1                    unmodulated pathways, amplitude
+``param(2)``   :math:`\lambda_1`        0.4                0                    1                    1st modulated pathway, amplitude
+``param(3)``   :math:`\lambda_2`        0.2                0                    1                    2nd modulated pathway, amplitude
+``param(4)``   :math:`T_0^{(2)}`        5.0                0                    20                   2nd modulated pathway, refocusing time (us)
 ============== ======================== ================= ==================== ==================== =============================================
 
 
@@ -69,7 +68,7 @@ Description
 
 .. code-block:: matlab
 
-        info = ex_5pdeer(t)
+        info = ex_5pdeer()
 
 Returns an ``info`` table containing the information of the model parameters and boundaries.
 
@@ -81,9 +80,9 @@ Returns an ``info`` table containing the information of the model parameters and
 
 .. code-block:: matlab
 
-        pathways = ex_5pdeer(t,param)
+        pathways = ex_5pdeer(param)
 
-Generates the dipolar pathways matrix ``pathways`` from the time-axis ``t`` and model parameters ``param``. 
+Generates the dipolar pathways matrix ``pathways`` from the model parameters ``param``. 
 
 
 

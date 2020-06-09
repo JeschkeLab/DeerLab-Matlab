@@ -1,11 +1,10 @@
 %
 % EX_4PDEER Single-pathway 4-pulse DEER experiment model 
 %
-%   info = EX_4PDEER(t)
-%   Returns an (info) structure containing the specifics of the model, including
-%   a list of parameters.
+%   info = EX_4PDEER()
+%   Returns an (info) table of model parameters and boundaries.
 %
-%   pathways = EX_4PDEER(t,param)
+%   pathways = EX_4PDEER(param)
 %   Computes the dipolar pathway information array according to the paramater
 %   array (param).
 %
@@ -21,15 +20,15 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function output = ex_4pdeer(t,param)
+function output = ex_4pdeer(param)
 
 nParam = 1;
 
-if nargin>2
-    error('Model requires one or two input arguments.')
+if nargin>1
+    error('Model requires one input argument.')
 end
 
-if nargin==1
+if nargin==0
     % If no inputs given, return info about the parametric model
     info(1).Index = 1;
     info(1).Parameter = "Modulation depth";

@@ -16,11 +16,10 @@ Syntax
 
 .. code-block:: matlab
 
-        info = ex_4pdeer(t)
-        pathways = ex_4pdeer(t,param)
+        info = ex_4pdeer()
+        pathways = ex_4pdeer(param)
 
 Parameters
-    *   ``t`` - Time axis (*M*-array), in microseconds
     *   ``param`` - Model parameters (array)
 Returns
     *   ``pathways`` - Dipolar pathways (array)
@@ -64,7 +63,7 @@ Description
 
 .. code-block:: matlab
 
-        info = ex_4pdeer(t)
+        info = ex_4pdeer()
 
 Returns an ``info`` table containing the information of the model parameters and boundaries.
 
@@ -77,8 +76,8 @@ Returns an ``info`` table containing the information of the model parameters and
 
 .. code-block:: matlab
 
-    pathways = ex_4pdeer(t,param)
+    pathways = ex_4pdeer(param)
 
-Generates the dipolar pathways matrix ``pathways`` from the time-axis ``t`` and model parameters ``param``. 
+Generates the dipolar pathways matrix ``pathways`` from the model parameters ``param``. 
 
 

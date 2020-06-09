@@ -16,11 +16,10 @@ Syntax
 
 .. code-block:: matlab
 
-        info = ex_7pdeer(t)
-        pathways = ex_7pdeer(t,param)
+        info = ex_7pdeer()
+        pathways = ex_7pdeer(param)
 
 Parameters
-    *   ``t`` - Time axis (*M*-array), in microseconds
     *   ``param`` - Model parameters (array)
 Returns
     *   ``pathways`` - Dipolar pathways (array)
@@ -53,8 +52,8 @@ where :math:`T_0^{(1)}=0\;\mu s`, :math:`T_0^{(2)}`, and :math:`T_0^{(3)}` are t
 ``param(2)``   :math:`\lambda_1`        0.4                0                    1                     1st modulated pathway, amplitude
 ``param(3)``   :math:`\lambda_2`        0.2                0                    1                     2nd modulated pathway, amplitude
 ``param(4)``   :math:`\lambda_3`        0.2                0                    1                     3rd modulated pathway, amplitude
-``param(5)``   :math:`T_0^{(2)}`        `1/5\max(t)`       `1/5\max(t)-2`       `1/5\max(t)+2`        2nd modulated pathway, refocusing time (us)
-``param(6)``   :math:`T_0^{(3)}`        `2/5\max(t)`       `2/5\max(t)-2`       `2/5\max(t)+2`        3rd modulated pathway, refocusing time (us)
+``param(5)``   :math:`T_0^{(2)}`        1.5                0                    20                    2nd modulated pathway, refocusing time (us)
+``param(6)``   :math:`T_0^{(3)}`        3.5                0                    20                    3rd modulated pathway, refocusing time (us)
 ============== ======================== ================= ==================== ==================== =============================================
 
 
@@ -71,7 +70,7 @@ Description
 
 .. code-block:: matlab
 
-        info = ex_7pdeer(t)
+        info = ex_7pdeer()
 
 Returns an ``info`` table containing the information of the model parameters and boundaries.
 
@@ -83,9 +82,9 @@ Returns an ``info`` table containing the information of the model parameters and
 
 .. code-block:: matlab
 
-        pathways = ex_7pdeer(t,param)
+        pathways = ex_7pdeer(param)
 
-Generates the dipolar pathways matrix ``pathways`` from the time-axis ``t`` and model parameters ``param``. 
+Generates the dipolar pathways matrix ``pathways`` from the model parameters ``param``. 
 
 
 

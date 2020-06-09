@@ -8,9 +8,9 @@ t = linspace(0,5,100);
 r = linspace(2,6,75);
 P = dd_gauss(r,[4.5 0.6]);
 
-info = ex_7pdeer(t);
+info = ex_7pdeer();
 parIn = info.Start;
-pathinfo = ex_7pdeer(t,parIn);
+pathinfo = ex_7pdeer(parIn);
 
 kappa = 0.2;
 Bmodel = @(t,lam) bg_exp(t,kappa,lam);

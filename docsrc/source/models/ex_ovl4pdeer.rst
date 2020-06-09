@@ -16,11 +16,10 @@ Syntax
 
 .. code-block:: matlab
 
-        info = ex_ovl4pdeer(t)
-        pathways = ex_ovl4pdeer(t,param)
+        info = ex_ovl4pdeer()
+        pathways = ex_ovl4pdeer(param)
 
 Parameters
-    *   ``t`` - Time axis (*M*-array), in microseconds
     *   ``param`` - Model parameters (array)
 Returns
     *   ``pathways`` - Dipolar pathways (array)
@@ -54,7 +53,7 @@ where :math:`T_0^{(1)}=0` and :math:`T_0^{(2)}` are the refocusing times of the 
 ``param(1)``   :math:`\varLambda_0`     0.1                0                    1                     unmodulated pathways, amplitude
 ``param(2)``   :math:`\lambda_1`        0.8                0                    1                     1st modulated pathway, amplitude
 ``param(3)``   :math:`\lambda_2`        0.1                0                    1                     2nd modulated pathway, amplitude
-``param(4)``   :math:`T_0^{(2)}`        :math:`\max(t)`   :math:`\max(t)-2`    :math:`\max(t)+2`      2nd modulated pathway, refocusing time (us)
+``param(4)``   :math:`T_0^{(2)}`        5.0                0                    20                    2nd modulated pathway, refocusing time (us)
 ============== ======================== ================= ==================== ==================== ==============================================
 
 
@@ -71,7 +70,7 @@ Description
 
 .. code-block:: matlab
 
-        info = ex_ovl4pdeer(t)
+        info = ex_ovl4pdeer()
 
 Returns an ``info`` table containing the information of the model parameters and boundaries.
 
@@ -83,8 +82,8 @@ Returns an ``info`` table containing the information of the model parameters and
 
 .. code-block:: matlab
 
-    pathways = ex_ovl4pdeer(t,param)
+    pathways = ex_ovl4pdeer(param)
 
-Generates the dipolar pathways matrix ``pathways`` from the time-axis ``t`` and model parameters ``param``. 
+Generates the dipolar pathways matrix ``pathways`` from the model parameters ``param``. 
 
 
