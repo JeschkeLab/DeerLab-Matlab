@@ -13,8 +13,8 @@ end
 r = r(:);
 P = 0;
 for k = 1:numel(r0)
-    sig = fwhm(k)/sqrt(2*log(2));
-    P = P + a(k)*sqrt(2/pi)*1/sig*exp(-2*((r-r0(k))/sig).^2);
+    sig = fwhm(k)/2/sqrt(2*log(2));
+    P = P + a(k)*sqrt(1/(2*pi))*1/sig*exp(-0.5*((r-r0(k))/sig).^2);
 end
 
 % Normalize
