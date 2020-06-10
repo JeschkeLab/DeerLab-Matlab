@@ -199,10 +199,10 @@ end
 
 if nargin<5 || isempty(par0)
     % If user does not give parameters, use the defaults of the model
-    par0 =  paraminfo.Start;
+    par0 =  [paraminfo.Start];
 elseif nargin>4 && ischar(par0)
     varargin = [{par0} varargin];
-    par0 = paraminfo.Start;
+    par0 = [paraminfo.Start];
 else
     validateattributes(par0,{'numeric'},{'2d','nonempty'},mfilename,'StartParameters')
 end
@@ -306,10 +306,10 @@ Labels = num2cell(1:nSignals);
 
 % Prepare upper/lower bounds on parameter search range
 if isempty(lb)
-    lb = paraminfo.Lower;
+    lb = [paraminfo.Lower];
 end
 if isempty(ub)
-    ub = paraminfo.Upper;
+    ub = [paraminfo.Upper];
 end
 if any(ub==realmax) || any(lb==-realmax)
     unboundedparams = true;

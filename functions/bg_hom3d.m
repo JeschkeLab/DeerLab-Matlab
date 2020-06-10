@@ -40,7 +40,7 @@ if nargin==0
     info(1).Upper = 5000;
     info(1).Start = 50;
     
-    output = struct2table(info);
+    output = info;
     return
 end
 

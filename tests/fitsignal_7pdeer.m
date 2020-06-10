@@ -9,7 +9,7 @@ r = linspace(2,6,75);
 P = dd_gauss(r,[4.5 0.6]);
 
 info = ex_7pdeer();
-parIn = info.Start;
+parIn = [info.Start];
 pathinfo = ex_7pdeer(parIn);
 
 kappa = 0.2;

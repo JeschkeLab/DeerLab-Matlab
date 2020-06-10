@@ -142,7 +142,7 @@ if nargin==0
     info(14).Upper = 0.5;
     info(14).Start = 0.7;
     
-    output = struct2table(info);
+    output = info;
     return
     
     % If no inputs given, return info about the parametric model

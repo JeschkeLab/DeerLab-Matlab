@@ -146,8 +146,8 @@ end
 
 % Initialize bounds and initial parameter values
 info = bgmodel();
-lowerBounds = info.Lower;
-upperBounds = info.Upper;
+lowerBounds = [info.Lower];
+upperBounds = [info.Upper];
 if fitModDepth
     lowerBounds(end+1) = 0;
     upperBounds(end+1) = 1;
@@ -155,7 +155,7 @@ end
 if ~isempty(InitialGuess)
     StartParameters = InitialGuess;
 else
-    StartParameters =  info.Start;
+    StartParameters =  [info.Start];
     if fitModDepth
         StartParameters(end+1) = 0.5;
     end

@@ -6,10 +6,10 @@ model = @bg_poly2;
 info = model();
 
 t = linspace(-5,5,500);
-par0 = info.Start;
+par0 = [info.Start];
 
-lower = info.Lower;
-upper = info.Upper;
+lower = [info.Lower];
+upper = [info.Upper];
 
 B1 = model(t,par0);
 B2 = model(t.',par0);

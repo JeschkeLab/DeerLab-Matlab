@@ -6,10 +6,10 @@ model = @bg_homfractal;
 info = model();
 
 t = linspace(-5,5,500);
-par0 = info.Start;
+par0 = [info.Start];
 
-lower = info.Lower;
-upper = info.Upper;
+lower = [info.Lower];
+upper = [info.Upper];
 
 B1 = model(t,par0);
 B2 = model(t.',par0);
@@ -17,7 +17,7 @@ B3 = model(t,lower);
 B4 = model(t,upper);
  
 B6 = model(t,par0,1);
-B7 = model(t,par0.*[2; 1],0.5);
+B7 = model(t,par0.*[2 1],0.5);
 
 % Pass 1: dimensionality is correct
 pass(1) = isequal(B1,B2);

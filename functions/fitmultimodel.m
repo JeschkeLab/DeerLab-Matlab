@@ -76,8 +76,8 @@ optionalProperties = {'Upper','Lower','Background','internal::parselater'};
 
 % Control that the boundaries match the model and are appropiate
 modelInfo = model();
-nparam =  height(modelInfo);
-paramNames = modelInfo.Parameter;
+nparam =  numel(modelInfo);
+paramNames = [{modelInfo.Parameter}];
 str = [];
 for i=1:numel(paramNames), str = [str paramNames{i} ', ']; end, str(end-1:end) = ''; 
 if ~isempty(Upper) && isempty(BckgModel) && length(Upper)~=nparam
@@ -157,9 +157,9 @@ if ~isempty(Upper) || ~isempty(Lower)
     for i = 1:maxModels
         % Get the info about the models
         info = multiModels{i}();
-        modelnparam = height(info);
+        modelnparam = numel(info);
         boundary = zeros(1,modelnparam);
-        paramNames = info.Parameter;
+        paramNames = [{info.Parameter}];
 
         %Get the indices of the different parameters on the mixed models
         paramidx = (1:nparam+1:modelnparam) + (0:nparam).';
@@ -227,15 +227,15 @@ if ~isempty(BckgModel)
     for i = 1:maxModels
         DistModel = multiModels{i};
         info = DistModel();
-        Nparam = height(info);
-        Pparam = info.Start;
+        Nparam = numel(info);
+        Pparam = [info.Start];
         infoB = BckgModel();
         Bparam = infoB.Start;
         lampars = Nparam + (1+numel(Bparam))*(1:Nsignals)-numel(Bparam);
         Bpars = lampars + 1;
         lam0 = 0.25;
         timeMultiGaussModels{i} = @(t,param,idx) (1 - param(lampars(idx)) + param(lampars(idx))*dipolarkernel(t,r)*DistModel(r,param(1:Nparam)) ).*BckgModel(t,param(Bpars(idx):Bpars(idx)+numel(Bparam)-1));
-        param0{i} = [Pparam; repmat([lam0; Bparam],Nsignals,1)];
+        param0{i} = [Pparam repmat([lam0 Bparam],Nsignals,1)];
     end
 end
 
@@ -254,7 +254,7 @@ param = fitparams{nGaussOpt};
 paramci = paramcis{nGaussOpt};
 optModel = multiModels{nGaussOpt};
 info = optModel();
-nparam = height(info);
+nparam = numel(info);
 Pfit = optModel(r,param(1:nparam));
 stats = stats{nGaussOpt};
 

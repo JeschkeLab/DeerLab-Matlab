@@ -117,7 +117,7 @@ if nargin==0
     info(11).Upper = 0.5;
     info(11).Start = 0.7;
     
-    output = struct2table(info);
+    output = info;
     return
 end
 

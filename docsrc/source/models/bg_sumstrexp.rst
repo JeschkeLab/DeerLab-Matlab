@@ -27,7 +27,7 @@ Inputs
 
 Outputs
     *   ``B`` - Model background (N-array)
-    *   ``info`` - Model information (table)
+    *   ``info`` - Model information (struct)
 
 
 -----------------------------

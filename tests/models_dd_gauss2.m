@@ -5,9 +5,9 @@ function [pass,maxerr] = test(opt)
 info = dd_gauss2();
 
 r = linspace(0,50,500);
-par0 = info.Start;
-lower = info.Lower;
-upper = info.Upper;
+par0 = [info.Start];
+lower = [info.Lower];
+upper = [info.Upper];
 
 P1 = dd_gauss2(r,par0);
 P2 = dd_gauss2(r.',par0);

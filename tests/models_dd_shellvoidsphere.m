@@ -5,10 +5,10 @@ function [pass,maxerr] = test(opt)
 info = dd_shellvoidsphere();
 
 r = linspace(0,50,500);
-par0 = info.Start;
+par0 = [info.Start];
 
-lower = info.Lower;
-upper = info.Upper;
+lower = [info.Lower];
+upper = [info.Upper];
 
 P1 = dd_shellvoidsphere(r,par0);
 P2 = dd_shellvoidsphere(r.',par0);

@@ -559,7 +559,6 @@ if nargout==0
     str = '  %s{%d}(%d):   %.7f  (%.7f, %.7f)  %s (%s)\n';
     if numel(parfit.dd)>0
         info = dd_model();
-        info = table2struct(info);
         for p = 1:numel(parfit.dd)
             c = parfit.dd(p);
             ci = parci.dd(p,:);
@@ -570,7 +569,6 @@ if nargout==0
     if numel(parfit.bg)>0
         for i = 1:nSignals
             info = bg_model{i}();
-            info = table2struct(info);
             for p = 1:numel(parfit.bg{i})
                 c = parfit.bg{i}(p);
                 ci = parci.bg{i}(p,:);
@@ -582,7 +580,6 @@ if nargout==0
     if numel(parfit.ex)>0
         for i = 1:nSignals
             info = ex_model{i}();
-            info = table2struct(info);
             for p = 1:numel(parfit.ex{i})
                 c = parfit.ex{i}(p);
                 ci = parci.ex{i}(p,:);
@@ -683,9 +680,9 @@ end
 function [par0,lo,up,N] = getmodelparams(model,t)
 
 info = model();
-par0 = info.Start(:).';
-lo = info.Lower(:).';
-up = info.Upper(:).';
+par0 = [info.Start];
+lo = [info.Lower];
+up = [info.Upper];
 N = numel(par0);
 
 end

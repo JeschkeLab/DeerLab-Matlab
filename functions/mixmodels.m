@@ -39,26 +39,26 @@ nModels = numel(models);
 %-------------------------------------------------------------------------------
 % Add amplitudes for each model except last
 for j = 1:nModels-1
-    Info(j,1).Index = j;
-    Info(j,1).Parameter = sprintf('Model %i: Amplitude',j);
-    Info(j,1).Units = '  ';
-    Info(j,1).Lower = 0;
-    Info(j,1).Upper = 1;
-    Info(j,1).Start = 1/nModels;
+    Info(j).Index = j;
+    Info(j).Parameter = sprintf('Model %i: Amplitude',j);
+    Info(j).Units = '  ';
+    Info(j).Lower = 0;
+    Info(j).Upper = 1;
+    Info(j).Start = 1/nModels;
 end
 pidx_amp = 1:nModels-1;
 
 % Combine info structures from all models
 idx = pidx_amp(end);
 for i = 1:nModels
-    info = table2struct(models{i}());
+    info = models{i}();
     nparam = numel(info);
     pidx{i} = idx + (1:nparam);
     idx = idx + nparam;
     for j = 1:nparam
         info(j).Parameter = sprintf('Model %i: %s',i,info(j).Parameter);
     end
-    Info = [Info; info];
+    Info = [Info info];
 end
 
 % Mixed model function handle
@@ -69,7 +69,7 @@ mixModelFcn = @mixedFunction;
   function output = mixedFunction(varargin)
 
         if nargin==0
-            output = struct2table(Info);
+            output = Info;
             return
         end
         

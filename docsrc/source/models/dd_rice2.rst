@@ -23,7 +23,7 @@ Parameters
     *   ``param`` - Model parameters
 Returns
     *   ``P`` - Distance distribution (N-array)
-    *   ``info`` - Model information (table)
+    *   ``info`` - Model information (struct)
 
 
 -----------------------------
@@ -65,14 +65,13 @@ Description
 
         info = dd_rice2()
 
-Returns an ``info`` table containing the information of the model parameters and boundaries.
+Returns an ``info`` structure containing the information of the model parameters and boundaries.
 
-The table contents can be accessed as follows:
-* ``info.Index`` -  Indices of the parameters in the ``param`` array
-* ``info.Parameter`` -  Names of the model parameters
-* ``info.Lower`` - Lower bounds for the parameters
-* ``info.Upper`` - Upper bounds for the parameters
-* ``info.Start`` - Start values for optimization
+* ``info(n).Index`` -  Index of the parameter in the ``param`` array.
+* ``info(n).Parameter`` -  Description of the n-th parameter.
+* ``info(n).Lower`` -  Lower bound of the n-th parameter.
+* ``info(n).Upper`` -  Upper bound of the n-th parameter.
+* ``info(n).Start`` -  Start value of the n-th parameter.
 
 -----------------------------
 

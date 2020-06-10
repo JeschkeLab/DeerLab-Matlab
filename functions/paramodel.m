@@ -60,7 +60,7 @@ model = @myparametricmodel;
                 info(i).Start = param0(i);
             end
             
-            Output = struct2table(info);
+            Output = info;
             
         elseif nargin >= 2
             
