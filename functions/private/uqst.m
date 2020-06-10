@@ -1,11 +1,11 @@
 %
-%   CIST Confidence interval structure constructor
+%   UQST Uncertainty quantification structure constructor
 %
-%   cistruct = CIST('covariance',parfit,covmat,lb,ub)
-%   Constructs the structure for covariance-based confidence intervals.
+%   uqstruct = UQST('covariance',parfit,covmat,lb,ub)
+%   Constructs the structure for covariance-based uncertainty quantificaton.
 %
-%   cistruct = CIST('bootstrap',samples)
-%   Constructs the structure for bootstrapped confidence intervals.
+%   uqstruct = UQST('bootstrap',samples)
+%   Constructs the structure for bootstrapped uncertainty quantificaton.
 %
 %   Inputs:
 %      parfit     N-element array of fitted values used as mean values in covariance-based CI
@@ -17,13 +17,13 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function cistruct = cist(type,varargin)
+function uqstruct = uqst(type,varargin)
 
 %Parse inputs schemes
 switch type
     
     case 'covariance'
-        % Scheme 1: cist('covariance',parfit,covmat,lb,ub)
+        % Scheme 1: uqst('covariance',parfit,covmat,lb,ub)
         parfit = varargin{1}(:);
         covmat = varargin{2};
         lb = varargin{3}(:);
@@ -38,7 +38,7 @@ switch type
         end
         
     case 'bootstrap'
-        % Scheme 2: cist('bootstrap',samples)
+        % Scheme 2: uqst('bootstrap',samples)
         samples = varargin{1};
         nParam = numel(samples(1,:));
         
@@ -53,27 +53,36 @@ end
 switch type
     %Covariance-based CI specific fields
     case 'covariance'
-        cistruct.mean = parfit;
-        cistruct.median = parfit;
-        cistruct.std = sqrt(diag(covmat));
-        cistruct.covmat = covmat;
-        cistruct.propagate = @(model,lb,ub)propagate(model,lb,ub);
+        uqstruct.mean = parfit;
+        uqstruct.median = parfit;
+        uqstruct.std = sqrt(diag(covmat));
+        uqstruct.covmat = covmat;
         
         %Bootstrap-based CI specific fields
     case 'bootstrap'
-        cistruct.mean = squeeze(mean(samples,1));
-        cistruct.median = squeeze(median(samples,1));
-        cistruct.std = squeeze(std(samples,[],1));
+        means = squeeze(mean(samples,1));
+        covmat = squeeze(samples).'*squeeze(samples)/size(samples,1) - means.*means.';
+        uqstruct.mean = means;
+        uqstruct.median = squeeze(median(samples,1));
+        uqstruct.std = squeeze(std(samples,[],1));
+        uqstruct.covmat = covmat;
+
 end
 
-cistruct.percentile = @(p)percentile(p);
-cistruct.ci = @(p)ci(p);
-cistruct.pardist = @(n)pardist(n);
+uqstruct.percentile = @(p)percentile(p);
+uqstruct.ci = @(p)ci(p);
+uqstruct.pardist = @(n)pardist(n);
+uqstruct.propagate = @(model,lb,ub)propagate(model,lb,ub);
+uqstruct.type = type;
 
 %-----------------------------------------------
 % Parameter percentiles
 %-----------------------------------------------
     function x = percentile(p)
+  
+        if p>100 || p<0
+            error('The input must be a number between 0 and 100')
+        end
         
         x = zeros(nParam,1);
         for n=1:nParam
@@ -86,7 +95,7 @@ cistruct.pardist = @(n)pardist(n);
             % Eliminate duplicates
             [cdf, index] = unique(cdf);
             % Interpolate requested percentile
-            x(n) = interp1(cdf,values(index),p);
+            x(n) = interp1(cdf,values(index),p/100);
         end
     end
 
@@ -95,7 +104,11 @@ cistruct.pardist = @(n)pardist(n);
 %-----------------------------------------------
     function x = ci(coverage)
         
-        alpha = 1 - coverage;
+        if coverage>100 || coverage<0
+            error('The input must be a number between 0 and 100')
+        end
+        
+        alpha = 1 - coverage/100;
         p = 1 - alpha/2; % percentile
         
         switch type
@@ -116,6 +129,10 @@ cistruct.pardist = @(n)pardist(n);
 % Parameter distributions
 %-----------------------------------------------
     function out = pardist(n)
+        
+        if floor(n)-n~=0 || n>nParam || n<1
+            error('The input must be an integer number between 1 and %i',nParam)
+        end
         
         switch type
             
@@ -148,20 +165,30 @@ cistruct.pardist = @(n)pardist(n);
 % Error Propagation (covariance-based only)
 %-----------------------------------------------
 
-    function modelcistruct = propagate(model,lb,ub)
+    function modeluqstruct = propagate(model,lb,ub)
         
+        if ~isa(model,'function_handle')
+            error('The 1st input must be a valid function handle: @(parfit)model(__,parfit,__)')
+        end
         
-        % Get jacobian of model to be propagated with respect to parameters
-        jacobian = jacobianest(model,parfit);
+        % Evaluate model with fit parameters
         modelfit = model(parfit);
-        
-        % Clip at boundaries
+
+        % Validate input boundaries
         if isempty(lb)
             lb = zeros(numel(modelfit),1) - realmax;
         end
         if isempty(ub)
             ub = zeros(numel(modelfit),1) + realmax;
         end
+        if numel(modelfit)~=numel(lb) || numel(modelfit)~=numel(ub)
+            error('The 2nd and 3rd input arguments must have the same number of elements as the model output.')
+        end
+        
+        % Get jacobian of model to be propagated with respect to parameters
+        jacobian = jacobianest(model,parfit);
+        
+        % Clip at boundaries
         modelfit = max(modelfit,lb);
         modelfit = min(modelfit,ub);
         
@@ -169,7 +196,7 @@ cistruct.pardist = @(n)pardist(n);
         modelcovmat = jacobian*covmat*jacobian.';
         
         % Construct new CI-structure for the model
-        modelcistruct = cist(type,modelfit,modelcovmat,lb,ub);
+        modeluqstruct = uqst(type,modelfit,modelcovmat,lb,ub);
         
     end
 

@@ -5,26 +5,26 @@ After fitting experimental data with a distance distribution, a background, and 
 
 DeerLab provides uncertainty estimates for all parameters in the form of confidence intervals (CIs). They can be calculated in two ways: either using the covariance matrix, or using bootstrap. The first method is fast, but is not entirely accurate, whereas bootstrap is much slower, but more robust. All confidence intervals provided by DeerLab functions describe the range of values which might contain the ground truth with a ceratin probability.
 
-Covariance CIs
+Covariance Uncertainty Quantification
 ------------------------------------------
 
 Along with every fit, functions like ``fitsignal`` return confidence intervals for the fitted parameters and the fitted distributions. For example,
 
 .. code-block:: matlab
 
-   [Vfit,Pfit,Bfit,parfit,parCI] = fitsignal(Vexp,t,r);
+   [Vfit,Pfit,Bfit,parfit,paruq] = fitsignal(Vexp,t,r);
 
-The output ``parCI`` contains a confidence interval structure which contains the uncertainty information for all fitted parameters, calculated using the standard method based on the variance-covariance matrix.
+The output ``paruq`` is a uncertainty quantification structure which contains the uncertainty information for all fitted parameters, calculated using the standard method based on the variance-covariance matrix.
 
-The confidence intervals (at any confidence level) can be calculated by using the ``parCI.ci()`` field, e.g. the 50%, 75% and 95% confidence intervals: 
+The confidence intervals (at any confidence level) can be calculated by using the ``paruq.ci()`` field, e.g. the 50%, 75% and 95% confidence intervals: 
 
 .. code-block:: matlab
 
-    parfit_ci50 = parCI.ci(0.50);
-    parfit_ci75 = parCI.ci(0.75);
-    parfit_ci95 = parCI.ci(0.95);
+    parfit_ci50 = paruq.ci(50);
+    parfit_ci75 = paruq.ci(75);
+    parfit_ci95 = paruq.ci(95);
 
-Covariance-based uncertainty can be propagated to dependent models, e.g. propagating the uncertainty in the fit of ``rmean`` and ``fwhm`` to the resulting Gaussian distance distribution. This can be done via the ``parCI.propagate()`` function: 
+Uncertainty can be propagated to dependent models, e.g. propagating the uncertainty in the fit of ``rmean`` and ``fwhm`` to the resulting Gaussian distance distribution. This can be done via the ``paruq.propagate()`` function: 
 
 .. code-block:: matlab
 
@@ -37,7 +37,7 @@ Covariance-based uncertainty can be propagated to dependent models, e.g. propaga
     %Propagate the error in the parameters to the model
     lb = zeros(numel(Pfit),1);
     ub = [];
-    Pci = parCI.propagate(ddmodel,lb,ub)
+    Pci = paruq.propagate(ddmodel,lb,ub)
 
     % Get the 95%-confidence intervals of the fitted distribution
     Pci95 = Pci.ci(95);
@@ -49,7 +49,7 @@ Assumptions:
    - All parameters are assumed to be unconstrained.
 
 
-Bootstrap CIs
+Bootstrap Uncertainty Quantification
 ------------------------------------------
 
 A more thorough way of assessing parameter uncertainty is bootstrap. In this method, many additional synthetic datasets are generated from the given experimental data and the fitted model and are fitted individually. This yields an ensemble of parameter fits that is analyzed statistically to provide information about the scatter.
@@ -58,32 +58,32 @@ Here is an example for a parametric model:
 
 .. code-block:: matlab
 
-    bootci = bootan(@(V)fitfcn(V,r,K),Vexp,Vfit,1000,'verbose',true);
+    bootuq = bootan(@(V)fitfcn(V,r,K),Vexp,Vfit,1000,'verbose',true);
     
     function parfit = fitfcn(Vin,r,K)
            parfit = fitparamodel(Vin,@dd_gauss,r,K);
     end
 
-The output ``bootci`` structure can be used to evaluate confidence intervals at different confidence levels, e.g the 50%, 75% and 95% confidence intervals: 
+The output ``bootuq`` structure can be analogously used to evaluate confidence intervals at different confidence levels, e.g the 50%, 75% and 95% confidence intervals: 
 
 .. code-block:: matlab
 
-    parfit_ci50 = bootci.ci(0.50);
-    parfit_ci75 = bootci.ci(0.75);
-    parfit_ci95 = bootci.ci(0.95);
+    parfit_ci50 = bootuq.ci(50);
+    parfit_ci75 = bootuq.ci(75);
+    parfit_ci95 = bootuq.ci(95);
 
-The bootstrapped distributions for each parameter can be accessed by using the ``parCI.pardist()`` field, e.g.if the modulation depth is the second fit parameter:
+The bootstrapped distributions for each parameter can be accessed by using the ``paruq.pardist()`` field, e.g.if the modulation depth is the second fit parameter:
 
 .. code-block:: matlab
 
-    moddepth_dist = bootci.pardist(2);
+    moddepth_dist = bootuq.pardist(2);
 
 
 Here is an example for a model with a non-parametric distribution:
 
 .. code-block:: matlab
 
-    bootci = bootan(@(V)fitfcn(V,t,r),Vexp,Vfit,100,'verbose',true);
+    bootuq = bootan(@(V)fitfcn(V,t,r),Vexp,Vfit,100,'verbose',true);
 
     function [Pfit, parfit.bg, parfit.ex] = fitfcn(Vin,t,r)
            [~,Pfit,~,parfit] = fitsignal(Vin,t,r,'P',@bg_hom3d,@ex_4pdeer,[],'RegParam',1);
@@ -93,8 +93,8 @@ To plot the resulting 95% and 50% confidence interval for the non-parametric dis
 
 .. code-block:: matlab
     
-    Pci50 = bootci.ci(0.50);
-    Pci95 = bootci.ci(0.95);
+    Pci50 = bootuq.ci(50);
+    Pci95 = bootuq.ci(95);
     
     plot(r,Pfit,'k')
     fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','FaceColor',0.5)
@@ -105,11 +105,11 @@ Assumptions:
 
 .. _cireference:
 
-CI Reference
+Uncertainty Quantification Reference
 ------------------------------------------
-All DeerLab functions which return any kind of confidence intervals (covariance-baed or bootstrapped) will return a so-called confidence intervals structure. When fitting *N* parameters or e.g. an *N*-element distance distribution, it has the following structure.
+All DeerLab functions which return any kind of uncertainty estimation (covariance-baed or bootstrapped) will return a so-called uncertainty quantification structure. When fitting *N* parameters or e.g. an *N*-element distance distribution, it has the following structure.
 
-``cist`` - Confidence interval structure containing the following fields:
+``uqstruct`` - Uncertainty quantification structure containing the following fields:
 
 ------------------------------------------
 
@@ -119,7 +119,7 @@ All DeerLab functions which return any kind of confidence intervals (covariance-
 
             Inputs:
             
-                *   ``c`` - Coverage/Confidence level (scalar, in range [0,1])
+                *   ``c`` - Coverage/Confidence level (scalar, in range [0,100])
             Returns:
             
                 *   ``parCI`` - confidence intervals of the *N*-parameters (*Nx2*-matrix, ``parCI(:,1)`` - upper bound, ``parCI(:,2)`` - lower bound)
@@ -148,17 +148,17 @@ All DeerLab functions which return any kind of confidence intervals (covariance-
 
             Inputs:
             
-                *   ``p`` - Percentile (scalar, in range [0,1])
+                *   ``p`` - Percentile (scalar, in range [0,100])
             Returns:
             
                 *   ``perct`` - Percentiles of the parameter distributions (*N*-element array)
 
 ---------------------------
 
-    **Specific to covariance CIs**
+    **Covariance & Propagation**
 
     *   ``.covmat`` - Covariance matrix for the fit parameters (*NxN* matrix)
-    *   ``.propagate(model,lb,ub)`` - Function handle that propagates the uncertainty unto another model
+    *   ``.propagate(model,lb,ub)`` - Function handle that propagates the uncertainty unto another model (based on quadratic-approximation)
 
 
             Inputs:

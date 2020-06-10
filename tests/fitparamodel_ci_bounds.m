@@ -17,7 +17,7 @@ upper = [0.3 20 0.6];
 lower = [0.1 1 0.1];
 [~,~,cistruct] = fitparamodel(V,Vmodel,t,par0,lower,upper);
 
-parCI = cistruct.ci(0.95);
+parCI = cistruct.ci(95);
 
 % Pass 1-2: confidence intervals are within the bounds
 pass(1) = all(all(parCI <= upper.'));

@@ -11,16 +11,16 @@ P = dd_gauss(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P + whitegaussnoise(t,0.05);
 
-[Pfit,parfit,Pci,parci] = fitmultimodel(S,K,r,@dd_gauss,3,'aic');
+[Pfit,parfit,Puq,paruq] = fitmultimodel(S,K,r,@dd_gauss,3,'aic');
 
-parci50 = parci.ci(0.50);
-parci95 = parci.ci(0.95);
+paruq50 = paruq.ci(50);
+paruq95 = paruq.ci(95);
 
-Pci50 = Pci.ci(0.50);
-Pci95 = Pci.ci(0.95);
+Pci50 = Puq.ci(50);
+Pci95 = Puq.ci(95);
 
 % Pass 1-2: confidence intervals behave as expected
-pass(1) = all(all(abs(parfit - parci50.') < abs(parfit - parci95.')));
+pass(1) = all(all(abs(parfit - paruq50.') < abs(parfit - paruq95.')));
 pass(2) = all(all(abs(Pfit - Pci50) <= abs(Pfit - Pci95)));
 
 pass = all(pass);

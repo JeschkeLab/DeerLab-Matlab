@@ -10,10 +10,10 @@ P = dd_gauss(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P + whitegaussnoise(t,0.05);
 
-[Pfit,Pci] = fitregmodel(S,K,r,'tikh','aic');
+[Pfit,Puq] = fitregmodel(S,K,r,'tikh','aic');
 
-Pci50 = Pci.ci(0.50);
-Pci95 = Pci.ci(0.95);
+Pci50 = Puq.ci(50);
+Pci95 = Puq.ci(95);
 
 % Pass: confidence intervals behave as expected
 pass = all(all(abs(Pfit - Pci50) <= abs(Pfit - Pci95)));

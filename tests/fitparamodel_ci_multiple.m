@@ -14,8 +14,8 @@ S = K*P + whitegaussnoise(t,0.01);
 par0 = [2 0.2];
 [parFit,Pfit,cistruct] = fitparamodel(S,@dd_gauss,r,K,par0);
 
-parCI1 = cistruct.ci(0.95);
-parCI2 = cistruct.ci(0.50);
+parCI1 = cistruct.ci(95);
+parCI2 = cistruct.ci(50);
 parCI3 = cistruct.ci(0.25);
 
 % Pass 1-2: confidence intervals behave as expected

@@ -24,7 +24,7 @@ Syntax
     P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric)
     P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric,'Background',bg_model)
     P = fitmultimodel(___,'Property',Value)
-    [P,param,Pci,paramci,Nopt,metrics,Peval] = fitmultimodel(___)
+    [P,param,Puq,paramuq,Nopt,metrics,Peval] = fitmultimodel(___)
 
 
 Parameters
@@ -40,8 +40,8 @@ Parameters
 Returns
     *  ``P`` - Fitted distance distribution (*M*-element array)
     *  ``param`` - Fitted model parameters (*W*-array)
-    *  ``Pci`` - Fitted distribution confidence intervals (*Mx2*-array)
-    *  ``paramci`` - Fitted parameters confidence intervals (*Wx2*-array)
+    *  ``Puq`` - Fitted distribution uncertainty quantification (*Mx2*-array)
+    *  ``paramuq`` - Fitted parameters uncertainty quantification (*Wx2*-array)
     *  ``Nopt`` - Optimal number of components (scalar)
     *  ``metrics`` - Evaluated model selection functionals (cell array)
     *  ``Peval`` - Fitted distance distributions for each multi-component model (*Nmax x N* matrix)
@@ -118,7 +118,7 @@ Similarly, time-domain global fitting can be used when passing time-domain ``mod
 
     [P,param,Nopt,metrics] = fitmultimodel(____)
 
-If requested alongside the distribution ``P``, the optimal fit model parameters ``param``, as well their respective confidence intervals ``Pci`` and ``paramci`` the optimal number of components ``Nopt`` and evaluated selection metrics ``metrics`` are returned.
+If requested alongside the distribution ``P``, the optimal fit model parameters ``param``, as well their respective uncertainty quantification structures ``Puq`` and ``paramuq``, the optimal number of components ``Nopt`` and evaluated selection metrics ``metrics`` are returned.
 
 -----------------------------
 

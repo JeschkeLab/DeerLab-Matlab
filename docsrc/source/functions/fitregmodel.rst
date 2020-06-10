@@ -19,7 +19,7 @@ Syntax
     P = fitregmodel(V,K,r,'regtype','method')
     P = fitregmodel(V,K,r,'regtype',alpha,'Property',Value)
     P = fitregmodel(V,K,r,'regtype','method','Property',Value)
-    [P,Pci,alpha,stats] = fitregmodel(___)
+    [P,Puq,alpha,stats] = fitregmodel(___)
 
 Parameters
     *   ``V`` - Input signal (*N*-element array) or input signals (cell array)
@@ -31,7 +31,7 @@ Parameters
 
 Returns
     *  ``P`` - Distance distribution (*M*-element array)
-    *  ``Pci`` - Estimated confidence intervals (*2xM*-element array)
+    *  ``Puq`` - Uncertainty quantification (struct)
     *  ``alpha`` - regularization parameter (scalar)
     *  ``stats`` - Goodness-of-fit statistics (structure)
 
@@ -43,17 +43,17 @@ Description
 
 .. code-block:: matlab
 
-    [P,Pci] = fitregmodel(V,K,r)
+    [P,Puq] = fitregmodel(V,K,r)
 
 Fits a distance distribution ``P`` to the input signal ``V`` given the kernel matrix ``K``, using Tikhonov regularization using an AIC-optimized regularization parameter. 
 
-The ``Pci`` output contains the confidence intervals structure (see :ref:`cireference`) of the fitted distance distribution.
+The ``Puq`` output contains the uncertainty quantification structure (see :ref:`cireference`) of the fitted distance distribution.
 
 -----------------------------
 
 .. code-block:: matlab
 
-    [P,Pci] = fitregmodel(V,K,r,'regtype',alpha)
+    [P,Puq] = fitregmodel(V,K,r,'regtype',alpha)
 
 Fits a distance distribution ``P`` to the input signal ``V`` using the regularization method specified in ``'regtype'`` and the regularization parameter value given in ``alpha``. The available values for ``'regtype'`` are
 
@@ -66,7 +66,7 @@ Fits a distance distribution ``P`` to the input signal ``V`` using the regulariz
 
 .. code-block:: matlab
 
-    [P,Pci,alpha] = fitregmodel(V,K,r,'regtype','method')
+    [P,Puq,alpha] = fitregmodel(V,K,r,'regtype','method')
 
 
 .. rst-class:: coderef
@@ -78,7 +78,7 @@ Instead of passing a numerical value for the regularization parameter ``alpha``,
 
 .. code-block:: matlab
 
-    [P,Pci] =  = fitregmodel({V1,V2,___},{K1,K2,___},r,___)
+    [P,Puq] =  = fitregmodel({V1,V2,___},{K1,K2,___},r,___)
 
 Passing multiple signals and kernels enables global fitting of a kernel model to a single distribution. The global fit weights are automatically computed according to their contribution to ill-posedness. The multiple signals are passed as a cell array of arrays of sizes `N_1`, `N_2`,... and a cell array of kernel matrices with sizes `N_1 \times M`, `N_2 \times M`,... must be passed as well.
 
@@ -86,7 +86,7 @@ Passing multiple signals and kernels enables global fitting of a kernel model to
 
 .. code-block:: matlab
 
-    [P,Pci,alpha,stats] = fitregmodel(___)
+    [P,Puq,alpha,stats] = fitregmodel(___)
 
 The ``stats`` structure provides several statistical metric which allow judgment on the quality of the fitted signal on the experimental data ``V`` and allows comparison between fits. The structure contains the following fields: 
 

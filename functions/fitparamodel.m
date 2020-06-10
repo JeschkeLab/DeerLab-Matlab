@@ -1,7 +1,7 @@
 %
 % FITPARAMODEL Fits a time- or distance-domain parametric model to one (or several) signals
 %
-%   [param,fit,paramci,modelci,stats] = FITPARAMODEL(V,@model,t,par0,lb,ub)
+%   [param,fit,paramuq,modeluq,stats] = FITPARAMODEL(V,@model,t,par0,lb,ub)
 %   __ = FITPARAMODEL(V,@model,r,K,par0,lb,ub)
 %   __ = FITPARAMODEL(V,@model,r,K,par0)
 %   __ = FITPARAMODEL(V,@model,r,K)
@@ -15,14 +15,10 @@
 %   Fits the N-point signal (V) to a M-point parametric model (@model) given an
 %   M-point distance/time axis (r/t). For distance-domain fitting, provide
 %   the NxM point kernel matrix (K). The fitted model corresponds to a parametric model
-%   calculated by the passed function handle (@model). The fitted parameters (param)
-%   are returned as the first output argument, their 95% confidence intervals (paramci) are
-%   returned as the third output, the fitted model as the second output, and the
-%   corresponding 95% confidence bands (modelci) as the fourth output. If
-%   more than one confidence level is requested, (paramci) and (modelci)
-%   are given as cell arrays containing the confidence intervals at the different
-%   confidence levels. A structure containing different statistical
-%   estimators of goodness of fit is returned as (stats).
+%   calculated by the passed function handle (@model). 
+
+%   A structure containing different statistical estimators of goodness of 
+%   fit is returned as (stats).
 %
 %   The initial guess of the model parameters can be passed as an
 %   argument (param0). This is optional for DeerLab model functions. If (@model)
@@ -417,7 +413,7 @@ if calcParamUncertainty
     end
     
     % Construct confidence interval structure
-    parci = cist('covariance',parfit,covmatrix,lb,ub);
+    parci = uqst('covariance',parfit,covmatrix,lb,ub);
     
 end
 

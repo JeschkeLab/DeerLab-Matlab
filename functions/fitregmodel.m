@@ -328,7 +328,7 @@ if getConfidenceIntervals
     
     % Construct confidence interval structure for P
     NonNegConst = zeros(nr,1);
-    Pci = cist('covariance',P,covmat,NonNegConst,[]);
+    Pci = uqst('covariance',P,covmat,NonNegConst,[]);
     
 end
 

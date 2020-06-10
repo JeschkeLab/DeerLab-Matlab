@@ -187,7 +187,7 @@ warning('on','all')
 %-------------------------------------------------------------------------------
 for iOut = 1:numel(evals)
     boots = evals{iOut};
-    stats{iOut} = cist('bootstrap',boots);
+    stats{iOut} = uqst('bootstrap',boots);
 end
 
 end

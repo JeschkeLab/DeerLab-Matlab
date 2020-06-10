@@ -13,11 +13,11 @@ S = K*P + whitegaussnoise(t,0.05);
 
 [~,~,parfit,cistruct] = selectmodel({@dd_gauss,@dd_gauss2},S,r,K,'aic');
 
-parci1 = cistruct{1}.ci(0.50);
-parci2 = cistruct{1}.ci(0.95);
+paruq1 = cistruct{1}.ci(50);
+paruq2 = cistruct{1}.ci(95);
 
 % Pass 1-2: confidence intervals behave as expected
-pass = all(all(abs(parfit{1} - parci1.') < abs(parfit{1} - parci2.')));
+pass = all(all(abs(parfit{1} - paruq1.') < abs(parfit{1} - paruq2.')));
 
 maxerr = NaN;
 

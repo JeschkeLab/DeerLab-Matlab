@@ -12,7 +12,7 @@ S = K*P;
 par0 = [2 0.2];
 [parFit,Pfit,cistruct] = fitparamodel(S,@dd_gauss,r,K,par0,'solver','lsqnonlin');
 
-parCI = cistruct.ci(0.95);
+parCI = cistruct.ci(95);
 
 % Pass 1: distance distribution is well fitted
 pass(1) = all(abs(Pfit - P) < 1e-5);

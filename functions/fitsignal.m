@@ -445,13 +445,13 @@ else
         end
         
         % Construct CI-structure for fitted parameters
-        parci_ = cist('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
+        parci_ = uqst('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
         
         % Lower bound for distribution CIs
         Plo = zeros(numel(r),1);
         if parfreeDistribution
             % Construct CI-structure for non-parametric distribution
-            PfitCI = cist('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
+            PfitCI = uqst('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
         else
             % Construct CI-structure for parametric distribution           
             PfitCI = parci_.propagate(@(parfit)dd_model(r,parfit_(ddidx)),Plo,[]);
@@ -509,7 +509,7 @@ for i = 1:nSignals
     parfit.ex{i} = parfit_(exidx{i});
 end
 if calculateCI
-    parci_ = parci_.ci(0.95);
+    parci_ = parci_.ci(95);
     parci.dd = parci_(ddidx,:);
     modfitci.Pfit = PfitCI;
     for i = 1:nSignals
@@ -527,8 +527,8 @@ if nargout==0
         subplot(2,nSignals,i);
         plot(t{i},Vexp{i},'k.',t{i},Vfit{i},'r','LineWidth',1.5)
         hold on
-        Vci95 = VfitCI{i}.ci(0.95);
-        Vci50 = VfitCI{i}.ci(0.50);
+        Vci95 = VfitCI{i}.ci(95);
+        Vci50 = VfitCI{i}.ci(50);
         fill([t{i}; flipud(t{i})],[Vci95(:,1); flipud(Vci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
         fill([t{i}; flipud(t{i})],[Vci50(:,1); flipud(Vci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
         hold off
@@ -541,8 +541,8 @@ if nargout==0
     subplot(2,1,2);
     plot(r,Pfit,'k','LineWidth',1.5);
     hold on
-    Pci95 = PfitCI.ci(0.95);
-    Pci50 = PfitCI.ci(0.50);
+    Pci95 = PfitCI.ci(95);
+    Pci50 = PfitCI.ci(50);
     fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
     fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
     hold off

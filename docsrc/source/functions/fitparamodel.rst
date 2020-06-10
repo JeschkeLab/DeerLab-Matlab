@@ -15,7 +15,7 @@ Syntax
 
 .. code-block:: matlab
 
-    [param,fit,paramci,fitci,stats] = fitparamodel(V,@model,t)
+    [param,fit,paramuq,fituq,stats] = fitparamodel(V,@model,t)
     __ = fitparamodel(V,@model,r,K,par0,lb,ub)
     __ = fitparamodel(V,@model,r,K,par0)
     __ = fitparamodel(V,@model,r,K)
@@ -40,8 +40,8 @@ Parameters
 Returns
     *  ``param`` - Fitted model parameters (*W*-array)
     *  ``fit`` - Parametric model fit (*N*-element array)
-    *  ``paramci`` - Fit confidence intervals (*Wx2*-element array)
-    *  ``fitci`` - Model fit confidence bands (*Nx2*-element array)
+    *  ``paramuq`` - Parameters fit uncertainty quantification (struct)
+    *  ``fituq`` - Model fit uncertainty quantification (struct)
     *  ``stats`` - Goodness-of-fit statistics (structure)
 
 
@@ -53,12 +53,12 @@ Description
 
 .. code-block:: matlab
 
-    [param,fit,paramci,fitci] = fitparamodel(V,@model,t)
-    [param,fit,paramci,fitci] = fitparamodel(V,@model,t,param0)
+    [param,fit,paramuq,fituq] = fitparamodel(V,@model,t)
+    [param,fit,paramuq,fituq] = fitparamodel(V,@model,t,param0)
 
 Fits the **time-domain** parametric model ``@model`` to the input signal ``V`` on a time axis ``t``. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require ``param0`` to be passed.
 
-The fitted parameters as well as the corresponding confidence intervals structures (see :ref:`cireference`) are returned as the ``param`` and ``paramci`` outputs, respectively. The fitted model and its confidence bands are returned as the ``fit`` and ``fitci`` outputs, respectively.
+The fitted parameters as well as the corresponding uncertainty quantification structures (see :ref:`cireference`) are returned as the ``param`` and ``paramuq`` outputs, respectively. The fitted model and corresponding uncertainty quantifitcation are returned as the ``fit`` and ``fituq`` outputs, respectively.
 
 
 -----------------------------
@@ -66,8 +66,8 @@ The fitted parameters as well as the corresponding confidence intervals structur
 
 .. code-block:: matlab
 
-    [param,fit,paramci,fitci] = fitparamodel(V,@model,r,K)
-    [param,fit,paramci,fitci] = fitparamodel(V,@model,r,K,param0)
+    [param,fit,paramuq,fituq] = fitparamodel(V,@model,r,K)
+    [param,fit,paramuq,fituq] = fitparamodel(V,@model,r,K,param0)
 
 Fits the **distance-domain** parametric model ``@model`` to the input signal ``V`` on a distance axis ``r``. The dipolar kernel ``K`` is required as in input for distance-domain fitting. User-defined initial guess values can be passed as an additional argument, if not they are automatically determined from the model. If the model is a user-defined function handle, the function will require ``param0`` to be passed.
 
@@ -124,7 +124,7 @@ By doing so, ``fitparamodel`` will automatically pass the index ``idx = (1,2,...
 
 .. code-block:: matlab
 
-    [param,fit,paramci,fitci,stats] = fitparamodel(___)
+    [param,fit,paramuq,fituq,stats] = fitparamodel(___)
 
 The ``stats`` structure provides several statistical metric which allow judgment on the quality of the fitted ``Vfit`` on the experimental data ``V`` and allows comparison between fits. The structure contains the following fields: 
 
