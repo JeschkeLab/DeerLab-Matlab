@@ -49,7 +49,8 @@ Parameters
     *   ``ex`` - Experiment model, can be...
 
                  -- ``@ex_model`` function handle for parametric experiment model
-                 -- ``'none'`` to indicate simple dipolar oscillation (mod.depth = 1)
+                 -- ``'none'`` to indicate simple dipolar oscillation (mod.depth = 1)\
+                
     *   ``par0`` -- Starting parameters ``{par0_dd,par0_bg,par0_ex}`` (3-element cell array)
     *   ``lb`` -- Lower bounds for parameters ``{lb_dd,lb_bg,lb_ex}`` (3-element cell array)
     *   ``ub`` -- Upper bounds for parameters ``{lb_dd,lb_bg,lb_ex}`` (3-element cell array)
@@ -65,8 +66,16 @@ Returns
                  * ``.bg`` -- Fitted parameters for background model
                  * ``.ex`` -- Fitted parameters for experiment model
 
-    *   ``modfitci`` -- Confidence interval structures for Vfit, Bfit and Pfit
-    *   ``parci`` -- Structure with confidence intervals for parameters (similar to ``parfit``)
+    *   ``modfituq`` -- Structure with uncertainty quantification of the fitted...
+                 * ``.Pfit`` -- ... distance distribution
+                 * ``.Bfit`` -- ... background(s)
+                 * ``.Vfit`` -- ... signal(s)
+                 
+    *   ``paruq`` -- Structure with uncertainty quantification of the fitted...
+                 * ``.dd`` -- ...distance distribution model parameters
+                 * ``.bg`` -- ...background(s) model parameters
+                 * ``.ex`` -- ...experiment(s) model parameters
+                 
     *   ``stats`` -- Goodness of fit statistical estimators (struct)
 
 ------------------------
@@ -84,7 +93,7 @@ Description
 
 Fits a full time-domain model of the dipolar signal constructed from the distance distribution model ``dd``, background model ``bg`` and experiment model ``ex`` to the experimental data ``V``, defined on a time-axis ``t``. The distance distribution is fitted on the specified distance axis ``r``. If some models are not specified, the defaults are used: ``'P'`` for the ``dd`` model, ``@bg_hom3d`` for the ``bg`` model, and ``@ex_4pdeer`` for the experiment model.
 
-The fitted dipolar signal ``Vfit``, fitted distribution ``Pfit`` and fitted background ``Bfit`` are returned as the first outputs. The corresponding model parameters are returned in the ``parfit`` structure and their corresponding confidence intervals in the ``parci`` structure. ``stats`` contains information on the quality of the fit.
+The fitted dipolar signal ``Vfit``, fitted distribution ``Pfit`` and fitted background ``Bfit`` are returned as the first outputs and their corresponding uncertainty quantification structures as ``modfituq``. The corresponding model parameters are returned in the ``parfit`` structure and their corresponding uncertainty quantification structures (see :ref:`cireference`) in the ``parci`` structure. ``stats`` contains information on the quality of the fit.
 
 .. code-block:: matlab
 
@@ -97,7 +106,7 @@ Examples:
 .. code-block:: matlab
 
     fitsignal(V,t,r,@dd_gauss,@bg_hom3d,@ex_4pdeer)  % Fit a 4pDEER signal with homogenous 3D background with Gaussian distribution
-    fitsignal(V,t,r,'P',@bg_hom3d,@ex_5pdeer)          % Fit a 5pDEER signal with exponential background and Tikhonov regularization
+    fitsignal(V,t,r,'P',@bg_hom3d,@ex_5pdeer)        % Fit a 5pDEER signal with exponential background and Tikhonov regularization
     fitsignal(V,t,r,'none',@bg_strexp,@ex_4pdeer)    % Fit a 4pDEER stretched exponential background (no foreground)
     fitsignal(V,t,r,@dd_rice,'none','none')          % Fit a dipolar evolution function with Rician distribution
     fitsignal(V,t,r,@dd_gauss2,'none',@ex_4pdeer)    % Fit a 4pDEER form factor (no background) with bimodal Gaussian distribution

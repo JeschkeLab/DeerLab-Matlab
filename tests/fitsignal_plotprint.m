@@ -23,12 +23,9 @@ else
     set(0,'DefaultFigureVisible','off')
 end
 
-try
-    evalc('fitsignal(V,t,r,''P'',@bg_exp,@ex_4pdeer)');
-    pass = true;
-catch
-    pass = false;
-end
+evalc('fitsignal(V,t,r,''P'',@bg_exp,@ex_4pdeer)');
+pass = true;
+
 set(0,'DefaultFigureVisible','on')
 
 maxerr = NaN;

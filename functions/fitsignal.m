@@ -81,7 +81,7 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [Vfit,Pfit,Bfit,parfit,modfitci,parci,stats] = fitsignal(Vexp,t,r,varargin)
+function [Vfit,Pfit,Bfit,parfit,modfituq,paruq,stats] = fitsignal(Vexp,t,r,varargin)
 
 if nargin<3
     error('At least three inputs (V,t,r) must be specified.');
@@ -372,7 +372,7 @@ if RegularizationOnly
         Bfit{i} = ones(size(Vexp{i}));
     end
     parfit_ = [];
-    parci_ = [];
+    paruq_ = [];
 else
     
     % Keep track of alpha and parameter vector across iterations, to avoid
@@ -444,30 +444,40 @@ else
             covmatrix = covmatrix + Weights(i)*covmatrix_;
         end
         
-        % Construct CI-structure for fitted parameters
-        parci_ = uqst('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
-        
-        % Lower bound for distribution CIs
+        % Construct uncertainty quantification structure for fitted parameters
+        paruq_ = uqst('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
+
+        % Lower bound for distribution uncertainty quantification
         Plo = zeros(numel(r),1);
         if parfreeDistribution
+            paruq_dd = uqst('covariance',parfit_,covmatrix(ddidx,ddidx),lb(ddidx),ub(ddidx));
             % Construct CI-structure for non-parametric distribution
-            PfitCI = uqst('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
+            PfitUQ = uqst('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
         else
             % Construct CI-structure for parametric distribution           
-            PfitCI = parci_.propagate(@(parfit)dd_model(r,parfit_(ddidx)),Plo,[]);
+            PfitUQ = paruq_.propagate(@(parfit)dd_model(r,parfit_(ddidx)),Plo,[]);
         end
-        
-        VfitCI = cell(nSignals,1);
-        BfitCI = cell(nSignals,1);
-        for idx = 1:nSignals
+
+
+        VfitUQ = cell(nSignals,1);
+        BfitUQ = cell(nSignals,1);
+        paruq_bg = cell(nSignals,1);
+        paruq_ex = cell(nSignals,1);
+        for i = 1:nSignals
+            
+            % Construct uncertainty quantification structures for
+            % experiment and background parameters
+            paruq_bg{i} = uqst('covariance',parfit_,covmatrix(bgidx{i},bgidx{i}),lb(bgidx{i}),ub(bgidx{i}));
+            paruq_ex{i} = uqst('covariance',parfit_,covmatrix(exidx{i},exidx{i}),lb(exidx{i}),ub(exidx{i}));
+            
             % Propagate uncertainty to the dipolar signal model
-            VfitCI{idx} = parci_.propagate(@(par)Kmodels{idx}({par(exidx{idx}),par(bgidx{idx})})*Pfit,[],[]);
+            VfitUQ{i} = paruq_.propagate(@(par)Kmodels{i}({par(exidx{i}),par(bgidx{i})})*Pfit,[],[]);
             
             % Propagate uncertainty to the background model
-            BfitCI{idx} = parci_.propagate(@(par)bg_model{idx}(t{idx},par(bgidx{idx})),[],[]);
+            BfitUQ{i} = paruq_.propagate(@(par)bg_model{i}(t{i},par(bgidx{i})),[],[]);
         end
     else
-        parci_ = [];
+        paruq_ = [];
     end
 end
 
@@ -478,12 +488,12 @@ if normP && includeForeground
     Pnorm = trapz(r,Pfit);
     Pfit = Pfit/Pnorm;
     if calculateCI
-        if iscell(PfitCI)
-            for j = 1:numel(PfitCI)
-                PfitCI{j} = PfitCI{j}/Pnorm;
+        if iscell(PfitUQ)
+            for j = 1:numel(PfitUQ)
+                PfitUQ{j} = PfitUQ{j}/Pnorm;
             end
         else
-            PfitCI.ci = @(p) PfitCI.ci(p)/Pnorm;
+            PfitUQ.ci = @(p) PfitUQ.ci(p)/Pnorm;
         end
     end
 end
@@ -509,14 +519,14 @@ for i = 1:nSignals
     parfit.ex{i} = parfit_(exidx{i});
 end
 if calculateCI
-    parci_ = parci_.ci(95);
-    parci.dd = parci_(ddidx,:);
-    modfitci.Pfit = PfitCI;
+    paruq_ = paruq_.ci(95);
+    paruq.dd = paruq_dd;
+    modfituq.Pfit = PfitUQ;
     for i = 1:nSignals
-        parci.bg{i} = parci_(bgidx{i},:);
-        parci.ex{i} = parci_(exidx{i},:);
-        modfitci.Vfit{i} = VfitCI;
-        modfitci.Bfit{i} = BfitCI;
+        paruq.bg{i} = paruq_bg{i};
+        paruq.ex{i} = paruq_ex{i};
+        modfituq.Vfit{i} = VfitUQ;
+        modfituq.Bfit{i} = BfitUQ;
     end
 end
 
@@ -527,8 +537,8 @@ if nargout==0
         subplot(2,nSignals,i);
         plot(t{i},Vexp{i},'k.',t{i},Vfit{i},'r','LineWidth',1.5)
         hold on
-        Vci95 = VfitCI{i}.ci(95);
-        Vci50 = VfitCI{i}.ci(50);
+        Vci95 = VfitUQ{i}.ci(95);
+        Vci50 = VfitUQ{i}.ci(50);
         fill([t{i}; flipud(t{i})],[Vci95(:,1); flipud(Vci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
         fill([t{i}; flipud(t{i})],[Vci50(:,1); flipud(Vci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
         hold off
@@ -541,8 +551,8 @@ if nargout==0
     subplot(2,1,2);
     plot(r,Pfit,'k','LineWidth',1.5);
     hold on
-    Pci95 = PfitCI.ci(95);
-    Pci50 = PfitCI.ci(50);
+    Pci95 = PfitUQ.ci(95);
+    Pci50 = PfitUQ.ci(50);
     fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','LineStyle','none','FaceAlpha',0.2)
     fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','LineStyle','none','FaceAlpha',0.5)
     hold off
@@ -562,9 +572,9 @@ if nargout==0
         pars = info.parameters;
         for p = 1:numel(parfit.dd)
             c = parfit.dd(p);
-            ci = parci.dd(p,:);
+            ci = paruq.dd.ci(95);
             fprintf(str,'dd',1,p,c,...
-                ci(1),ci(2),pars(p).name,pars(p).units);
+                ci(2),ci(1),pars(p).name,pars(p).units);
         end
     end
     if numel(parfit.bg)>0
@@ -573,9 +583,9 @@ if nargout==0
             pars = info.parameters;
             for p = 1:numel(parfit.bg{i})
                 c = parfit.bg{i}(p);
-                ci = parci.bg{i}(p,:);
+                ci = paruq.bg{i}.ci(95);
                 fprintf(str,'bg',i,p,c,...
-                    ci(1),ci(2),pars(p).name,pars(p).units)
+                    ci(2),ci(1),pars(p).name,pars(p).units)
             end
         end
     end
@@ -585,9 +595,9 @@ if nargout==0
             pars = info.parameters;
             for p = 1:numel(parfit.ex{i})
                 c = parfit.ex{i}(p);
-                ci = parci.ex{i}(p,:);
+                ci = paruq.ex{i}.ci(95);
                 fprintf(str,'ex',i,p,c,...
-                    ci(1),ci(2),pars(p).name,pars(p).units)
+                    ci(2),ci(1),pars(p).name,pars(p).units)
             end
         end
     end
@@ -606,9 +616,9 @@ if nSignals==1
     if iscell(parfit.ex)
         parfit.ex = parfit.ex{1};
     end
-    if ~isempty(parci_)
-        parci.bg = parci.bg{1};
-        parci.ex = parci.ex{1};
+    if ~isempty(paruq_)
+        paruq.bg = paruq.bg{1};
+        paruq.ex = paruq.ex{1};
     end
     if ~isempty(stats)
         stats = stats{1};
