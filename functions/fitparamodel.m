@@ -76,14 +76,16 @@ par0 = [];
 lb = [];
 ub = [];
 
-%Check if kernel is passed
-input = varargin{1};
+% Check if kernel is passed
 Kpassed = false;
-if ~ischar(input)
-    if all(size(input)>1) || iscell(input)
-        Kpassed = true;
-        K = varargin{1};
-        varargin(1) = [];
+if ~isempty(varargin)
+    input = varargin{1};
+    if ~ischar(input)
+        if all(size(input)>1) || iscell(input)
+            Kpassed = true;
+            K = varargin{1};
+            varargin(1) = [];
+        end
     end
 end
 isDistanceDomain = Kpassed;
