@@ -30,6 +30,10 @@ validateattributes(t,{'numeric'},{'vector'},mfilename,'t')
 
 % Determine zero-time via first-moment integral
 %-------------------------------------------------------------------------------
+% See:
+%   G. Jeschke, Appl.Magn.Reson. 30, 473-498 (2006) p.485
+%   https://doi.org/10.1007/BF03166213
+
 % Use column vectors
 V = V(:);
 t = t(:);
