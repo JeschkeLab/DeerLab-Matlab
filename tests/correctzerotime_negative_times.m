@@ -2,29 +2,29 @@ function [pass,maxerr] = test(opt)
 
 % Check that zero-time correction works with negative times
 
-t = linspace(-2,5,400);
-r = time2dist(t);
+t_true = linspace(-2,5,400);
+r = linspace(1,7,400);
 P = dd_gauss(r,[4,0.2]);
-S = dipolarkernel(t,r)*P;
-zt = abs(min(t));
+V = dipolarkernel(t_true,r)*P;
 
-[ct,czt] = correctzerotime(S,t+1);
+tshift = 1.21343;
+t = t_true + tshift;
+
+[ct,czt] = correctzerotime(V,t);
 
 % Pass 1: corrected time-axis is equal to original
-pass(1) = all(abs(ct - t.') < 1e-10);
+pass(1) = all(abs(ct - t_true.') < 1e-10);
 % Pass 2: zero-time is returned properly
-pass(2) = abs(czt - zt) < 1e-10;
+pass(2) = abs(czt - tshift) < 1e-10;
 
-pass = all(pass);
- 
 maxerr = max(abs(ct - t.'));
 
 if opt.Display
-   plot(t,S,ct,S)
-   xlabel('t [\mus]')
-   ylabel('V(t)')
-   grid on, axis tight, box on
-   legend('Input','Output')
+    plot(t,V,ct,V)
+    xlabel('t [\mus]')
+    ylabel('V(t)')
+    grid on, axis tight, box on
+    legend('Input','Output')
 end
 
 end
