@@ -141,9 +141,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-uncertainty-quantification">Covariance Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#uncertainty-quantification-reference">Uncertainty Quantification Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -244,8 +244,7 @@
 <div class="section" id="syntax">
 <h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">tc</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
-<span class="n">tc</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">t0</span><span class="p">)</span>
-<span class="p">[</span><span class="n">tc</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">t0</span><span class="p">)</span>
+<span class="p">[</span><span class="n">tc</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
 <dl class="docutils">
@@ -253,14 +252,13 @@
 <dd><ul class="first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">V</span></code> - Signal (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">t</span></code> - Time axis (<em>N</em>-element array)</li>
-<li><code class="docutils literal notranslate"><span class="pre">t0</span></code> - Zero time (scalar)</li>
 </ul>
 </dd>
 <dt>Returns</dt>
 <dd><ul class="first last simple">
 <li><code class="docutils literal notranslate"><span class="pre">tc</span></code> - Corrected time axis (<em>N</em>-element array)</li>
 <li><code class="docutils literal notranslate"><span class="pre">t0</span></code> - Zero time (scalar)</li>
-<li><code class="docutils literal notranslate"><span class="pre">pos</span></code>  - Zero time index (scalar)</li>
+<li><code class="docutils literal notranslate"><span class="pre">idx</span></code>  - Zero time index (scalar)</li>
 </ul>
 </dd>
 </dl>
@@ -268,15 +266,10 @@
 <hr class="docutils" />
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">tc</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">tc</span><span class="p">,</span><span class="n">t0</span><span class="p">,</span><span class="n">idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Determines the zero time of a dipolar signal <code class="docutils literal notranslate"><span class="pre">V</span></code> and corrects the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in microseconds) for it. If input signal <code class="docutils literal notranslate"><span class="pre">V</span></code> is the zero time <code class="docutils literal notranslate"><span class="pre">t0</span></code> and corrected time axis <code class="docutils literal notranslate"><span class="pre">tc</span></code> will be returned.</p>
-<hr class="docutils" />
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">tc</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">t0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Corrects the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> for a given zero-time <code class="docutils literal notranslate"><span class="pre">t0</span></code> in microseconds.</p>
+<p>Determines the zero time of a dipolar signal <code class="docutils literal notranslate"><span class="pre">V</span></code> and corrects the time axis <code class="docutils literal notranslate"><span class="pre">t</span></code> (in microseconds) for it. The function returns the corrected time axis <code class="docutils literal notranslate"><span class="pre">tc</span></code>, the corresponding zero time <code class="docutils literal notranslate"><span class="pre">t0</span></code> and the index <code class="docutils literal notranslate"><span class="pre">idx</span></code> of the zero-time in the <code class="docutils literal notranslate"><span class="pre">t</span></code> array.</p>
 </div>
 </div>
 

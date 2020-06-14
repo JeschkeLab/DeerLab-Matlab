@@ -141,9 +141,9 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Uncertainty</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#covariance-cis">Covariance CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#bootstrap-cis">Bootstrap CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#ci-reference">CI Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#covariance-uncertainty-quantification">Covariance Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uncertainty-quantification-reference">Uncertainty Quantification Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Example scripts</a></li>
@@ -239,20 +239,20 @@
 <h1>Uncertainty<a class="headerlink" href="#uncertainty" title="Permalink to this headline">¶</a></h1>
 <p>After fitting experimental data with a distance distribution, a background, and a modulation depth, it is important to assess the uncertainty (i.e. the error) in the fitted parameters.</p>
 <p>DeerLab provides uncertainty estimates for all parameters in the form of confidence intervals (CIs). They can be calculated in two ways: either using the covariance matrix, or using bootstrap. The first method is fast, but is not entirely accurate, whereas bootstrap is much slower, but more robust. All confidence intervals provided by DeerLab functions describe the range of values which might contain the ground truth with a ceratin probability.</p>
-<div class="section" id="covariance-cis">
-<h2>Covariance CIs<a class="headerlink" href="#covariance-cis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="covariance-uncertainty-quantification">
+<h2>Covariance Uncertainty Quantification<a class="headerlink" href="#covariance-uncertainty-quantification" title="Permalink to this headline">¶</a></h2>
 <p>Along with every fit, functions like <code class="docutils literal notranslate"><span class="pre">fitsignal</span></code> return confidence intervals for the fitted parameters and the fitted distributions. For example,</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">parCI</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Vfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">Bfit</span><span class="p">,</span><span class="n">parfit</span><span class="p">,</span><span class="n">paruq</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vexp</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The output <code class="docutils literal notranslate"><span class="pre">parCI</span></code> contains a confidence interval structure which contains the uncertainty information for all fitted parameters, calculated using the standard method based on the variance-covariance matrix.</p>
-<p>The confidence intervals (at any confidence level) can be calculated by using the <code class="docutils literal notranslate"><span class="pre">parCI.ci()</span></code> field, e.g. the 50%, 75% and 95% confidence intervals:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">parfit_ci50</span> <span class="p">=</span> <span class="n">parCI</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.50</span><span class="p">);</span>
-<span class="n">parfit_ci75</span> <span class="p">=</span> <span class="n">parCI</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.75</span><span class="p">);</span>
-<span class="n">parfit_ci95</span> <span class="p">=</span> <span class="n">parCI</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.95</span><span class="p">);</span>
+<p>The output <code class="docutils literal notranslate"><span class="pre">paruq</span></code> is a uncertainty quantification structure which contains the uncertainty information for all fitted parameters, calculated using the standard method based on the variance-covariance matrix.</p>
+<p>The confidence intervals (at any confidence level) can be calculated by using the <code class="docutils literal notranslate"><span class="pre">paruq.ci()</span></code> field, e.g. the 50%, 75% and 95% confidence intervals:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">parfit_ci50</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="n">parfit_ci75</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">75</span><span class="p">);</span>
+<span class="n">parfit_ci95</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Covariance-based uncertainty can be propagated to dependent models, e.g. propagating the uncertainty in the fit of <code class="docutils literal notranslate"><span class="pre">rmean</span></code> and <code class="docutils literal notranslate"><span class="pre">fwhm</span></code> to the resulting Gaussian distance distribution. This can be done via the <code class="docutils literal notranslate"><span class="pre">parCI.propagate()</span></code> function:</p>
+<p>Uncertainty can be propagated to dependent models, e.g. propagating the uncertainty in the fit of <code class="docutils literal notranslate"><span class="pre">rmean</span></code> and <code class="docutils literal notranslate"><span class="pre">fwhm</span></code> to the resulting Gaussian distance distribution. This can be done via the <code class="docutils literal notranslate"><span class="pre">paruq.propagate()</span></code> function:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% parfit = [rmean fwhm]</span>
 <span class="n">ddmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">parfit</span><span class="p">)</span><span class="n">dd_gauss</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">parfit</span><span class="p">)</span>
 
@@ -262,7 +262,7 @@
 <span class="c">%Propagate the error in the parameters to the model</span>
 <span class="n">lb</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">Pfit</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">ub</span> <span class="p">=</span> <span class="p">[];</span>
-<span class="n">Pci</span> <span class="p">=</span> <span class="n">parCI</span><span class="p">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">ddmodel</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
+<span class="n">Pci</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">ddmodel</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
 
 <span class="c">% Get the 95%-confidence intervals of the fitted distribution</span>
 <span class="n">Pci95</span> <span class="p">=</span> <span class="n">Pci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span>
@@ -278,29 +278,29 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="bootstrap-cis">
-<h2>Bootstrap CIs<a class="headerlink" href="#bootstrap-cis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bootstrap-uncertainty-quantification">
+<h2>Bootstrap Uncertainty Quantification<a class="headerlink" href="#bootstrap-uncertainty-quantification" title="Permalink to this headline">¶</a></h2>
 <p>A more thorough way of assessing parameter uncertainty is bootstrap. In this method, many additional synthetic datasets are generated from the given experimental data and the fitted model and are fitted individually. This yields an ensemble of parameter fits that is analyzed statistically to provide information about the scatter.</p>
 <p>Here is an example for a parametric model:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootci</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootuq</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
 
 <span class="nf">function</span> <span class="s">parfit</span> <span class="s">=</span> <span class="s">fitfcn(Vin,r,K)</span>
        <span class="n">parfit</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">Vin</span><span class="p">,@</span><span class="n">dd_gauss</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">K</span><span class="p">);</span>
 <span class="nf">end</span>
 </pre></div>
 </div>
-<p>The output <code class="docutils literal notranslate"><span class="pre">bootci</span></code> structure can be used to evaluate confidence intervals at different confidence levels, e.g the 50%, 75% and 95% confidence intervals:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">parfit_ci50</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.50</span><span class="p">);</span>
-<span class="n">parfit_ci75</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.75</span><span class="p">);</span>
-<span class="n">parfit_ci95</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.95</span><span class="p">);</span>
+<p>The output <code class="docutils literal notranslate"><span class="pre">bootuq</span></code> structure can be analogously used to evaluate confidence intervals at different confidence levels, e.g the 50%, 75% and 95% confidence intervals:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">parfit_ci50</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="n">parfit_ci75</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">75</span><span class="p">);</span>
+<span class="n">parfit_ci95</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>The bootstrapped distributions for each parameter can be accessed by using the <code class="docutils literal notranslate"><span class="pre">parCI.pardist()</span></code> field, e.g.if the modulation depth is the second fit parameter:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">moddepth_dist</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">pardist</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p>The bootstrapped distributions for each parameter can be accessed by using the <code class="docutils literal notranslate"><span class="pre">paruq.pardist()</span></code> field, e.g.if the modulation depth is the second fit parameter:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">moddepth_dist</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">pardist</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Here is an example for a model with a non-parametric distribution:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootci</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">bootuq</span> <span class="p">=</span> <span class="n">bootan</span><span class="p">(@(</span><span class="n">V</span><span class="p">)</span><span class="n">fitfcn</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">),</span><span class="n">Vexp</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="s">&#39;verbose&#39;</span><span class="p">,</span><span class="n">true</span><span class="p">);</span>
 
 <span class="nf">function</span> <span class="s">[Pfit,</span> <span class="s">parfit.bg,</span> <span class="s">parfit.ex]</span> <span class="s">=</span> <span class="s">fitfcn(Vin,t,r)</span>
        <span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">parfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitsignal</span><span class="p">(</span><span class="n">Vin</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">,[],</span><span class="s">&#39;RegParam&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
@@ -308,8 +308,8 @@
 </pre></div>
 </div>
 <p>To plot the resulting 95% and 50% confidence interval for the non-parametric distance distribution, use</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Pci50</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.50</span><span class="p">);</span>
-<span class="n">Pci95</span> <span class="p">=</span> <span class="n">bootci</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mf">0.95</span><span class="p">);</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Pci50</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+<span class="n">Pci95</span> <span class="p">=</span> <span class="n">bootuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span>
 
 <span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">fill</span><span class="p">([</span><span class="n">r</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">r</span><span class="p">)],[</span><span class="n">Pci50</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">Pci50</span><span class="p">(:,</span><span class="mi">2</span><span class="p">))],</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;FaceColor&#39;</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
@@ -324,10 +324,10 @@
 </dd>
 </dl>
 </div>
-<div class="section" id="ci-reference">
-<span id="cireference"></span><h2>CI Reference<a class="headerlink" href="#ci-reference" title="Permalink to this headline">¶</a></h2>
-<p>All DeerLab functions which return any kind of confidence intervals (covariance-baed or bootstrapped) will return a so-called confidence intervals structure. When fitting <em>N</em> parameters or e.g. an <em>N</em>-element distance distribution, it has the following structure.</p>
-<p><code class="docutils literal notranslate"><span class="pre">cist</span></code> - Confidence interval structure containing the following fields:</p>
+<div class="section" id="uncertainty-quantification-reference">
+<span id="cireference"></span><h2>Uncertainty Quantification Reference<a class="headerlink" href="#uncertainty-quantification-reference" title="Permalink to this headline">¶</a></h2>
+<p>All DeerLab functions which return any kind of uncertainty estimation (covariance-baed or bootstrapped) will return a so-called uncertainty quantification structure. When fitting <em>N</em> parameters or e.g. an <em>N</em>-element distance distribution, it has the following structure.</p>
+<p><code class="docutils literal notranslate"><span class="pre">uqstruct</span></code> - Uncertainty quantification structure containing the following fields:</p>
 <hr class="docutils" />
 <blockquote>
 <div><p><strong>Confidence intervals</strong></p>
@@ -337,7 +337,7 @@
 <div><p>Inputs:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">c</span></code> - Coverage/Confidence level (scalar, in range [0,1])</li>
+<li><code class="docutils literal notranslate"><span class="pre">c</span></code> - Coverage/Confidence level (scalar, in range [0,100])</li>
 </ul>
 </div></blockquote>
 <p>Returns:</p>
@@ -388,7 +388,7 @@
 <div><p>Inputs:</p>
 <blockquote>
 <div><ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">p</span></code> - Percentile (scalar, in range [0,1])</li>
+<li><code class="docutils literal notranslate"><span class="pre">p</span></code> - Percentile (scalar, in range [0,100])</li>
 </ul>
 </div></blockquote>
 <p>Returns:</p>
@@ -403,11 +403,11 @@
 </div></blockquote>
 <hr class="docutils" />
 <blockquote>
-<div><p><strong>Specific to covariance CIs</strong></p>
+<div><p><strong>Covariance &amp; Propagation</strong></p>
 <ul>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">.covmat</span></code> - Covariance matrix for the fit parameters (<em>NxN</em> matrix)</p>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.propagate(model,lb,ub)</span></code> - Function handle that propagates the uncertainty unto another model</p>
+<li><p class="first"><code class="docutils literal notranslate"><span class="pre">.propagate(model,lb,ub)</span></code> - Function handle that propagates the uncertainty unto another model (based on quadratic-approximation)</p>
 <blockquote>
 <div><p>Inputs:</p>
 <blockquote>

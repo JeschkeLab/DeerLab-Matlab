@@ -141,9 +141,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-cis">Covariance CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-cis">Bootstrap CIs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#ci-reference">CI Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-uncertainty-quantification">Covariance Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#uncertainty-quantification-reference">Uncertainty Quantification Reference</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
@@ -314,9 +314,25 @@
 </ul>
 </div></blockquote>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">modfitci</span></code> – Confidence interval structures for Vfit, Bfit and Pfit</p>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">modfituq</span></code> – Structure with uncertainty quantification of the fitted…</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">.Pfit</span></code> – … distance distribution</li>
+<li><code class="docutils literal notranslate"><span class="pre">.Bfit</span></code> – … background(s)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.Vfit</span></code> – … signal(s)</li>
+</ul>
+</dd>
+</dl>
 </li>
-<li><p class="first"><code class="docutils literal notranslate"><span class="pre">parci</span></code> – Structure with confidence intervals for parameters (similar to <code class="docutils literal notranslate"><span class="pre">parfit</span></code>)</p>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">paruq</span></code> – Structure with uncertainty quantification of the fitted…</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">.dd</span></code> – …distance distribution model parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">.bg</span></code> – …background(s) model parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">.ex</span></code> – …experiment(s) model parameters</li>
+</ul>
+</dd>
+</dl>
 </li>
 <li><p class="first"><code class="docutils literal notranslate"><span class="pre">stats</span></code> – Goodness of fit statistical estimators (struct)</p>
 </li>
@@ -334,14 +350,14 @@
 </pre></div>
 </div>
 <p>Fits a full time-domain model of the dipolar signal constructed from the distance distribution model <code class="docutils literal notranslate"><span class="pre">dd</span></code>, background model <code class="docutils literal notranslate"><span class="pre">bg</span></code> and experiment model <code class="docutils literal notranslate"><span class="pre">ex</span></code> to the experimental data <code class="docutils literal notranslate"><span class="pre">V</span></code>, defined on a time-axis <code class="docutils literal notranslate"><span class="pre">t</span></code>. The distance distribution is fitted on the specified distance axis <code class="docutils literal notranslate"><span class="pre">r</span></code>. If some models are not specified, the defaults are used: <code class="docutils literal notranslate"><span class="pre">'P'</span></code> for the <code class="docutils literal notranslate"><span class="pre">dd</span></code> model, <code class="docutils literal notranslate"><span class="pre">&#64;bg_hom3d</span></code> for the <code class="docutils literal notranslate"><span class="pre">bg</span></code> model, and <code class="docutils literal notranslate"><span class="pre">&#64;ex_4pdeer</span></code> for the experiment model.</p>
-<p>The fitted dipolar signal <code class="docutils literal notranslate"><span class="pre">Vfit</span></code>, fitted distribution <code class="docutils literal notranslate"><span class="pre">Pfit</span></code> and fitted background <code class="docutils literal notranslate"><span class="pre">Bfit</span></code> are returned as the first outputs. The corresponding model parameters are returned in the <code class="docutils literal notranslate"><span class="pre">parfit</span></code> structure and their corresponding confidence intervals in the <code class="docutils literal notranslate"><span class="pre">parci</span></code> structure. <code class="docutils literal notranslate"><span class="pre">stats</span></code> contains information on the quality of the fit.</p>
+<p>The fitted dipolar signal <code class="docutils literal notranslate"><span class="pre">Vfit</span></code>, fitted distribution <code class="docutils literal notranslate"><span class="pre">Pfit</span></code> and fitted background <code class="docutils literal notranslate"><span class="pre">Bfit</span></code> are returned as the first outputs and their corresponding uncertainty quantification structures as <code class="docutils literal notranslate"><span class="pre">modfituq</span></code>. The corresponding model parameters are returned in the <code class="docutils literal notranslate"><span class="pre">parfit</span></code> structure and their corresponding uncertainty quantification structures (see <a class="reference internal" href="../uncertainty.html#cireference"><span class="std std-ref">Uncertainty Quantification Reference</span></a>) in the <code class="docutils literal notranslate"><span class="pre">parci</span></code> structure. <code class="docutils literal notranslate"><span class="pre">stats</span></code> contains information on the quality of the fit.</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">dd</span><span class="p">,</span><span class="n">bg</span><span class="p">,</span><span class="n">ex</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If the function is called without outputs, the function plots the fit results, prints a summary of the fit results, and lists all parameters and their confidence intervals.</p>
 <p>Examples:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_gauss</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>  <span class="c">% Fit a 4pDEER signal with homogenous 3D background with Gaussian distribution</span>
-<span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_5pdeer</span><span class="p">)</span>          <span class="c">% Fit a 5pDEER signal with exponential background and Tikhonov regularization</span>
+<span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;P&#39;</span><span class="p">,@</span><span class="n">bg_hom3d</span><span class="p">,@</span><span class="n">ex_5pdeer</span><span class="p">)</span>        <span class="c">% Fit a 5pDEER signal with exponential background and Tikhonov regularization</span>
 <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">,@</span><span class="n">bg_strexp</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>    <span class="c">% Fit a 4pDEER stretched exponential background (no foreground)</span>
 <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_rice</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">)</span>          <span class="c">% Fit a dipolar evolution function with Rician distribution</span>
 <span class="n">fitsignal</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,@</span><span class="n">dd_gauss2</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">,@</span><span class="n">ex_4pdeer</span><span class="p">)</span>    <span class="c">% Fit a 4pDEER form factor (no background) with bimodal Gaussian distribution</span>
