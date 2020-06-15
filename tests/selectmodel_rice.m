@@ -5,7 +5,7 @@ function [pass,maxerr] = test(opt)
 
 t = linspace(0,3,200);
 r = linspace(2,6,100);
-parIn = [3 0.3 0.5 5 0.3];
+parIn = [3 0.3 0.5 5 0.3 0.5];
 P = dd_rice2(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P;

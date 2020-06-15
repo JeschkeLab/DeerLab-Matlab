@@ -16,7 +16,7 @@ clear, clc, clf
 rng(1)
 t = linspace(-0.25,4,300); % time axis, us
 r = linspace(2.5,4.5,300); % distance axes
-param0 = [3 0.3 0.2 3.5 0.3 0.65 4 0.2]; % parameters for three-Gaussian model
+param0 = [3 0.3 0.2 3.5 0.3 0.65 4 0.2 0.15]; % parameters for three-Gaussian model
 P = dd_gauss3(r,param0); % model distance distribution
 lam = 0.25;
 B = bg_exp(t,0.05);

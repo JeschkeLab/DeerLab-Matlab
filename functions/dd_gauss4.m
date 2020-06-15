@@ -11,9 +11,9 @@
 %
 % PARAMETERS
 % 
-%    ------------------------------------------------------------------
+%    -------------------------------------------------------------------
 %     Index   Parameter                Units    Lower    Upper    Start
-%    ------------------------------------------------------------------
+%    -------------------------------------------------------------------
 %       1     Center of 1st Gaussian     nm       1       20       2.5 
 %       2     FWHM of 1st Gaussian       nm      0.2       5       0.5 
 %       3     Amplitude of 1st Gaussian           0        1       0.25 
@@ -25,7 +25,8 @@
 %       9     Amplitude of 3rd Gaussian           0        1       0.25 
 %      10     Center of 4th Gaussian     nm       1       20        5 
 %      11     FWHM of 4th Gaussian       nm      0.2       5       0.5 
-%    ------------------------------------------------------------------
+%      12     Amplitude of 4th Gaussian           0        1       0.25 
+%    -------------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -34,7 +35,7 @@
 
 function output = dd_gauss4(r,param)
 
-nParam = 11;
+nParam = 12;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -119,6 +120,13 @@ if nargin==0
     info(11).Upper = 5;
     info(11).Start = 0.5;
     
+    info(12).Index = 12;
+    info(12).Parameter = 'Amplitude of 4th Gaussian';
+    info(12).Units = '  ';
+    info(12).Lower = 0;
+    info(12).Upper = 1;
+    info(12).Start = 0.25; 
+    
     output = info;
     return
 
@@ -135,8 +143,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute the model distance distribution
 fwhm = param([2 5 8 11]);
 r0 = param([1 4 7 10]);
-a = param([3 6 9]);
-a(4) = max(1-sum(a),0);
+a = param([3 6 9 12]);
 P = multigaussfun(r,r0,fwhm,a);
 
 output = P;

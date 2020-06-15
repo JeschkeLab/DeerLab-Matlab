@@ -21,6 +21,7 @@
 %       6    Amplitude of 2nd Rician            0        1       0.3 
 %       7    Center of 3rd Rician      nm       1       10        5 
 %       8    Width of 3rd Rician       nm      0.1       5       0.7 
+%       9    Amplitude of 3rd Rician            0        1       0.3 
 %    ----------------------------------------------------------------
 %
 
@@ -29,7 +30,7 @@
 
 function output = dd_rice3(r,param)
 
-nParam = 8;
+nParam = 9;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -93,6 +94,13 @@ if nargin==0
     info(8).Upper = 5;
     info(8).Start = 0.7;
     
+    info(9).Index = 9;
+    info(9).Parameter = 'Amplitude of 3rd Rician';
+    info(9).Units = '  ';
+    info(9).Lower = 0;
+    info(9).Upper = 1;
+    info(9).Start = 0.3;
+    
     output = info;
     return
 end
@@ -108,8 +116,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute non-central chi distribution with 3 degrees of freedom (a 3D Rician)
 nu = param([1 4 7]);
 sig = param([2 5 8]);
-a = param([3 6]);
-a(3) = max(1-sum(a),0);
+a = param([3 6 9]);
 P = multirice3d(r,nu,sig,a);
 
 output = P;

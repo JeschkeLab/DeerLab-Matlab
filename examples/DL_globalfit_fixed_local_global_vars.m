@@ -35,8 +35,8 @@ fracA2 = 0.2; % Molar fraction of state A under conditions 2
 % The molar fraction of state B is not required as it follows fracB = 1 - fracA
 
 % Generate the two distributions for conditions 1 & 2
-P1 = dd_gauss2(r,[rmeanA fwhmA fracA1 rmeanB fwhmB]);
-P2 = dd_gauss2(r,[rmeanA fwhmA fracA2 rmeanB fwhmB]);
+P1 = dd_gauss2(r,[rmeanA fwhmA fracA1 rmeanB fwhmB 1-fracA1]);
+P2 = dd_gauss2(r,[rmeanA fwhmA fracA2 rmeanB fwhmB 1-fracA2]);
 
 % ...and the two corresponding signals
 V1 = dipolarsignal(t1,r,P1,'noiselevel',0.01);
@@ -84,7 +84,7 @@ ts = {t1,t2};
 model = @(t,par,idx) myABmodel(t,par,idx,r,Ks);
 
 % Fit the global parametric model to both signals
-parfit = fitparamodel(Vs,model,ts,par0,'lower',lower,'upper',upper,'multistart',50);
+parfit = fitparamodel(Vs,model,ts,par0,lower,upper,'multistart',50);
 
 % The use of the option 'multistart' will help the solver to find the
 % global minimum and not to get stuck at local minima.
@@ -150,7 +150,7 @@ function [Vfit,Pfit] = myABmodel(~,par,idx,r,Ks)
     end
     
     % Generate the signal-specific distribution
-    Pfit = dd_gauss2(r,[rmeanA fwhmA fraction rmeanB fwhmB]);
+    Pfit = dd_gauss2(r,[rmeanA fwhmA fraction rmeanB fwhmB max(1-fraction,0)]);
     
     % Generate the corresponding signal (either V{1} or V{2}) by using the
     % appropiate dipolar kernel

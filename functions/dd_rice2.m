@@ -18,6 +18,7 @@
 %       3    Amplitude of 1st Rician           0       1       0.5 
 %       4    Center of 2nd Rician     nm       1       10       4 
 %       5    Width of 2nd Rician      nm      0.1      5       0.7
+%       6    Amplitude of 2nd Rician           0       1       0.5 
 %    ----------------------------------------------------------------
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
@@ -25,7 +26,7 @@
 
 function output = dd_rice2(r,param)
 
-nParam = 5;
+nParam = 6;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -67,7 +68,14 @@ if nargin==0
     info(5).Lower = 0.1;
     info(5).Upper = 5;
     info(5).Start = 0.7;
-    
+ 
+    info(6).Index = 6;
+    info(6).Parameter = 'Amplitude of 2nd Rician';
+    info(6).Units = '  ';
+    info(6).Lower = 0;
+    info(6).Upper = 1;
+    info(6).Start = 0.5;
+
     output = info;
     return
 end
@@ -83,8 +91,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute non-central chi distribution with 3 degrees of freedom (a 3D Rician)
 nu = param([1 4]);
 sig = param([2 5]);
-a = param(3);
-a(2) = max(1-a,0);
+a = param([3 6]);
 
 P = multirice3d(r,nu,sig,a);
 

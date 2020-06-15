@@ -27,6 +27,7 @@
 %      12    Amplitude of 4th Gaussian           0        1       0.2 
 %      13    Center of 5th Gaussian      nm      1       20        5 
 %      14    FWHM of 5th Gaussian        nm     0.2       5       0.5 
+%      15    Amplitude of 5th Gaussian           0        1       0.2 
 %    ------------------------------------------------------------------
 %
 
@@ -36,7 +37,7 @@
 
 function output = dd_gauss5(r,param)
 
-nParam = 14;
+nParam = 15;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -142,6 +143,13 @@ if nargin==0
     info(14).Lower = 0.2;
     info(14).Upper = 5;
     info(14).Start = 0.5;
+
+    info(15).Index = 15;
+    info(15).Parameter = 'Amplitude of 5th Gaussian';
+    info(15).Units = '  ';
+    info(15).Lower = 0;
+    info(15).Upper = 1;
+    info(15).Start = 0.2; 
     
     output = info;
     return
@@ -158,8 +166,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute the model distance distribution
 fwhm = param([2 5 8 11 14]);
 r0 = param([1 4 7 10 13]);
-a = param([3 6 9 12]);
-a(5) = max(1-sum(a),0);
+a = param([3 6 9 12 15]);
 P = multigaussfun(r,r0,fwhm,a);
 
 output = P;

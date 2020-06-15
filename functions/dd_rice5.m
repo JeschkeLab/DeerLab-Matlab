@@ -27,6 +27,7 @@
 %      12    Amplitude of 4th Rician             0        1      0.2 
 %      13    Center of 5th Rician       nm       1       10      5.5 
 %      14    Width of 5th Rician        nm     0.1      0.5      0.7 
+%      15    Amplitude of 5th Rician             0        1      0.2 
 %    -----------------------------------------------------------------
 %
 
@@ -35,8 +36,7 @@
 
 function output = dd_rice5(r,param)
 
-
-nParam = 14;
+nParam = 15;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -142,84 +142,14 @@ if nargin==0
     info(14).Upper = 0.5;
     info(14).Start = 0.7;
     
+    info(15).Index = 15;
+    info(15).Parameter = 'Amplitude of 5th Rician';
+    info(15).Units = '  ';
+    info(15).Lower = 0;
+    info(15).Upper = 1;
+    info(15).Start = 0.2;   
     output = info;
     return
-    
-    % If no inputs given, return info about the parametric model
-    info.model  = 'Five 3D-Rice distributions';
-    info.nparam  = nParam;
-    info.parameters(1).name = ['Center ',char(957),'1 1st component'];
-    info.parameters(1).range = [1 10];
-    info.parameters(1).default = 2.5;
-    info.parameters(1).units = 'nm';
-    
-    info.parameters(2).name = ['Spread ',char(963),'1 1st component'];
-    info.parameters(2).range = [0.1 5];
-    info.parameters(2).default = 0.7;
-    info.parameters(2).units = 'nm';
-        
-    info.parameters(3).name = 'Relative amplitude a1 1st component';
-    info.parameters(3).range = [0 1];
-    info.parameters(3).default = 0.2;
-    info.parameters(3).units = '';
-
-    info.parameters(4).name = ['Center ',char(957),'2 2nd component'];
-    info.parameters(4).range = [1 10];
-    info.parameters(4).default = 3.5;
-    info.parameters(4).units = 'nm';
-    
-    info.parameters(5).name = ['Spread ',char(963),'2 2nd component'];
-    info.parameters(5).range = [0.1 5];
-    info.parameters(5).default = 0.7;
-    info.parameters(5).units = 'nm';
-        
-    info.parameters(6).name = 'Relative amplitude a2 2nd component';
-    info.parameters(6).range = [0 1];
-    info.parameters(6).default = 0.2;
-    info.parameters(6).units = '';
-    
-    info.parameters(7).name = ['Center ',char(957),'3 3rd component'];
-    info.parameters(7).range = [1 10];
-    info.parameters(7).default = 4.0;
-    info.parameters(7).units = 'nm';
-    
-    info.parameters(8).name = ['Spread ',char(963),'3 3rd component'];
-    info.parameters(8).range = [0.1 5];
-    info.parameters(8).default = 0.7;
-    info.parameters(8).units = 'nm';
-         
-    info.parameters(9).name = 'Relative amplitude a3 3rd component';
-    info.parameters(9).range = [0 1];
-    info.parameters(9).default = 0.2;
-    info.parameters(9).units = '';
-    
-    info.parameters(10).name = ['Center ',char(957),'4 4th component'];
-    info.parameters(10).range = [1 10];
-    info.parameters(10).default = 5;
-    info.parameters(10).units = 'nm';
-    
-    info.parameters(11).name = ['Spread ',char(963),'4 4th component'];
-    info.parameters(11).range = [0.1 5];
-    info.parameters(11).default = 0.7;
-    info.parameters(11).units = 'nm';
-     
-    info.parameters(12).name = 'Relative amplitude a4 4th component';
-    info.parameters(12).range = [0 1];
-    info.parameters(12).default = 0.2;
-    info.parameters(12).units = '';
-    
-    info.parameters(13).name = ['Center ',char(957),'5 5th component'];
-    info.parameters(13).range = [1 10];
-    info.parameters(13).default = 5.5;
-    info.parameters(13).units = 'nm';
-    
-    info.parameters(14).name = ['Spread ',char(963),'5 5th component'];
-    info.parameters(14).range = [0.1 5];
-    info.parameters(14).default = 0.7;
-    info.parameters(14).units = 'nm';
-        
-    output = info;
-    return;
 end
 
 % If user passes them, check that the number of parameters matches the model
@@ -233,8 +163,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute non-central chi distribution with 3 degrees of freedom (a 3D Rician)
 nu = param([1 4 7 10 13]);
 sig = param([2 5 8 11 14]);
-a = param([3 6 9 12]);
-a(5) = max(1-sum(a),0);
+a = param([3 6 9 12 15]);
 
 P = multirice3d(r,nu,sig,a);
 

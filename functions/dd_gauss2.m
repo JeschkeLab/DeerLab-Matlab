@@ -18,6 +18,7 @@
 %       3    Amplitude of 1st Gaussian            0       1        0.5 
 %       4    Center of 2nd Gaussian     nm        1       20       3.5 
 %       5    FWHM of 2nd Gaussian       nm       0.2      5        0.5 
+%       6    Amplitude of 2nd Gaussian            0       1        0.5 
 %    --------------------------------------------------------------------
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -25,7 +26,7 @@
 
 function output = dd_gauss2(r,param)
 
-nParam = 5;
+nParam = 6;
 
 if nargin~=0 && nargin~=2
     error('Model requires two input arguments.')
@@ -67,7 +68,14 @@ if nargin==0
     info(5).Lower = 0.2;
     info(5).Upper = 5;
     info(5).Start = 0.5;
-
+    
+    info(6).Index = 6;
+    info(6).Parameter = 'Amplitude of 2nd Gaussian';
+    info(6).Units = '  ';
+    info(6).Lower = 0;
+    info(6).Upper = 1;
+    info(6).Start = 0.5;
+    
     output = info;
     return
 end
@@ -83,8 +91,7 @@ validateattributes(r,{'numeric'},{'nonnegative','increasing','nonempty'},mfilena
 % Compute the model distance distribution
 fwhm = param([2 5]);
 r0 = param([1 4]);
-a = param(3);
-a(2) = max(1-a,0);
+a = param([3 6]);
 P = multigaussfun(r,r0,fwhm,a);
 
 output = P;

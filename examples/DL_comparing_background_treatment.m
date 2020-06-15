@@ -32,7 +32,7 @@ t = linspace(0,5,251);
 r = linspace(2,5,100);
 
 % Generate distance distribution, background, and dipolar signal
-P = dd_gauss2(r,[r01 w1 A1 r02 w2]);
+P = dd_gauss2(r,[r01 w1 A1 r02 w2 1-A1]);
 B = bg_strexp(t,[decay strfact]);
 V = dipolarsignal(t,r,P,lam,B,'noiselevel',0.01);
 

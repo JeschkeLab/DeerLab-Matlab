@@ -4,15 +4,15 @@ function [pass,maxerr] = test(opt)
 
 t = linspace(0,3,200);
 r = linspace(2,6,100);
-P = dd_gauss2(r,[3 0.3 0.5 4 0.3]);
+P = dd_gauss2(r,[3 0.3 0.5 4 0.3 0.5]);
 K = dipolarkernel(t,r);
 S = K*P;
 
 models = {@dd_gauss,@dd_gauss2,@dd_gauss3};
 
 par0{1} = [3 1];
-par0{2} = [3 1 0.5 3 1];
-par0{3} = [3 1 0.2 3 1 0.2 3 1];
+par0{2} = [3 1 0.5 3 1 0.5];
+par0{3} = [3 1 0.2 3 1 0.2 3 1 0.5];
 
 [optimum,metric] = selectmodel(models,S,r,K,'aicc',par0,'Solver','lsqnonlin');
 

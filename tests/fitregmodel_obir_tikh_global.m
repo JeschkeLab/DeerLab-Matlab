@@ -6,7 +6,7 @@ rng(1)
 t1 = linspace(0,3,100);
 t2 = linspace(0,4,200);
 r = linspace(2,7,100);
-P = dd_gauss2(r,[3.7,0.5,0.5,4.3,0.3]);
+P = dd_gauss2(r,[3.7,0.5,0.5,4.3,0.3,0.5]);
 K1 = dipolarkernel(t1,r);
 K2 = dipolarkernel(t2,r);
 
