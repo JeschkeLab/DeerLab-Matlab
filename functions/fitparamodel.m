@@ -389,6 +389,23 @@ end
 [~,globmin] = min(fvals);
 parfit = parfits{globmin};
 
+% Issue warnings if fitted parameter values are at search range boundaries
+%-------------------------------------------------------------------------------
+tol = 1e-5;
+atLower = abs(parfit-lb)<tol;
+atUpper = abs(parfit-ub)<tol;
+fixedPar = lb==ub;
+for p = 1:numel(parfit)
+    % Skip if parameter is fixed
+    if fixedPar(p), continue; end
+    
+    if atLower(p)
+        warning('The fitted value of parameter %d (%s) is at the lower bound of the range.',p,paraminfo(p).name);
+    end
+    if atUpper(p)
+        warning('The fitted value of parameter %d (%s) is at the upper bound of the range.',p,paraminfo(p).name);
+    end
+end
 
 % Calculate parameter confidence intervals
 %-------------------------------------------------------------------------------

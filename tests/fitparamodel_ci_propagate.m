@@ -30,7 +30,7 @@ pass = all(pass);
 
 maxerr = max(abs(Pfit - P));
  
-neif opt.Display
+if opt.Display
     hold on
    plot(r,P,'k',r,Pfit,'r')
    fill([r fliplr(r)],[Puq(:,1); flipud(Puq(:,2))],'r','FaceAlpha',0.3,'LineStyle','none')
