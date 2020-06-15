@@ -7,7 +7,7 @@ r = linspace(2,6,100);
 parIn1 = [3 0.5];
 parIn2 = [4 0.5];
 mixedModel = mixmodels(@dd_gauss,@dd_gauss);
-parInMix = [0.3 parIn1 parIn2];
+parInMix = [parIn1 0.3 parIn2 0.7];
 Pmix = mixedModel(r,parInMix);
 
 K = dipolarkernel(t,r);
