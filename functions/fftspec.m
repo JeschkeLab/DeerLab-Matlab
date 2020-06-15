@@ -33,7 +33,7 @@ if nargin<2
 end
 
 %Parse optional input
-[Type,ZeroFilling,useApodization] = parseoptional({'Type','ZeroFilling','Apodization'},varargin);
+[Type,ZeroFilling,useApodization] = parseoptions(varargin);
 
 if isempty(Type)
     Type = 'abs';

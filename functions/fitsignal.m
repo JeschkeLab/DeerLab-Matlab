@@ -123,8 +123,8 @@ varargin(1:optionstart) = [];
 
 % Parse the optional parameters in varargin
 %-------------------------------------------------------------------------------
-optionalProperties = {'RegParam','RegType','alphaOptThreshold','TolFun','Rescale','normP','MultiStart','GlobalWeights'};
-[regparam,regtype,alphaOptThreshold,TolFun,Rescale,normP,MultiStart,Weights] = parseoptional(optionalProperties,varargin);
+options = varargin;
+[regparam,regtype,alphaOptThreshold,TolFun,normP,Weights] = parseoptions(options);
 
 % Validation of Vexp, t, r
 %-------------------------------------------------------------------------------
@@ -185,11 +185,6 @@ if isempty(normP)
 else
     validateattributes(normP,{'logical'},{'nonempty'},mfilename,'normP option');
 end
-
-if isempty(MultiStart)
-    MultiStart = 1;
-end
-validateattributes(MultiStart,{'numeric'},{'scalar','integer','positive'},mfilename,'MultiStart option');
 
 % Regularization settings
 if isempty(regtype)
@@ -387,8 +382,7 @@ else
     B_cached = [];
     
     % Fit the parameters
-    args = {Vexp,@Vmodel,t,par0,lb,ub,'TolFun',TolFun,...
-        'Verbose',verbose,'Rescale',Rescale,'MultiStart',MultiStart};
+    args = {Vexp,@Vmodel,t,par0,lb,ub,options};
     [parfit_] = fitparamodel(args{:});
     
     
@@ -510,7 +504,7 @@ else
     stats = [];
 end
 
-% Return fitted parameters and confidence intervals in structures
+% Return fitted parameters and confiden-ce intervals in structures
 %-------------------------------------------------------------------------------
 parfit_ = parfit_(:);
 parfit.dd = parfit_(ddidx);
@@ -652,7 +646,7 @@ end
                         end
                     end
                     par_prev = par;
-                    [P,~,regparam_prev] = fitregmodel(Vexp,K,r,regtype,alpha,'Verbose',verbose,'NormP',false);
+                    [P,~,regparam_prev] = fitregmodel(Vexp,K,r,regtype,alpha);
                 else
                     P = dd_model(r,par(ddidx));
                 end

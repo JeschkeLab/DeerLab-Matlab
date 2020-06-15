@@ -25,7 +25,7 @@
 function APTkernel = aptkernel(t,varargin)
 
 % Check if user requested some options via name-value input
-[ExcitationBandwidth] = parseoptional({'ExcitationBandwidth'},varargin);
+[ExcitationBandwidth] = parseoptions(varargin);
 if ~isempty(ExcitationBandwidth)
     validateattributes(ExcitationBandwidth,{'numeric'},{'scalar','nonnegative'})
 end

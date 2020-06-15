@@ -66,7 +66,7 @@ if ~isa(bgmodel,'function_handle')
 end
 
 % Parse optional inputs
-[LogFit,InitialGuess,ModDepth,Solver] = parseoptional({'LogFit','InitialGuess','ModDepth','Solver'},varargin);
+[LogFit,InitialGuess,ModDepth,Solver] = parseoptions(varargin);
 
 if isempty(LogFit)
     LogFit = false;

@@ -57,8 +57,7 @@ if numel(proplist)>=1 && ~ischar(proplist{1})
 end
 
 % Parse optional input arguments
-names = {'NoiseLevel','g','Scale','Overtones','Phase'};
-[NoiseLevel,g,Scale,Overtones,Phase] = parseoptional(names,proplist);
+[NoiseLevel,g,Scale,Overtones,Phase] = parseoptions(proplist);
 
 % Validate inputs
 if isempty(pathinfo)

@@ -62,7 +62,7 @@ end
 
 % Parse the optional parameters in varargin
 optionalProperties = {'Verbose','Resampling'};
-[Verbose,Resampling] = parseoptional(optionalProperties,varargin);
+[Verbose,Resampling] = parseoptions(varargin);
 
 if nargin<4 || isempty(nSamples)
     nSamples = 1000;

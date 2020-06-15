@@ -67,7 +67,7 @@ warning('off','MATLAB:nearlySingularMatrix')
 
 % Check if user requested some options via name-value input
 [TolFun,NonNegConstrained,NoiseLevel,GlobalWeights,HuberParameter,alphaRange,RegOrder,SearchMethod] ...
-    = parseoptional({'TolFun','NonNegConstrained','NoiseLevel','GlobalWeights','HuberParameter','Range','RegOrder','Search'},varargin);
+    = parseoptions(varargin);
 
 if ~iscell(V)
     V = {V};

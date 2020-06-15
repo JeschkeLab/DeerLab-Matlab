@@ -30,7 +30,7 @@
 function [FilteredS,FIRtransferFcn] = winlowpass(S,StopBand,PassBand,SamplingRate,varargin)
 
 %Parse optional input arguments
-[MinimalAttenuation,ForwardBackward] = parseoptional({'MinimalAttenuation','ForwardBackward'},varargin);
+[MinimalAttenuation,ForwardBackward] = parseoptions(varargin);
 
 %Validate inputs
 if isempty(MinimalAttenuation)

@@ -71,8 +71,7 @@ end
 
 % Parse the optional parameters
 %--------------------------------------------------------------
-optionalProperties = {'Upper','Lower','Background','internal::parselater'};
-[Upper,Lower,BckgModel] = parseoptional(optionalProperties,varargin);
+[Upper,Lower,BckgModel] = parseoptions(varargin);
 
 % Control that the boundaries match the model and are appropiate
 modelInfo = model();
@@ -89,12 +88,6 @@ if ~isempty(Lower) && isempty(BckgModel)  && length(Lower)~=nparam
     error('''Lower'' property must be a %i-element array of lower boundaries for the parameters [%s]',nparam,str)
 elseif ~isempty(Upper) && ~isempty(BckgModel) && length(Lower)<(nparam+2)
     error('''Lower'' property must be a %i-element array [%s lambda_min Bparam_min]',nparam,str)
-end
-
-% Remove used options from varargin so they are not passed to fitparamodel
-for i = 1:numel(optionalProperties)
-    Idx = find(cellfun(@(x)(ischar(x) && strcmpi(x,optionalProperties{i})),varargin));
-    varargin(Idx:Idx+1) = [];
 end
 
 %Parse the required inputs for global fitting

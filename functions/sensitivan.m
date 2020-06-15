@@ -69,7 +69,7 @@ end
 validateattributes(Parameters,{'struct'},{'nonempty'},mfilename,'Parameters');
 
 [AxisHandle,RandPerm,dynamicStats,Verbose] = ...
-    parseoptional({'AxisHandle','RandPerm','dynamicStats','Verbose'},varargin);
+    parseoptions(varargin);
 
 if ~isempty(dynamicStats)
     validateattributes(dynamicStats,{'logical'},{'nonempty'},mfilename,'dynamicStats')

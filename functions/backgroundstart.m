@@ -57,7 +57,7 @@ validateattributes(t,{'numeric'},{'2d','nonempty','increasing'},mfilename,'t')
 % Parse & Validate Optional Input
 %--------------------------------------------------------------------------
 % Check if user requested some options via name-value input
-[SearchStart,SearchEnd,EndCutoff] = parseoptional({'RelSearchStart','RelSearchEnd','EndCutoffPos'},varargin);
+[SearchStart,SearchEnd,EndCutoff] = parseoptions(varargin);
 
 if isempty(SearchStart)
     SearchStart = 0.1*max(t);

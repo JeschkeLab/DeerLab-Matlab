@@ -38,8 +38,7 @@ if nargin<3
 end
 
 % Check if user requested some options via name-value input
-[OvertoneCoeffs,Renormalize] = ...
-    parseoptional({'OvertoneCoeffs','Renormalize'},varargin);
+[OvertoneCoeffs,Renormalize] = parseoptions(varargin);
 
 if isempty(Renormalize)
     Renormalize = true;

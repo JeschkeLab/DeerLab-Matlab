@@ -100,15 +100,8 @@ if ~iscell(K)
 end
 
 % Check if user requested some options via name-value input
-optionalProperties = {'TolFun','Solver','NonNegConstrained','Verbose','MaxFunEvals','MaxIter','HuberParam','GlobalWeights','OBIR','RegOrder','internal::parseLater','NormP'};
 [TolFun,Solver,NonNegConstrained,Verbose,MaxFunEvals,MaxIter,HuberParam,GlobalWeights,runOBIR,RegOrder,NormP] ...
-    = parseoptional(optionalProperties,varargin);
-
-% Remove used options from varargin so they are not passed to selregparam
-for i=1:numel(optionalProperties)
-    Idx = find(cellfun(@(x)(ischar(x) && strcmpi(x,optionalProperties{i})),varargin));
-    varargin(Idx:Idx+1) = [];
-end
+    = parseoptions(varargin);
 
 if strcmp(RegType,'custom')
     GradObj = false;
@@ -134,7 +127,7 @@ if ~isempty(GlobalWeights)
 end
 
 if isa(alpha,'char')
-    alpha = selregparam(V,K,r,RegType,alpha,[{'GlobalWeights'},{GlobalWeights},varargin]);
+    alpha = selregparam(V,K,r,RegType,alpha,varargin);
 else
     validateattributes(alpha,{'numeric'},{'scalar','nonempty','nonnegative'},mfilename,'RegParam')
 end

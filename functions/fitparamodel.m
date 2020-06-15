@@ -207,12 +207,8 @@ end
 
 % Parse the optional parameters in varargin
 %-------------------------------------------------------------------------------
-optionalProperties = {'Solver','Algorithm','MaxIter','Verbose','MaxFunEvals',...
-    'TolFun','GlobalWeights','MultiStart',...
-    'Rescale'};
 [Solver,Algorithm,maxIter,Verbose,maxFunEvals,TolFun,GlobalWeights,...
-    MultiStart,Rescale] = ...
-    parseoptional(optionalProperties,varargin);
+    MultiStart,Rescale] = parseoptions(varargin);
 
 % Validate optional inputs
 if isempty(MultiStart)
