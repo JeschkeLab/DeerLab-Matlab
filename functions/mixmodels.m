@@ -18,7 +18,7 @@
 
 function mixModelFcn = mixmodels(varargin)
 
-if numel(varargin)==1
+if ~iscell(varargin) && numel(varargin)==1
     models = {varargin};
 else
     models = varargin;
@@ -26,6 +26,10 @@ end
 
 if numel(varargin)==0
     error('At least one model must be provided.')
+end
+
+if iscell(models) && numel(models)==1
+   models =  models{1};
 end
 
 if ~all(cellfun(@(M)isa(M,'function_handle'),models))
@@ -80,18 +84,26 @@ mixModelFcn = @mixedFunction;
             error('Only two input arguments are allowed.')
         end
         
-        x = varargin{1};
+        ax = varargin{1};
         params = varargin{2};
-        if ~iscolumn(x)
-            x = x.';
+        if ~iscolumn(ax)
+            ax = ax.';
         end
         
         amp = params(pidx_amp);        
-        y = 0;
+        
+        
+        model = 0;
         for k = 1:numel(models)
-            y = y + amp(k)*models{k}(x,params(pidx{k}));
+            model = model + amp(k)*models{k}(ax,params(pidx{k}));
         end
-        output = y;
+        
+        %Normalize the distribution if it is a distance distribution model
+        isddmodel = any(contains(cellfun(@(M)func2str(M),models,'UniformOutput',false),'dd'));
+        if isddmodel && ~all(model==0)
+            model = model/trapz(ax,model);
+        end
+        output = model;
         
     end
     

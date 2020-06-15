@@ -128,7 +128,7 @@ if strcmp(func2str(model),'dd_gauss')
     if maxModels>=4, multiModels{4} = @dd_gauss4; end
     if maxModels>=5, multiModels{5} = @dd_gauss5; end
     for i = 6:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},@dd_gauss);
+        multiModels{i} =  mixmodels(repmat({@dd_gauss},1,i));
     end
 elseif strcmp(func2str(model),'dd_rice')
     % If basis function is a Rician, use built-in models
@@ -138,13 +138,13 @@ elseif strcmp(func2str(model),'dd_rice')
     if maxModels>=4, multiModels{4} = @dd_rice4; end
     if maxModels>=5, multiModels{5} = @dd_rice5; end
     for i = 6:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},@dd_rice);
+        multiModels{i} =  mixmodels(repmat({@dd_rice},1,i));
     end
 else
     % Otherwise mix the models
     multiModels{1} = model;
     for i = 2:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},model);
+        multiModels{i} =  mixmodels(repmat({model},1,i));
     end
 end
 
@@ -161,9 +161,13 @@ if ~isempty(Upper) || ~isempty(Lower)
         boundary = zeros(1,modelnparam);
         paramNames = [{info.Parameter}];
 
-        %Get the indices of the different parameters on the mixed models
+        %Get the indices of the different parameters on the mixed models\\
         paramidx = (1:nparam+1:modelnparam) + (0:nparam).';
-        ampidx = paramidx(end,1:end-1);
+        if i>i
+            ampidx = paramidx(end,1:end);
+        else
+            ampidx = [];
+        end
         if ~isempty(Upper)
             for j=1:nparam
                 boundary(paramidx(j,:)) = Upper(j);
@@ -176,7 +180,7 @@ if ~isempty(Upper) || ~isempty(Lower)
         else
             UpperBounds = [];
         end
-        boundary = zeros(1,modelnparam);
+        
         if ~isempty(Lower)
             for j=1:nparam
                 boundary(paramidx(j,:)) = Lower(j);
@@ -204,23 +208,18 @@ if ~isempty(BckgModel)
     if isempty(LowerBounds)
         for i = 1:maxModels
             info = multiModels{i}();
-            range = [info.parameters(:).range];
-            Plower = range(1:2:end-1);
+            Plower = [info.Lower];
             infoB = BckgModel();
-            range = [infoB.parameters(:).range];
-            Blower = range(1:2:end-1);
+            Blower = [infoB.Lower];
             LowerBounds{i} = [Plower repmat([0 Blower],1,Nsignals)];
-            
         end
     end
     if isempty(UpperBounds)
         for i = 1:maxModels
             info = multiModels{i}();
-            range = [info.parameters(:).range];
-            Pupper = range(2:2:end);
+            Pupper = [info.Upper];
             infoB = BckgModel();
-            range = [infoB.parameters(:).range];
-            Bupper = range(2:2:end);
+            Bupper = [infoB.Upper];
             UpperBounds{i} = [Pupper repmat([1 Bupper],1,Nsignals)];
         end
     end
@@ -264,21 +263,6 @@ if nargin>3
     %Loop over different signals
     lb = zeros(numel(r),1);
     Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb,[]);
-    
-%     jacobian = jacobianest(@(par)optModel(r,par),param(1:info.nparam));
-%     % Calculate the confidence bands for the distance distribution
-%     modelvariance = arrayfun(@(idx)full(jacobian(idx,:))*covmatrix*full(jacobian(idx,:)).',1:numel(r)).';
-%     
-%     Pfitci = cell(numel(critical),1);
-%     for j=1:numel(critical)
-%         upperci = Pfit + critical(j)*sqrt(modelvariance);
-%         lowerci = max(0,Pfit - critical(j)*sqrt(modelvariance));
-%         Pfitci{j} = [upperci(:) lowerci(:)];
-%     end
-%     %Do not return a cell if only one confidence level is requested
-%     if numel(critical)==1
-%         Pfitci = Pfitci{1};
-%     end
 end
 
 if nargout>6
