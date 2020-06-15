@@ -2,7 +2,7 @@
 % DD_RICE 3D-Rice distribution parametric model
 %
 %   info = DD_RICE
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_RICE(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to
@@ -10,11 +10,12 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name     symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  nu      3.5     1.0         10          center
-% param(2)  sigma   0.7     0.1          5          spread
-% --------------------------------------------------------------------------
+%    ----------------------------------------------------
+%     Index  Parameter   Units   Lower    Upper    Start
+%    ----------------------------------------------------
+%       1    Center       nm       1       10       3.5 
+%       2    Width        nm      0.1       5       0.7 
+%    ----------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -30,17 +31,19 @@ end
 
 if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = 'Single 3D-Rice distribution';
-    info.nparam  = nParam;
-    info.parameters(1).name = ['Center ',char(957)];
-    info.parameters(1).range = [1 10];
-    info.parameters(1).default = 3.5;
-    info.parameters(1).units = 'nm';
+    info(1).Index = 1;
+    info(1).Parameter = 'Center';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 10;
+    info(1).Start = 3.5;
     
-    info.parameters(2).name = ['Width ',char(963)];
-    info.parameters(2).range = [0.1 5];
-    info.parameters(2).default = 0.7;
-    info.parameters(2).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'Width';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 5;
+    info(2).Start = 0.7;
     
     output = info;
     return

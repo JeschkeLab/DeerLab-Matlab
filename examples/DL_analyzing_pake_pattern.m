@@ -16,7 +16,7 @@ clear,clc,clf
 % Prepare components
 t = linspace(0,5,400);
 r = linspace(0,9,500);
-P = dd_gauss2(r,[3.5 0.3 4 0.2 0.2]);
+P = dd_gauss2(r,[3.5 0.3 0.2 4 0.2 0.8]);
 B = bg_exp(t,0.2);
 lam = 0.3;
 V = dipolarsignal(t,r,P,lam,B,'noiselevel',0.01);

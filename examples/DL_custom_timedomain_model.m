@@ -86,7 +86,7 @@ upper =    [0.50 7.0 0.5  0.3 2.0];
 %--------------------------------------
 
 % Finally we can launch the fitting function to obtain our fitted model parameters.
-fitpar = fitparamodel(V,model,t,par0,'lower',lower,'upper',upper);
+fitpar = fitparamodel(V,model,t,par0,lower,upper);
 
 % We can now obtain the fitted models, and compare the fit parameters to our 
 % input parameters:

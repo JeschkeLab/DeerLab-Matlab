@@ -32,7 +32,7 @@ t3 = linspace(0,3,150);
 
 %Generate distance distribution
 r = linspace(2,5,100);
-P = dd_gauss2(r,[rmean1 w1 A1 rmean2 w2]);
+P = dd_gauss2(r,[rmean1 w1 A1 rmean2 w2 1-A1]);
 
 %Generate dipolar signals
 D1 = dipolarsignal(t1,r,P,'noiselevel',0.06);

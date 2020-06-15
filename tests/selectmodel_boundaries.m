@@ -4,18 +4,18 @@ function [pass,maxerr] = test(opt)
 
 t = linspace(0,3,200);
 r = linspace(2,6,100);
-P = dd_gauss2(r,[3 0.3 0.5 4 0.3]);
+P = dd_gauss2(r,[3 0.3 0.5 4 0.3 0.5]);
 K = dipolarkernel(t,r);
 S = K*P;
 
 models = {@dd_gauss,@dd_gauss2,@dd_gauss3};
 lower{1} = [2 0.2];
-lower{2} = [2 0.2 0 2 0.2];
-lower{3} = [2 0.2 0 2 0.2 0 2 0.2];
+lower{2} = [2 0.2 0 2 0.2 0.2];
+lower{3} = [2 0.2 0 2 0.2 0 2 0.2 0.2];
 
 upper{1} = [5 2];
-upper{2} = [5 2 1 5 2];
-upper{3} = [5 2 1 5 2 1 5 2];
+upper{2} = [5 2 1 5 2 1];
+upper{3} = [5 2 1 5 2 1 5 2 1];
 
 [optimum,metric] = selectmodel(models,S,r,K,'aicc',[],lower,upper,'Solver','lsqnonlin');
 

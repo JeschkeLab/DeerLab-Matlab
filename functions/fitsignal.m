@@ -7,7 +7,7 @@
 %   __ = FITSIGNAL(V,t,r,dd,bg)
 %   __ = FITSIGNAL(V,t,r,dd)
 %   __ = FITSIGNAL(V,t,r)
-%   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,,lb,ub)
+%   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0,lb,ub)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__},par0)
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},{ex1,ex2,__})
 %   __ = FITSIGNAL({V1,V2,__},{t1,t2,__},r,dd,{bg1,bg2,__},ex)
@@ -345,7 +345,7 @@ for j = 1:nSignals
     end
     
     if includeExperiment(j)
-        Exfcn = @(par)ex_model{j}(t{j},par);
+        Exfcn = @(par)ex_model{j}(par);
         Bmodels{j} = @(par) dipolarbackground(t{j},Exfcn(par{1}),@(t,lam)Bfcn(t,lam,par{2}));
         Kmodels{j} = @(par) dipolarkernel(t{j},r,Exfcn(par{1}),@(t,lam)Bfcn(t,lam,par{2}));
     else
@@ -569,35 +569,32 @@ if nargout==0
     str = '  %s{%d}(%d):   %.7f  (%.7f, %.7f)  %s (%s)\n';
     if numel(parfit.dd)>0
         info = dd_model();
-        pars = info.parameters;
         for p = 1:numel(parfit.dd)
             c = parfit.dd(p);
             ci = paruq.dd.ci(95);
             fprintf(str,'dd',1,p,c,...
-                ci(2),ci(1),pars(p).name,pars(p).units);
+                    ci(1),ci(2),info(p).Parameter,info(p).Units)
         end
     end
     if numel(parfit.bg)>0
         for i = 1:nSignals
             info = bg_model{i}();
-            pars = info.parameters;
             for p = 1:numel(parfit.bg{i})
                 c = parfit.bg{i}(p);
                 ci = paruq.bg{i}.ci(95);
                 fprintf(str,'bg',i,p,c,...
-                    ci(2),ci(1),pars(p).name,pars(p).units)
+                    ci(1),ci(2),info(p).Parameter,info(p).Units)
             end
         end
     end
     if numel(parfit.ex)>0
         for i = 1:nSignals
-            info = ex_model{i}(t{i});
-            pars = info.parameters;
+            info = ex_model{i}();
             for p = 1:numel(parfit.ex{i})
                 c = parfit.ex{i}(p);
                 ci = paruq.ex{i}.ci(95);
                 fprintf(str,'ex',i,p,c,...
-                    ci(2),ci(1),pars(p).name,pars(p).units)
+                    ci(1),ci(2),info(p).Parameter,info(p).Units)
             end
         end
     end
@@ -692,15 +689,10 @@ end
 
 function [par0,lo,up,N] = getmodelparams(model,t)
 
-if contains(func2str(model),'ex_')
-    info = model(t);
-else
-    info = model();
-end
-par0 = [info.parameters.default];
-range = [info.parameters.range];
-lo = range(1:2:end-1);
-up = range(2:2:end);
+info = model();
+par0 = [info.Start];
+lo = [info.Lower];
+up = [info.Upper];
 N = numel(par0);
 
 end

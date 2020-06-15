@@ -1,59 +1,66 @@
 %
-% EX_5PDEER 5-pulse DEER experiment model 
+% EX_5PDEER 5-pulse DEER experiment model
 %
-%   info = EX_5PDEER(t)
-%   Returns an (info) structure containing the specifics of the model, including
-%   a list of parameters.
+%   info = EX_5PDEER()
+%   Returns an (info) table of model parameters and boundaries.
 %
-%   pathways = EX_5PDEER(t,param)
+%   pathways = EX_5PDEER(param)
 %   Computes the dipolar pathway information array according to the paramater
 %   array (param).
 %
 %
 % PARAMETERS
-% name     symbol  default lower bound upper bound
-% -----------------------------------------------------------------------
-% PARAM(1)  lam0    0.4       0            1        unmodulated pathway amplitude
-% PARAM(2)  lam1    0.4       0            1        1st modulated pathway amplitude
-% PARAM(3)  lam2    0.2       0            1        2nd modulated pathway amplitude
-% PARAM(4)  T02  max(t)/2  max(t)/2-2  max(t)/2+2   2nd modulated pathway refocusing time
-% -----------------------------------------------------------------------
+%    ------------------------------------------------------------------------------------
+%     Index  Parameter                                 Units    Lower    Upper     Start
+%    ------------------------------------------------------------------------------------
+%       1    Amplitude of unmodulated components                   0       1        0.3
+%       2    Amplitude of 1st modulated pathway                    0       1        0.3
+%       3    Amplitude of 2nd modulated pathway                    0       1        0.3
+%       4    Refocusing time of 2nd modulated pathway   us         0       20        5        
+%    ------------------------------------------------------------------------------------
 %
 
-% This file is a part of DeerLab. License is MIT (see LICENSE.md). 
+% This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function output = ex_5pdeer(t,param)
+function output = ex_5pdeer(param)
 
 nParam = 4;
 
-if nargin>2
-    error('Model requires one or two input arguments.')
+if nargin>1
+    error('Model requires one input argument.')
 end
 
-if nargin==1
+if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = '5-pulse DEER experiment (two modulated pathways)';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'unmodulated pathway amplitude';
-    info.parameters(1).range = [0 1];
-    info.parameters(1).default = 0.4;
-    info.parameters(1).units = '';
+    info(1).Index = 1;
+    info(1).Parameter = 'Amplitude of unmodulated components';
+    info(1).Units = '  ';
+    info(1).Lower = 0;
+    info(1).Upper = 1;
+    info(1).Start = 0.4;
     
-    info.parameters(2).name = '1st modulated pathway amplitude';
-    info.parameters(2).range = [0 1];
-    info.parameters(2).default = 0.4;
-    info.parameters(2).units = '';
+    info(2).Index = 2;
+    info(2).Parameter = 'Amplitude of 1st modulated pathway';
+    info(2).Units = '  ';
+    info(2).Lower = 0;
+    info(2).Upper = 1;
+    info(2).Start = 0.4;
     
-    info.parameters(3).name = '2nd modulated pathway amplitude';
-    info.parameters(3).range = [0 1];
-    info.parameters(3).default = 0.2;
-    info.parameters(3).units = '';
+    info(3).Index = 3;
+    info(3).Parameter = 'Amplitude of 2nd modulated pathway';
+    info(3).Units = '  ';
+    info(3).Lower = 0;
+    info(3).Upper = 1;
+    info(3).Start = 0.2;
     
-    info.parameters(4).name = '2nd modulated pathway refocusing time';
-    info.parameters(4).range = [max(t)/2 - 2 max(t)/2 + 2];
-    info.parameters(4).default = max(t)/2;
-    info.parameters(4).units = 'us';
+    info(4).Index = 4;
+    info(4).Parameter = 'Refocusing time of 2nd modulated pathway';
+    info(4).Units = 'us';
+    info(4).Lower = 0;
+    info(4).Upper = 20;
+    info(4).Start = 5;
+
     output = info;
     return
 end
@@ -62,6 +69,7 @@ end
 if length(param)~=nParam
     error('The number of input parameters does not match the number of model parameters.')
 end
+param = param(:).';
 
 % Extract parameter
 lambda = param(1:3);

@@ -17,7 +17,7 @@ clear,clc,clf
 % Prepare the signal components
 t = linspace(-0.1,6,300);
 r = linspace(2,8,200);
-P = dd_gauss2(r,[4 0.7 0.3 4.5 0.3]);
+P = dd_gauss2(r,[4 0.7 0.3 4.5 0.3 0.7]);
 
 % Simulate the signal
 V = dipolarsignal(t,r,P,'noiselevel',0.03);

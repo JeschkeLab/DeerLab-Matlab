@@ -163,7 +163,6 @@ end
 try
     % Check whether model is a DeerLab model function
     paraminfo = model();
-    paraminfo = paraminfo.parameters;
     if nargin(model)==2
         model = @(ax,param,idx) model(ax,param);
     else
@@ -178,7 +177,6 @@ catch
     % Wrap the function handle into a DeerLab model function
     model = paramodel(model,par0,[],[],isDistanceDomain);
     paraminfo = model();
-    paraminfo = paraminfo.parameters;
 end
 
 % Validate kernel
@@ -199,10 +197,10 @@ end
 
 if nargin<5 || isempty(par0)
     % If user does not give parameters, use the defaults of the model
-    par0 =  [paraminfo(:).default];
+    par0 =  [paraminfo.Start];
 elseif nargin>4 && ischar(par0)
     varargin = [{par0} varargin];
-    par0 = [paraminfo(:).default];
+    par0 = [paraminfo.Start];
 else
     validateattributes(par0,{'numeric'},{'2d','nonempty'},mfilename,'StartParameters')
 end
@@ -305,12 +303,11 @@ Weights = Weights(:).';
 Labels = num2cell(1:nSignals);
 
 % Prepare upper/lower bounds on parameter search range
-Ranges =  [paraminfo(:).range];
 if isempty(lb)
-    lb = Ranges(1:2:end-1);
+    lb = [paraminfo.Lower];
 end
 if isempty(ub)
-    ub = Ranges(2:2:end);
+    ub = [paraminfo.Upper];
 end
 if any(ub==realmax) || any(lb==-realmax)
     unboundedparams = true;
@@ -400,10 +397,10 @@ for p = 1:numel(parfit)
     if fixedPar(p), continue; end
     
     if atLower(p)
-        warning('The fitted value of parameter %d (%s) is at the lower bound of the range.',p,paraminfo(p).name);
+        warning('The fitted value of parameter %d (%s) is at the lower bound of the range.',p,paraminfo(p).Parameter);
     end
     if atUpper(p)
-        warning('The fitted value of parameter %d (%s) is at the upper bound of the range.',p,paraminfo(p).name);
+        warning('The fitted value of parameter %d (%s) is at the upper bound of the range.',p,paraminfo(p).Parameter);
     end
 end
 

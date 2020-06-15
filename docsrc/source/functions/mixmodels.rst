@@ -61,4 +61,4 @@ If one mixes a single Gaussian model (2 parameters) with a WLC model (2 paramete
 
     newmodel = mixmodels(@dd_gauss,@dd_wormchain)
 
-the resulting model ``newmodel`` will contain 5 parameters in the following order: 1 amplitude parameter, the 2 single-Gaussian parameters and the 2 WLC parameters. 
+the resulting model ``newmodel`` will contain 6 parameters in the following order: the 2 single-Gaussian parameters, 1 amplitude parameter for the Gaussian model, the 2 WLC parameters, and 1 amplitude parameter for the WLC model,. 

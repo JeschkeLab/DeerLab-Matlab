@@ -2,7 +2,7 @@
 % BG_STREXP Stretched exponential background model
 %
 %   info = BG_STREXP
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_STREXP(t,param)
 %   B = BG_STREXP(t,param,lambda)
@@ -12,11 +12,12 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% ------------------------------------------------------------------
-% PARAM(1) kappa   0.25        0           200         decay rate
-% PARAM(2)   d       1         0            6          stretch factor
-% ------------------------------------------------------------------
+%    -----------------------------------------------------------
+%     Index  Parameter        Units    Lower    Upper    Start
+%    -----------------------------------------------------------
+%       1    Decay Rate       us^-1      0       200      0.25 
+%       2    Stretch Factor              0        6        1 
+%    -----------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -33,18 +34,20 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'stretched exponential';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'decay rate kappa';
-    info.parameters(1).range = [0 200];
-    info.parameters(1).default = 0.25;
-    info.parameters(1).units = 'us^-1';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Decay Rate';
+    info(1).Units = 'us^-1';
+    info(1).Lower = 0;
+    info(1).Upper = 200;
+    info(1).Start = 0.25;
     
-    info.parameters(2).name = 'stretch factor d';
-    info.parameters(2).range = [0 6];
-    info.parameters(2).default = 1;
-    info.parameters(2).units = ' ';
+    info(2).Index = 2;
+    info(2).Parameter = 'Stretch Factor';
+    info(2).Units = '  ';
+    info(2).Lower = 0;
+    info(2).Upper = 6;
+    info(2).Start = 1;
     
     output = info;
     return

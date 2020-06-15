@@ -4,12 +4,12 @@ function [pass,maxerr] = test(opt)
 
 t = linspace(0,5,300);
 r = linspace(1,6,300);
-parIn = [3 0.5 0.4 4 0.5];
+parIn = [3 0.5 0.4 4 0.5 0.6];
 P = dd_gauss2(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P;
 
-par0 = [2 0.5 0.5 5 0.3];
+par0 = [2 0.5 0.5 5 0.3 0.5];
 [~,Pfit] = fitparamodel(S,@dd_gauss2,r,K,par0);
 
 

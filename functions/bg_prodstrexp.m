@@ -2,7 +2,7 @@
 % BG_PRODSTREXP Product of two stretched exponentials background model
 %
 %   info = BG_PRODSTREXP
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_PRODSTREXP(t,param)
 %   B = BG_PRODSTREXP(t,param,lambda)
@@ -12,13 +12,14 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% PARAM(1) kappa1     3.5      0            200        1st strexp decay rate
-% PARAM(2)  d1        1        0            6          1st strexp stretch factor
-% PARAM(3) kappa2     3.5      0            200        2nd strexp decay rate
-% PARAM(4)  d2        1        0            6          2nd strexp stretch factor
-% --------------------------------------------------------------------------
+%    ---------------------------------------------------------------------------
+%     Index  Parameter                        Units    Lower    Upper    Start
+%    ---------------------------------------------------------------------------
+%       1    Decay Rate of 1st component      us^-1      0       200      0.25 
+%       2    Stretch Factor of 1st component             0         6       1 
+%       3    Decay Rate of 2nd component      us^-1      0       200      0.25 
+%       4    Stretch Factor of 2nd component             0         6       1 
+%    ---------------------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -34,28 +35,34 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'product of two stretched exponentials';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'decay rate kappa1 of 1st stretched exponential';
-    info.parameters(1).range = [0 200];
-    info.parameters(1).default = 3.5;
-    info.parameters(1).units = 'us^-1';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Decay Rate of 1st component';
+    info(1).Units = 'us^-1';
+    info(1).Lower = 0;
+    info(1).Upper = 200;
+    info(1).Start = 0.25;
     
-    info.parameters(2).name = 'stretch factor d1 of 1st stretched exponential';
-    info.parameters(2).range = [0 6];
-    info.parameters(2).default = 1;
-    info.parameters(2).units = ' ';
+    info(2).Index = 2;
+    info(2).Parameter = 'Stretch Factor of 1st component';
+    info(2).Units = '     ';
+    info(2).Lower = 0;
+    info(2).Upper = 6;
+    info(2).Start = 1;
     
-    info.parameters(3).name = 'decay rate kappa2 of 2nd stretched exponential';
-    info.parameters(3).range = [0 200];
-    info.parameters(3).default = 3.5;
-    info.parameters(3).units = 'us^-1';
+    info(3).Index = 3;
+    info(3).Parameter = 'Decay Rate of 2nd component';
+    info(3).Units = 'us^-1';
+    info(3).Lower = 0;
+    info(3).Upper = 200;
+    info(3).Start = 0.25;
     
-    info.parameters(4).name = 'stretch factor d2 of 2nd stretched exponential';
-    info.parameters(4).range = [0 6];
-    info.parameters(4).default = 1;
-    info.parameters(4).units = ' ';
+    info(4).Index = 4;
+    info(4).Parameter = 'Stretch Factor of 2nd component';
+    info(4).Units = '     ';
+    info(4).Lower = 0;
+    info(4).Upper = 6;
+    info(4).Start = 1;
     
     output = info;
     return

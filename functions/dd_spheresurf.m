@@ -2,7 +2,7 @@
 % DD_SPHERESURF  Particles distributed on a sphere's surface
 %
 %   info = DD_SPHERESURF
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_SPHERESURF(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,10 +10,11 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)   R    2.5       0.1         20         sphere radius
-% --------------------------------------------------------------------------
+%    --------------------------------------------------------
+%     Index  Parameter        Units   Lower   Upper   Start
+%    -------------------------------------------------------
+%       1    Sphere radius      nm     0.1     20      2.5 
+%    --------------------------------------------------------
 %
 %   See: D.R. Kattnig, D. Hinderberger, Journal of Magnetic Resonance, 230 (2013), 50-63 
 %        http://doi.org/10.1016/j.jmr.2013.01.007
@@ -32,13 +33,13 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Sphere Surface';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Sphere radius R';
-    info.parameters(1).range = [0.1 20];
-    info.parameters(1).default = 2.5;
-    info.parameters(1).units = 'nm';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = "Sphere radius";
+    info(1).Units = 'nm';
+    info(1).Lower = 0.1;
+    info(1).Upper = 20;
+    info(1).Start = 2.5;
     
     output = info;
     return

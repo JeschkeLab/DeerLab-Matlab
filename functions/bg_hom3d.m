@@ -2,7 +2,7 @@
 % BG_HOM3D Background from 3D homogeneous distribution of spins
 %
 %   info = BG_HOM3D
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_HOM3D(t,param)
 %   B = BG_HOM3D(t,param,lambda)
@@ -12,10 +12,11 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% ------------------------------------------------------------------
-% PARAM(1)  c       50        0.01       5000     spin concentration (uM)
-% ------------------------------------------------------------------
+%    ------------------------------------------------------------
+%     Index  Parameter            Units   Lower   Upper   Start
+%    ------------------------------------------------------------
+%       1    Spin concentration    uM     0.01    5000    50 
+%    ------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -31,13 +32,13 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'homogenous distribution in 3D';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'spin concentration c';
-    info.parameters(1).range = [0.01 5000];
-    info.parameters(1).default = 50;
-    info.parameters(1).units = 'uM';
+    % If no inputs given, return info about the parametric model  
+    info(1).Index = 1;
+    info(1).Parameter = "Spin concentration";
+    info(1).Units = 'uM';
+    info(1).Lower = 0.01;
+    info(1).Upper = 5000;
+    info(1).Start = 50;
     
     output = info;
     return

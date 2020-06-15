@@ -2,7 +2,7 @@
 % BG_EXP Exponential background model
 %
 %   info = BG_EXP
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_EXP(t,param)
 %   B = BG_EXP(t,param,lambda)
@@ -12,10 +12,11 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% ------------------------------------------------------------------
-% PARAM(1) kappa    0.35      0            200        decay rate
-% ------------------------------------------------------------------
+%    ---------------------------------------------------
+%     Index  Parameter    Units   Lower   Upper   Start
+%    ---------------------------------------------------
+%       1    Decay Rate   us^-1     0      200    0.35 
+%    ---------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -32,13 +33,13 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    % If no inputs given, return info about the parametric model
-    info.model  = 'Exponential';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'decay rate kappa';
-    info.parameters(1).range = [0 200];
-    info.parameters(1).default = 0.35;
-    info.parameters(1).units = 'us^-1';
+    % If no inputs given, return info about the parametric model  
+    info(1).Index = 1;
+    info(1).Parameter = 'Decay Rate';
+    info(1).Units = 'us^-1';
+    info(1).Lower = 0;
+    info(1).Upper = 200;
+    info(1).Start = 0.35;
     
     output = info;
     return

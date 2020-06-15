@@ -2,7 +2,7 @@
 % DD_TRIANGLE Triangle distribution parametric model
 %
 %   info = DD_TRIANGLE
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_TRIANGLE(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -10,12 +10,13 @@
 %   in the (info) structure.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% --------------------------------------------------------------------------
-% param(1)  r0     3.5     1.0         20         mode
-% param(2)  wL     0.3     0.1         5          left width
-% param(3)  wR     0.3     0.1         5          right width
-% --------------------------------------------------------------------------
+%    ----------------------------------------------------
+%     Index  Parameter   Units    Lower   Upper    Start
+%    ----------------------------------------------------
+%       1    Center       nm       1       20       3.5 
+%       2    Width left   nm      0.1       5       0.3 
+%       3    Width right  nm      0.1       5       0.3 
+%    ----------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -31,23 +32,27 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'Triangle distribution';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Center distance r0';
-    info.parameters(1).range = [1 20];
-    info.parameters(1).default = 3.5;
-    info.parameters(1).units = 'nm';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Center';
+    info(1).Units = 'nm';
+    info(1).Lower = 1;
+    info(1).Upper = 20;
+    info(1).Start = 3.5;
     
-    info.parameters(2).name = 'width left wL';
-    info.parameters(2).range = [0.1 5];
-    info.parameters(2).default = 0.3;
-    info.parameters(2).units = 'nm';
+    info(2).Index = 2;
+    info(2).Parameter = 'Width left';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 5;
+    info(2).Start = 0.3;
     
-    info.parameters(3).name = 'width right wR';
-    info.parameters(3).range = [0.1 5];
-    info.parameters(3).default = 0.3;
-    info.parameters(3).units = 'nm';
+    info(3).Index = 3;
+    info(3).Parameter = 'Width right';
+    info(3).Units = 'nm';
+    info(3).Lower = 0.1;
+    info(3).Upper = 5;
+    info(3).Start = 0.3;
     
     output = info;
     return

@@ -2,7 +2,7 @@
 % BG_POLY2 Polynomial 2nd-order background model 
 %
 %   info = BG_POLY2
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   B = BG_POLY2(t,param)
 %   B = BG_POLY2(t,param,lambda)
@@ -12,12 +12,13 @@
 %   included, if not given the default lambda=1 will be used.
 %
 % PARAMETERS
-% name    symbol default lower bound upper bound
-% ------------------------------------------------------------------
-% PARAM(1)  p0     1        0            200        Intercept
-% PARAM(2)  p1     -1     -200           200        1st order weight
-% PARAM(3)  p2     -1     -200           200        2nd order weight
-% ------------------------------------------------------------------
+%    ----------------------------------------------------------------
+%     Index  Parameter              Units    Lower    Upper    Start
+%    ----------------------------------------------------------------
+%       1    Intercept                         0       200       1  
+%       2    1st-order coefficient  us^-1    -200      200      -1
+%       3    2nd-order coefficient  us^-2    -200      200      -1  
+%    ----------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
@@ -34,24 +35,28 @@ if all(nargin~=[0 2 3])
 end
 
 if nargin==0
-    %If no inputs given, return info about the parametric model
-    info.model  = 'polynomial 2nd order';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'intercept p0';
-    info.parameters(1).range = [0 200];
-    info.parameters(1).default = 1;
-    info.parameters(1).units = ' ';
-
-    info.parameters(2).name = '1st-order coefficient p1';
-    info.parameters(2).range = [-200 200];
-    info.parameters(2).default = -1;
-    info.parameters(2).units = 'us^-1';
+    % If no inputs given, return info about the parametric model
+    info(1).Index = 1;
+    info(1).Parameter = 'Intercept';
+    info(1).Units = '  ';
+    info(1).Lower = 0;
+    info(1).Upper = 200;
+    info(1).Start = 1;
     
-    info.parameters(3).name = '2nd-order coefficient p2';
-    info.parameters(3).range = [-200 200];
-    info.parameters(3).default = -1;
-    info.parameters(3).units = 'us^-2';
+    info(2).Index = 2;
+    info(2).Parameter = '1st-order coefficient';
+    info(2).Units = 'us^-1';
+    info(2).Lower = -200;
+    info(2).Upper = 200;
+    info(2).Start = -1;
     
+    info(3).Index = 3;
+    info(3).Parameter = '2nd-order coefficient';
+    info(3).Units = 'us^-2';
+    info(3).Lower = -200;
+    info(3).Upper = 200;
+    info(3).Start = -1;
+        
     output = info;
     return
 end
@@ -66,7 +71,8 @@ if length(param)~=nParam
 end
 
 % If necessary inputs given, compute the model distance distribution
-p = fliplr(param);
+param = param(:);
+p = flipud(param);
 B = polyval(lambda*p,abs(t));
 B = B(:);
 output = B;

@@ -4,11 +4,11 @@ function [pass,maxerr] = test(opt)
 
 t = linspace(0,5,300);
 r = linspace(1,6,300);
-parIn = [3 0.4 4.5 0.3 0.6];
+parIn = [3 0.4 0.6 4.5 0.3 0.4];
 P = dd_rice2(r,parIn);
 K = dipolarkernel(t,r);
 S = K*P;
-par0 = [2 0.1 1 0.6 0.2];
+par0 = [2 0.1 1 0.6 0.2 1];
 
 [~,Pfit] = fitparamodel(S,@dd_rice2,r,K,par0,'multistart',10);
 

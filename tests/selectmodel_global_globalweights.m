@@ -4,7 +4,7 @@ function [pass,maxerr] = test(opt)
 
 
 r = linspace(2,6,100);
-parIn = [3 0.3 0.5 5 0.3];
+parIn = [3 0.3 0.5 5 0.3 0.5];
 P = dd_gauss2(r,parIn);
 
 t1 = linspace(0,3,200);
@@ -20,7 +20,7 @@ K3 = dipolarkernel(t3,r);
 S3 = K3*P;
 
 
-models = {@dd_gauss,@dd_gauss2,@dd_gauss3};
+models = {@dd_gauss,@dd_gauss2,@dd_gauss5};
 
 [optimum,metric] = selectmodel(models,{S1,S2,S3},r,{K1,K2,K3},'aicc','GlobalWeights',[1 1 1]);
 

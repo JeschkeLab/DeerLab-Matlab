@@ -76,8 +76,8 @@ optionalProperties = {'Upper','Lower','Background','internal::parselater'};
 
 % Control that the boundaries match the model and are appropiate
 modelInfo = model();
-nparam =  modelInfo.nparam;
-paramNames = [{modelInfo.parameters(:).name}];
+nparam =  numel(modelInfo);
+paramNames = [{modelInfo.Parameter}];
 str = [];
 for i=1:numel(paramNames), str = [str paramNames{i} ', ']; end, str(end-1:end) = ''; 
 if ~isempty(Upper) && isempty(BckgModel) && length(Upper)~=nparam
@@ -128,7 +128,7 @@ if strcmp(func2str(model),'dd_gauss')
     if maxModels>=4, multiModels{4} = @dd_gauss4; end
     if maxModels>=5, multiModels{5} = @dd_gauss5; end
     for i = 6:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},@dd_gauss);
+        multiModels{i} =  mixmodels(repmat({@dd_gauss},1,i));
     end
 elseif strcmp(func2str(model),'dd_rice')
     % If basis function is a Rician, use built-in models
@@ -138,13 +138,13 @@ elseif strcmp(func2str(model),'dd_rice')
     if maxModels>=4, multiModels{4} = @dd_rice4; end
     if maxModels>=5, multiModels{5} = @dd_rice5; end
     for i = 6:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},@dd_rice);
+        multiModels{i} =  mixmodels(repmat({@dd_rice},1,i));
     end
 else
     % Otherwise mix the models
     multiModels{1} = model;
     for i = 2:maxModels
-        multiModels{i} =  mixmodels(multiModels{i-1},model);
+        multiModels{i} =  mixmodels(repmat({model},1,i));
     end
 end
 
@@ -157,12 +157,17 @@ if ~isempty(Upper) || ~isempty(Lower)
     for i = 1:maxModels
         % Get the info about the models
         info = multiModels{i}();
-        boundary = zeros(1,info.nparam);
-        ParamNames = {info.parameters(:).name};
+        modelnparam = numel(info);
+        boundary = zeros(1,modelnparam);
+        paramNames = [{info.Parameter}];
 
-        %Get the indices of the different parameters on the mixed models
-        paramidx = (1:nparam+1:info.nparam) + (0:nparam).';
-        ampidx = paramidx(end,1:end-1);
+        %Get the indices of the different parameters on the mixed models\\
+        paramidx = (1:nparam+1:modelnparam) + (0:nparam).';
+        if i>i
+            ampidx = paramidx(end,1:end);
+        else
+            ampidx = [];
+        end
         if ~isempty(Upper)
             for j=1:nparam
                 boundary(paramidx(j,:)) = Upper(j);
@@ -175,7 +180,7 @@ if ~isempty(Upper) || ~isempty(Lower)
         else
             UpperBounds = [];
         end
-        boundary = zeros(1,info.nparam);
+        
         if ~isempty(Lower)
             for j=1:nparam
                 boundary(paramidx(j,:)) = Lower(j);
@@ -203,38 +208,33 @@ if ~isempty(BckgModel)
     if isempty(LowerBounds)
         for i = 1:maxModels
             info = multiModels{i}();
-            range = [info.parameters(:).range];
-            Plower = range(1:2:end-1);
+            Plower = [info.Lower];
             infoB = BckgModel();
-            range = [infoB.parameters(:).range];
-            Blower = range(1:2:end-1);
+            Blower = [infoB.Lower];
             LowerBounds{i} = [Plower repmat([0 Blower],1,Nsignals)];
-            
         end
     end
     if isempty(UpperBounds)
         for i = 1:maxModels
             info = multiModels{i}();
-            range = [info.parameters(:).range];
-            Pupper = range(2:2:end);
+            Pupper = [info.Upper];
             infoB = BckgModel();
-            range = [infoB.parameters(:).range];
-            Bupper = range(2:2:end);
+            Bupper = [infoB.Upper];
             UpperBounds{i} = [Pupper repmat([1 Bupper],1,Nsignals)];
         end
     end
     for i = 1:maxModels
         DistModel = multiModels{i};
         info = DistModel();
-        Nparam = info.nparam;
-        Pparam = [info.parameters(:).default];
+        Nparam = numel(info);
+        Pparam = [info.Start];
         infoB = BckgModel();
-        Bparam = [infoB.parameters(:).default];
+        Bparam = infoB.Start;
         lampars = Nparam + (1+numel(Bparam))*(1:Nsignals)-numel(Bparam);
         Bpars = lampars + 1;
         lam0 = 0.25;
         timeMultiGaussModels{i} = @(t,param,idx) (1 - param(lampars(idx)) + param(lampars(idx))*dipolarkernel(t,r)*DistModel(r,param(1:Nparam)) ).*BckgModel(t,param(Bpars(idx):Bpars(idx)+numel(Bparam)-1));
-        param0{i} = [Pparam repmat([lam0 Bparam],1,Nsignals)];
+        param0{i} = [Pparam repmat([lam0 Bparam],Nsignals,1)];
     end
 end
 
@@ -253,7 +253,8 @@ param = fitparams{nGaussOpt};
 paramci = paramcis{nGaussOpt};
 optModel = multiModels{nGaussOpt};
 info = optModel();
-Pfit = optModel(r,param(1:info.nparam));
+nparam = numel(info);
+Pfit = optModel(r,param(1:nparam));
 stats = stats{nGaussOpt};
 
 % Uncertainty estimation
@@ -261,15 +262,16 @@ stats = stats{nGaussOpt};
 if nargin>3
     %Loop over different signals
     lb = zeros(numel(r),1);
-    Pfitci = paramci.propagate(@(par)optModel(r,par(1:info.nparam)),lb,[]);
+    Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb,[]);
 end
 
 if nargout>6
     Peval = zeros(maxModels,numel(r));
     for i = 1:maxModels
         info = multiModels{i}();
+        nparam = height(info);
         p = fitparams{i};
-        Peval(i,:) = multiModels{i}(r,p(1:info.nparam));
+        Peval(i,:) = multiModels{i}(r,p(1:nparam));
     end
 end
 

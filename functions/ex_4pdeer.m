@@ -1,41 +1,41 @@
 %
 % EX_4PDEER Single-pathway 4-pulse DEER experiment model 
 %
-%   info = EX_4PDEER(t)
-%   Returns an (info) structure containing the specifics of the model, including
-%   a list of parameters.
+%   info = EX_4PDEER()
+%   Returns an (info) table of model parameters and boundaries.
 %
-%   pathways = EX_4PDEER(t,param)
+%   pathways = EX_4PDEER(param)
 %   Computes the dipolar pathway information array according to the paramater
 %   array (param).
 %
 %
 % PARAMETERS
-% name     symbol default lower bound upper bound
-% -----------------------------------------------------------------------
-% PARAM(1)  lam     0.3       0            1    modulated pathway amplitude (modulation depth)
-% -----------------------------------------------------------------------
+%    -----------------------------------------------------------------
+%     Index  Parameter           Units    Lower    Upper    Start
+%    -----------------------------------------------------------------
+%       1    Modulation depth               0        1       0.3 
+%    -----------------------------------------------------------------
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md). 
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function output = ex_4pdeer(t,param)
+function output = ex_4pdeer(param)
 
 nParam = 1;
 
-if nargin>2
-    error('Model requires one or two input arguments.')
+if nargin>1
+    error('Model requires one input argument.')
 end
 
-if nargin==1
+if nargin==0
     % If no inputs given, return info about the parametric model
-    info.model  = '4-pulse DEER experiment (single pathway)';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'modulation depth';
-    info.parameters(1).range = [0 1];
-    info.parameters(1).default = 0.3;
-    info.parameters(1).units = '';
+    info(1).Index = 1;
+    info(1).Parameter = "Modulation depth";
+    info(1).Units = '  ';
+    info(1).Lower = 0;
+    info(1).Upper = 1;
+    info(1).Start = 0.3;
     
     output = info;
     return

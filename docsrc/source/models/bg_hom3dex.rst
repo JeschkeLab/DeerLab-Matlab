@@ -67,7 +67,7 @@ Description
 
         info = bg_hom3dex()
 
-Returns an ``info`` structure containing the specifics of the model:
+Returns an ``info`` table containing the information of the model parameters and boundaries.
 
 * ``info.model`` -- Full name of the parametric model.
 * ``info.nparam`` -- Total number of adjustable parameters.

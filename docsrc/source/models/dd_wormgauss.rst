@@ -43,11 +43,13 @@ Description
 
         info = dd_wormgauss()
 
-Returns an ``info`` structure containing the specifics of the model:
+Returns an ``info`` structure containing the information of the model parameters and boundaries.
 
-* ``info.model`` -  Full name of the parametric model.
-* ``info.nparam`` -  Total number of adjustable parameters.
-* ``info.parameters`` - Structure array with information on individual parameters.
+* ``info(n).Index`` -  Index of the parameter in the ``param`` array.
+* ``info(n).Parameter`` -  Description of the n-th parameter.
+* ``info(n).Lower`` -  Lower bound of the n-th parameter.
+* ``info(n).Upper`` -  Upper bound of the n-th parameter.
+* ``info(n).Start`` -  Start value of the n-th parameter.
 
 .. code-block:: matlab
 

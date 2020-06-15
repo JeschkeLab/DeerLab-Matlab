@@ -3,7 +3,7 @@ function output = dd_randcoil(r,param)
 % DD_RANDCOIL Random-coil model for an unfolded peptide/protein
 %
 %   info = DD_RANDCOIL
-%   Returns an (info) structure containing the specifics of the model.
+%   Returns an (info) table of model parameters and boundaries.
 %
 %   P = DD_RANDCOIL(r,param)
 %   Computes the N-point model (P) from the N-point distance axis (r) according to 
@@ -13,12 +13,13 @@ function output = dd_randcoil(r,param)
 %   sufficiently large N.
 %
 % PARAMETERS
-% name      symbol default lower bound   upper bound
-% --------------------------------------------------------------------------
-% param(1)  N      50         2          1000    number of residues between labels, including labeled residues
-% param(2)  R0     0.20      0.10        0.40    segment length
-% param(3)  nu     0.60      0.33        1.00    scaling exponent
-% --------------------------------------------------------------------------
+%    -------------------------------------------------------------
+%     Index  Parameter           Units   Lower    Upper    Start
+%    -------------------------------------------------------------
+%       1    Number of residues           2       1000      50
+%       2    Segment length       nm      0.1     0.4       0.2
+%       3    Scaling exponent             0.33    1         0.602
+%    -------------------------------------------------------------
 %
 %   See: N. C. Fitzkee, G. D. Rose, PNAS 2004, 101(34), 12497-12502
 %        https://doi.org/10.1073/pnas.0404236101
@@ -34,25 +35,27 @@ if nargin~=0 && nargin~=2
 end
 
 if nargin==0
-  
     % If no inputs given, return info about the parametric model
-    info.model  = 'Random-coil model';
-    info.nparam  = nParam;
-    info.parameters(1).name = 'Chain members N';
-    info.parameters(1).range = [2 1000];
-    info.parameters(1).default = 50;
-    info.parameters(1).units = '';
-        
-    info.parameters(2).name = 'Segment length';
-    info.parameters(2).range = [0.1 0.4];
-    info.parameters(2).default = 0.2;
-    info.parameters(2).units = 'nm';  
+    info(1).Index = 1;
+    info(1).Parameter = 'Number of residues';
+    info(1).Units = '  ';
+    info(1).Lower = 2;
+    info(1).Upper = 1000;
+    info(1).Start = 50;
     
-    info.parameters(3).name = ['Scaling exponent',char(957)];
-    info.parameters(3).range = [0.33 1];
-    info.parameters(3).default = 0.602;
-    info.parameters(3).units = '';
-  
+    info(2).Index = 2;
+    info(2).Parameter = 'Segment length';
+    info(2).Units = 'nm';
+    info(2).Lower = 0.1;
+    info(2).Upper = 0.4;
+    info(2).Start = 0.2;
+    
+    info(3).Index = 3;
+    info(3).Parameter = 'Scaling exponent';
+    info(3).Units = '  ';
+    info(3).Lower = 0.33;
+    info(3).Upper = 1;
+    info(3).Start = 0.602;
     
     output = info;
     return
