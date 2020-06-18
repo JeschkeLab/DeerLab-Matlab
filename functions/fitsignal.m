@@ -100,7 +100,7 @@ ub = [];
 optionstart = numel(varargin);
 for i=1:numel(varargin)
     if i<4 && ischar(varargin{i}) && ~any(strcmp(varargin{i},{'P','none'})) || ...
-       i>3 && ischar(varargin{i})
+            i>3 && ischar(varargin{i})
         optionstart = i-1;
         break
     end
@@ -288,7 +288,7 @@ includeExperiment = NaN(nSignals,1);
 for i = 1:nSignals
     includeExperiment(i) = true;
     if isa(ex_model{i},'function_handle')
-        [par0_ex{i},lower_ex{i},upper_ex{i},N_ex(i)] = getmodelparams(ex_model{i},t{i});
+        [par0_ex{i},lower_ex{i},upper_ex{i},N_ex(i)] = getmodelparams(ex_model{i});
     elseif ischar(ex_model{i}) && strcmp(ex_model{i},'none')
         includeExperiment(i) = false;
     else
@@ -388,9 +388,7 @@ else
     
     % Calculate the fitted signal, background, and distribution
     alpha = regparam; % use original setting for final run
-    for i = 1:nSignals
-        [Vfit{i},Bfit{i},Pfit] = Vmodel([],parfit_,i);
-    end
+    [Vfit,Bfit,Pfit] = Vmodel([],parfit_);
     
     
     % Uncertainty estimation
@@ -440,7 +438,7 @@ else
         
         % Construct uncertainty quantification structure for fitted parameters
         paruq_ = uqst('covariance',parfit_,covmatrix(subidx_theta,subidx_theta),lb,ub);
-
+        
         % Lower bound for distribution uncertainty quantification
         Plo = zeros(numel(r),1);
         if parfreeDistribution
@@ -448,11 +446,10 @@ else
             % Construct CI-structure for non-parametric distribution
             PfitUQ = uqst('covariance',Pfit,covmatrix(subidx_P,subidx_P),Plo,[]);
         else
-            % Construct CI-structure for parametric distribution           
+            % Construct CI-structure for parametric distribution
             PfitUQ = paruq_.propagate(@(parfit)dd_model(r,parfit_(ddidx)),Plo,[]);
         end
-
-
+        
         VfitUQ = cell(nSignals,1);
         BfitUQ = cell(nSignals,1);
         paruq_bg = cell(nSignals,1);
@@ -504,7 +501,7 @@ else
     stats = [];
 end
 
-% Return fitted parameters and confiden-ce intervals in structures
+% Return fitted parameters and confidence intervals in structures
 %-------------------------------------------------------------------------------
 parfit_ = parfit_(:);
 parfit.dd = parfit_(ddidx);
@@ -567,7 +564,7 @@ if nargout==0
             c = parfit.dd(p);
             ci = paruq.dd.ci(95);
             fprintf(str,'dd',1,p,c,...
-                    ci(1),ci(2),info(p).Parameter,info(p).Units)
+                ci(1),ci(2),info(p).Parameter,info(p).Units)
         end
     end
     if numel(parfit.bg)>0
@@ -619,69 +616,59 @@ end
 %===============================================================================
 
 % General multi-pathway DEER signal model function
-    function [V,B,P] = Vmodel(~,par,idx)
+    function [V,B,P] = Vmodel(~,par)
         
-        if nargin<3
-            idx = 1;
-        end
         % Calculate all K, all B, and P when called for first signal
-        if idx==1
-            for j = 1:nSignals
-                % Calculate the background and the experiment kernel matrix
-                K{j} = Kmodels{j}({par(exidx{j}),par(bgidx{j})});
-                B{j} = Bmodels{j}({par(exidx{j}),par(bgidx{j})});
-            end
+        for iSignal = 1:nSignals
+            % Calculate the background and the experiment kernel matrix
+            K{iSignal} = Kmodels{iSignal}({par(exidx{iSignal}),par(bgidx{iSignal})});
+            B{iSignal} = Bmodels{iSignal}({par(exidx{iSignal}),par(bgidx{iSignal})});
+        end
+        
+        % Get the distance distribution
+        if includeForeground && nargin<4
             
-            % Get the distance distribution
-            if includeForeground && nargin<4
-                                
-                if parfreeDistribution
-                    % Use the alpha-search settings by default
-                    alpha = regparam;
-                    % If the parameter vectors has not changed by much...
-                    if ~isempty(par_prev)
-                        if all(abs(par_prev-par)./par < alphaOptThreshold)
-                            % ...use the alpha optimized in the previous iteration
-                            alpha = regparam_prev;
-                        end
+            if parfreeDistribution
+                % Use the alpha-search settings by default
+                alpha = regparam;
+                % If the parameter vectors has not changed by much...
+                if ~isempty(par_prev)
+                    if all(abs(par_prev-par)./par < alphaOptThreshold)
+                        % ...use the alpha optimized in the previous iteration
+                        alpha = regparam_prev;
                     end
-                    par_prev = par;
-                    [P,~,regparam_prev] = fitregmodel(Vexp,K,r,regtype,alpha);
-                else
-                    P = dd_model(r,par(ddidx));
                 end
+                par_prev = par;
+                [P,~,regparam_prev] = fitregmodel(Vexp,K,r,regtype,alpha);
             else
-                P = zeros(numel(t),1);
+                P = dd_model(r,par(ddidx));
             end
-            K_cached = K;
-            B_cached = B;
-            P_cached = P;
         else
-            % Compute the rest of the signals from the cached results
-            K = K_cached;
-            B = B_cached;
-            P = P_cached;
+            P = zeros(numel(t),1);
         end
         
-        % Compute the current signal
-        if includeForeground
-            V = K{idx}*P;
-        else
-            V = B{idx};
+        % Get foreground(s) & background(s)
+        for iSignal = 1:nSignals
+            
+            % Compute the current signal
+            if includeForeground
+                V{iSignal} = K{iSignal}*P;
+            else
+                V{iSignal} = B{iSignal};
+            end
+            if ~parfreeDistribution
+                scale = V{iSignal}\Vexp{iSignal};
+                P = scale*P;
+                V{iSignal} = scale*V{iSignal};
+            end
+            B{iSignal} = B{iSignal};
         end
-        if ~parfreeDistribution
-            scale = V\Vexp{idx};
-            P = scale*P;
-            V = scale*V;
-        end
-        B = B{idx};
-        
     end
 end
 
 %===============================================================================
 
-function [par0,lo,up,N] = getmodelparams(model,t)
+function [par0,lo,up,N] = getmodelparams(model)
 
 info = model();
 par0 = [info.Start];
@@ -695,8 +682,8 @@ end
 
 function pvec = parcombine(p,def)
 for k = 1:3
-  if isempty(p{k}), p{k} = def{k}; end
-  if iscell(p{k}), p{k} = cell2mat(p{k}); end
+    if isempty(p{k}), p{k} = def{k}; end
+    if iscell(p{k}), p{k} = cell2mat(p{k}); end
 end
 pvec = cell2mat(p);
 end

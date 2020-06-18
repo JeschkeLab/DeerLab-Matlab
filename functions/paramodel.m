@@ -68,13 +68,8 @@ model = @myparametricmodel;
             if length(param)~=nParam
                 error('The number of input parameters does not match the number of model parameters.')
             end
-            
-            % If necessary inputs given, compute the model distance distribution
-            if nargin(handle)==3
-                Output = handle(ax,param,idx);
-            else
-                Output = handle(ax,param);
-            end
+
+            Output = handle(ax,param);
             if normalize
                 Output = Output/sum(Output)/mean(diff(ax));
             end

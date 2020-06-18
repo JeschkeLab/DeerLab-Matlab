@@ -163,12 +163,6 @@ end
 try
     % Check whether model is a DeerLab model function
     paraminfo = model();
-    if nargin(model)==2
-        model = @(ax,param,idx) model(ax,param);
-    else
-        model = @(ax,param,idx) model(ax,param,idx);
-    end
-    
 catch
     % If not, require user to pass the inital values
     if ~exist('par0','var') || isempty(par0) || ischar(par0)
@@ -295,8 +289,6 @@ else
     Weights = GlobalWeights;
 end
 Weights = Weights(:).';
-
-Labels = num2cell(1:nSignals);
 
 % Prepare upper/lower bounds on parameter search range
 if isempty(lb)
@@ -433,9 +425,9 @@ end
 %-------------------------------------------------------------------------------
 computeFittedModel = nargout>1;
 if computeFittedModel
-    modelfit = cell(nAxes,1);
+    modelfit = model(ax{1},parfit);
+    if ~iscell(modelfit), modelfit = {modelfit};end
     for i = 1:nAxes
-        modelfit{i} = model(ax{i},parfit,Labels{i});
         if Rescale
             if isDistanceDomain
                 scale = (K{i}*modelfit{i})\V{i};
@@ -458,7 +450,7 @@ if computeModelCI
             lb = zeros(numel(ax{i}),1) - realmax;
         end
         ub = realmax + zeros(numel(ax{i}),1);
-        modelci{i} = parci.propagate(@(par)model(ax{i},par,Labels{i}),lb,ub);
+        modelci{i} = parci.propagate(@(par)localmodel(ax{i},par,i),lb,ub);
     end
 end
 
@@ -496,26 +488,37 @@ warning('on','MATLAB:nearlySingularMatrix')
 warning('on','MATLAB:singularMatrix')
 warning('on','MATLAB:rankDeficientMatrix')
 
-% Function that provides vector of residuals, which is the objective
-% function for the least-squares solvers
+    % Residual vector function
+    % ------------------------------------------------------------------
+    % Function that provides vector of residuals, which is the objective
+    % function for the least-squares solvers
     function r = ResidualsFcn(p)
         r_ = cell(nSignals,1);
-        t = ax{1};
+        sims = model(ax{1},p);
         for iSignal = 1:nSignals
-            if nAxes>1
-                t = ax{iSignal};
-            end
             if isDistanceDomain
-                sim = K{iSignal}*model(t,p,iSignal);
+                Psim = sims;
+                Vsim = K{iSignal}*Psim;
             else
-                sim = model(t,p,iSignal);
+                if ~iscell(sims), sims = {sims};end
+                Vsim = sims{iSignal};
             end
             if Rescale
-                sim = (sim\V{iSignal})*sim;
+                Vsim = (Vsim\V{iSignal})*Vsim;
             end
-            r_{iSignal} = Weights(iSignal)*(V{iSignal}-sim);
+            r_{iSignal} = Weights(iSignal)*(V{iSignal}-Vsim);
         end
         r = vertcat(r_{:});
+    end
+
+    % Local model evaluator
+    % -------------------------------------------------------------------
+    % Function that evaluates an individual simulated model from a global
+    % set of local models
+    function sim = localmodel(ax,par,idx)
+       sims = model(ax,par);
+       if ~iscell(sims), sims = {sims};end
+       sim = sims{idx};
     end
 
 end
