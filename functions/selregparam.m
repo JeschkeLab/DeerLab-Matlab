@@ -1,10 +1,10 @@
 %
 %  SELREGPARAM Selection of optimal regularization parameter
 %
-%    alphaopt = SELREGPARAM(V,K,regtype,method)
-%    alphaopt = SELREGPARAM(V,K,regtype,methodlist)
+%    alphaopt = SELREGPARAM(V,K,r,regtype,method)
+%    alphaopt = SELREGPARAM(V,K,r,regtype,methodlist)
 %    [alphaopt,F,alphas] = SELREGPARAM(___)
-%    ___ = SELREGPARAM({V1,V2,...},{K1,K2,...},___)
+%    ___ = SELREGPARAM({V1,V2,...},{K1,K2,...},r,___)
 %    alpha = SELREGPARAM(___,Name,Value)
 %
 %  Returns the optimal regularization parameter (alphaopt) from a range of
