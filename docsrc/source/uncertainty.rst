@@ -97,8 +97,8 @@ To plot the resulting 95% and 50% confidence interval for the non-parametric dis
     Pci95 = bootuq.ci(95);
     
     plot(r,Pfit,'k')
-    fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','FaceColor',0.5)
-    fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','FaceColor',0.2)
+    fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','FaceAlpha',0.5)
+    fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','FaceAlpha',0.2)
 
 Assumptions:
    - ``Vfit`` is a good fit of the experimental data ``Vexp``.
