@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,6 +11,16 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+
+  
   
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
   
@@ -19,7 +28,9 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -31,16 +42,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="dd_gengauss" href="dd_gengauss.html" />
@@ -96,6 +97,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -178,6 +180,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -216,7 +219,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="../modelsref.html">Models</a> &raquo;</li>
         
@@ -265,7 +268,7 @@
 <hr class="docutils" />
 <div class="section" id="model">
 <h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
-<p><img class="math" src="../_images/math/48bff65f53cc180238b43cb843eed6a6289f37f8.svg" alt="P(r) = a_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + a_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + a_3\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right) +  a_4\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\sigma_4^2}\right) + (1 - a_1 - a_2 - a_3 - a_4)\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_5}\exp\left(-\frac{(r-\left&lt;r_5\right&gt;)^2}{\sigma_5^2}\right)"/></p>
+<p><img class="math" src="../_images/math/ad198a0b062254ebc5b10ca08ad74b960dac21b1.svg" alt="P(r) = a_1\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_1}\exp\left(-\frac{(r-\left&lt;r_1\right&gt;)^2}{\sigma_1^2}\right) + a_2\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_2}\exp\left(-\frac{(r-\left&lt;r_2\right&gt;)^2}{\sigma_2^2}\right) + a_3\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_3}\exp\left(-\frac{(r-\left&lt;r_3\right&gt;)^2}{\sigma_3^2}\right) +  a_4\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_4}\exp\left(-\frac{(r-\left&lt;r_4\right&gt;)^2}{\sigma_4^2}\right) + a_5\sqrt{\frac{2}{\pi}}\frac{1}{\sigma_5}\exp\left(-\frac{(r-\left&lt;r_5\right&gt;)^2}{\sigma_5^2}\right)"/></p>
 <p>with <img class="math" src="../_images/math/4d63585d2f1e782d830378fefd772bd67171d887.svg" alt="\sigma_i = \mathrm{FWHM}_i/\sqrt{2ln(2)}"/></p>
 <table border="1" class="docutils">
 <colgroup>
@@ -305,7 +308,7 @@
 <td>0.2</td>
 <td>0</td>
 <td>1</td>
-<td>1st Gaussian relative amplitude</td>
+<td>1st Gaussian amplitude</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(4)</span></code></td>
 <td><img class="math" src="../_images/math/8579a4fdc06483a87c55c606eae3786d12fc9a09.svg" alt="\left&lt;r_2\right&gt;"/></td>
@@ -326,7 +329,7 @@
 <td>0.2</td>
 <td>0</td>
 <td>1</td>
-<td>2nd Gaussian relative amplitude</td>
+<td>2nd Gaussian amplitude</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(7)</span></code></td>
 <td><img class="math" src="../_images/math/ba80f26c2176d5e3970f6c98959ffbef42447537.svg" alt="\left&lt;r_3\right&gt;"/></td>
@@ -347,7 +350,7 @@
 <td>0.2</td>
 <td>0</td>
 <td>1</td>
-<td>3rd Gaussian relative amplitude</td>
+<td>3rd Gaussian amplitude</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">param(10)</span></code></td>
 <td><img class="math" src="../_images/math/9b3c88db0e00b9dd7167e4a7a9b9617b9dcb006d.svg" alt="\left&lt;r_4\right&gt;"/></td>
@@ -368,7 +371,7 @@
 <td>0.2</td>
 <td>0</td>
 <td>1</td>
-<td>4th Gaussian relative amplitude</td>
+<td>4th Gaussian amplitude</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(13)</span></code></td>
 <td><img class="math" src="../_images/math/f1769cc18bb0e03e6abf3fbb342a2fdab3ccafea.svg" alt="\left&lt;r_5\right&gt;"/></td>
@@ -384,6 +387,13 @@
 <td>5</td>
 <td>5th Gaussian FWHM</td>
 </tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">param(15)</span></code></td>
+<td><img class="math" src="../_images/math/9ad5ae69b76fc8ebbdd8ebe379d4bf0917aaacf2.svg" alt="a_5"/></td>
+<td>0.2</td>
+<td>0</td>
+<td>1</td>
+<td>5th Gaussian amplitude</td>
+</tr>
 </tbody>
 </table>
 <p>Example using default parameters:</p>
@@ -395,11 +405,13 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span> <span class="p">=</span> <span class="n">dd_gauss5</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the specifics of the model:</p>
+<p>Returns an <code class="docutils literal notranslate"><span class="pre">info</span></code> structure containing the information of the model parameters and boundaries.</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">info.model</span></code> -  Full name of the parametric model.</li>
-<li><code class="docutils literal notranslate"><span class="pre">info.nparam</span></code> -  Total number of adjustable parameters.</li>
-<li><code class="docutils literal notranslate"><span class="pre">info.parameters</span></code> - Structure array with information on individual parameters.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info(n).Index</span></code> -  Index of the parameter in the <code class="docutils literal notranslate"><span class="pre">param</span></code> array.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info(n).Parameter</span></code> -  Description of the n-th parameter.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info(n).Lower</span></code> -  Lower bound of the n-th parameter.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info(n).Upper</span></code> -  Upper bound of the n-th parameter.</li>
+<li><code class="docutils literal notranslate"><span class="pre">info(n).Start</span></code> -  Start value of the n-th parameter.</li>
 </ul>
 <hr class="docutils" />
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="n">dd_gauss5</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">param</span><span class="p">)</span>
@@ -429,11 +441,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -444,7 +464,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
