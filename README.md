@@ -74,5 +74,6 @@ DeerLab includes code from the following projects, which have their own licenses
 - [kde.m](https://ch.mathworks.com/matlabcentral/fileexchange/14034-kernel-density-estimator) (Kernel Density Estimator by Zdravko Botev) [BSD]
 - [LevenbergMarquardt.m, jacobiansimple.m](https://ch.mathworks.com/matlabcentral/fileexchange/53449-levenberg-marquardt-toolbox)(Levenberg-Marquardt & Jacobian toolbox by Alexander Dentler)[BSD]
 - [fdcoeffF.m](https://faculty.washington.edu/rjl/fdmbook/matlab/fdcoeffF.m)(Fornberg's method for finite difference coefficients)
+- [minq.m](http://www.mat.univie.ac.at/~neum/software/minq/)(MINQ8 - General Definite and Bound Constrained Indefinite Quadratic Programming by Waltraud Huyer and Arnold Neumair)
 
 Copyright (c) 2019-2020: Luis Fábregas Ibáñez, Stefan Stoll, Gunnar Jeschke, and [other contributors](https://github.com/JeschkeLab/DeerLab/contributors).

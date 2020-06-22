@@ -172,7 +172,7 @@ uqstruct.type = type;
         end
         
         % Evaluate model with fit parameters
-        modelfit = model(parfit);
+        modelfit = model(parfit(:));
 
         % Validate input boundaries
         if isempty(lb)
