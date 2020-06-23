@@ -19,6 +19,11 @@ DeerLabfcns = fieldnames(optionslist);
 stack = dbstack;
 % Get name of DeerLab function currently calling checkoptions()...
 caller = stack(2).name;
+% Remove subfunction name if parseoptions is called from a subfunction
+if contains(caller,'/')
+    idx = strfind(caller,'/');
+    caller = caller(1:idx-1);
+end
 % ... as well as other functions that have been called
 called = [{stack.name}];
 calledfcns = [];
@@ -238,6 +243,14 @@ end
         %==================================================
         
         optionslist.sensitivan = {'AxisHandle','RandPerm','dynamicStats','Verbose'};
+        
+        %==================================================
+        %                   snlls()
+        %==================================================
+        
+        optionslist.snlls = {'alphaOptThreshold','RegOrder','RegParam','RegType',...
+                             'nonLinSolver','LinSolver','forcepenalty',...
+                             'nonLinMaxIter','nonLinTolFun','LinMaxIter','LinTolFun'};
     end
 
 
