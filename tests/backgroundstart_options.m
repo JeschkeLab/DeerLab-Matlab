@@ -11,12 +11,12 @@ F = (1 - lam) + lam*S;
 V = F.*B;
 
 %Check whether control statements on too smal start/end values work
-backgroundstart(V,t,@bg_exp,'RelSearchStart',0.01,'RelSearchEnd',0.1);
+backgroundstart(V,t,@bg_exp,'SearchStart',0.01,'SearchEnd',0.1);
 %Check other options
-backgroundstart(V,t,@bg_exp,'EndCutoffPos',100);
+backgroundstart(V,t,@bg_exp,'EndCutoff',100);
 
 %Control using the defaults
-t0 = backgroundstart(V,t,@bg_exp,'RelSearchStart',0.1*max(t),'RelSearchEnd',0.6*max(t));
+t0 = backgroundstart(V,t,@bg_exp,'SearchStart',0.1*max(t),'SearchEnd',0.6*max(t));
 [Bfit] = fitbackground(V,t,@bg_exp,t0);
 
 % Pass: the background fitted using the optimized start fits well

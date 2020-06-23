@@ -164,7 +164,7 @@ end
         %                   backgroundstart()
         %==================================================
         
-        optionslist.backgroundstart = {'RelSearchStart','RelSearchEnd','EndCutoffPos'};
+        optionslist.backgroundstart = {'SearchStart','SearchEnd','EndCutOff'};
                    
         %==================================================
         %                   dipolarbackground()
