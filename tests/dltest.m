@@ -12,7 +12,7 @@
 %        -c --coverage    Run a coverage analysis over the tests
 %        -b --badges      Generate JSON endpoint for badges
 %        -e --examples    Run example scripts
-% 
+%        -l --lines       Show lines not covered by tests
 %    Either the command syntax as above or the function syntax, e.g.
 %    dltest('asdf','t'), can be used. Any number of options are allowed
 % 
@@ -61,6 +61,7 @@ displayTimings = contains(params,'-t') | contains(params,'--time');
 runExamples = contains(params,'-e') | contains(params,'--examples');
 runCodeCoverage = contains(params,'-c') | contains(params,'--coverage');
 makeBadges = contains(params,'-b') | contains(params,'--badge');
+showMissedLines = contains(params,'-l') | contains(params,'--lines');
 
 if any(TestName=='_')
     FileMask = [TestName '*.m'];
@@ -365,7 +366,7 @@ if runCodeCoverage
         else
             TotalRunnable = TotalRunnable + Runnable;
         end
-        if contains(params,'-l')
+        if showMissedLines
             Missed = RunnableLines;
             for k=1:length(Executed)
                 Missed(RunnableLines==Executed(k)) = NaN;
