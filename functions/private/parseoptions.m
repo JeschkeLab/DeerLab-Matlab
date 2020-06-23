@@ -250,7 +250,8 @@ end
         
         optionslist.snlls = {'alphaOptThreshold','RegOrder','RegParam','RegType',...
                              'nonLinSolver','LinSolver','forcepenalty',...
-                             'nonLinMaxIter','nonLinTolFun','LinMaxIter','LinTolFun'};
+                             'nonLinMaxIter','nonLinTolFun','LinMaxIter','LinTolFun',...
+                             'multiStarts'};
     end
 
 

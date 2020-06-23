@@ -1,10 +1,11 @@
 %
 % SNNLS  Separable Non-linear Least Squares Solver
 %
-%   [pnlin,plin,paramuq] = SNNLS(y,Amodel,par0,lb,ub,lbl,ubl)
+%   [pnlin,plin,paramuq] = SNNLS(___)
 %   __ = SNNLS(y,Amodel,par0,lb,ub,lbl,ubl)
+%   __ = SNNLS(y,Amodel,par0,lb,ub,lbl)
 %   __ = SNNLS(y,Amodel,par0,lb,ub)
-%   __ = SNNLS(y,Amodel,par0)
+%   __ = SNNLS(y,Amodel,par0,lb)
 %   __ = SNNLS(y,Amodel,par0)
 %   __ = SNNLS(___,'Name',Values,___)
 %
@@ -64,20 +65,10 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [nonlinfit,linfit,paramuq] = snlls(y,Amodel,par0,lb,ub,lbl,ubl,varargin)
+function [nonlinfit,linfit,paramuq] = snlls(y,Amodel,par0,varargin)
 
-if nargin<7
-    ubl = [];
-end
-if nargin<6
-    lbl = [];
-end
-if nargin<5
-    ub = [];
-end
-if nargin<4
-    lb = [];
-end
+% Parse inputs in the varargin
+[ubl,lbl,lb,ub,options] = parseinputs(varargin);
 
 % Default optional settings
 alphaOptThreshold = 1e-3;
@@ -98,8 +89,9 @@ else
     LinSolver = 'minq';
 end
 
-% Parse and validate options passed by the user
-parsevalidate(varargin)
+% Parse and validate options passed by the user, if the user has specified
+% any, this call will overwrite the defaults above
+parsevalidate(options)
 
 %Pre-allocate static workspace variables to share between subfunctions
 [illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,L,...
@@ -220,9 +212,11 @@ nonlinfit = nonlinfit(:).';
             par_prev = p;
             regparam_prev = alpha;
             
+            % Non-linear operator with penalty
             A_ = AtAreg;
             y_ = Aty;
         else
+            % Non-linear operator without penalty
             A_ = A;
             y_ = y;
         end
@@ -323,7 +317,6 @@ nonlinfit = nonlinfit(:).';
         [x,eval,exitflag] = minq(gam,c,H,lbl,ubl,print);
     end
 
-
 % Checks on the box constraints for all parameters
 % ------------------------------------------------------------------
 % This function does the bookkeeping on the box boundaries of the nonlinear
@@ -379,6 +372,36 @@ nonlinfit = nonlinfit(:).';
         end
     end
 
+
+% Input parsing
+% ------------------------------------------------------------------
+% This function parses the different input schemes
+function [ubl,lbl,lb,ub,options] = parseinputs(inputs)
+    % Prepare empty containers
+    [ubl,lbl,lb,ub] = deal([]);
+    % Parse the varargin cell array
+    optionstart = numel(inputs);
+    for i=1:numel(inputs)
+        if ischar(inputs{i})
+            optionstart = i-1;
+            break
+        end
+        switch i
+            case 1
+                lb = inputs{i};
+            case 2
+                ub = inputs{i};
+            case 3
+                lbl = inputs{i};
+            case 4
+                ubl = inputs{i};
+        end
+    end
+    inputs(1:optionstart) = [];
+    options = inputs;
+end
+
+
 % Parsing and validation of options
 % ------------------------------------------------------------------
 % This function parses the name-value pairs or structures with options
@@ -388,7 +411,8 @@ nonlinfit = nonlinfit(:).';
         
         % Parse options
         [alphaOptThreshold_,RegOrder_,RegParam_,RegType_,nonLinSolver_,LinSolver_,...
-            forcePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_] = parseoptions(varargin);
+            forcePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_,...
+            multiStarts_] = parseoptions(varargin);
         
         if ~isempty(alphaOptThreshold_)
             validateattributes(alphaOptThreshold_,{'numeric'},{'scalar'})
@@ -444,6 +468,10 @@ nonlinfit = nonlinfit(:).';
         if ~isempty(LinTolFun_)
             validateattributes(LinTolFun_,{'numeric'},{'scalar','nonnegative','nonempty'})
             LinTolFun = LinTolFun_;
+        end
+        if ~isempty(multiStarts_)
+            validateattributes(multiStarts_,{'numeric'},{'scalar','nonnegative','integer'})
+            multiStarts = multiStarts_;
         end
     end
 end
