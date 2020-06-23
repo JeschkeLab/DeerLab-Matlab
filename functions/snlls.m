@@ -51,6 +51,7 @@
 %                       or value of the regularization parameter
 %   'alphaOptThreshold' -Relative parameter change threshold for reoptimizing
 %                          the regularization parameter
+%   'MultiStart'    -Number of starting points for global optimization
 %   'LinSolver'     -Linear LSQ solver
 %                         'lsqlin' - Requires Optimization Toolbox
 %                         'minq'   - Free

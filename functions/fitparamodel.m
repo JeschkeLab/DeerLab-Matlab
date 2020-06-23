@@ -16,7 +16,7 @@
 %   M-point distance/time axis (r/t). For distance-domain fitting, provide
 %   the NxM point kernel matrix (K). The fitted model corresponds to a parametric model
 %   calculated by the passed function handle (@model). 
-
+%
 %   A structure containing different statistical estimators of goodness of 
 %   fit is returned as (stats).
 %
