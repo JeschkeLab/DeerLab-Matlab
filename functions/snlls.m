@@ -66,6 +66,19 @@
 
 function [nonlinfit,linfit,paramuq] = snlls(y,Amodel,par0,lb,ub,lbl,ubl,varargin)
 
+if nargin<7
+    ubl = [];
+end
+if nargin<6
+    lbl = [];
+end
+if nargin<5
+    ub = [];
+end
+if nargin<4
+    lb = [];
+end
+
 % Default optional settings
 alphaOptThreshold = 1e-3;
 RegOrder = 2;
@@ -89,15 +102,11 @@ end
 parsevalidate(varargin)
 
 %Pre-allocate static workspace variables to share between subfunctions
-illConditioned = [];
-L = [];
-par_prev = [];
-regparam_prev = [];
-linfit = [];
+[illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,L,...
+    par_prev,regparam_prev,linfit] = deal([]);
 
 % Setup non-linear solver
 switch nonLinSolver
-    
     case 'lsqnonlin'
         nonLinSolverFcn = @lsqnonlin;
         nonLinSolverOpts = optimoptions(@lsqnonlin,'Display','off','MaxIter',nonLinMaxIter,...
@@ -106,39 +115,32 @@ switch nonLinSolver
     case 'lmlsqnonlin'
         nonLinSolverFcn = @lmlsqnonlin;
         nonLinSolverOpts = struct('Display','off','MaxIter',nonLinMaxIter,'MaxFunEvals',1e4,'TolFun',nonLinTolFun);
-        
 end
 
 % Setup linear solver
 switch LinSolver
-    
     case 'lsqlin'
         linSolverFcn = @(A,y,lbl,ubl,opts)lsqlin(A,y,[],[],[],[],lbl,ubl,[],opts);
         linSolverOpts = optimoptions(@lsqlin,'Display','off','MaxIter',LinMaxIter,'TolFun',LinTolFun);
-        
     case 'minq'
         linSolverFcn = @lsqlin_QP;
         linSolverOpts = [];
 end
 
-if isempty(lb) && isempty(ub)
-    nonLinearConstrained = false;
+% Get conditioning of the non-linear operator
+A0 = Amodel(par0);
+if cond(A0)>10
+    illConditioned = true;
 else
-    nonLinearConstrained = true;
+    illConditioned = false;
 end
 
-% Check if the linear problem is constrained
-if ~isempty(lbl) || ~isempty(ubl)
-    linearConstrained = true;
-end
+% Get number of parameters
+Nnonlin = numel(par0);
+Nlin = size(A0,2);
 
-% Check for non-negativity constraints on the linear solution
-if all(lbl==0) && isempty(ubl)
-    nonNegativeOnly = true;
-else
-    nonNegativeOnly = false;
-end
-
+% Validate the box constraints
+checkbounds;
 
 % Preprare multiple start global optimization if requested
 if multiStarts>1 && ~nonLinearConstrained
@@ -148,8 +150,7 @@ multiStartPar0 = multistarts(multiStarts,par0,lb,ub);
 
 % Pre-allocate containers for multi-start run
 fvals = zeros(1,multiStarts);
-nonlinfits = cell(1,multiStarts);
-linfits = cell(1,multiStarts);
+[nonlinfits,linfits] = deal(cell(1,multiStarts));
 
 % Multi-start global optimization
 for runIdx = 1:multiStarts
@@ -171,11 +172,14 @@ end
 nonlinfit = nonlinfits{globmin};
 linfit = linfits{globmin};
 
-
 % Uncertainty analysis (if requested)
 if nargout>2
     paramuq = uncertainty(nonlinfit);
 end
+
+% Return all parameter vectors are row columns
+linfit = linfit(:).';
+nonlinfit = nonlinfit(:).';
 
 % Residual vector function
 % ------------------------------------------------------------------
@@ -186,13 +190,6 @@ end
         % Non-linear model evaluation
         % ===============================
         A = Amodel(p);
-        
-        % Get condition of the operator
-        if cond(A)>10
-            illConditioned = true;
-        else
-            illConditioned = false;
-        end
         
         % Regularization components
         % ===============================
@@ -249,7 +246,8 @@ end
         % Evaluate full model residual
         % ===============================
         yfit = A*linfit;
-
+        % Adjust overall scale of the fit
+        yfit = (yfit\y)*yfit;
         % Compute residual vector
         res = yfit - y;
     end
@@ -260,20 +258,6 @@ end
 % Function that computes the covariance-based uncertainty quantification
 % and returns the corresponding uncertainty structure
     function [paramuq] = uncertainty(parfit)
-        
-        
-        if isempty(ubl)
-            ubl = realmax*ones(numel(linfit),1);
-        end
-        if isempty(lbl)
-            lbl = -realmax*ones(numel(linfit),1);
-        end
-        if isempty(ub)
-            ub = realmax*ones(numel(linfit),1);
-        end
-        if isempty(lb)
-            lb = -realmax*ones(numel(linfit),1);
-        end
         
         % Compute the jacobian of the signal fit with respect to parameter set
         subidx_pnonlin = 1:numel(parfit);
@@ -340,6 +324,60 @@ end
     end
 
 
+% Checks on the box constraints for all parameters
+% ------------------------------------------------------------------
+% This function does the bookkeeping on the box boundaries of the nonlinear
+% and linear parameters to ensure they are valid and to set 
+    function checkbounds()
+        % If passed empty, set unbounded box constraints
+        if isempty(ubl)
+            ubl = inf(Nlin,1);
+        else
+            ubl = ubl(:);
+        end
+        if isempty(lbl)
+            lbl = -inf(Nlin,1);
+        else
+            lbl = lbl(:);
+        end
+        if isempty(ub)
+            ub = inf(Nnonlin,1);
+        else
+            ub = ub(:);
+        end
+        if isempty(lb)
+            lb = -inf(Nnonlin,1);
+        else
+            lb = lb(:);
+        end
+        % Check if the linear problem is constrained
+        if ~all(isinf(lbl)) || ~all(isinf(ubl))
+            linearConstrained = true;
+        else
+            linearConstrained = false;
+        end
+        % Check if the nonlinear problem is constrained
+        if ~all(isinf(lb)) || ~all(isinf(ub))
+            nonLinearConstrained = false;
+        else
+            nonLinearConstrained = true;
+        end
+        
+        % Check for non-negativity constraints on the linear solution
+        if all(lbl==0) && all(isinf(ubl))
+            nonNegativeOnly = true;
+        else
+            nonNegativeOnly = false;
+        end
+        % Check that the boundaries are valid
+        if any(ub<lb) || any(ubl<lbl)
+            error('The upper bounds cannot be larger than the lower bounds.')
+        end
+        % Check that the non-linear start values are inside the box constraint
+        if any(par0(:)>ub) || any(par0(:)<lb)
+           error('The start values are outside of the specified bounds.') 
+        end
+    end
 
 % Parsing and validation of options
 % ------------------------------------------------------------------
