@@ -39,7 +39,12 @@
 %  Output:
 %    pnlin     fitted non-linear parameters
 %    nlin      fitted linear parameters
-%    paramuq   uncertainty quantification structure
+%    paramuq   uncertainty quantification structure of the joined parameter
+%              set (linear + non-linear parameters). The confidence intervals
+%              of the individual sets can be requested via:
+%                   paramuq.ci(n)           - n%-CI of the full parameter set
+%                   paramuq.ci(n,'lin')     - n%-CI of the linear parameter set
+%                   paramuq.ci(n,'nonlin')  - n%-CI of the non-linear parameter set
 %
 %  Name-value pairs:
 %
@@ -211,12 +216,10 @@ nonlinfit = nonlinfit(:).';
             % Non-linear operator with penalty
             A_ = AtAreg;
             y_ = Aty;
-            penalty = alpha*L*linfit;
         else
             % Non-linear operator without penalty
             A_ = A;
             y_ = y;
-            penalty = [];
         end
         
         if ~linearConstrained
@@ -243,6 +246,11 @@ nonlinfit = nonlinfit(:).';
         % Compute residual vector
         res = yfit - y;
         % Augmented residual
+        if illConditioned 
+            penalty = alpha*L*linfit;
+        else
+            penalty = [];
+        end
         res = [res; penalty];
     end
 
@@ -252,11 +260,7 @@ nonlinfit = nonlinfit(:).';
 % Function that computes the covariance-based uncertainty quantification
 % and returns the corresponding uncertainty structure
     function [paramuq] = uncertainty(parfit)
-        
-        % Compute the jacobian of the signal fit with respect to parameter set
-        subidx_pnonlin = 1:numel(parfit);
-        subidx_plin = numel(parfit)+[1:numel(linfit)];
-        
+
         % Augmented Jacobian
         Jnonlin = jacobianest(@(p)Amodel(p)*linfit,parfit);
         Jlin = Amodel(parfit);
@@ -287,7 +291,27 @@ nonlinfit = nonlinfit(:).';
         warning('on','MATLAB:nearlySingularMatrix'), warning('on','MATLAB:singularMatrix')
         
         % Construct uncertainty quantification structure for fitted parameters
-        paramuq = uqst('covariance',[parfit(:); linfit(:)],covmatrix,[lb(:); lbl(:)],[ub(:); ubl(:)]);
+        paramuq_ = uqst('covariance',[parfit(:); linfit(:)],covmatrix,[lb(:); lbl(:)],[ub(:); ubl(:)]);
+        paramuq = paramuq_;
+        paramuq.ci = @ci;
+        
+        % Wrapper around the CI function handle of the uncertainty structure
+        function paramci = ci(coverage,type)
+            if nargin<2
+                type = 'full';
+            end
+            % Get requested confidence interval of joined parameter set
+            paramci = paramuq_.ci(coverage);
+            switch lower(type) 
+                case 'nonlin'
+                    % Return only confidence intervals on non-linear parameters
+                    paramci = paramci(1:Nnonlin,:);
+                case 'lin'
+                    % Return only confidence intervals on linear parameters
+                    paramci = paramci(Nnonlin+1:end,:);
+            end
+        end
+        
     end
 
 
