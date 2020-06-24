@@ -47,7 +47,7 @@ end
 
 % Prepare
 nSignals = numel(V);
-nr = size(L,2);
+nr = size(K{1},2);
 
 % Provide defaults for Huber parameter and weights
 if nargin<6 || isempty(HuberParam)

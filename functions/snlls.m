@@ -79,7 +79,11 @@ function [nonlinfit,linfit,paramuq,stats] = snlls(y,Amodel,par0,varargin)
 % Parse inputs in the varargin
 [ubl,lbl,lb,ub,options] = parseinputs(varargin);
 % Ensure dimensionality
-y = y(:);
+if ~iscell(y)
+    y = {y};
+end
+y = cellfun(@(y)y(:),y,'UniformOutput',false);
+Ndatasets = numel(y);
 
 % Default optional settings
 alphaOptThreshold = 1e-3;
@@ -88,6 +92,7 @@ RegType = 'tikhonov';
 RegParam = 'aic';
 multiStarts = 1;
 includePenalty = [];
+weights = globalweights(y);
 nonLinTolFun = 1e-5;
 nonLinMaxIter = 1e4;
 LinTolFun = 1e-5;
@@ -106,7 +111,12 @@ parsevalidate(options)
 
 %Pre-allocate static workspace variables to share between subfunctions
 [illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,...
-    par_prev,regparam_prev,linfit,yfit] = deal([]);
+    par_prev,regparam_prev,linfit,yfit,Nnonlin,Nlin] = deal([]);
+
+% Validate the non-linear model(s)
+checkmodels;
+% Validate the box constraints
+checkbounds;
 
 % Setup non-linear solver
 switch nonLinSolver
@@ -130,17 +140,10 @@ switch LinSolver
         linSolverOpts = [];
 end
 
-% Get conditioning of the non-linear operator
-A0 = Amodel(par0);
-illConditioned = cond(A0)>10;
-% Decide whether to include a regularization penalty
+% Decide whether to include the regularization penalty
 if isempty(includePenalty) && illConditioned
-includePenalty = true;
+    includePenalty = true;
 end
-
-% Get number of parameters
-Nnonlin = numel(par0);
-Nlin = size(A0,2);
 
 if includePenalty
     % Use an arbitrary axis
@@ -150,8 +153,6 @@ if includePenalty
     L = regoperator(ax,RegOrder);
 end
 
-% Validate the box constraints
-checkbounds;
 
 % Preprare multiple start global optimization if requested
 if multiStarts>1 && ~nonLinearConstrained
@@ -190,8 +191,13 @@ end
 
 % Goodness of fit (if requested)
 if nargout>3
-        Ndof = numel(y) - Nlin - Nnonlin;
-        stats = gof(y,yfit,Ndof);
+    for idx = 1:Ndatasets
+        Ndof = numel(y{idx}) - Nlin - Nnonlin;
+        stats{idx} = gof(y{idx},yfit{idx},Ndof);
+    end
+    if Ndatasets==1
+        stats = stats{1};
+    end
 end
 
 % Return all parameter vectors are row columns
@@ -207,6 +213,9 @@ nonlinfit = nonlinfit(:).';
         % Non-linear model evaluation
         % ===============================
         A = Amodel(p);
+        if ~iscell(A)
+            A = {A};
+        end
         
         % Regularization components
         % ===============================
@@ -224,51 +233,46 @@ nonlinfit = nonlinfit(:).';
                 % Fixed regularization parameter
                 alpha =  RegParam;
             end
-            % Get components for LSQ fitting
-            [AtAreg,Aty] = lsqcomponents(y,A,L,alpha,RegType);
             
             % Store current iteration data for next one
             par_prev = p;
             regparam_prev = alpha;
             
             % Non-linear operator with penalty
-            AtA_ = AtAreg;
-            Aty_ = Aty;
-            A_ = AtAreg;
-            y_ = Aty;
+            [AtA,Aty] = lsqcomponents(y,A,L,alpha,RegType,[],weights);
+            
         else
             % Non-linear operator without penalty
-            AtA_ = A.'*A;
-            Aty_ = A.'*y;
-            A_ = A;
-            y_ = y;
+            L = eye(Nlin,Nlin);
+            [AtA,Aty] = lsqcomponents(y,A,L,0,RegType,[],weights);
         end
         
         if ~linearConstrained
             % Unconstrained linear LSQ
             % ====================================
-            linfit = A_\y_;
+            linfit = AtA\Aty;
             
         elseif linearConstrained && ~nonNegativeOnly
             % Constrained linear LSQ
             % ====================================
-            linfit = linSolverFcn(A_,y_,lbl,ubl,linSolverOpts);
+            linfit = linSolverFcn(AtA,Aty,lbl,ubl,linSolverOpts);
             
         elseif linearConstrained && nonNegativeOnly
             % Non-negative linear LSQ
             % ====================================
-            linfit = fnnls(AtA_,Aty_);
+            linfit = fnnls(AtA,Aty);
         end
         
         % Evaluate full model residual
         % ===============================
-        yfit = A*linfit;
-        % Adjust overall scale of the fit
-        yfit = (yfit\y)*yfit;
-        % Compute residual vector
-        res = yfit - y;
+        res = [];
+        for i=1:Ndatasets
+            yfit{i} = A{i}*linfit;
+            % Compute residual vector
+            res = [res; weights(i)*(yfit{i} - y{i})];
+        end
         
-        if includePenalty 
+        if includePenalty
             penalty = alpha*L*linfit;
             % Augmented residual
             res = [res; penalty];
@@ -281,23 +285,32 @@ nonlinfit = nonlinfit(:).';
 % Function that computes the covariance-based uncertainty quantification
 % and returns the corresponding uncertainty structure
     function [paramuq] = uncertainty(parfit)
-
+        
+        weights = weights/sum(weights);
         % Augmented Jacobian
-        Jnonlin = jacobianest(@(p)Amodel(p)*linfit,parfit);
-        Jlin = Amodel(parfit);
+        Jlin = [];
+        Jnonlin = [];
+        for ii=1:Ndatasets
+            Jnonlin = [Jnonlin; weights(ii)*jacobianest(@(p)cellselect(Amodel(p),ii)*linfit,parfit)];
+            Jlin = [Jlin; weights(ii)*cellselect(Amodel(parfit),ii)];
+        end
         if illConditioned
-            Jreg = [zeros(size(L,1),numel(parfit)) regparam_prev*L];
+            Jreg = [zeros(size(L,1),size(Jnonlin,2)) regparam_prev*L];
         else
             Jreg = [];
         end
-        J = [Jnonlin, Jlin; Jreg];
+        J = [Jnonlin Jlin];
+        J = [J; Jreg];
         
         % Suppress warnings for a moment
         warning('off','MATLAB:nearlySingularMatrix'), warning('off','MATLAB:singularMatrix')
         lastwarn('');
         
         % Estimate variance on experimental signal
-        sigma2 = std(ResidualsFcn(parfit)).^2;
+        for ii=1:Ndatasets
+            sigma2(ii) = std(y{ii} - yfit{ii}).^2;
+        end
+        sigma2 = mean(sigma2);
         
         % Estimate the covariance matrix by means of the inverse of Fisher information matrix
         covmatrix = sigma2.*inv(J.'*J);
@@ -311,6 +324,7 @@ nonlinfit = nonlinfit(:).';
         end
         warning('on','MATLAB:nearlySingularMatrix'), warning('on','MATLAB:singularMatrix')
         
+        
         % Construct uncertainty quantification structure for fitted parameters
         paramuq_ = uqst('covariance',[parfit(:); linfit(:)],covmatrix,[lb(:); lbl(:)],[ub(:); ubl(:)]);
         paramuq = paramuq_;
@@ -323,7 +337,7 @@ nonlinfit = nonlinfit(:).';
             end
             % Get requested confidence interval of joined parameter set
             paramci = paramuq_.ci(coverage);
-            switch lower(type) 
+            switch lower(type)
                 case 'nonlin'
                     % Return only confidence intervals on non-linear parameters
                     paramci = paramci(1:Nnonlin,:);
@@ -362,6 +376,28 @@ nonlinfit = nonlinfit(:).';
         [x,eval,exitflag] = minq(gam,c,H,lbl,ubl,print);
     end
 
+
+    function checkmodels()
+        % Get conditioning of the non-linear model(s)
+        A0 = Amodel(par0);
+        if ~iscell(A0)
+            A0 = {A0};
+        end
+        condA0 = cellfun(@(A)cond(A),A0);
+        
+        % Determine if any of them is ill-conditioned
+        illConditioned = any(condA0>10);
+        
+        % Get number of linear and non-linear parameters
+        Nnonlin = numel(par0);
+        Nlin = unique(cellfun(@(A)size(A,2),A0));
+        
+        % Check that all local models are consisten
+        if numel(Nlin)~=1
+            error('The second dimension of the non-linear model output is not consistent.')
+        end
+    end
+
 % Checks on the box constraints for all parameters
 % ------------------------------------------------------------------
 % This function does the bookkeeping on the box boundaries of the nonlinear
@@ -387,6 +423,13 @@ nonlinfit = nonlinfit(:).';
             lb = -inf(Nnonlin,1);
         else
             lb = lb(:);
+        end
+        
+        if numel(lb)~=Nnonlin || numel(ub)~=Nnonlin
+            error('The lower/upper bounds of the non-linear problem must have %i elements',Nnonlin)
+        end
+        if numel(lbl)~=Nlin || numel(ubl)~=Nlin
+            error('The lower/upper bounds of the linear problem must have %i elements',Nlin)
         end
         % Check if the linear problem is constrained
         linearConstrained = ~all(isinf(lbl)) || ~all(isinf(ubl));
@@ -445,7 +488,7 @@ nonlinfit = nonlinfit(:).';
         % Parse options
         [alphaOptThreshold_,RegOrder_,RegParam_,RegType_,nonLinSolver_,LinSolver_,...
             includePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_,...
-            multiStarts_] = parseoptions(varargin);
+            multiStarts_,GlobalWeights_] = parseoptions(varargin);
         
         if ~isempty(alphaOptThreshold_)
             validateattributes(alphaOptThreshold_,{'numeric'},{'scalar'})
@@ -506,6 +549,16 @@ nonlinfit = nonlinfit(:).';
             validateattributes(multiStarts_,{'numeric'},{'scalar','nonnegative','integer'})
             multiStarts = multiStarts_;
         end
+        if ~isempty(GlobalWeights_)
+            validateattributes(GlobalWeights_,{'numeric'},{'nonnegative','nonempty'})
+            weights = GlobalWeights_;
+        end
     end
 end
 
+function cell = cellselect(cell,idx)
+if ~iscell(cell)
+    return
+end
+cell = cell{idx};
+end
