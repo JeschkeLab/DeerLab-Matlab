@@ -21,6 +21,7 @@ Syntax
     __ = snlls(y,Amodel,par0,lb,ub)
     __ = snlls(y,Amodel,par0,lb)
     __ = snlls(y,Amodel,par0)
+    __ = snlls({y1,y2,___},Amodelg,par0,___)
     __ = snlls(___,'Name',Values,___)
 
 
@@ -71,7 +72,7 @@ where ``alpha`` and ``L`` are the regularization parameter and operator, respect
 
     [pnlin,plin] = snlls(y,Amodel,par0)
 
-Fits the input data ``y`` via SNNLS with unconstrained non-linear and linear parameters. The start values of the non-linear parameters ``par0`` must be specified. The function returns the fitted non-linear paramter set ``pnlin`` as well as the fitted linear parameter set ``plin``.
+Fits the input data ``y`` via SNNLS with unconstrained non-linear and linear parameters. The non-linear model ``Amodel`` must be a function handle which accepts the array of non-linear parameters and returns a matrix ``A`` such that (ideally) ``A*plin=y`` The start values of the non-linear parameters ``par0`` must be specified. The function returns the fitted non-linear paramter set ``pnlin`` as well as the fitted linear parameter set ``plin``.
 
 
 -----------------------------
@@ -85,6 +86,12 @@ Fits the input data ``y`` via SNNLS with unconstrained non-linear and linear par
     [pnlin,plin] = snlls(y,Amodel,par0,lb)
 
 The boundaries for the non-linear paramters (``lb`` and ``ub``) as well as for the linear parameter (``lbl`` and ``ubl``) can be specified as additional input arguments. If not specified or passed empty, the boundaries are set to infinity (unbounded).
+
+-----------------------------
+
+    [pnlin,plin] = snlls({y1,y2,___},Amodelg,par0,___)
+
+If multiple datasets ``{y1,y2,___}`` are passed as a cell array, these will be fitted to the global model `Amodelg`. This model must be a function handle which accepts the array of non-linear parameters and returns a cell array of matrices ``{A1,A2,___}``. 
 
 -----------------------------
 
@@ -113,6 +120,8 @@ The ``stats`` structure provides several statistical metric which allow judgment
          *   ``.AIC`` - Akaike information criterion
          *   ``.AICc`` - Corrected Akaike information criterion
          *   ``.BIC`` - Bayesian information criterion
+
+If multiple datasets have been fitted, ``stats`` will be returned as a cell array of structures, each of them containing the goodness of fit of the individual datasets. 
 
 Additional Settings
 =========================================
@@ -186,7 +195,18 @@ Additional settings can be specified via name-value pairs. All property names ar
 		.. code-block:: matlab
 
 			___ = snlls(___,'RegOrder',0)
+            
+            
+- ``'GlobalWeights'`` - Global analysis weights
+    Array of weighting coefficients for the individual datasets in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.
 
+    *Default:* [*empty*]
+
+    *Example:*
+
+		.. code-block:: matlab
+
+			___ = snlls({y1,y2,y3},Amodelg,par0,___,'GlobalWeights',[0.1 0.6 0.3]])
 
 - ``'NonLinSolver'`` - Optimization solver for non-linear part 
     Numerical solver employed for fitting non-linear parameters to the data.
