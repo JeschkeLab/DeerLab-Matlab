@@ -48,7 +48,9 @@
 %
 %  Name-value pairs:
 %
-%   'forcePenalty'  -(true/false) Forces use of regularization penalties on the linear optimization
+%   'includePenalty'  -Forces use of regularization penalties on the
+%                      linear optimization (true/false), if not specified the decision is
+%                      taken automatically via the conditioning of the model.
 %   'RegType'       -Regularization functional type ('tikh','tv','huber')
 %   'RegOrder'      -Order of the regularization operator
 %   'RegParam'      -Regularization parameter selection ('lr','lc','cv','gcv',
@@ -75,6 +77,8 @@ function [nonlinfit,linfit,paramuq] = snlls(y,Amodel,par0,varargin)
 
 % Parse inputs in the varargin
 [ubl,lbl,lb,ub,options] = parseinputs(varargin);
+% Ensure dimensionality
+y = y(:);
 
 % Default optional settings
 alphaOptThreshold = 1e-3;
@@ -82,7 +86,7 @@ RegOrder = 2;
 RegType = 'tikhonov';
 RegParam = 'aic';
 multiStarts = 1;
-forcePenalty = false;
+includePenalty = [];
 nonLinTolFun = 1e-5;
 nonLinMaxIter = 1e4;
 LinTolFun = 1e-5;
@@ -100,7 +104,7 @@ end
 parsevalidate(options)
 
 %Pre-allocate static workspace variables to share between subfunctions
-[illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,L,...
+[illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,...
     par_prev,regparam_prev,linfit] = deal([]);
 
 % Setup non-linear solver
@@ -128,10 +132,22 @@ end
 % Get conditioning of the non-linear operator
 A0 = Amodel(par0);
 illConditioned = cond(A0)>10;
+% Decide whether to include a regularization penalty
+if isempty(includePenalty) && illConditioned
+includePenalty = true;
+end
 
 % Get number of parameters
 Nnonlin = numel(par0);
 Nlin = size(A0,2);
+
+if includePenalty
+    % Use an arbitrary axis
+    ax = (1:Nlin);
+    % Get regularization operator
+    RegOrder = min(Nlin-1,RegOrder);
+    L = regoperator(ax,RegOrder);
+end
 
 % Validate the box constraints
 checkbounds;
@@ -187,12 +203,7 @@ nonlinfit = nonlinfit(:).';
         
         % Regularization components
         % ===============================
-        if illConditioned || forcePenalty
-            % Use an arbitrary axis
-            ax = (1:1:size(A,2));
-            % Get regularization operator
-            RegOrder = min(size(A,2)-1,RegOrder);
-            L = regoperator(ax,RegOrder);
+        if includePenalty
             if ischar(RegParam)
                 % If the parameter vector has not changed by much...
                 if ~isempty(par_prev) && all(abs(par_prev-p)./p < alphaOptThreshold)
@@ -214,10 +225,14 @@ nonlinfit = nonlinfit(:).';
             regparam_prev = alpha;
             
             % Non-linear operator with penalty
+            AtA_ = AtAreg;
+            Aty_ = Aty;
             A_ = AtAreg;
             y_ = Aty;
         else
             % Non-linear operator without penalty
+            AtA_ = A.'*A;
+            Aty_ = A.'*y;
             A_ = A;
             y_ = y;
         end
@@ -235,7 +250,7 @@ nonlinfit = nonlinfit(:).';
         elseif linearConstrained && nonNegativeOnly
             % Non-negative linear LSQ
             % ====================================
-            linfit = fnnls(A_,y_);
+            linfit = fnnls(AtA_,Aty_);
         end
         
         % Evaluate full model residual
@@ -245,13 +260,12 @@ nonlinfit = nonlinfit(:).';
         yfit = (yfit\y)*yfit;
         % Compute residual vector
         res = yfit - y;
-        % Augmented residual
-        if illConditioned 
+        
+        if includePenalty 
             penalty = alpha*L*linfit;
-        else
-            penalty = [];
+            % Augmented residual
+            res = [res; penalty];
         end
-        res = [res; penalty];
     end
 
 
@@ -423,7 +437,7 @@ nonlinfit = nonlinfit(:).';
         
         % Parse options
         [alphaOptThreshold_,RegOrder_,RegParam_,RegType_,nonLinSolver_,LinSolver_,...
-            forcePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_,...
+            includePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_,...
             multiStarts_] = parseoptions(varargin);
         
         if ~isempty(alphaOptThreshold_)
@@ -461,9 +475,9 @@ nonlinfit = nonlinfit(:).';
                 error('The ''lsqlin'' solver requies a valid license and installation of MATLAB''s Optimization Toolbox.')
             end
         end
-        if ~isempty(forcePenalty_)
-            validateattributes(forcePenalty_,{'logical'},{'nonempty'})
-            forcePenalty = forcePenalty_;
+        if ~isempty(includePenalty_)
+            validateattributes(includePenalty_,{'logical'},{'nonempty'})
+            includePenalty = includePenalty_;
         end
         if ~isempty(nonLinMaxIter_)
             validateattributes(nonLinMaxIter_,{'numeric'},{'scalar','nonnegative','nonempty'})

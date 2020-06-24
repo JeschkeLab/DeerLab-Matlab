@@ -68,6 +68,7 @@ This class of functions can be used and/or combined to create fitting routines o
 =============================================  ============================================================
 Function                                         Description
 =============================================  ============================================================
+:ref:`snlls`                                     Separable non-linear least squares solver
 :ref:`fitsignal`                                 Full model signal fitting engine
 :ref:`bootan`                                    Bootstrap uncertainty analysis
 :ref:`fitmultimodel`                             Multi-component model fitting engine
