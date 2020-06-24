@@ -1,7 +1,7 @@
 %
 % SNNLS  Separable Non-linear Least Squares Solver
 %
-%   [pnlin,plin,paramuq] = SNNLS(___)
+%   [pnlin,plin,paramuq,stats] = SNNLS(___)
 %   __ = SNNLS(y,Amodel,par0,lb,ub,lbl,ubl)
 %   __ = SNNLS(y,Amodel,par0,lb,ub,lbl)
 %   __ = SNNLS(y,Amodel,par0,lb,ub)
@@ -45,6 +45,7 @@
 %                   paramuq.ci(n)           - n%-CI of the full parameter set
 %                   paramuq.ci(n,'lin')     - n%-CI of the linear parameter set
 %                   paramuq.ci(n,'nonlin')  - n%-CI of the non-linear parameter set
+%    stats     goodness of fit statistical estimators structure
 %
 %  Name-value pairs:
 %
@@ -73,7 +74,7 @@
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [nonlinfit,linfit,paramuq] = snlls(y,Amodel,par0,varargin)
+function [nonlinfit,linfit,paramuq,stats] = snlls(y,Amodel,par0,varargin)
 
 % Parse inputs in the varargin
 [ubl,lbl,lb,ub,options] = parseinputs(varargin);
@@ -105,7 +106,7 @@ parsevalidate(options)
 
 %Pre-allocate static workspace variables to share between subfunctions
 [illConditioned,linearConstrained,nonLinearConstrained,nonNegativeOnly,...
-    par_prev,regparam_prev,linfit] = deal([]);
+    par_prev,regparam_prev,linfit,yfit] = deal([]);
 
 % Setup non-linear solver
 switch nonLinSolver
@@ -185,6 +186,12 @@ linfit = linfits{globmin};
 % Uncertainty analysis (if requested)
 if nargout>2
     paramuq = uncertainty(nonlinfit);
+end
+
+% Goodness of fit (if requested)
+if nargout>3
+        Ndof = numel(y) - Nlin - Nnonlin;
+        stats = gof(y,yfit,Ndof);
 end
 
 % Return all parameter vectors are row columns

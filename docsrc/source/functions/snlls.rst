@@ -15,7 +15,7 @@ Syntax
 
 .. code-block:: matlab
 
-    [pnlin,plin,puq] = snlls(___)
+    [pnlin,plin,puq,stats] = snlls(___)
     __ = snlls(y,Amodel,par0,lb,ub,lbl,ubl)
     __ = snlls(y,Amodel,par0,lb,ub,lbl)
     __ = snlls(y,Amodel,par0,lb,ub)
@@ -37,6 +37,7 @@ Returns
     *  ``pnlin`` - Fitted non-linear parameters
     *  ``plin`` - Fitted linear parameters
     *  ``puq`` - Uncertainty quantification (struct)
+    *  ``stats`` - Goodness-of-fit statistics (struct)
 
 -----------------------------
 
@@ -49,7 +50,7 @@ This separable non-linear least squares (SNLLS) solver aims to solve the followi
 
 .. code-block:: none 
 
-     [pnlin,plin] = argmin ||AModel(pnlin)*plin - y||^2
+     [pnlin,plin] = argmin ||Amodel(pnlin)*plin - y||^2
                     subject to  pnlin in [lb,ub]
                                  plin in [lbl,ubl]
  
@@ -58,7 +59,7 @@ where the parameter space is composed of a set of non-linear parameters ``pnlin`
 
 .. code-block:: none 
 
-     [pnlin,plin] = argmin ||AModel(pnlin)*plin - y||^2 + alpha^2*||L*plin||^2
+     [pnlin,plin] = argmin ||Amodel(pnlin)*plin - y||^2 + alpha^2*||L*plin||^2
                     subject to  pnlin in [lb,ub]
                                  plin in [lbl,ubl]
                                  
@@ -100,6 +101,18 @@ The third output argument contains the uncertainty quantification structure for 
 
 -----------------------------
 
+.. code-block:: matlab
+
+    [pnlin,plin,puq,stats] = snlls(___)
+    
+The ``stats`` structure provides several statistical metric which allow judgment on the quality of the fitted ``yfit`` on the experimental data ``y`` and allows comparison between fits. The structure contains the following fields: 
+
+         *   ``.chi2red`` - Reduced `\chi^2` test
+         *   ``.R2`` - `R^2` test
+         *   ``.RMSD`` - Root-mean squared deviation (RMSD)
+         *   ``.AIC`` - Akaike information criterion
+         *   ``.AICc`` - Corrected Akaike information criterion
+         *   ``.BIC`` - Bayesian information criterion
 
 Additional Settings
 =========================================
