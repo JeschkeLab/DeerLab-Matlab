@@ -122,11 +122,7 @@ end
 
 % Get conditioning of the non-linear operator
 A0 = Amodel(par0);
-if cond(A0)>10
-    illConditioned = true;
-else
-    illConditioned = false;
-end
+illConditioned = cond(A0)>10;
 
 % Get number of parameters
 Nnonlin = numel(par0);
@@ -192,19 +188,18 @@ nonlinfit = nonlinfit(:).';
             % Get regularization operator
             RegOrder = min(size(A,2)-1,RegOrder);
             L = regoperator(ax,RegOrder);
-            % If the parameter vector has not changed by much...
-            if ~isempty(par_prev) && all(abs(par_prev-p)./p < alphaOptThreshold)
-                % ...use the alpha optimized in the previous iteration
-                alpha = regparam_prev;
-            else
-                % ...otherwise optimize with current settings
-                if ischar(RegParam)
-                    % Optimized regularization parameter
-                    alpha = selregparam(y,A,ax,RegType,RegParam,'RegOrder',RegOrder);
+            if ischar(RegParam)
+                % If the parameter vector has not changed by much...
+                if ~isempty(par_prev) && all(abs(par_prev-p)./p < alphaOptThreshold)
+                    % ...use the alpha optimized in the previous iteration
+                    alpha = regparam_prev;
                 else
-                    % Fixed regularization parameter
-                    alpha =  RegParam;
+                    % ...otherwise optimize with current settings
+                    alpha = selregparam(y,A,ax,RegType,RegParam,'RegOrder',RegOrder);
                 end
+            else
+                % Fixed regularization parameter
+                alpha =  RegParam;
             end
             % Get components for LSQ fitting
             [AtAreg,Aty] = lsqcomponents(y,A,L,alpha,RegType);
@@ -216,10 +211,12 @@ nonlinfit = nonlinfit(:).';
             % Non-linear operator with penalty
             A_ = AtAreg;
             y_ = Aty;
+            penalty = alpha*L*linfit;
         else
             % Non-linear operator without penalty
             A_ = A;
             y_ = y;
+            penalty = [];
         end
         
         if ~linearConstrained
@@ -245,6 +242,8 @@ nonlinfit = nonlinfit(:).';
         yfit = (yfit\y)*yfit;
         % Compute residual vector
         res = yfit - y;
+        % Augmented residual
+        res = [res; penalty];
     end
 
 
@@ -321,7 +320,7 @@ nonlinfit = nonlinfit(:).';
 % Checks on the box constraints for all parameters
 % ------------------------------------------------------------------
 % This function does the bookkeeping on the box boundaries of the nonlinear
-% and linear parameters to ensure they are valid and to set 
+% and linear parameters to ensure they are valid and to set
     function checkbounds()
         % If passed empty, set unbounded box constraints
         if isempty(ubl)
@@ -345,31 +344,19 @@ nonlinfit = nonlinfit(:).';
             lb = lb(:);
         end
         % Check if the linear problem is constrained
-        if ~all(isinf(lbl)) || ~all(isinf(ubl))
-            linearConstrained = true;
-        else
-            linearConstrained = false;
-        end
+        linearConstrained = ~all(isinf(lbl)) || ~all(isinf(ubl));
         % Check if the nonlinear problem is constrained
-        if ~all(isinf(lb)) || ~all(isinf(ub))
-            nonLinearConstrained = false;
-        else
-            nonLinearConstrained = true;
-        end
-        
+        nonLinearConstrained = ~all(isinf(lb)) || ~all(isinf(ub));
         % Check for non-negativity constraints on the linear solution
-        if all(lbl==0) && all(isinf(ubl))
-            nonNegativeOnly = true;
-        else
-            nonNegativeOnly = false;
-        end
+        nonNegativeOnly = all(lbl==0) && all(isinf(ubl));
+        
         % Check that the boundaries are valid
         if any(ub<lb) || any(ubl<lbl)
             error('The upper bounds cannot be larger than the lower bounds.')
         end
         % Check that the non-linear start values are inside the box constraint
         if any(par0(:)>ub) || any(par0(:)<lb)
-           error('The start values are outside of the specified bounds.') 
+            error('The start values are outside of the specified bounds.')
         end
     end
 
@@ -377,30 +364,30 @@ nonlinfit = nonlinfit(:).';
 % Input parsing
 % ------------------------------------------------------------------
 % This function parses the different input schemes
-function [ubl,lbl,lb,ub,options] = parseinputs(inputs)
-    % Prepare empty containers
-    [ubl,lbl,lb,ub] = deal([]);
-    % Parse the varargin cell array
-    optionstart = numel(inputs);
-    for i=1:numel(inputs)
-        if ischar(inputs{i})
-            optionstart = i-1;
-            break
+    function [ubl,lbl,lb,ub,options] = parseinputs(inputs)
+        % Prepare empty containers
+        [ubl,lbl,lb,ub] = deal([]);
+        % Parse the varargin cell array
+        optionstart = numel(inputs);
+        for i=1:numel(inputs)
+            if ischar(inputs{i})
+                optionstart = i-1;
+                break
+            end
+            switch i
+                case 1
+                    lb = inputs{i};
+                case 2
+                    ub = inputs{i};
+                case 3
+                    lbl = inputs{i};
+                case 4
+                    ubl = inputs{i};
+            end
         end
-        switch i
-            case 1
-                lb = inputs{i};
-            case 2
-                ub = inputs{i};
-            case 3
-                lbl = inputs{i};
-            case 4
-                ubl = inputs{i};
-        end
+        inputs(1:optionstart) = [];
+        options = inputs;
     end
-    inputs(1:optionstart) = [];
-    options = inputs;
-end
 
 
 % Parsing and validation of options
