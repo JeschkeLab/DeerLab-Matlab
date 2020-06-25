@@ -59,6 +59,8 @@
 %                       or value of the regularization parameter
 %   'alphaOptThreshold' -Relative parameter change threshold for reoptimizing
 %                          the regularization parameter
+%   'GlobalWeights' - Array of weighting coefficients for the individual signals in
+%                     global fitting.
 %   'MultiStart'    -Number of starting points for global optimization
 %   'LinSolver'     -Linear LSQ solver
 %                         'lsqlin' - Requires Optimization Toolbox
@@ -286,12 +288,18 @@ nonlinfit = nonlinfit(:).';
 % and returns the corresponding uncertainty structure
     function [paramuq] = uncertainty(parfit)
         
+        % Get full augmented residual vector
+        %====================================
+        res = ResidualsFcn(parfit);
+        
         weights = weights/sum(weights);
-        % Augmented Jacobian
+        
+        % Compute the full augmented Jacobian
+        % =====================================
         Jlin = [];
         Jnonlin = [];
         for ii=1:Ndatasets
-            Jnonlin = [Jnonlin; weights(ii)*jacobianest(@(p)cellselect(Amodel(p),ii)*linfit,parfit)];
+            Jnonlin = [Jnonlin; jacobianest(@(p)weights(ii)*cellselect(Amodel(p),ii)*linfit,parfit)];
             Jlin = [Jlin; weights(ii)*cellselect(Amodel(parfit),ii)];
         end
         if illConditioned
@@ -301,29 +309,9 @@ nonlinfit = nonlinfit(:).';
         end
         J = [Jnonlin Jlin];
         J = [J; Jreg];
-        
-        % Suppress warnings for a moment
-        warning('off','MATLAB:nearlySingularMatrix'), warning('off','MATLAB:singularMatrix')
-        lastwarn('');
-        
-        % Estimate variance on experimental signal
-        for ii=1:Ndatasets
-            sigma2(ii) = std(y{ii} - yfit{ii}).^2;
-        end
-        sigma2 = mean(sigma2);
-        
-        % Estimate the covariance matrix by means of the inverse of Fisher information matrix
-        covmatrix = sigma2.*inv(J.'*J);
-        
-        % Detect if there was a 'nearly singular' warning...
-        [~, warnId] = lastwarn;
-        if strcmp(warnId,'MATLAB:nearlySingularMatrix') || strcmp(warnId,'MATLAB:singularMatrix')
-            % ...and if there was, then use a pseudoinverse instead of inverse
-            covmatrix = sigma2.*sparse(pinv(full(J.'*J)));
-            lastwarn('');
-        end
-        warning('on','MATLAB:nearlySingularMatrix'), warning('on','MATLAB:singularMatrix')
-        
+       
+        % Estimate the heteroscedasticity-consistent covariance matrix
+        covmatrix = hccm(J,res,'HC1');
         
         % Construct uncertainty quantification structure for fitted parameters
         paramuq_ = uqst('covariance',[parfit(:); linfit(:)],covmatrix,[lb(:); lbl(:)],[ub(:); ubl(:)]);
@@ -331,6 +319,7 @@ nonlinfit = nonlinfit(:).';
         paramuq.ci = @ci;
         
         % Wrapper around the CI function handle of the uncertainty structure
+        % ------------------------------------------------------------------
         function paramci = ci(coverage,type)
             if nargin<2
                 type = 'full';
