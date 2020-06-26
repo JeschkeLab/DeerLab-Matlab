@@ -304,21 +304,19 @@ if getConfidenceIntervals
     warning('off','MATLAB:nearlySingularMatrix')
     
     % Estimate the contribution to P variance from the different signals
-    covmat = 0;
-    for i = 1:numel(V)
-        
-        % Estimate noise standard deviation from residual
-        sig = std(V{i} - K{i}*P);
-        
-        % Get the regularized pseudoinverse
-        KtKreg = lsqcomponents(V{i},K{i},L,alpha,RegType,HuberParam);
-        pKinv = KtKreg\K{i}.';
-        
-        % Get standard error from covariance matrix
-        covmat_ = sig^2*pKinv*pKinv.';
-        covmat = covmat + GlobalWeights(i)*covmat_;
+    res = [];
+    J = [];
+    for ii=1:numel(V)
+        % Construct the full augmented residual
+        res = [res; GlobalWeights(ii)*(V{i} - K{i}*P)];
+        J = [J; GlobalWeights(ii)*K{i}];
     end
+    Jreg = alpha*L;
+    % Augment residual and Jacobian with regularization term
+    res = [res; Jreg*P];
+    J = [J; Jreg];
     
+    covmat = hccm(J,res,'HC1');
     % Construct confidence interval structure for P
     NonNegConst = zeros(nr,1);
     Pci = uqst('covariance',P,covmat,NonNegConst,[]);

@@ -15,7 +15,7 @@ K2 = dipolarkernel(t2,r);
 S2 = K2*P + whitegaussnoise(t2,0.03);
 
 [Pfit,Puq] = fitregmodel({S1,S2},{K1,K2},r,'tikhonov','aic');
-Puq = Puq.ci(0.9);
+Puq = Puq.ci(90);
 
 %Pass : fnnls manages to fit the distribution
 pass = all(abs(Pfit - P) < 3e-1);

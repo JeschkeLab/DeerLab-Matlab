@@ -399,22 +399,13 @@ if calcParamUncertainty
     
     % Compute residual vector and estimate variance from that
     residuals = ResidualsFcn(parfit);
-    sigma2 = var(residuals);
     
     % Calculate numerical estimates of the Jacobian and Hessian
     % of the negative log-likelihood
-    jacobian = jacobianest(@ResidualsFcn,parfit);
-    hessian = jacobian.'*jacobian;
+    J = jacobianest(@ResidualsFcn,parfit);
     
-    % Estimate the covariance matrix by means of the inverse of Fisher information matrix
-    lastwarn('');
-    covmatrix = sigma2.*inv(hessian);
-    % Detect if there was a 'nearly singular' warning
-    [~, warnId] = lastwarn;
-    if strcmp(warnId,'MATLAB:nearlySingularMatrix') || strcmp(warnId,'MATLAB:singularMatrix')
-        covmatrix = sigma2.*sparse(pinv(full(hessian)));
-        lastwarn('');
-    end
+    % Estimate the heteroscedasticity-consistent covariance matrix
+    covmatrix = hccm(J,residuals,'HC1');
     
     % Construct confidence interval structure
     parci = uqst('covariance',parfit,covmatrix,lb,ub);

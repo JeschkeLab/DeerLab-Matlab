@@ -88,22 +88,7 @@ switch upper(mode)
         error('HCCM estimation mode not found.')
 end
 
-% Suppress warnings for a moment
-warning('off','MATLAB:nearlySingularMatrix'), warning('off','MATLAB:singularMatrix')
-lastwarn('');
-
 % Heteroscedasticity Consistent Covariance Matrix (HCCM) estimator
 C = pinv(J.'*J)*J.'*V*J*pinv(J.'*J);
-
-% Detect if there was a 'nearly singular' warning...
-[~, warnId] = lastwarn;
-if strcmp(warnId,'MATLAB:nearlySingularMatrix') || strcmp(warnId,'MATLAB:singularMatrix')
-    % ...and if there was, then use a pseudoinverse instead of inverse
-    C = sparse(pinv(J.'*J)*J.'*V*J*pinv(J.'*J));
-    lastwarn('');
-end
-warning('on','MATLAB:nearlySingularMatrix'), warning('on','MATLAB:singularMatrix')
-        
-
 
 end
