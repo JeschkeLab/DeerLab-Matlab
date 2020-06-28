@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>snlls &mdash; DeerLab  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/functions/snlls.html">0.9.2</option>
+        <option value="../../0.9.1/functions/snlls.html">0.9.1</option>
+        <option value="../../0.9.0/functions/snlls.html">0.9.0</option>
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/functions/snlls.html">0.9.2</option>
+        <option value="../../0.9.1/functions/snlls.html">0.9.1</option>
+        <option selected value="">0.9.0</option>
+        <option value="../../develop/functions/snlls.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/functions/snlls.html">0.9.2</option>
+        <option selected value="">0.9.1</option>
+        <option value="../../0.9.0/functions/snlls.html">0.9.0</option>
+        <option value="../../develop/functions/snlls.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-releases">Downloading Releases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../download.html#downloading-the-source-code">Downloading the source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#setup">Setup</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#backgrounds">Backgrounds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#experiments">Experiments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#time-domain-signals">Time-domain signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../basics.html#kernel-matrices">Kernel matrices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#loading">Loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#preprocessing">Preprocessing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess.html#noise-levels">Noise levels</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#picking-the-model">Picking the model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#non-parametric-distribution">Non-parametric distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#parametric-distributions">Parametric distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fitting.html#background-fitting">Background fitting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#covariance-uncertainty-quantification">Covariance Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../uncertainty.html#uncertainty-quantification-reference">Uncertainty Quantification Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#modeling">Modeling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#analysis">Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#pre-processing">Pre-Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#model-selection">Model Selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html#legacy-functions">Legacy Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#distribution-models">Distribution models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#background-models">Background models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modelsref.html#experiment-models">Experiment models</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#assumptions">Assumptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#distance-distributions">Distance distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#dipolar-signals-and-kernels">Dipolar signals and kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#discretization">Discretization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../theory.html#least-squares-fitting">Least-squares fitting</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">snlls</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="snlls">
+<span id="id1"></span><h1><code class="xref mat mat-mod docutils literal notranslate"><span class="pre">snlls</span></code><a class="headerlink" href="#snlls" title="Permalink to this headline">¶</a></h1>
+<p>Separable Non-linear Least Squares Solver</p>
+<hr class="docutils" />
+<div class="section" id="syntax">
+<h2>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">,</span><span class="n">puq</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">,</span><span class="n">lbl</span><span class="p">,</span><span class="n">ubl</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">,</span><span class="n">lbl</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">({</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">___</span><span class="p">},</span><span class="n">Amodelg</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
+<span class="n">__</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Name&#39;</span><span class="p">,</span><span class="n">Values</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Parameters</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">y</span></code> - Input data (<em>N</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">Amodel</span></code> - Non-linear function accepting <code class="docutils literal notranslate"><span class="pre">W</span></code> non-linear parameters, returns a <em>NxM</em>-matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> (function handle)</li>
+<li><code class="docutils literal notranslate"><span class="pre">par0</span></code> -  Start values of the non-linear parameters (<em>W</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">lb</span></code> -  Lower bounds of the non-linear parameters (<em>W</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ub</span></code> -  Upper bounds of the non-linear parameters (<em>W</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">lbl</span></code> -  Lower bounds of the linear parameters (<em>M</em>-element array)</li>
+<li><code class="docutils literal notranslate"><span class="pre">ubl</span></code> -  Upper bounds of the linear parameters (<em>M</em>-element array)</li>
+</ul>
+</dd>
+<dt>Returns</dt>
+<dd><ul class="first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">pnlin</span></code> - Fitted non-linear parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">plin</span></code> - Fitted linear parameters</li>
+<li><code class="docutils literal notranslate"><span class="pre">puq</span></code> - Uncertainty quantification (struct)</li>
+<li><code class="docutils literal notranslate"><span class="pre">stats</span></code> - Goodness-of-fit statistics (struct)</li>
+</ul>
+</dd>
+</dl>
+</div>
+<hr class="docutils" />
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This separable non-linear least squares (SNLLS) solver aims to solve the following general problem</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[pnlin,plin] = argmin ||Amodel(pnlin)*plin - y||^2
+               subject to  pnlin in [lb,ub]
+                            plin in [lbl,ubl]
+</pre></div>
+</div>
+<p>where the parameter space is composed of a set of non-linear parameters <code class="docutils literal notranslate"><span class="pre">pnlin</span></code> and linear parameters <code class="docutils literal notranslate"><span class="pre">plin</span></code>. If the non-linear function <code class="docutils literal notranslate"><span class="pre">Amodel</span></code> yields an ill-conditioned problem, the solver will include a regularization penalty and solve the following problem</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[pnlin,plin] = argmin ||Amodel(pnlin)*plin - y||^2 + alpha^2*||L*plin||^2
+               subject to  pnlin in [lb,ub]
+                            plin in [lbl,ubl]
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">alpha</span></code> and <code class="docutils literal notranslate"><span class="pre">L</span></code> are the regularization parameter and operator, respectively.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Fits the input data <code class="docutils literal notranslate"><span class="pre">y</span></code> via SNNLS with unconstrained non-linear and linear parameters. The non-linear model <code class="docutils literal notranslate"><span class="pre">Amodel</span></code> must be a function handle which accepts the array of non-linear parameters and returns a matrix <code class="docutils literal notranslate"><span class="pre">A</span></code> such that (ideally) <code class="docutils literal notranslate"><span class="pre">A*plin=y</span></code> The start values of the non-linear parameters <code class="docutils literal notranslate"><span class="pre">par0</span></code> must be specified. The function returns the fitted non-linear paramter set <code class="docutils literal notranslate"><span class="pre">pnlin</span></code> as well as the fitted linear parameter set <code class="docutils literal notranslate"><span class="pre">plin</span></code>.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">,</span><span class="n">lbl</span><span class="p">,</span><span class="n">ubl</span><span class="p">)</span>
+<span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">,</span><span class="n">lbl</span><span class="p">)</span>
+<span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">)</span>
+<span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">Amodel</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The boundaries for the non-linear paramters (<code class="docutils literal notranslate"><span class="pre">lb</span></code> and <code class="docutils literal notranslate"><span class="pre">ub</span></code>) as well as for the linear parameter (<code class="docutils literal notranslate"><span class="pre">lbl</span></code> and <code class="docutils literal notranslate"><span class="pre">ubl</span></code>) can be specified as additional input arguments. If not specified or passed empty, the boundaries are set to infinity (unbounded).</p>
+<hr class="docutils" />
+<blockquote>
+<div>[pnlin,plin] = snlls({y1,y2,___},Amodelg,par0,___)</div></blockquote>
+<p>If multiple datasets <code class="docutils literal notranslate"><span class="pre">{y1,y2,___}</span></code> are passed as a cell array, these will be fitted to the global model <img class="math" src="../_images/math/952a01b46c2b3b5d514b46b91878b311a65c02b8.svg" alt="Amodelg"/>. This model must be a function handle which accepts the array of non-linear parameters and returns a cell array of matrices <code class="docutils literal notranslate"><span class="pre">{A1,A2,___}</span></code>.</p>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">,</span><span class="n">puq</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The third output argument contains the uncertainty quantification structure for the full parameter set (non-linear + linear) based on the covariance matrix of the SNNLS problem. In addition to the functionality described in <a class="reference internal" href="../uncertainty.html#cireference"><span class="std std-ref">Uncertainty Quantification Reference</span></a>, when requesting the confidence intervals via the <code class="docutils literal notranslate"><span class="pre">puq.ci</span></code> field, an additional argument can be passed to request the confidence intervals of the individual linear or non-linear parameter sets.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">puq.ci(n)</span></code> - Confidence interval of the combined parameter set</li>
+<li><code class="docutils literal notranslate"><span class="pre">puq.ci(n,'lin')</span></code> - Confidence interval of the linear parameter set</li>
+<li><code class="docutils literal notranslate"><span class="pre">puq.ci(n,'nonlin')</span></code> - Confidence interval of the non-linear parameter set</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">pnlin</span><span class="p">,</span><span class="n">plin</span><span class="p">,</span><span class="n">puq</span><span class="p">,</span><span class="n">stats</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">stats</span></code> structure provides several statistical metric which allow judgment on the quality of the fitted <code class="docutils literal notranslate"><span class="pre">yfit</span></code> on the experimental data <code class="docutils literal notranslate"><span class="pre">y</span></code> and allows comparison between fits. The structure contains the following fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">.chi2red</span></code> - Reduced <img class="math" src="../_images/math/609261ef04c55100e8ef73bea359a3a860baf8cb.svg" alt="\chi^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.R2</span></code> - <img class="math" src="../_images/math/1d31674441504377bbb9f0094982bc25b92a0792.svg" alt="R^2"/> test</li>
+<li><code class="docutils literal notranslate"><span class="pre">.RMSD</span></code> - Root-mean squared deviation (RMSD)</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AIC</span></code> - Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.AICc</span></code> - Corrected Akaike information criterion</li>
+<li><code class="docutils literal notranslate"><span class="pre">.BIC</span></code> - Bayesian information criterion</li>
+</ul>
+</div></blockquote>
+<p>If multiple datasets have been fitted, <code class="docutils literal notranslate"><span class="pre">stats</span></code> will be returned as a cell array of structures, each of them containing the goodness of fit of the individual datasets.</p>
+</div>
+<div class="section" id="additional-settings">
+<h2>Additional Settings<a class="headerlink" href="#additional-settings" title="Permalink to this headline">¶</a></h2>
+<p>Additional settings can be specified via name-value pairs. All property names are case insensitive and the property-value pairs can be passed in any order after the required input arguments have been passed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;Name1&#39;</span><span class="p">,</span><span class="n">Value1</span><span class="p">,</span><span class="s">&#39;Name2&#39;</span><span class="p">,</span><span class="n">Value2</span><span class="p">,</span><span class="n">___</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'includePenalty'</span></code> - Include regularization penalty term</dt>
+<dd><p class="first">Manually specifies whether a regularization penalty is included (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or not (<code class="docutils literal notranslate"><span class="pre">false</span></code>). If not specified or passed empty, the penalty is automatically included when the matrix returned by <code class="docutils literal notranslate"><span class="pre">Amodel</span></code> is ill-conditioned (default).</p>
+<p><em>Default:</em> []</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;includePenalty&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'alphaOptThreshold'</span></code> - Relative parameter change threshold</dt>
+<dd><p class="first">Specifies the relative parameter change threshold for reoptimizing the regularization parameter during the fitting.</p>
+<p><em>Default:</em> 1e-3</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;alphaOptThreshold&#39;</span><span class="p">,</span><span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'RegParam'</span></code> - Regularization parameter</dt>
+<dd><p class="first">Specifies the selection method employed for the optimization of the regularization parameter (see <a class="reference internal" href="selregparam.html#selregparam"><span class="std std-ref">selregparam</span></a> for a list). If a value is passed, the regularization parameter will be fixed througout the optimization.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'aic'</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RegParam&#39;</span><span class="p">,</span><span class="s">&#39;aic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'RegType'</span></code> - Regularization functional type</dt>
+<dd><p class="first">Type of regularization penalty</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'tikhonov'</span></code> - Tikhonov regularization</li>
+<li><code class="docutils literal notranslate"><span class="pre">'tv'</span></code> - Total variation regularization</li>
+<li><code class="docutils literal notranslate"><span class="pre">'huber'</span></code> - Huber regularization</li>
+</ul>
+</div></blockquote>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">tikhonov</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RegType&#39;</span><span class="p">,</span><span class="s">&#39;tv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'RegOrder'</span></code> - Regularization matrix order</dt>
+<dd><p class="first">Order of the regularization operator matrix.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;RegOrder&#39;</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'GlobalWeights'</span></code> - Global analysis weights</dt>
+<dd><p class="first">Array of weighting coefficients for the individual datasets in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.</p>
+<p><em>Default:</em> [<em>empty</em>]</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">({</span><span class="n">y1</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">y3</span><span class="p">},</span><span class="n">Amodelg</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,[</span><span class="mf">0.1</span> <span class="mf">0.6</span> <span class="mf">0.3</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'NonLinSolver'</span></code> - Optimization solver for non-linear part</dt>
+<dd><p class="first">Numerical solver employed for fitting non-linear parameters to the data.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> - Non-linear least squares (requires Optimization toolbox)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'lmlsqnonlin'</span></code> - Levenberg-Marquardt non-linear least squares (free)</li>
+</ul>
+</div></blockquote>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'lsqnonlin'</span></code> (Optimization Toolbox installed) or <code class="docutils literal notranslate"><span class="pre">'lmlsqnonlin'</span></code> (Optimization Toolbox not installed)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;nonLinSolver&#39;</span><span class="p">,</span><span class="s">&#39;lmlsqnonlin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'LinSolver'</span></code> - Optimization solver for linear part</dt>
+<dd><p class="first">Numerical solver employed for fitting linear parameters to the data.</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">'lsqlin'</span></code> - Linear least squares (requires Optimization toolbox)</li>
+<li><code class="docutils literal notranslate"><span class="pre">'minq'</span></code> - Quadratic programming solver [MINQ5](<a class="reference external" href="https://www.mat.univie.ac.at/~neum/software/minq/">https://www.mat.univie.ac.at/~neum/software/minq/</a>) (free)</li>
+</ul>
+</div></blockquote>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">'lsqlin'</span></code> (Optimization Toolbox installed) or <code class="docutils literal notranslate"><span class="pre">'minq'</span></code> (Optimization Toolbox not installed)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">___</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;LinSolver&#39;</span><span class="p">,</span><span class="s">&#39;lsqlin&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'NonLinTolFun'</span></code> -  Tolerance value for the non-linear solver</dt>
+<dd><p class="first">Non-linear optimizer function tolerance. The solver stops once the fitting functional evaluation reaches a value lower than this tolerance. Lower values increase the precision of the result, albeit at the cost of longer computation times.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e-5</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;NonLinTolFun&#39;</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'NonLinMaxIter'</span></code> - Maximal iterations for the non-linear solver</dt>
+<dd><p class="first">Maximum number of iterations of the non-linear solver. After the solver exceeds this number the optimization will stop.solvers.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e4</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;nonLinMaxIter&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'LinTolFun'</span></code> -  Tolerance value for the linear solver</dt>
+<dd><p class="first">Linear optimizer function tolerance. The solver stops once the fitting functional evaluation reaches a value lower than this tolerance. Lower values increase the precision of the result, albeit at the cost of longer computation times.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e-5</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;LinTolFun&#39;</span><span class="p">,</span><span class="mf">1e-20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'LinMaxIter'</span></code> - Maximal iterations for the linear solver</dt>
+<dd><p class="first">Maximum number of iterations of the linear solver. After the solver exceeds this number the optimization will stop.solvers.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1e4</span></code></p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;LinMaxIter&#39;</span><span class="p">,</span><span class="mf">1e10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">'MultiStart'</span></code> -  Multi-start global optimization</dt>
+<dd><p class="first">Number of initial points to be generated for a global search. For each start point, a local minimum is searched, and the solution with the lowest objective function value is selected as the global optimum.</p>
+<p><em>Default:</em> <code class="docutils literal notranslate"><span class="pre">1</span></code> (No global optimization)</p>
+<p><em>Example:</em></p>
+<blockquote class="last">
+<div><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">param</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">___</span><span class="p">,</span><span class="s">&#39;MultiStart&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
