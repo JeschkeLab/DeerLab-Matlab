@@ -71,7 +71,8 @@ end
 
 % Parse the optional parameters
 %--------------------------------------------------------------
-[Upper,Lower,BckgModel] = parseoptions(varargin);
+optionalProperties = {'Upper','Lower','Background','internal::parselater'};
+[Upper,Lower,BckgModel] = parseoptions(optionalProperties,varargin);
 
 % Control that the boundaries match the model and are appropiate
 modelInfo = model();

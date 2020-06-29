@@ -26,7 +26,7 @@
 function alphas = regparamrange(K,L,varargin)
 
 % Check if user requested some options via name-value input
-[stdNoise,lgResolution] = parseoptions(varargin);
+[stdNoise,lgResolution] = parseoptions({'NoiseLevel','Resolution'},varargin);
 
 if isempty(stdNoise)
     stdNoise = 0;

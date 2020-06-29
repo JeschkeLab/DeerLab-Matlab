@@ -117,7 +117,8 @@ if ~iscell(methods)
 end
 
 % Parse the optional parameters in the varargin
-[GlobalWeights] = parseoptions(varargin);
+optionalProperties = {'GlobalWeights','internal::parselater'};
+[GlobalWeights] = parseoptions(optionalProperties,varargin);
 
 if ~isempty(Upper) && ~iscell(Upper)
     error('Upper property must be a cell array of upper bound vectors.')

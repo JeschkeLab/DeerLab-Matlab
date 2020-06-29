@@ -26,7 +26,7 @@ if ~isa(Parameters,'struct')
 end
 
 % Parse and validate optional input
-randomizeOrdering = parseoptions(varargin);
+randomizeOrdering = parseoptions({'randperm'},varargin);
 
 if isempty(randomizeOrdering)
     randomizeOrdering = true;

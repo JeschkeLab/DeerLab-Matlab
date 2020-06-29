@@ -439,8 +439,10 @@ end
 % default values are overwritten by the user-specified values.
     function parsevalidate(varargin)
         
+        validoptions = {'regparam','regtype','alphaOptThreshold','TolFun','normP','Weights'};
+        
         % Parse options
-        [regparam_,regtype_,alphaOptThreshold_,TolFun_,normP_,Weights_] = parseoptions(varargin);
+        [regparam_,regtype_,alphaOptThreshold_,TolFun_,normP_,Weights_] = parseoptions(validoptions,varargin);
         
         if ~isempty(alphaOptThreshold_)
             validateattributes(alphaOptThreshold_,{'numeric'},{'scalar'})

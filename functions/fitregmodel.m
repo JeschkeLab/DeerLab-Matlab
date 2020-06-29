@@ -100,8 +100,11 @@ if ~iscell(K)
 end
 
 % Check if user requested some options via name-value input
-[TolFun,Solver,NonNegConstrained,Verbose,MaxFunEvals,MaxIter,HuberParam,GlobalWeights,runOBIR,RegOrder,NormP] ...
-    = parseoptions(varargin);
+optionalProperties = {'TolFun','Solver','NonNegConstrained','Verbose',...
+                      'MaxFunEvals','MaxIter','HuberParam','GlobalWeights',...
+                      'OBIR','RegOrder','internal::parseLater','NormP'};
+[TolFun,Solver,NonNegConstrained,Verbose,MaxFunEvals,MaxIter,HuberParam,...
+    GlobalWeights,runOBIR,RegOrder,NormP] = parseoptions(optionalProperties,varargin);
 
 if strcmp(RegType,'custom')
     GradObj = false;

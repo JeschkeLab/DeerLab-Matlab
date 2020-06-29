@@ -77,7 +77,8 @@ if numel(proplist)>=1 && ~ischar(proplist{1})
 end
 
 % Check if user requested some options via name-value input
-[ExcitationBandwidth,OvertoneCoeffs,g,Method,nKnots,useCache,Renormalize] = parseoptions(proplist);
+[ExcitationBandwidth,OvertoneCoeffs,g,Method,nKnots,useCache,Renormalize] = ...
+    parseoptions({'ExcitationBandwidth','OvertoneCoeffs','g','Method','nKnots','Cache','Renormalize'},proplist);
 if isempty(useCache)
     useCache = true;
 end

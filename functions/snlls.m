@@ -474,10 +474,14 @@ nonlinfit = nonlinfit(:).';
 % default values are overwritten by the user-specified values.
     function parsevalidate(varargin)
         
+        validoptions = {'alphaOptThreshold','RegOrder','RegParam','RegType','nonLinSolver','LinSolver',...
+            'includePenalty','nonLinMaxIter','nonLinTolFun','LinMaxIter','LinTolFun',...
+            'MultiStart','GlobalWeights'};
+        
         % Parse options
         [alphaOptThreshold_,RegOrder_,RegParam_,RegType_,nonLinSolver_,LinSolver_,...
             includePenalty_,nonLinMaxIter_,nonLinTolFun_,LinMaxIter_,LinTolFun_,...
-            multiStarts_,GlobalWeights_] = parseoptions(varargin);
+            multiStarts_,GlobalWeights_] = parseoptions(validoptions,varargin);
         
         if ~isempty(alphaOptThreshold_)
             validateattributes(alphaOptThreshold_,{'numeric'},{'scalar'})
