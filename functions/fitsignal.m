@@ -436,11 +436,15 @@ end
         % ====================================
         for jj=1:nSignals
             if parametricDistribution
+                % Simple parametric model error propagation
                 Vmodel = @(par)multiPathwayKernel(par,jj)*Pfcn(par(ddidx));
                 Vfit_uq{ii} = paruq.propagate(Vmodel,[],[]);
             else
-                Vmodel = @(par)multiPathwayKernel(par(paramidx),jj)*par(Pfreeidx);
-                Vfit_uq{ii} = full_uq.propagate(Vmodel,[],[]);
+                % Use special structure to speed up propagation for
+                % parameter-free case instead of .propagate()
+                J = [jacobianest(@(par)multiPathwayKernel(par(paramidx),jj)*Pfit,parfit_) Kfit{jj}];
+                Vcovmat = J*covmat*J.';
+                Vfit_uq{ii} = uqst('covariance',Vfit{jj},Vcovmat,[],[]);
             end
         end
         
