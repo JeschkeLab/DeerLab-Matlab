@@ -62,17 +62,9 @@
 %
 %  Name-value pairs:
 %
-%   'TolFun'        - Optimizer function tolerance
-%   'RegType'       - Regularization functional type ('tikh','tv','huber')
-%   'RegParam'      - Regularization parameter selection ('lr','lc','cv','gcv',
-%                     'rgcv','srgcv','aic','bic','aicc','rm','ee','ncp','gml','mcl')
-%   'alphaOptThreshold' - relative parameter change threshold for reoptimizing
-%                         the regularization parameter
 %   'Rescale'       - Enable/Disable optimization of the signal scale
 %   'normP'         - Enable/Disable re-normalization of the fitted distribution
-%   'MultiStart'    - Number of starting points for global optimization
-%   'GlobalWeights' - Array of weighting coefficients for the individual signals in
-%                     global fitting.
+%   See "help snnls" for more options.
 %
 % Example:
 %    Vfit = fitsignal(Vexp,t,r,@dd_gauss,@bg_hom3d,@ex_4pdeer)
@@ -101,9 +93,6 @@ nSignals = validateVtr;
 % ====================
 
 % Default optional settings
-alphaOptThreshold = 1e-3;
-TolFun = 1e-5;
-Weights = globalweights(Vexp);
 regtype = 'tikh';
 regparam = 'aic';
 normP = true;
@@ -169,10 +158,11 @@ for ii = 1:nSignals
     exidx{ii} = N_dd + sum(N_bg) + sum(N_ex(1:ii-1)) + (1:N_ex(ii));
 end
 
+
 % Fit the dipolar multi-pathway model
 % ====================================
 OnlyRegularization = ~includeExperiment & ~includeBackground;
-OnlyParametric = ~OnlyRegularization & parametricDistribution;
+OnlyParametric = ~OnlyRegularization & (parametricDistribution || ~includeForeground);
 
 
 if OnlyRegularization
@@ -194,7 +184,11 @@ if OnlyRegularization
 elseif OnlyParametric
     
     % Prepare the full-parametric model
-    Pfcn = @(par) dd_model(r,par(ddidx));
+    if includeForeground
+        Pfcn = @(par) dd_model(r,par(ddidx));
+    else
+        Pfcn = @(~) ones(numel(r),1);
+    end
     Vmodel = @(~,par) cellfun(@(K) K*Pfcn(par),multiPathwayModel(par),'UniformOutput',false);
     
     % Non-linear parametric fit
@@ -202,10 +196,14 @@ elseif OnlyParametric
 
     % Get fitted models
     [~,Bfit] = multiPathwayModel(parfit_);
-    Pfit = Pfcn(parfit_);
-    
+    if includeForeground
+        Pfit = Pfcn(parfit_);
+    else
+        Pfit = [];
+    end
+    if calculateCI
     [Vfit_uq,Pfit_uq,Bfit_uq,paruq_bg,paruq_ex,paruq_dd] = splituq(param_uq);
-
+    end
     
 else
     
@@ -220,16 +218,161 @@ else
     Pfit = Pfit(:);
     Vfit = cellfun(@(K) K*Pfit,Kfit,'UniformOutput',false);
     
+    if calculateCI
     [Vfit_uq,Pfit_uq,Bfit_uq,paruq_bg,paruq_ex,paruq_dd] = splituq(snlls_uq);
-    
+    end
 end
 
-    
-    function [Vfit_uq,Pfit_uq,Bfit_uq,paruq_bg,paruq_ex,paruq_dd] = splituq(full_uq)
+% Normalize distribution
+% =======================
+if normP && includeForeground
+    Pnorm = trapz(r,Pfit);
+    Pfit = Pfit/Pnorm;
+    if calculateCI
+        % scale CIs accordingly
+        if iscell(Pfit_uq)
+            for j = 1:numel(Pfit_uq)
+                Pfit_uq{j} = Pfit_uq{j}/Pnorm;
+            end
+        else
+            Pfit_uq.ci = @(p) Pfit_uq.ci(p)/Pnorm;
+        end
+    end
+end
+
+% Calculate goodness of fit
+% =========================
+if computeStats
+    stats = cell(nSignals,1);
+    for j = 1:nSignals
+        Ndof = numel(Vexp{j}) - numel(parfit_);
+        stats{j} = gof(Vexp{j},Vfit{j},Ndof);
+    end
+else
+    stats = [];
+end
+
+% Return fitted parameters and confidence intervals in structures
+% ================================================================
+parfit_ = parfit_(:);
+parfit.dd = parfit_(ddidx);
+for j = 1:nSignals
+    parfit.bg{j} = parfit_(bgidx{j});
+    parfit.ex{j} = parfit_(exidx{j});
+end
+if calculateCI
+    paruq.dd = paruq_dd;
+    modfituq.Pfit = Pfit_uq;
+    for j = 1:nSignals
+        paruq.bg{j} = paruq_bg{j};
+        paruq.ex{j} = paruq_ex{j};
+        modfituq.Vfit{j} = Vfit_uq;
+        modfituq.Bfit{j} = Bfit_uq;
+    end
+end
+
+% Plotting
+% =========
+if nargout==0
+    display()
+end
+
+% Return numeric and not cell arrays if there is only one signal
+if nSignals==1
+    if iscell(Vfit)
+    Vfit = Vfit{1};
+    end
+    if iscell(Bfit)
+    Bfit = Bfit{1};
+    end
+    if iscell(parfit.dd)
+        parfit.dd = parfit.dd{1};
+    end
+    if iscell(parfit.bg)
+        parfit.bg = parfit.bg{1};
+    end
+    if iscell(parfit.ex)
+        parfit.ex = parfit.ex{1};
+    end
+    if calculateCI
+        paruq.bg = paruq.bg{1};
+        paruq.ex = paruq.ex{1};
+    end
+    if ~isempty(stats)
+        stats = stats{1};
+    end
+end
+
+% =========================================================================
+% Subfunctions
+% =========================================================================
+
+% Multi-pathway dipolar model
+% ------------------------------------------------------------------
+% This function represent the core model of fitsignal, it takes the
+% parameters and computes the dipolar kernel and background according to
+% the dipolar multi-pathway theory. 
+% This is the non-linear part of the SNLLS problem when fitting a
+% parameter-free distribution.
+    function [Ks,Bs] = multiPathwayModel(par)
+        
+        [Bs,Ks] = deal(cell(nSignals,1));
+        for iSignal=1:nSignals            
+            % Get parameter subsets for this signal
+            ex_par = par(exidx{iSignal});
+            bg_par = par(bgidx{iSignal});
             
+            % Prepared background basis function
+            if includeBackground(iSignal)
+                Bfcn = @(t,lam) bg_model{iSignal}(t,bg_par,lam);
+            else
+                Bfcn = @(~,~) ones(size(Vexp{iSignal}));
+            end
+            
+            % Get pathway information
+            if includeExperiment(iSignal)
+                pathinfo = ex_model{iSignal}(ex_par);
+            else
+                pathinfo = 1;
+            end
+            
+            % Compute the multipathway-background
+            Bs{iSignal} = dipolarbackground(t{iSignal},pathinfo,Bfcn);
+            % Compute the multipathway-kernel
+            Ks{iSignal} = dipolarkernel(t{iSignal},r,pathinfo);
+            Ks{iSignal} = Ks{iSignal}.*Bs{iSignal};
+            
+        end
+        
+    end
+    function [Ks] = multiPathwayKernel(par,idx)
+        Ks = multiPathwayModel(par);
+        if nargin>1
+            Ks = Ks{idx};
+        end
+    end
+
+
+    function [Bs] = multiPathwayBackground(par,idx)
+        [~,Bs] = multiPathwayModel(par);
+        if nargin>1
+            Bs = Bs{idx};
+        end
+    end
+
+% Uncertainty quantification
+% ------------------------------------------------------------------
+% This function takes the full combined covariance matrix of the
+% linear+nonlinear parameter sets and splits it into the different
+% components of the model. 
+    function [Vfit_uq,Pfit_uq,Bfit_uq,paruq_bg,paruq_ex,paruq_dd] = splituq(full_uq)
+        
+        % Pre-allocation
+        [paruq_bg,paruq_ex,Bfit_uq,Vfit_uq] = deal(cell(nSignals,1));
+        
         % Retrieve full covariance matrix
         covmat = full_uq.covmat;
-
+        
         paramidx = 1:Nparam;
         Pfreeidx = Nparam+1:length(covmat);
         
@@ -302,135 +445,6 @@ end
         end
         
     end
-    paruq_ = [];
-
-
-% Normalize distribution
-% =======================
-if normP && includeForeground
-    Pnorm = trapz(r,Pfit);
-    Pfit = Pfit/Pnorm;
-    if calculateCI
-        % scale CIs accordingly
-        if iscell(Pfit_uq)
-            for j = 1:numel(Pfit_uq)
-                Pfit_uq{j} = Pfit_uq{j}/Pnorm;
-            end
-        else
-            Pfit_uq.ci = @(p) Pfit_uq.ci(p)/Pnorm;
-        end
-    end
-end
-
-% Calculate goodness of fit
-% =========================
-if computeStats
-    stats = cell(nSignals,1);
-    for i = 1:nSignals
-        Ndof = numel(Vexp{i}) - numel(parfit_);
-        stats{i} = gof(Vexp{i},Vfit{i},Ndof);
-    end
-else
-    stats = [];
-end
-
-% Return fitted parameters and confidence intervals in structures
-% ================================================================
-parfit_ = parfit_(:);
-parfit.dd = parfit_(ddidx);
-for i = 1:nSignals
-    parfit.bg{i} = parfit_(bgidx{i});
-    parfit.ex{i} = parfit_(exidx{i});
-end
-if calculateCI
-    paruq.dd = paruq_dd;
-    modfituq.Pfit = Pfit_uq;
-    for i = 1:nSignals
-        paruq.bg{i} = paruq_bg{i};
-        paruq.ex{i} = paruq_ex{i};
-        modfituq.Vfit{i} = Vfit_uq;
-        modfituq.Bfit{i} = Bfit_uq;
-    end
-end
-
-% Plotting
-% =========
-if nargout==0
-    display()
-end
-
-% Return numeric and not cell arrays if there is only one signal
-if nSignals==1
-    Vfit = Vfit{1};
-    Bfit = Bfit{1};
-    if iscell(parfit.dd)
-        parfit.dd = parfit.dd{1};
-    end
-    if iscell(parfit.bg)
-        parfit.bg = parfit.bg{1};
-    end
-    if iscell(parfit.ex)
-        parfit.ex = parfit.ex{1};
-    end
-    if calculateCI
-        paruq.bg = paruq.bg{1};
-        paruq.ex = paruq.ex{1};
-    end
-    if ~isempty(stats)
-        stats = stats{1};
-    end
-end
-
-% Multi-pathway dipolar model
-% ------------------------------------------------------------------
-% This function represent the core model of fitsignal, it takes the
-% parameters and computes the dipolar kernel and background according to
-% the dipolar multi-pathway theory. 
-% This is the non-linear part of the SNLLS problem when fitting a
-% parameter-free distribution.
-    function [Ks,Bs] = multiPathwayModel(par)
-        
-        [Bs,Ks] = deal(cell(nSignals,1));
-        for iSignal=1:nSignals            
-            % Get parameter subsets for this signal
-            ex_par = par(exidx{iSignal});
-            bg_par = par(bgidx{iSignal});
-            
-            % Prepared background basis function
-            if includeBackground(iSignal)
-                Bfcn = @(t,lam) bg_model{iSignal}(t,bg_par,lam);
-            else
-                Bfcn = @(~,~) ones(size(Vexp{iSignal}));
-            end
-            
-            % Get pathway information
-            if includeExperiment(iSignal)
-                pathinfo = ex_model{iSignal}(ex_par);
-            else
-                pathinfo = 1;
-            end
-            
-            % Compute the multipathway-background
-            Bs{iSignal} = dipolarbackground(t{iSignal},pathinfo,Bfcn);
-            % Compute the multipathway-kernel
-            Ks{iSignal} = dipolarkernel(t{iSignal},r,pathinfo,Bfcn);
-        end
-        
-    end
-    function [Ks] = multiPathwayKernel(par,idx)
-        Ks = multiPathwayModel(par);
-        if nargin>1
-            Ks = Ks{idx};
-        end
-    end
-
-
-    function [Bs] = multiPathwayBackground(par,idx)
-        [~,Bs] = multiPathwayModel(par);
-        if nargin>1
-            Bs = Bs{idx};
-        end
-    end
 
 % Parsing and validation of options
 % ------------------------------------------------------------------
@@ -439,26 +453,11 @@ end
 % default values are overwritten by the user-specified values.
     function parsevalidate(varargin)
         
-        validoptions = {'regparam','regtype','alphaOptThreshold','TolFun','normP','Weights'};
+        validoptions = {'regparam','regtype','normP'};
         
         % Parse options
-        [regparam_,regtype_,alphaOptThreshold_,TolFun_,normP_,Weights_] = parseoptions(validoptions,varargin);
-        
-        if ~isempty(alphaOptThreshold_)
-            validateattributes(alphaOptThreshold_,{'numeric'},{'scalar'})
-            alphaOptThreshold = alphaOptThreshold_;
-        end
-        if ~isempty(TolFun_)
-            validateattributes(multiStarts_,{'numeric'},{'scalar','nonnegative','integer'})
-            TolFun = TolFun_;
-        end
-        if ~isempty(Weights_)
-            validateattributes(Weights,{'numeric'},{'nonnegative'})
-            if numel(Weights)~=nSignals
-                error('The number of global fit weights and signals must be equal.')
-            end
-            Weights = Weights/sum(Weights);
-        end
+        [regparam_,regtype_,normP_] = parseoptions(validoptions,varargin);
+
         if ~isempty(normP_)
             validateattributes(normP_,{'logical'},{'scalar','nonempty'})
             normP = normP_;
@@ -594,7 +593,11 @@ end
 end
 
 %===============================================================================
+% Local functions
+%===============================================================================
 
+% Extract parameter info from parametric models
+% ------------------------------------------------------------------
 function [par0,lo,up,N] = getmodelparams(models)
 
 if ~iscell(models)
@@ -604,15 +607,15 @@ end
 [par0,lo,up] = deal(cell(numel(models),1));
 N = zeros(numel(models),1);
 for i=1:numel(models)
-if isa(models{i},'function_handle')
-    info = models{i}();
-    par0{i} = [info.Start];
-    lo{i} = [info.Lower];
-    up{i} = [info.Upper];
-else
-    [par0{i},lo{i},up{i}] = deal([]);
-end
-N(i) = numel(par0{i});
+    if isa(models{i},'function_handle')
+        info = models{i}();
+        par0{i} = [info.Start];
+        lo{i} = [info.Lower];
+        up{i} = [info.Upper];
+    else
+        [par0{i},lo{i},up{i}] = deal([]);
+    end
+    N(i) = numel(par0{i});
 end
 
 if numel(models)==1
@@ -623,8 +626,8 @@ end
 
 end
 
-%===============================================================================
-
+% Combine parameter subsets
+% ------------------------------------------------------------------
 function pvec = parcombine(p,def)
 for k = 1:3
     if isempty(p{k}), p{k} = def{k}; end
@@ -634,6 +637,9 @@ end
 pvec = cell2mat(p);
 end
 
+
+% Boundary checking
+% ------------------------------------------------------------------
 function checkbounds(lb,ub,par0)
 
 nParams = numel(par0);
