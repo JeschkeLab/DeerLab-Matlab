@@ -23,10 +23,10 @@ pass(3) = all(abs(scale*Pfit2 - Pfit1) < scale*1e-3);
 
 pass = all(pass);
 
-maxerr = max(abs(Pfit1 - scale*P));
+maxerr = max(abs(Pfit1/scale - P));
 
 if opt.Display
-   plot(r,P,'k',r,Pfit1,'r',r,Pfit2,'b')
+   plot(r,P,'k',r,Pfit1/scale,'r',r,Pfit2,'b')
    legend('truth','rescaled','normalized')
    xlabel('r [nm]')
    ylabel('P(r) [nm^{-1}]')
