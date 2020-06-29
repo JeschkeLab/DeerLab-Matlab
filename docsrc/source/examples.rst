@@ -1,6 +1,8 @@
 Example scripts
 =========================================
 
+.. note:: Couldn't find what you were looking for? `Add a request <https://github.com/JeschkeLab/DeerLab/issues/112>`_ for a new example/tutorial and it will considered for the next release.
+
 Here is a collection of example scripts for the use of DeerLab. You can also find them in the ``examples`` subfolder in the DeerLab folder.
 
 .. toctree:
@@ -100,7 +102,17 @@ The following scripts are more advanced.
 	<div class="container-table100">
 	<div class="wrap-table100">
 	<div class="table">
+		<div class="row" onclick="window.location='examples/example_customkernel_snlls.html#example_customkernel_snlls'">
+			<div class="cell">
+				Fitting a custom kernel model with a parameter-free distribution
+			</div>
+		</div>
 
+		<div class="row" onclick="window.location='examples/example_parfree_titration.html#example_parfree_titration'">
+			<div class="cell">
+				Analyzing pseudo-titration (dose-respononse) curves with parameter-free distributions
+			</div>
+		</div>
 
 		<div class="row" onclick="window.location='examples/example_timedomainfitting.html#example_timedomainfitting'">
 			<div class="cell">
