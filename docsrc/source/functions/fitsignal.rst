@@ -166,40 +166,6 @@ Additional settings can be specified via name-value pairs. All property names ar
 
     fitsignal(___,'Property1',Value1,'Property2',Value2,___)
 
-- ``'Lower'`` - Lower bounds of search range
-    Lower bounds for parameter search range. This must be a 3-element cell array of the form ``{lb_dd,lb_bg,lb_ex}``, where the elements are arrays that give the lower bounds for the distance distribution parameters, background parameters, and experiment parameters.
-
-    *Default:* taken from info structure provided by model functions
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			fitsignal(V,t,r,'P',@bg_hom3dex,@ex_4pdeer,'Lower',{[],[10 1],0.1})
-
-
-- ``'Upper'`` - Upper bounds of search range
-    Upper bounds for parameter search range. This must be a 3-element cell array of the form ``{ub_dd,ub_bg,ub_ex}``, where the elements are arrays that give the upper bounds for the distance distribution parameters, background parameters, and experiment parameters.
-
-    *Default:* taken from info structure provided by model functions
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			fitsignal(V,t,r,'P',@bg_hom3dex,@ex_4pdeer,'Upper',{[],[200 3],0.7})
-
-- ``'TolFun'`` - Optimizer tolerance value
-    Optimizer function tolerance. The solver stops once the fitting functional evaluation reaches a value lower than this tolerance. Lower values increase the precision of the result, albeit at the cost of longer computation times.
-
-    *Default:* ``1e-5``
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			fitsignal(___,'TolFun',1e-9)
-
 
 - ``'RegType'`` - Regularization functional type
     Specifies the type of regularization to be used to fit non-parametric distributions
@@ -229,17 +195,6 @@ Additional settings can be specified via name-value pairs. All property names ar
 			fitsignal(___,'RegParam','bic')
 			fitsignal(___,'RegParam',0.2)
 
-
-- ``'alphaOptThreshold'`` - Relative parameter change threshold 
-    Specifies the relative parameter change threshold for reoptimizing the regularization parameter during the fitting
-
-    *Default:* ``1e-3``
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			fitsignal(___,'alphaOptThreshold',1e-4)
 
 - ``'GlobalWeights'`` - Global analysis weights
     Array of weighting coefficients for the individual signals in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.
@@ -287,3 +242,15 @@ Additional settings can be specified via name-value pairs. All property names ar
 		.. code-block:: matlab
 
 			fitsignal(___,'normP',false)
+            
+            
+- ``'Display'`` -  Plot and print results
+    This enables/disables plotting and printing of results.
+
+    *Default:* ``true`` if no outputs requested, otherwise ``false`` 
+
+    *Example:*
+
+		.. code-block:: matlab
+
+			fitsignal(___,'Display',true)

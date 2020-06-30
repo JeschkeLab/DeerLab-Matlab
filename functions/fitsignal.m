@@ -64,6 +64,7 @@
 %
 %   'Rescale'       - Enable/Disable optimization of the signal scale
 %   'normP'         - Enable/Disable re-normalization of the fitted distribution
+%   'Display'       - Enable/Disable plotting and printing of results
 %   See "help snnls" for more options.
 %
 % Example:
@@ -82,10 +83,6 @@ end
 % Parse inputs in the varargin
 [dd_model,bg_model,ex_model,par0,lb,ub,options] = parseinputs(varargin);
 
-calculateCI = nargout>=5 || nargout==0;
-computeStats = nargout>4 || nargout==0;
-verbose = 'off';
-
 % Validate the V,t,r inputs and check global fit settings
 nSignals = validateVtr;
 
@@ -95,11 +92,16 @@ nSignals = validateVtr;
 % Default optional settings
 regtype = 'tikh';
 regparam = 'aic';
+DisplayResults = nargout==0;
 normP = true;
 
 % Parse and validate options passed by the user, if the user has specified
 % any, this call will overwrite the defaults above
 parsevalidate(options)
+
+calculateCI = nargout>=5 || DisplayResults;
+computeStats = nargout>4 || DisplayResults;
+verbose = 'off';
 
 % Get information about distance distribution parameters
 % ======================================================
@@ -273,7 +275,7 @@ end
 
 % Plotting
 % =========
-if nargout==0
+if DisplayResults
     display()
 end
 
@@ -457,11 +459,15 @@ end
 % default values are overwritten by the user-specified values.
     function parsevalidate(varargin)
         
-        validoptions = {'regparam','regtype','normP'};
+        validoptions = {'regparam','regtype','normP','Display'};
         
         % Parse options
-        [regparam_,regtype_,normP_] = parseoptions(validoptions,varargin);
+        [regparam_,regtype_,normP_,DisplayResults_] = parseoptions(validoptions,varargin);
 
+        if ~isempty(DisplayResults_)
+            validateattributes(DisplayResults_,{'logical'},{'scalar','nonempty'})
+            DisplayResults = DisplayResults_;
+        end
         if ~isempty(normP_)
             validateattributes(normP_,{'logical'},{'scalar','nonempty'})
             normP = normP_;
