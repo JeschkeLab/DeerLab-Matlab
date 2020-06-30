@@ -21,6 +21,8 @@ pass(2) = all(abs(parFit - parIn) < 1e-3);
 % Pass 3: confidence intervals are exactly zero
 pass(3) = all(all(abs(parFit - parCI.') < 1e-10));
 
+pass = all(pass);
+
 maxerr = max(abs(Pfit - P));
 
  

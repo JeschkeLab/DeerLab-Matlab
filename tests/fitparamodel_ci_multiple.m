@@ -22,6 +22,8 @@ parCI3 = cistruct.ci(0.25);
 pass(1) = all(all(abs(parFit - parCI1.') > abs(parFit - parCI2.')));
 pass(2) = all(all(abs(parFit - parCI2.') > abs(parFit - parCI3.')));
 
+pass = all(pass);
+
 maxerr = NaN;
 
  

@@ -33,6 +33,8 @@ Pfwhm_ref = Pfwhm_ref/sum(Pfwhm_ref);
 pass(1) = all(abs(Prmean - Prmean_ref)<1e-5);
 pass(2) = all(abs(Pfwhm - Pfwhm_ref)<1e-5);
 
+pass = all(pass);
+
 maxerr = max(abs(Prmean - Prmean_ref));
 
 if opt.Display

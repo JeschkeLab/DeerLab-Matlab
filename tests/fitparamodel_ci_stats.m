@@ -20,6 +20,7 @@ parp50 = cistruct.percentile(0.50);
 pass(1) = all(abs(parmean - parmedian)<1e-5);
 pass(2) = all(abs(parmedian - parp50)<1e-5);
 
+pass = all(pass);
 maxerr = max(abs(parmean - parmedian));
 
 end
