@@ -203,6 +203,9 @@ elseif OnlyParametric
     else
         Pfit = [];
     end
+    if ~iscell(Vfit)
+        Vfit = {Vfit};
+    end
     if calculateCI
     [Vfit_uq,Pfit_uq,Bfit_uq,paruq_bg,paruq_ex,paruq_dd] = splituq(param_uq);
     end
@@ -569,32 +572,32 @@ end
         str = '  %s{%d}(%d):   %.7f  (%.7f, %.7f)  %s (%s)\n';
         if numel(parfit.dd)>0
             info = dd_model();
+            ci = paruq.dd.ci(95);
             for p = 1:numel(parfit.dd)
                 c = parfit.dd(p);
-                ci = paruq.dd.ci(95);
                 fprintf(str,'dd',1,p,c,...
-                    ci(1),ci(2),info(p).Parameter,info(p).Units)
+                    ci(p,1),ci(p,2),info(p).Parameter,info(p).Units)
             end
         end
         if numel(parfit.bg)>0
             for i = 1:nSignals
                 info = bg_model{i}();
+                ci = paruq.bg{i}.ci(95);
                 for p = 1:numel(parfit.bg{i})
                     c = parfit.bg{i}(p);
-                    ci = paruq.bg{i}.ci(95);
                     fprintf(str,'bg',i,p,c,...
-                        ci(1),ci(2),info(p).Parameter,info(p).Units)
+                        ci(p,1),ci(p,2),info(p).Parameter,info(p).Units)
                 end
             end
         end
         if numel(parfit.ex)>0
             for i = 1:nSignals
                 info = ex_model{i}();
+                ci = paruq.ex{i}.ci(95);
                 for p = 1:numel(parfit.ex{i})
                     c = parfit.ex{i}(p);
-                    ci = paruq.ex{i}.ci(95);
                     fprintf(str,'ex',i,p,c,...
-                        ci(1),ci(2),info(p).Parameter,info(p).Units)
+                        ci(p,1),ci(p,2),info(p).Parameter,info(p).Units)
                 end
             end
         end
