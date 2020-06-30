@@ -5,11 +5,9 @@
 </div>
 
 <p align="center">
-  <img src="https://img.shields.io/github/issues-raw/JeschkeLab/DeerLab?style=flat"></img>
   <img src="https://img.shields.io/badge/MATLAB-R2017a--R2020a-brightgreen?style=flat"></img>
   <img src="https://img.shields.io/github/downloads/JeschkeLab/DeerLab/total?style=flat"></img>
   <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fdeershields.s3.eu-central-1.amazonaws.com%2Fcoverage_badge.json"></img>
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fdeershields.s3.eu-central-1.amazonaws.com%2Ftestsuite_badge.json"></img>
 </p>
 
 ### About
@@ -67,13 +65,12 @@ The DeerLab toolbox is licensed under the MIT License. The complete toolbox cons
 DeerLab includes code from the following projects, which have their own licenses:
 - [datahash.m](https://www.mathworks.com/matlabcentral/fileexchange/31272-datahash) (Hash-key generator by Jan Simon) [BSD] 
 - [fresnelS.m, fresnelC.m](https://www.mathworks.com/matlabcentral/fileexchange/28765-fresnels-and-fresnelc) (Efficient and accurate Fresnel integrals by John D'Errico) [BSD]
-- [fminsearchcon.m](https://www.mathworks.com/matlabcentral/fileexchange/8277-fminsearchbnd-fminsearchcon) (Bound constrained optimization using fminsearch by John D'Errico) [BSD]
 - [nlsqbnd.m](https://ch.mathworks.com/matlabcentral/fileexchange/23621-nlsqbnd) (Non-linear least squares solver with box constraints by Alain Barraud) [BSD]
 - [golden.m](https://www.mathworks.com/matlabcentral/fileexchange/25919-golden-section-method-algorithm) (Golden Section method algorithm by Katarzyna Zarnowiec) [BSD]
 - [jacobianest.m](https://www.mathworks.com/matlabcentral/fileexchange/13490-adaptive-robust-numerical-differentiation) (Adaptive Robust Numerical Differentiation by John D'Errico) [BSD]
 - [kde.m](https://ch.mathworks.com/matlabcentral/fileexchange/14034-kernel-density-estimator) (Kernel Density Estimator by Zdravko Botev) [BSD]
-- [LevenbergMarquardt.m, jacobiansimple.m](https://ch.mathworks.com/matlabcentral/fileexchange/53449-levenberg-marquardt-toolbox)(Levenberg-Marquardt & Jacobian toolbox by Alexander Dentler)[BSD]
-- [fdcoeffF.m](https://faculty.washington.edu/rjl/fdmbook/matlab/fdcoeffF.m)(Fornberg's method for finite difference coefficients)
-- [minq.m](http://www.mat.univie.ac.at/~neum/software/minq/)(MINQ8 - General Definite and Bound Constrained Indefinite Quadratic Programming by Waltraud Huyer and Arnold Neumair)
+- [LevenbergMarquardt.m, jacobiansimple.m](https://ch.mathworks.com/matlabcentral/fileexchange/53449-levenberg-marquardt-toolbox) (Levenberg-Marquardt & Jacobian toolbox by Alexander Dentler)[BSD]
+- [fdcoeffF.m](https://faculty.washington.edu/rjl/fdmbook/matlab/fdcoeffF.m) (Fornberg's method for finite difference coefficients)
+- [minq.m](http://www.mat.univie.ac.at/~neum/software/minq/) (MINQ8 - General Definite and Bound Constrained Indefinite Quadratic Programming by Waltraud Huyer and Arnold Neumair)
 
 Copyright (c) 2019-2020: Luis Fábregas Ibáñez, Stefan Stoll, Gunnar Jeschke, and [other contributors](https://github.com/JeschkeLab/DeerLab/contributors).
