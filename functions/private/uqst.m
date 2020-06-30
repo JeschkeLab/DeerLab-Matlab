@@ -95,7 +95,7 @@ uqstruct.type = type;
             % Eliminate duplicates
             [cdf, index] = unique(cdf);
             % Interpolate requested percentile
-            x(n) = interp1(cdf,values(index),p/100);
+            x(n) = interp1(cdf,values(index),p/100,'pchip');
         end
     end
 
@@ -115,13 +115,15 @@ uqstruct.type = type;
             
             case 'covariance'
                 % Compute covariance-based confidence intervals
+                % Clip at specified box boundaries
                 x(:,1) = max(lb,parfit - norm_inv(p)*sqrt(diag(covmat)));
                 x(:,2) = min(ub,parfit + norm_inv(p)*sqrt(diag(covmat)));
                 
             case 'bootstrap'
-                p = (1 - coverage)/2;
-                x(:,1) = percentile(p);
-                x(:,2) = percentile(1-p);
+                % Compute bootstrap-based confidence intervals
+                % Clip possible artifacts from the percentile estimation
+                x(:,1) = min(percentile(p*100),max(samples,[],'all'));
+                x(:,2) = max(percentile((1-p)*100),min(samples,[],'all'));
         end
     end
 
@@ -150,7 +152,6 @@ uqstruct.type = type;
             case 'bootstrap'
                 % Kernel density estimation
                 [~,pdf,x] = kde(samples(:,n),500);
-                
         end
         
         %Ensure normalization of the probability density function
