@@ -1,6 +1,6 @@
 %============================================================================
 % DeerLab Example:
-% Confidence intervals for regularization results
+% Comparing confidence intervals for regularization results
 %============================================================================
 
 % In this example we will show a simpe example of uncertainty estimation for 
@@ -14,6 +14,8 @@ clear, clc, clf
 %===================
 
 % Let's start by generating some data.
+
+rng(1)
 
 % Prepare signal components
 t = linspace(-0.4,3.5,200);
@@ -50,26 +52,18 @@ K = dipolarkernel(t,r,lam,B);
 % Obtain time-domain fit
 Vfit = K*Pfit;
 
-% Plot the fit results
-subplot(311)
-plot(t,V,'k.',t,Vfit,'r','LineWidth',1)
-grid on, axis tight,box on
-xlabel('time [\mus]')
-ylabel('V(t)')
-legend('Truth','Fit')
-
-subplot(312)
+subplot(211)
 cla,hold on
 plot(r,P,'k',r,Pfit,'r','LineWidth',1)
-Pci95 = Pci.ci(0.95);
-Pci50 = Pci.ci(0.50);
-fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'b','Linestyle','none','facealpha',0.45)
-fill([r fliplr(r)], [Pci95(:,1); flipud(Pci95(:,2))],'b','Linestyle','none','facealpha',0.25)
+Pci95 = Pci.ci(95);
+Pci50 = Pci.ci(50);
+fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'r','Linestyle','none','facealpha',0.45)
+fill([r fliplr(r)], [Pci95(:,1); flipud(Pci95(:,2))],'r','Linestyle','none','facealpha',0.25)
 grid on, axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
 title('Curvature Matrix CI')
-legend('Truth','Fit','95%-CI')
+legend('Truth','Fit','50%-CI','95%-CI')
 
 
 %=========================================
@@ -82,15 +76,15 @@ legend('Truth','Fit','95%-CI')
 
 % Launch bootstrapping
 Nsamples = 100;
-booci = bootan(@(V)mybootfcn(V,K,r),V,Vfit,Nsamples);
-Pci95 = booci{1}.ci(0.95);
-Pci50 = booci{1}.ci(0.50);
+booci = bootan(@(V)mybootfcn(V,K,r),V,Vfit,Nsamples,'Verbose',true);
+Pci95 = booci{1}.ci(95);
+Pci50 = booci{1}.ci(50);
 
 % By plotting the results, one can see that the bootstrapped confidence intervals 
 % are narrower in comparison to the ones obtained via the curvature
 % matrices. This is due to the inherent accurate nature of bootstrapping. 
 
-subplot(313)
+subplot(212)
 cla,hold on
 plot(r,P,'k',r,Pfit,'b','LineWidth',1)
 fill([r fliplr(r)], [Pci50(:,1); flipud(Pci50(:,2))],'b','Linestyle','none','facealpha',0.45)
@@ -99,7 +93,7 @@ grid on, axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
 title('Bootstrapped CI')
-legend('Truth','Fit','95%-CI')
+legend('Truth','Fit','50%-CI','95%-CI')
 
 function Pfit = mybootfcn(V,K,r)
  Pfit = fitregmodel(V,K,r,'tikh','aic');

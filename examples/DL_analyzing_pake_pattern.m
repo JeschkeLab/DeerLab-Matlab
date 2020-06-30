@@ -23,7 +23,7 @@ V = dipolarsignal(t,r,P,lam,B,'noiselevel',0.01);
 
 % Plot
 subplot(221)
-plot(t,V)
+plot(t,V,'k')
 axis tight, grid on
 xlabel('Time [\mus]'),ylabel('V(t)')
 
@@ -51,7 +51,7 @@ xlabel('Time [\mus]'),ylabel('V(t)')
 Dcorr = (V./B - (1 - lambda))/lambda;
 
 subplot(222)
-plot(t,Dcorr)
+plot(t,Dcorr,'k')
 axis tight, grid on
 xlabel('Time [\mus]'),ylabel('D_{corr}(t)')
 
@@ -74,7 +74,7 @@ xlabel('Time [\mus]'),ylabel('D_{corr}(t)')
 
 % Plot results
 subplot(2,2,[3 4])
-plot(nu,pake,nuapo,pakeapo)
+plot(nu,pake,'k',nuapo,pakeapo,'b','LineWidth',1.5)
 axis tight, grid on
 xlim([-10 10])
 xlabel('Frequency [MHz]'),ylabel('Intensity [a.u.]')

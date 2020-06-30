@@ -23,10 +23,10 @@ t = linspace(0,5,250);
 r = linspace(1,7,200);
 P = dd_gauss3(r,[4.5 0.6 0.4 3 0.4 0.3 4 0.7 0.5]);
 lambda = 0.3;
-kappa = 0.4;
+conc = 80; %uM
 
 % Simulate the signal
-Bmodel = @(t,lam) bg_hom3d(t,kappa,lam);
+Bmodel = @(t,lam) bg_hom3d(t,conc,lam);
 K = dipolarkernel(t,r,lambda,Bmodel);
 V = K*P + whitegaussnoise(t,0.01);
 

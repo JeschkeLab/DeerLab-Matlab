@@ -16,7 +16,7 @@ clear, clc, clf
 
 % Let's start by simulating a very simple dipolar evolution function (i.e. no 
 % background and 100% modulation depth), whose parameters we know. 
-
+rng(1)
 t = linspace(-0.2,4,300);
 r = linspace(2,5,250);
 
@@ -26,9 +26,10 @@ D = dipolarsignal(t,r,P,'noiselevel',0.05);
 
 % Plot
 subplot(311)
-plot(t,D,'k')
+plot(t,D,'k.')
 axis tight, grid on
 xlabel('Time [\mus]'),ylabel('V(t)')
+set(gca,'fontsize',10)
 
 %==============================
 % Generating the APT kernel
@@ -52,10 +53,11 @@ Kapt = aptkernel(t);
 
 % Plot results
 subplot(312)
-plot(r,P,'k',rapt,Papt,'r')
+plot(r,P,'k',rapt,Papt,'r','LineWidth',1.5)
 axis tight, grid on, legend('Truth','APT Fit','Location','eastoutside')
 xlim([2 5])
 xlabel('Distance [nm]'),ylabel('P(r) [nm^{-1}]')
+set(gca,'fontsize',10)
 
 %================================
 % Playing with the DDS parameter
@@ -76,7 +78,8 @@ Papt3 = apt(D,Kapt,0.5);
 
 % Plot results
 subplot(313)
-plot(rapt,Papt,'k',rapt,Papt2,'b',rapt,Papt3,'r')
+plot(rapt,Papt,'k',rapt,Papt2,'b',rapt,Papt3,'r','LineWidth',1.5)
 axis tight, grid on, legend('DDS = 0.05','DDS = 0.1','DDS = 0.5','Location','eastoutside')
+set(gca,'fontsize',10)
 xlim([2 5])
 xlabel('Distance [nm]'),ylabel('P(r) [nm^{-1}]')

@@ -17,6 +17,8 @@ clear, clc, clf
 % distribution with a relatively fast decaying stretched exponential background. 
 % We will set the modulation depth to 40% and add some noise to it.
 
+rng(1)
+
 % Model input parameters
 decay = 0.4;     % decay constant for background (us^-1)
 strfact = 1;     % stretching factor
@@ -70,6 +72,7 @@ plot(t,Vdiv,'k.',t,Vfit,'b','LineWidth',1)
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
+title('B divided')
 
 subplot(522)
 plot(r,P,'k',r,Pdiv,'b','LineWidth',1)
@@ -98,6 +101,7 @@ plot(t,Vsub,'k.',t,Vfit,'b','LineWidth',1)
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
+title('B subtracted')
 
 subplot(524)
 plot(r,P,'k',r,Psub,'b','LineWidth',1)
@@ -125,6 +129,7 @@ plot(t,V,'k.',t,Vfit,'b','LineWidth',1)
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
+title('B in kernel')
 
 subplot(526)
 plot(r,P,'k',r,Pker,'b','LineWidth',1)
@@ -154,6 +159,7 @@ plot(t,Vsqrt,'k.',t,Vfit,'b','LineWidth',1)
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
+title('sqrt(B) in kernel')
 
 subplot(528)
 plot(r,P,'k',r,Pker,'b','LineWidth',1)
@@ -175,6 +181,7 @@ plot(t,V,'k.',t,V1,'b','LineWidth',1)
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
+title('fitsignal')
 
 subplot(5,2,10)
 plot(r,P,'k',r,P1,'b','LineWidth',1)

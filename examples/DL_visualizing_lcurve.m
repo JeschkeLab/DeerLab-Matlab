@@ -4,7 +4,9 @@
 %============================================================================
 
 % This quick tutorial will show how to construct the so-called L-curve for the 
-% selection of the optimal regularization parameter.
+% selection of the optimal regularization parameter. While the L-curve is
+% not recommended as a selection criterion, it can help with the
+% visualization of other selection criteria. 
 
 %=============================
 % Simulating a dipolar signal

@@ -3,7 +3,7 @@
 % Fitting a mixed distance-distribution model
 %============================================================================
 
-% This short example will cover some basic manipulation of parametric models 
+% Basic manipulation of parametric models and creating mixed models 
 % for fitting distance distributions.
 
 clear, clc, clf
@@ -11,6 +11,8 @@ clear, clc, clf
 %====================
 % Simulate the data
 %====================
+
+rng(1)
 
 % Let's start by creating a simple dipolar evolution function (i.e. no background 
 % and full modulation depth) corresponding to a simple 4-pulse DEER signal.
@@ -79,7 +81,7 @@ K = dipolarkernel(t,r);
 % Now we can call |fitparamodel| to fit our mixed model to our signal. 
 
 %Fit the model to the data
-paramfit = fitparamodel(D,gausswlc,r,K,'MultiStart',15);
+paramfit = fitparamodel(D,gausswlc,r,K,'MultiStart',25);
 
 % From the fitted parameter set |paramfit| we can now generate our fitted distance 
 % distribution and the corresponding time-domain fit.
@@ -93,17 +95,17 @@ Dfit = K*Pfit;
 
 %Plot results
 subplot(211)
-plot(t,D,'k.',t,Dfit)
+plot(t,D,'k.',t,Dfit,'LineWidth',1.5)
 xlabel('t [\mus]')
 ylabel('V(t)')
 legend('data','fit')
 axis tight, grid on, box on
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)
 
 subplot(212)
-plot(r,P,'k',r,Pfit)
+plot(r,P,'k',r,Pfit,'LineWidth',1.5)
 xlabel('r [nm]')
 ylabel('P(r)')
 legend('truth','fit')
 axis tight, grid on, box on
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)

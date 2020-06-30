@@ -6,8 +6,6 @@
 % This example shows how to fit multiple signals to a global model, which
 % may depend on some parameters which need to be globally fitted, some
 % locally and some might be fixed and not fitted. 
-% This kind of script is the basis for the analysis of pseudo-titration
-% curves or dose-response curves.
 
 clc,clear,clf
 
@@ -81,7 +79,7 @@ ts = {t1,t2};
 
 % Prepare the model function, when using local fit parameters is very 
 % important to request the |idx| variable (see below). 
-model = @(t,par,idx) myABmodel(t,par,idx,r,Ks);
+model = @(t,par) myABmodel(t,par,r,K1,K2);
 
 % Fit the global parametric model to both signals
 parfit = fitparamodel(Vs,model,ts,par0,lower,upper,'multistart',50);
@@ -90,8 +88,9 @@ parfit = fitparamodel(Vs,model,ts,par0,lower,upper,'multistart',50);
 % global minimum and not to get stuck at local minima.
 
 % Get the fitted models 
-[Vfit1,Pfit1] = myABmodel(t1,parfit,1,r,Ks);
-[Vfit2,Pfit2] = myABmodel(t2,parfit,2,r,Ks);
+[Vfits,Pfit1,Pfit2] = myABmodel([],parfit,r,K1,K2);
+Vfit1 = Vfits{1};
+Vfit2 = Vfits{2};
 
 % Plot results
 %-----------------------------------------------------------------------------
@@ -119,15 +118,12 @@ xlabel('t [\mus]'),ylabel('V(t)')
 
 % Model definition
 %-----------------------------------------------------------------------------
-function [Vfit,Pfit] = myABmodel(~,par,idx,r,Ks)
+function [Vfit,Pfit1,Pfit2] = myABmodel(~,par,r,K1,K2)
 
     % This function models the signals in our A-B system, and it is used to
-    % simulate all signals passed to fitparamodel(). 
-    % To be able to distinguish which signal is being analyzed at the
-    % moment by fitparamodel(), the function will provide the variable
-    % |idx| which identifys the signal, i.e.
-    %   idx = 1 ---> Vs{1}
-    %   idx = 2 ---> Vs{2}
+    % simulate all signals passed to fitparamodel(). The function must
+    % return a cell array containing the siimulations of all the signals
+    % passed to fitparamodel().
 
     %Fixed parameters
     fwhmA = 0.5;
@@ -138,22 +134,14 @@ function [Vfit,Pfit] = myABmodel(~,par,idx,r,Ks)
     %Local parameters
     fracA1 = par(3);
     fracA2 = par(4);
-
-    % Depending on which signal is being simulated at the moment, use the
-    % corresponding fraction
-    if idx == 1
-        %Use fracA1 for signal Vs{1}
-        fraction = fracA1;
-    else
-        %Use fracA2 for signal Vs{2}
-        fraction = fracA2;
-    end
     
     % Generate the signal-specific distribution
-    Pfit = dd_gauss2(r,[rmeanA fwhmA fraction rmeanB fwhmB max(1-fraction,0)]);
-    
-    % Generate the corresponding signal (either V{1} or V{2}) by using the
-    % appropiate dipolar kernel
-    Vfit = Ks{idx}*Pfit;
+    Pfit1 = dd_gauss2(r,[rmeanA fwhmA fracA1 rmeanB fwhmB max(1-fracA1,0)]);
+    Pfit2 = dd_gauss2(r,[rmeanA fwhmA fracA2 rmeanB fwhmB max(1-fracA2,0)]);
+
+    % Generate signal #1
+    Vfit{1} = K1*Pfit1;
+    % Generate signal #2
+    Vfit{2} = K2*Pfit2;
 
 end

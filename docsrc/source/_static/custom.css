@@ -230,3 +230,39 @@ table.func-list.docutils tbody tr.row-odd:hover, table.func-list.docutils tbody 
 .select select:disabled ~ .select_arrow {
     border-top-color: #343131;
 }
+
+
+
+/*Formatting of examples list*/
+        ul.examples * {margin: 0; padding: 0;}
+         
+        ul.examples div {
+          margin: 20px;
+        }
+         
+        ul.examples ul {
+          list-style-type: none;
+          width: 500px;
+        }
+         
+        ul.examples li img {
+          float: left;
+          margin: 0 15px 0 0;
+          width: 120px;
+          height: 120px;
+        }
+         
+        ul.examples li h3 {
+	font-size: 110%;
+	margin-top: 30px;
+        }
+ 
+        ul.examples li {
+          padding: 10px;
+          overflow: auto;
+        }
+         
+        ul.examples li:hover {
+          background: #eee;
+          cursor: pointer;
+        }

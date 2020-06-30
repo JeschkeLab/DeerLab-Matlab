@@ -39,7 +39,7 @@ pass = all(pass);
 maxerr = NaN;
 
 if opt.Display
-    plot(t,K0,t,K1,t,K02,t,Kinf,'.k','LineWidth',1.5);
+    plot(t,K0,t,K1,t,K2,t,Kinf,'.k','LineWidth',1.5);
     legend('Fresnel','grid','integral','inf bw');
    xlabel('t [\mus]')
    ylabel('K(t,2.5nm)')

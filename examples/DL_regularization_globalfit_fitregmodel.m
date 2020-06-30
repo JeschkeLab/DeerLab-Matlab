@@ -66,14 +66,14 @@ plot(t1,D1,'k.',t1,D1fit,'b',t2,D2+1/2,'k.',t2,D2fit+1/2,'b',t3,D3+1,'k.',t3,D3f
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)
 
 subplot(222)
 plot(r,P,'k',r,Pfit,'b','LineWidth',1.5)
 grid on,axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)
 
 % Studying the influence of the global weights
 %-----------------------------------------------------------------------------
@@ -103,11 +103,11 @@ plot(t1,D1,'k.',t1,D1fit,'r',t2,D2+1/2,'k.',t2,D2fit+1/2,'r',t3,D3+1,'k.',t3,D3f
 grid on,axis tight,box on
 xlabel('time [\mus]')
 ylabel('V_i(t)')
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)
 
 subplot(224)
 plot(r,P,'k',r,Pfit,'r','LineWidth',1.5)
 grid on,axis tight,box on
 xlabel('distance [nm]')
 ylabel('P(r) [nm^{-1}]')
-set(gca,'FontSize',14)
+set(gca,'FontSize',12)

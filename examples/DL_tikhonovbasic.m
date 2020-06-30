@@ -22,15 +22,4 @@ Vexp = dipolarsignal(t,r,P,lam,B,'NoiseLevel',0.01);
 % Run fit
 %-----------------------------------------------------------------------------
 [Vfit,Pfit,Bfit,parfit,parci] = ...
-    fitsignal(Vexp,t,r,'P',@bg_hom3dex,@ex_4pdeer);
-
-
-% Plot results
-%-----------------------------------------------------------------------------
-subplot(211)
-plot(t,Vexp,'.',t,Vfit)
-legend('data','fit')
-
-subplot(212)
-plot(r,P,r,Pfit);
-legend('model','fit')
+    fitsignal(Vexp,t,r,'P',@bg_hom3d,@ex_4pdeer,'Display',true);

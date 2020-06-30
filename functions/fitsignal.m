@@ -498,6 +498,7 @@ end
             Vexp = {Vexp};
         end
         nSignals = numel(Vexp);
+        r = r(:).';
         if ~iscell(t)
             t = {t};
         end

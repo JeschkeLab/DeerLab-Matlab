@@ -46,6 +46,7 @@ Ks = Kmodel([0.25 0.1 KD],ts,rA,rB,L);
 
 % Simulate dipolar signals
 for i=1:Nsignals
+    rng(i)
     Vs{i} = Ks{i}*[PA; PB] + whitegaussnoise(ts{i},0.005);
     subplot(221)
     hold on,plot(ts{i},Vs{i}+i/9,'k.'),hold off
@@ -156,7 +157,7 @@ Ksfit = Kmodel(parfit,ts,rA,rB,L);
 for i=1:Nsignals
     Vsfit{i} = Ksfit{i}*Pfit(:);
     subplot(221)
-    hold on,plot(ts{i},Vsfit{i}+i/9,'r'),hold off
+    hold on,plot(ts{i},Vsfit{i}+i/9,'r','LineWidth',1.5),hold off
 end
 axis tight, grid on, box on
 xlabel('t [\mus]')
@@ -171,7 +172,7 @@ for i=1:Nsignals
     PBfit = xBfit(i)*Pfit(numel(rA)+1:end);
     subplot(2,2,[2,4])
     hold on
-    plot(rA,PAfit+2*i,'r',rB,PBfit+2*i,'b')
+    plot(rA,PAfit+2*i,'r',rB,PBfit+2*i,'b','LineWidth',1.5)
 end
 axis tight, grid on, box on
 xlabel('r [nm]')
@@ -181,7 +182,7 @@ legend('state A','state B')
 subplot(223)
 cla,hold on
 plot(log10(L),xA,'r-',log10(L),xB,'b-')
-plot(log10(L),xAfit,'ro',log10(L),xBfit,'bo')
+plot(log10(L),xAfit,'ro',log10(L),xBfit,'bo','LineWidth',1.5)
 axis tight, grid on, box on
 xlabel('log_{10}([L])')
 ylabel('Fractions')

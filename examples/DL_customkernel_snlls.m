@@ -75,7 +75,7 @@ Vfit = Kfit*Pfit;
 %-----------------------------------------------------------------------------
 
 subplot(211)
-plot(t,V,'k.',t,Vfit,'r')
+plot(t,V,'k.',t,Vfit,'b')
 axis tight, grid on, box on
 xlabel('t [\mus]')
 ylabel('V(t)')
@@ -83,9 +83,9 @@ legend('data','fit')
 
 subplot(212)
 cla,hold on
-plot(r,P,'k',r,Pfit,'r')
-fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'r','FaceAlpha',0.5,'LineStyle','none')
-fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'r','FaceAlpha',0.2,'LineStyle','none')
+plot(r,P,'k',r,Pfit,'b')
+fill([r fliplr(r)],[Pci50(:,1); flipud(Pci50(:,2))],'b','FaceAlpha',0.5,'LineStyle','none')
+fill([r fliplr(r)],[Pci95(:,1); flipud(Pci95(:,2))],'b','FaceAlpha',0.2,'LineStyle','none')
 axis tight, grid on, box on
 xlabel('r [nm]')
 ylabel('P(r) [nm^{-1}]')
