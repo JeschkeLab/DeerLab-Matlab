@@ -54,6 +54,7 @@
 %                 'off' - no information displayed
 %                 'final' - display solver exit message
 %                 'iter-detailed' - display state of solver at each iteration
+%   'Covariance' - Covariance matrix(ces) of the input dataset(s)
 %               See MATLAB doc optimoptions for detailed explanation
 %
 
@@ -202,13 +203,30 @@ end
 % Parse the optional parameters in varargin
 %-------------------------------------------------------------------------------
 optionalProperties = {'Solver','Algorithm','MaxIter','Verbose','MaxFunEvals',...
-    'TolFun','GlobalWeights','MultiStart',...
+    'TolFun','GlobalWeights','MultiStart','Covariance'...
     'Rescale'};
 [Solver,Algorithm,maxIter,Verbose,maxFunEvals,TolFun,GlobalWeights,...
-    MultiStart,Rescale] = ...
+    MultiStart,covmatin,Rescale] = ...
     parseoptions(optionalProperties,varargin);
 
 % Validate optional inputs
+if isempty(covmatin)
+    covmatin = [];
+else
+    if ~iscell(covmatin)
+        covmatin = {covmatin};
+    end
+    % Make block-diagonal matrix of covariance matrices
+    covmatin_= [];
+    for i=1:numel(covmatin)
+        validateattributes(covmatin{i},{'numeric'},{'matrix'},mfilename,'Covariance')
+        if all(size(covmatin{i})~=numel(V{i}))
+           error('The specified covariance matrix #%i must be a %ix%i matrix',i,numel(V{i}),numel(V{i})) 
+        end
+        covmatin_= blkdiag(covmatin_,covmatin{1});
+    end
+    covmatin = covmatin_;
+end
 if isempty(MultiStart)
     MultiStart = 1;
 else
@@ -409,8 +427,13 @@ if calcParamUncertainty
     J = jacobianest(@ResidualsFcn,parfit);
     
     % Estimate the heteroscedasticity-consistent covariance matrix
-    covmatrix = hccm(J,residuals,'HC1');
-    
+    if isempty(covmatin)
+        % Use estimated data covariance matrix
+        covmatrix = hccm(J,residuals,'HC1');
+    else
+        % Use user-given data covariance matrix
+        covmatrix = hccm(J,covmatin);
+    end
     % Construct confidence interval structure
     parci = uqst('covariance',parfit,covmatrix,lb,ub);
     

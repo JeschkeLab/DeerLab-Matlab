@@ -88,20 +88,14 @@ Here is a collection of example scripts for the use of DeerLab. You can also fin
 			</div>
 		</div>
 
-	</div>
-	</div>
-	</div>
-	</div>
 
+		<div class="row" onclick="window.location='examples/example_extracting_gauss_constraints.html#example_extracting_gauss_constraints'">
+			<div class="cell">
+                Extracting Gaussian constraints from a parameter-free distribution fit
+			</div>
+		</div>
+        
 
-The following scripts are more advanced.
-
-.. raw:: html
-
-	<div class="limiter">
-	<div class="container-table100">
-	<div class="wrap-table100">
-	<div class="table">
 		<div class="row" onclick="window.location='examples/example_customkernel_snlls.html#example_customkernel_snlls'">
 			<div class="cell">
 				Fitting a custom kernel model with a parameter-free distribution

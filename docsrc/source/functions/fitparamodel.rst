@@ -138,7 +138,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 .. code-block:: matlab
 
-    param = fitparamodel(___,'Property1',Value1,'Property2',Value2,___)
+    ___ = fitparamodel(___,'Property1',Value1,'Property2',Value2,___)
 
 
 - ``'Solver'`` - Optimization solver
@@ -154,7 +154,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'Solver','lmlsqnonlin')
+			___ = fitparamodel(___,'Solver','lmlsqnonlin')
 
 - ``'Algorithm'`` - Numerical solver algorithm
     Algorithm to be used by the solvers (see ``lsqnonlin`` MATLAB documentation)
@@ -165,7 +165,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'Algorithm','trust-region-reflective')
+			___ = fitparamodel(___,'Algorithm','trust-region-reflective')
 
 - ``'GlobalWeights'`` - Global analysis weights
     Array of weighting coefficients for the individual signals in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.
@@ -176,7 +176,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel({S1,S2,S3},@dd_gauss,r,{K1,K2,K3},'GlobalWeights',[0.1 0.6 0.3]])
+			___ = fitparamodel({S1,S2,S3},@dd_gauss,r,{K1,K2,K3},'GlobalWeights',[0.1 0.6 0.3]])
 
 - ``'TolFun'`` -  Optimizer tolerance value
     Optimizer function tolerance. The solver stops once the fitting functional evaluation reaches a value lower than this tolerance. Lower values increase the precision of the result, albeit at the cost of longer computation times.
@@ -187,7 +187,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'TolFun',1e-20)
+			___ = fitparamodel(___,'TolFun',1e-20)
 
 - ``'MaxIter'`` - Maximal solver iterations
     Maximum number of iterations of the solver. After the solver exceeds this number the optimization will stop. This option is only relevant for the ``'fmincon'``  and ``'lsqnonneg'`` solvers.
@@ -198,7 +198,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'MaxIter',1e10)
+			___ = fitparamodel(___,'MaxIter',1e10)
 
 - ``'MaxFunEval'`` -  Maximal solver function evaluations
     Maximum number of function evaluation of the solver. After the solver exceeds this number the optimization will stop. This option is only relevant for the ``'fmincon'``  and ``'lsqnonneg'`` solvers.
@@ -209,7 +209,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'MaxFunEval',1e10)
+			___ = fitparamodel(___,'MaxFunEval',1e10)
 
 - ``'Rescale'`` -  Rescaling of fitted dipolar signal
     This enables/disables the automatic optimization of the dipolar signal scale. If enabled (``true``) the experimental dipolar signal does not need to fulfill ``V(t=0)=1``, if disabled (``false``) it needs to be fulfilled.
@@ -221,7 +221,7 @@ Additional settings can be specified via name-value pairs. All property names ar
 		.. code-block:: matlab
 
 			V = correctscale(V,t);
-			param = fitparamodel(___,'Rescale',false)
+			___ = fitparamodel(___,'Rescale',false)
 
 - ``'MultiStart'`` -  Multi-start global optimization
     Number of initial points to be generated for a global search. For each start point, a local minimum is searched, and the solution with the lowest objective function value is selected as the global optimum.
@@ -232,7 +232,18 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'MultiStart',50)
+			___ = fitparamodel(___,'MultiStart',50)
+
+- ``'Covariance'`` -  Data covariance matrix
+    *N*x*N*-element covariance matrix of the input data ``V``. If not specified, this covariance matrix is estimated from the variance in the residual vector of the fit. 
+
+    *Default:* ``[]`` (automatically estimated)
+
+    *Example:*
+
+		.. code-block:: matlab
+
+			___ = fitparamodel(___,'Covariance',sigma^2*eye(N,N))
 
 - ``'Verbose'`` -  Information display
     Set the level of detail display for the solvers:
@@ -248,4 +259,4 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 		.. code-block:: matlab
 
-			param = fitparamodel(___,'Verbose','iter-detailed')
+			___ = fitparamodel(___,'Verbose','iter-detailed')
