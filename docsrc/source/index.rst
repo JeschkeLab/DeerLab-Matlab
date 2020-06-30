@@ -14,7 +14,7 @@ A publication about DeerLab is in preparation. When you use DeerLab in your work
 .. toctree::
     :hidden:
     :caption: Getting DeerLab
-    :maxdepth: 1
+    :maxdepth: 0
 
     ./download
     ./installation
@@ -22,7 +22,7 @@ A publication about DeerLab is in preparation. When you use DeerLab in your work
 .. toctree::
     :hidden:
     :caption: User Guide
-    :maxdepth: 1
+    :maxdepth: 0
 
     ./firstscript
     ./basics
@@ -34,11 +34,18 @@ A publication about DeerLab is in preparation. When you use DeerLab in your work
 .. toctree::
     :hidden:
     :caption: Reference
-    :maxdepth: 1
+    :maxdepth: 0
 
     ./functions
     ./modelsref
     ./theory
+
+.. toctree::
+    :hidden:
+    :caption: Others
+    :maxdepth: 0
+
+    ./funding
 
 
 .. Indices and tables
