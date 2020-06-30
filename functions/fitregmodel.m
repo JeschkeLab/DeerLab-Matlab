@@ -206,8 +206,8 @@ if getConfidenceIntervals
     J = [];
     for ii=1:numel(V)
         % Construct the full augmented residual
-        res = [res; GlobalWeights(ii)*(V{i} - K{i}*P)];
-        J = [J; GlobalWeights(ii)*K{i}];
+        res = [res; GlobalWeights(ii)*(V{ii} - K{ii}*P)];
+        J = [J; GlobalWeights(ii)*K{ii}];
     end
     Jreg = alpha*L;
     % Augment residual and Jacobian with regularization term
