@@ -431,7 +431,7 @@ end
         % ====================================
         for jj=1:nSignals
             if includeExperiment(jj)
-                Bfit_uq{ii} = paruq.propagate(@(par)multiPathwayBackground(par,jj),[],[]);
+                Bfit_uq{ii} = paruq.propagate(@(par)multiPathwayBackground(par,jj));
             else
                 Bfit_uq{ii} = [];
             end
@@ -443,7 +443,7 @@ end
             if parametricDistribution
                 % Simple parametric model error propagation
                 Vmodel = @(par)multiPathwayKernel(par,jj)*Pfcn(par(ddidx));
-                Vfit_uq{ii} = paruq.propagate(Vmodel,[],[]);
+                Vfit_uq{ii} = paruq.propagate(Vmodel);
             else
                 % Use special structure to speed up propagation for
                 % parameter-free case instead of .propagate()

@@ -66,20 +66,20 @@ switch type
         uqstruct.median = squeeze(median(samples,1));
         uqstruct.std = squeeze(std(samples,[],1));
         uqstruct.covmat = covmat;
-
+        
 end
 
 uqstruct.percentile = @(p)percentile(p);
 uqstruct.ci = @(p)ci(p);
 uqstruct.pardist = @(n)pardist(n);
-uqstruct.propagate = @(model,lb,ub)propagate(model,lb,ub);
+uqstruct.propagate = @(varargin)propagate(varargin);
 uqstruct.type = type;
 
 %-----------------------------------------------
 % Parameter percentiles
 %-----------------------------------------------
     function x = percentile(p)
-  
+        
         if p>100 || p<0
             error('The input must be a number between 0 and 100')
         end
@@ -166,7 +166,27 @@ uqstruct.type = type;
 % Error Propagation (covariance-based only)
 %-----------------------------------------------
 
-    function modeluqstruct = propagate(model,lb,ub)
+    function modeluqstruct = propagate(varargin)
+        varargin = varargin{1};
+        nargin = numel(varargin);
+        if nargin>3
+            error('Too many input arguments. Expected .propagate(@model,lb,ub)')
+        end
+        if nargin==0
+            error('At least one input argument required.')
+        else
+            model = varargin{1};
+        end
+        if nargin<3
+            ub = [];
+        else
+            ub = varargin{3};
+        end
+        if nargin<2
+            lb = [];
+        else
+            lb = varargin{2};
+        end
         
         if ~isa(model,'function_handle')
             error('The 1st input must be a valid function handle: @(parfit)model(__,parfit,__)')
@@ -174,7 +194,7 @@ uqstruct.type = type;
         
         % Evaluate model with fit parameters
         modelfit = model(parfit(:));
-
+        
         % Validate input boundaries
         if isempty(lb)
             lb = zeros(numel(modelfit),1) - realmax;

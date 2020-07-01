@@ -256,7 +256,7 @@ stats = stats{nGaussOpt};
 if nargin>3
     %Loop over different signals
     lb = zeros(numel(r),1);
-    Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb,[]);
+    Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb);
 end
 
 if nargout>6
