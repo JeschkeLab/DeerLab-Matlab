@@ -35,6 +35,12 @@ Here is a collection of example scripts for the use of DeerLab. You can also fin
           <h3>Fitting a 4-pulse DEER signal with a parameter-free distribution</h3>
           <p> How to fit a simple 4-pulse DEER signal with a parameter-free distribution, a background, and a modulation amplitude.</p>
         </li>
+
+        <li onclick="window.location='examples/example_basic_5pdeer.html#example_basic_5pdeer'">
+          <img src="_images/example_basic_5pdeer.png" >
+          <h3>Fitting a 5-pulse DEER signal with a parameter-free distribution</h3>
+          <p> How to fit a 5-pulse DEER signal with a parameter-free distribution, a background, and all multi-pathway parameters.</p>
+        </li>
         
         <li onclick="window.location='examples/example_mixmodels_fitting.html#example_mixmodels_fitting'">
           <img src="_images/example_mixmodels_fitting.png" >
@@ -53,7 +59,19 @@ Here is a collection of example scripts for the use of DeerLab. You can also fin
           <h3>Comparing confidence intervals for regularization results</h3>
           <p> A simpe example of uncertainty estimation for Tikhonov regularization results. The example covers the use of confidence intervals obtained from curvature matrices and boostrap analysis. </p>
         </li>
-        
+    
+        <li onclick="window.location='examples/example_bootan_pardist.html#example_bootan_pardist'">
+          <img src="_images/example_bootan_pardist.png" >
+          <h3>Bootstrapped distributions of fit parameters</h3>
+          <p>  How to generate probability density functions of values for fit parameters using bootstrapping, showcased for a 5-pulse DEER signal.</p>
+        </li>
+    
+        <li onclick="window.location='examples/example_param_error_propagation.html#example_param_error_propagation'">
+          <img src="_images/example_param_error_propagation.png" >
+          <h3>Uncertainty propagation from parameter fits</h3>
+          <p> How to propagate the uncertainty of the fitted parameters to the models which depend on them. </p>
+        </li>
+
         <li onclick="window.location='examples/example_pakepattern.html#example_pakepattern'">
           <img src="_images/example_pakepattern.png" >
           <h3>Analyzing the Pake pattern of a dipolar signal</h3>

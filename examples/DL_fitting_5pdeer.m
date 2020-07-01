@@ -37,7 +37,7 @@ Vexp = dipolarsignal(t,r,P,pathinfo,B,'NoiseLevel',0.01);
 % Experiment parameters:
 %          Lam0 lam1 lam2    T02
 ex_lb   = [ 0    0    0   max(t)/2-1]; % lower bounds
-ex_ub   = [ 1    1    1   max(t)/2+1]; % upper bounds
+ex_ub   = [100  100  100  max(t)/2+1]; % upper bounds
 ex_par0 = [0.5  0.5  0.5  max(t)/2  ]; % start values
 
 % In this case we only want to set the bounds for the experiment
@@ -48,20 +48,4 @@ par0 = {[],[],ex_par0};
 
 % Run the fit
 [Vfit,Pfit,Bfit,parfit,parci] = ...
-    fitsignal(Vexp,t,r,'P',@bg_hom3d,@ex_5pdeer,par0,lb,ub);
-
-% Plot results
-%-----------------------------------------------------------------------------
-subplot(211)
-plot(t,Vexp,'.',t,Vfit)
-axis tight, grid on
-legend('data','fit')
-xlabel('t [\mus]')
-ylabel('V(t)')
-
-subplot(212)
-plot(r,P,r,Pfit);
-axis tight, grid on
-legend('model','fit')
-xlabel('r [nm]')
-ylabel('P(r) [nm^{-1}]')
+    fitsignal(Vexp,t,r,'P',@bg_hom3d,@ex_5pdeer,par0,lb,ub,'Display',true);
