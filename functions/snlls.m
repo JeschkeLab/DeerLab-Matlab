@@ -302,7 +302,7 @@ nonlinfit = nonlinfit(:).';
             Jnonlin = [Jnonlin; jacobianest(@(p)weights(ii)*cellselect(Amodel(p),ii)*linfit,parfit)];
             Jlin = [Jlin; weights(ii)*cellselect(Amodel(parfit),ii)];
         end
-        if illConditioned
+        if includePenalty
             Jreg = [zeros(size(L,1),size(Jnonlin,2)) regparam_prev*L];
         else
             Jreg = [];
