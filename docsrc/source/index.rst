@@ -9,7 +9,11 @@ DeerLab consists of a collection of functions that perform individual tasks. The
 
 DeerLab provides two types of distance distribution models: non-parametric models (as used in Tikhonov regularization) as well as a series of parametric distance distribution models (multi-Gaussians, multi-Rice, worm-like chain, etc.). It also provides a selection of background models (homogeneous spin distribution in 3 or fractal dimensions, excluded-volume effects). 
 
-A publication about DeerLab is in preparation. When you use DeerLab in your work, please cite "Fábregas Ibáñez, L., Jeschke, G., and Stoll, S.: DeerLab: A comprehensive toolbox for analyzing dipolar EPR spectroscopy data, Magn. Reson. Discuss., https://doi.org/10.5194/mr-2020-13, in review, 2020". Please check back frequently for updated publication information.
+A publication about DeerLab is in preparation. When you use DeerLab in your work, please cite 
+
+    Fábregas Ibáñez, L., Jeschke, G., and Stoll, S.: *DeerLab: A comprehensive toolbox for analyzing dipolar EPR spectroscopy data*, Magn. Reson. Discuss., https://doi.org/10.5194/mr-2020-13, in review, 2020
+
+Please check back frequently for updated publication information.
 
 .. toctree::
     :hidden:
@@ -43,7 +47,7 @@ A publication about DeerLab is in preparation. When you use DeerLab in your work
 .. toctree::
     :hidden:
     :caption: Others
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./funding
 

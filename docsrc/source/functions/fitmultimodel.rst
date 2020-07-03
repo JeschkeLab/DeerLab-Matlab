@@ -6,7 +6,7 @@
 :mod:`fitmultimodel`
 ***********************
 
-Automatic multi-component parametric model fitting of a distance distribution
+Dipolar signal fitting with automatic multi-component parametric distance distributions optimization
 
 -----------------------------
 
@@ -16,35 +16,38 @@ Syntax
 
 .. code-block:: matlab
 
-    P = fitmultimodel(S,K,r,@dd_model,Nmax)
-    P = fitmultimodel(S,t,r,@dd_model,Nmax)
-    P = fitmultimodel(S,K,r,@dd_model,Nmax,metric)
-    P = fitmultimodel(S,t,r,@dd_model,Nmax,metric,'Background',bg_model)
-    P = fitmultimodel({V1,V2,___},{K1,K2,___},r,@dd_model,Nmax,metric)
-    P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric)
-    P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric,'Background',bg_model)
-    P = fitmultimodel(___,'Property',Value)
-    [P,param,Puq,paramuq,Nopt,metrics,Peval] = fitmultimodel(___)
+    [Pfit,parfit,Puq,paruq,Nopt,fcnal,Peval,stats] = fitmultimodel(___)
+    [___] = fitmultimodel(V,K,r,@dd_model,Nmax,metric,lb,ub)
+    [___] = fitmultimodel(V,K,r,@dd_model,Nmax,metric,lb)
+    [___] = fitmultimodel(V,K,r,@dd_model,Nmax,metric)
+    [___] = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric,lb,ub)
+    [___] = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric,lb)
+    [___] = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric)
+    [___] = fitmultimodel({V1,V2,___},{K1,K2,___},r,@dd_model,Nmax,metric,lb,ub)
+    [___] = fitmultimodel({V1,V2,___},Kmodel,r,@dd_model,Nmax,metric,lb,ub)
+    [___] = fitmultimodel(___,'Name',Value)
 
 
 Parameters
-    *   ``S`` - Input signal (*N*-element array)
+    *   ``V`` - Input signal (*N*-element array)
     *   ``K`` -  Dipolar kernel (*NxM*-element array)
-    *   ``r`` -  Distance Axis (*N*-element array)
-    *   ``t`` -  Time Axis (*N*-element array)
+    *   ``@Kmodel`` -  Kernel model function (function handle)
+    *   ``r`` -  Distance Axis (*M*-element array)
     *   ``@dd_model`` -  Parametric model basis function (function handle)
     *   ``Nmax`` - Maximum number of components (scalar)
     *    ``metric`` - Metric for model selection (string)
+    *    ``lb`` - Lower bounds for parameters ``{Kpar_lb,ddpar_lb}`` (2-element cell array)
+    *    ``ub`` - Upper bounds for parameters ``{Kpar_ub,ddpar_ub}`` (2-element cell array)
 
 
 Returns
-    *  ``P`` - Fitted distance distribution (*M*-element array)
-    *  ``param`` - Fitted model parameters (*W*-array)
-    *  ``Puq`` - Fitted distribution uncertainty quantification (*Mx2*-array)
-    *  ``paramuq`` - Fitted parameters uncertainty quantification (*Wx2*-array)
+    *  ``Pfit`` - Fitted distance distribution (*M*-element array)
+    *  ``parfit`` - Fitted model parameters ``{Kpar,ddpar,Amp}``(3-element cell array)
+    *  ``Puq`` - Fitted distribution uncertainty quantification (struct)
+    *  ``paramuq`` - Fitted parameters uncertainty quantification (struct)
     *  ``Nopt`` - Optimal number of components (scalar)
-    *  ``metrics`` - Evaluated model selection functionals (cell array)
-    *  ``Peval`` - Fitted distance distributions for each multi-component model (*Nmax x N* matrix)
+    *  ``metrics`` - Evaluated model selection functional (``Nmax``-element array)
+    *  ``Peval`` - Fitted distance distributions for each multi-component model (``Nmax``-element cell array)
 
 -----------------------------
 
@@ -52,42 +55,56 @@ Returns
 Description
 =========================================
 
-.. code-block:: matlab
+This function fits a multi-component distance distribution (of maximal ``Nmax`` components) via the problem  
 
-        P = fitmultimodel(S,K,r,@dd_model,Nmax)
+.. code-block:: none 
 
-Fits the dipolar signal ``S`` to a distance distribution ``P`` using a multi-component parametric model according to the dipolar kernel ``K`` and distance axis ``r``. The multi-component model is constructed from the basis function provided as ``@dd_model``. The function chooses the optimal number of components distributions up to a maximum number given by ``Nmax`` by means of the corrected Akaike information criterion (AICC).
+     [Amp,Kpar,ddpar] = argmin || sum_i Amp_i*Kmodel(Kpar)*dd_model(ddpar_i) - V||^2
+                        subject to   Kpar  in [Kpar_lb,Kpar_ub]
+                                     ddpar in [ddpar_lb,ddpar_ub]
+                                     A_i   in [0,inf] 
+
+where ``Kpar`` (kernel parameters) and ``ddpar`` (distribution parameters) are fitted as the non-linear parameters and ``Amp`` (components amplitudes) as the linear parameters of a separable non-linear least-squares (SNLLS) problem. The optimization is repeated for all multi-component models up to ``Nmax``, and the optimal model is chosen according to a selection metric specified by ``metric``.
 
 -----------------------------
 
-
 .. code-block:: matlab
 
-        P = fitmultimodel(S,K,r,@,dd_model,Nmax,metric)
+        Pfit = fitmultimodel(V,K,r,@dd_model,Nmax,metric)
+        Pfit = fitmultimodel(V,K,r,@dd_model,Nmax,metric,{[],ddpar_lb},{[],ddpar_ub})
 
-The metric employed for the selection of the optimal number of components can be specified as an additional input ``metric``. The accepted inputs are:
+
+Fits a distance distribution ``Pfit`` to the dipolar signal ``V`` using a multi-component parametric model and a fixed dipolar kernel ``K``. The multi-component model is constructed from the basis function provided as ``@dd_model``. The function chooses the optimal number of components distributions up to a maximum number given by ``Nmax`` by means of the metric specified as the input ``metric``. The accepted inputs are:
 
 	*   ``'aic'`` - Akaike information criterion
 	*   ``'aicc'`` - Corrected Akaike information criterion
 	*   ``'bic'`` - Bayesian information criterion
+	*   ``'rmsd'`` - Root mean squared deviation
+
+The lower and upper bounds of the parameters accepted by ``@dd_model`` can be specified as the ``ddpar_lb`` and ``ddpar_ub`` arguments. If not specified, they are automatically taken from the model defition. 
 
 -----------------------------
 
-
 .. code-block:: matlab
 
-        P = fitmultimodel(S,t,r,@,dd_model,Nmax)
+        Pfit = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric)
+        Pfit = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric,{Kpar_lb,[]},{Kpar_ub,[]})
+        Pfit = fitmultimodel(V,@Kmodel,r,@dd_model,Nmax,metric,{Kpar_lb,ddpar_lb},{Kpar_ub,ddpar_ub})
 
-If the default kernel is to be used, the time-axis can be passed instead of the kernel.
+If the kernel depends on other parameters (e.g. modulation depth, background parameters,...) these can be fitted along the multi-component distribution by passing a custom dipolar kernel model as a function handle ``Kmodel``. This must be a function that accepts an array ``Kpar`` of parameters and returns a *NxM*-element dipolar kernel matrix. For example: 
 
------------------------------
+ .. code-block:: matlab
 
+        Kmodel = @(Kpar) K4pdeer(Kpar,t,r);
+        Pfit = fitmultimodel(V,Kmodel,r,@dd_model,Nmax,'aicc')
+        
+        function K = K4pdeer(Kpar,t,r)
+            lambda = Kpar(1);
+            conc = Kpar(2);
+            K = dipolarkernel(t,r,lambda,bg_hom3d(t,conc,lambda));
+        end        
 
-.. code-block:: matlab
-
-	P = fitmultimodel(S,t,r,@dd_model,Nmax,metric,'Background',model)
-
-By passing the ``'Background'`` option, the background function and modulation depth are fitted along the multi-component distribution parameters. 
+The lower and upper bounds of the parameters accepted by ``@Kmodel`` can be specified as the ``Kpar_lb`` and ``Kpar_ub`` arguments. If not specified, they are considered to be unconstrained. The fitted kernel parameters are returned along the distribution parameters in the ``parfit`` output.
 
 -----------------------------
 
@@ -95,30 +112,25 @@ By passing the ``'Background'`` option, the background function and modulation d
 .. code-block:: matlab
 
     P = fitmultimodel({V1,V2,___},{K1,K2,___},r,@dd_model,Nmax,metric)
-
-Passing multiple signals/kernels enables distance-domain global fitting of the parametric model to a single distribution. The global fit weights are automatically computed according to their contribution to ill-posedness. The multiple signals are passed as a cell array of arrays of sizes *N1*, *N2*,... and a cell array of kernel matrices with sizes *N1xM*, *N2xM*, ... must be passed as well.
-
-
------------------------------
-
-.. code-block:: matlab
+    P = fitmultimodel({V1,V2,___},Kmodel,r,@dd_model,Nmax,metric)
 
 
-    P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric)
-    P = fitmultimodel({V1,V2,___},{t1,t2,___},r,@dd_model,Nmax,metric,'Background',model)
-
-Similarly, time-domain global fitting can be used when passing time-domain ``models`` and the model time axes ``{t1,t2,___}`` of the corresponding signals. If a background model is specified, it will be applied to all input signals. 
+Passing multiple signals results in global fitting of a single multi-component distance distribution. The multiple signals are passed as a cell array of arrays of sizes *N1*, *N2*,... and if a fixed kernel is used, then a cell array of kernel matrices with sizes *N1xM*, *N2xM*, ... must be passed as well. If instead a kernel model is used, a single function handle ``Kmodel`` must be specified, whose function returns a cell array of kernels.  For example:
 
 
+ .. code-block:: matlab
 
------------------------------
-
-
-.. code-block:: matlab
-
-    [P,param,Nopt,metrics] = fitmultimodel(____)
-
-If requested alongside the distribution ``P``, the optimal fit model parameters ``param``, as well their respective uncertainty quantification structures ``Puq`` and ``paramuq``, the optimal number of components ``Nopt`` and evaluated selection metrics ``metrics`` are returned.
+        Kmodel = @(Kpar) K4pdeer(Kpar,t1,t2,r);
+        Pfit = fitmultimodel({V1,V2,___},Kmodel,r,@dd_model,Nmax,'aicc')
+        
+        function K = K4pdeer(Kpar,t1,t2,r)
+            lambda1 = Kpar(1);
+            conc1 = Kpar(2);
+            lambda2 = Kpar(1);
+            conc2 = Kpar(2);
+            K{1} = dipolarkernel(t1,r,lambda1,bg_hom3d(t1,conc1,lambda1));
+            K{2} = dipolarkernel(t2,r,lambda2,bg_hom3d(t2,conc2,lambda2));
+        end    
 
 -----------------------------
 
@@ -131,39 +143,30 @@ Additional settings can be specified via name-value pairs. All property names ar
 
 .. code-block:: matlab
 
-    P = fitmultimodel(___,'Property1',Value1,'Property2',Value2,___)
+    ___ = fitmultimodel(___,'Property1',Value1,'Property2',Value2,___)
 
-- ``'Background'`` - Parametric background model
-    Function handle of the corresponding time-domain background model.
+- ``'GlobalWeights'`` - Global analysis weights
+    Array of weighting coefficients for the individual datasets in global fitting. If not specified, the global fit weights are automatically computed according to their contribution to ill-posedness. The same number of weights as number of input signals is required. Weight values do not need to be normalized.
 
-    *Default:* [*empty*] - Background and modulation depth are not fitted
-
-    *Example:*
-
-		.. code-block:: matlab
-
-			P = fitmultimodel(___,'Background',@bg_hom3d)
-
-- ``'Upper'`` - Parameters upper bound constraints
-    An array of *W*-elements containing the upper bounds for the *W* parameters accepted by the model function ``@dd_model``.
-
-    *Default:* [*empty*] - Uses the model's default upper bound values
+    *Default:* [*empty*]
 
     *Example:*
 
 		.. code-block:: matlab
 
-			P = fitmultimodel(___,@dd_gauss,___,'Upper',[rmean_max FWHM_max])
+			___ = fitmultimodel({V1,V2,V3},___,'GlobalWeights',[0.1 0.6 0.3]])
+            
 
-- ``'Lower'`` - Parameters lower bound constraints
-    An array of *W*-elements containing the lower bounds for the *W* parameters accepted by the model function ``@dd_model``.
+- ``'normP'`` -  Renormalization of the distance distribution
+    This enables/disables the re-normalization of the fitted distance distribution such that ``trapz(r,P)==1``. 
 
-    *Default:* [*empty*] - Uses the model's default lower bound values
+    *Default:* ``true``
 
     *Example:*
 
 		.. code-block:: matlab
 
-			P = fitmultimodel(___,@dd_gauss,___,'Upper',[rmean_in FWHM_min])
+			P = fitregmodel(___,'normP',false)
 
-- See :ref:`fitparamodel` for a detailed list of other property-value pairs accepted by the function.
+
+- See :ref:`snlls` for a detailed list of other property-value pairs accepted by the function.

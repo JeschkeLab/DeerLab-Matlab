@@ -41,6 +41,12 @@ Here is a collection of example scripts for the use of DeerLab. You can also fin
           <h3>Fitting a 5-pulse DEER signal with a parameter-free distribution</h3>
           <p> How to fit a 5-pulse DEER signal with a parameter-free distribution, a background, and all multi-pathway parameters.</p>
         </li>
+             
+        <li onclick="window.location='examples/example_multigauss_4pdeer.html#example_multigauss_4pdeer'">
+          <img src="_images/example_multigauss_4pdeer.png" >
+          <h3>Multi-Gauss fitting of a 4-pulse DEER signal</h3>
+          <p> How to fit a simple 4-pulse DEER signal with background using a multi-Gauss model, i.e automatically optimizing the number of Gaussians in the model.</p>
+        </li>
         
         <li onclick="window.location='examples/example_mixmodels_fitting.html#example_mixmodels_fitting'">
           <img src="_images/example_mixmodels_fitting.png" >
@@ -137,13 +143,6 @@ Here is a collection of example scripts for the use of DeerLab. You can also fin
           <h3>Global model fits with global, local and fixed parameters</h3>
           <p>How to fit multiple signals to a global model, which may depend on some parameters which need to be globally fitted, some locally and some might be fixed and not fitted.  </p>
         </li>      
-
-          
-        <li onclick="window.location='examples/example_multigauss_4pdeer.html#example_multigauss_4pdeer'">
-          <img src="_images/example_multigauss_4pdeer.png" >
-          <h3>Multi-Gauss fitting of a 4-pulse DEER signal</h3>
-          <p> How to fit a simple 4-pulse DEER signal with background using a multi-Gauss model, i.e automatically optimizing the number of Gaussians in the model.</p>
-        </li>
         
         
       </ul>

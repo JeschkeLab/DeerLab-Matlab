@@ -16,7 +16,7 @@ This class of functions allows simulation of dipolar signals and their modeling 
 .. toctree::
     :hidden:
     :glob:
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./functions/dipolarkernel
     ./functions/aptkernel
@@ -48,7 +48,7 @@ This class of functions can be used and/or combined to create fitting routines o
 .. toctree::
     :hidden:
     :glob:
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./functions/fitsignal
     ./functions/apt
@@ -86,7 +86,7 @@ This class of functions provide tools for preparing experimental data for analys
 .. toctree::
     :hidden:
     :glob:
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./functions/correctphase
     ./functions/correctzerotime
@@ -115,7 +115,7 @@ This class of functions helps to find an optimal choice of model or model parame
 .. toctree::
     :hidden:
     :glob:
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./functions/selectmodel
     ./functions/selregparam
@@ -142,7 +142,7 @@ This class of functions provides several tools for quick commands typically requ
 .. toctree::
     :hidden:
     :glob:
-    :maxdepth: 0
+    :maxdepth: 1
 
     ./functions/deerload
     ./functions/time2freq
