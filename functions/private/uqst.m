@@ -178,14 +178,14 @@ uqstruct.type = type;
             model = varargin{1};
         end
         if nargin<3
-            ub = [];
+            ubm = [];
         else
-            ub = varargin{3};
+            ubm = varargin{3};
         end
         if nargin<2
-            lb = [];
+            lbm = [];
         else
-            lb = varargin{2};
+            lbm = varargin{2};
         end
         
         if ~isa(model,'function_handle')
@@ -196,13 +196,13 @@ uqstruct.type = type;
         modelfit = model(parfit(:));
         
         % Validate input boundaries
-        if isempty(lb)
-            lb = zeros(numel(modelfit),1) - realmax;
+        if isempty(lbm)
+            lbm = zeros(numel(modelfit),1) - realmax;
         end
-        if isempty(ub)
-            ub = zeros(numel(modelfit),1) + realmax;
+        if isempty(ubm)
+            ubm = zeros(numel(modelfit),1) + realmax;
         end
-        if numel(modelfit)~=numel(lb) || numel(modelfit)~=numel(ub)
+        if numel(modelfit)~=numel(lbm) || numel(modelfit)~=numel(ubm)
             error('The 2nd and 3rd input arguments must have the same number of elements as the model output.')
         end
         
@@ -210,14 +210,14 @@ uqstruct.type = type;
         jacobian = jacobianest(model,parfit);
         
         % Clip at boundaries
-        modelfit = max(modelfit,lb);
-        modelfit = min(modelfit,ub);
+        modelfit = max(modelfit,lbm);
+        modelfit = min(modelfit,ubm);
         
         % Error progation
         modelcovmat = jacobian*covmat*jacobian.';
         
         % Construct new CI-structure for the model
-        modeluqstruct = uqst(type,modelfit,modelcovmat,lb,ub);
+        modeluqstruct = uqst(type,modelfit,modelcovmat,lbm,ubm);
         
     end
 
