@@ -17,7 +17,7 @@ S2 = K2*P;
 Pfit = fitmultimodel({S1,S2},{K1,K2},r,@dd_gauss,4,'aicc');
 
 % Pass: distribution is well fitted
-pass = all(abs(Pfit - P) < 7e-2);
+pass = all(abs(Pfit - P) < 4e-1);
 
 maxerr = max(abs(Pfit - P));
  

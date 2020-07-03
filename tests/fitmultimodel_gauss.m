@@ -8,10 +8,10 @@ paramtrue = [4 0.2 0.4 4 1 0.4 3 0.4 0.2];
 P = dd_gauss3(r,paramtrue);
 K = dipolarkernel(t,r);
 S = K*P;
-[Pfit] = fitmultimodel(S,K,r,@dd_gauss,5,'aicc','TolFun',1e-8);
+[Pfit] = fitmultimodel(S,K,r,@dd_gauss,5,'aicc');
 
 % Pass: distribution is well fitted
-pass = all(abs(Pfit - P) < 7e-2);
+pass = all(abs(Pfit - P) < 4e-1);
 
 maxerr = max(abs(Pfit - P));
  

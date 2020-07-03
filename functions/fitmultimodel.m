@@ -1,272 +1,420 @@
 %
-% FITMULTIMODEL Multi-model fitting of a distance distribution
+% FITMULTIMODEL Multi-component distributions SNNLS fit function
 %
-%   P = FITMULTIMODEL(V,K,r,@basis,Nmax,method)
+%   [Pfit,parfit,Puq,paruq,Nopt,fcnal,Peval,stats] = fitmultimodel(___)
+%   [___] = fitmultimodel(V,K,r,@model,maxModels,method,lb,ub)
+%   [___] = fitmultimodel(V,K,r,@model,maxModels,method,lb)
+%   [___] = fitmultimodel(V,K,r,@model,maxModels,method)
+%   [___] = fitmultimodel(V,Kmodel,r,@model,maxModels,method,lb,ub)
+%   [___] = fitmultimodel(V,Kmodel,r,@model,maxModels,method,lb)
+%   [___] = fitmultimodel(V,Kmodel,r,@model,maxModels,method)
+%   [___] = fitmultimodel({V1,V2,___},{K1,K2,___},r,@model,maxModels,method,lb,ub)
+%   [___] = fitmultimodel({V1,V2,___},Kmodel,r,@model,maxModels,method,lb,ub)
+%   [___] = fitmultimodel(___,'Name',Value)
+%
 %   Fits a multi-model parametric distance distribution model to the dipolar
 %   signal (V) using (@model) as the basis function, the dipolar kernel (K)
 %   and distance axis (r). The function compares these multi-model distributions
-%   with up to a maximum number of basis functions given by (Nmax) and 
-%   determines the optimum one using the model selection criterion given in 
-%   (method) ('AIC', 'BIC', or 'AICc'). The fitted distribution is returned in P.
+%   with up to a maximum number of basis functions given by (Nmax) and
+%   determines the optimum one using the model selection criterion given in
+%   (method) ('aic', 'bic', or 'aicc'). 
 %
-%   P = FITMULTIMODEL(V,t,r,@basis,Nmax,method)
-%   If a the default kernel is to be used, the time axis (t) can be passed
-%   instead of the kernel.
+%   Ex/     Pfit = fitmultimodel(V,K,r,@dd_gauss,5,'aic'); 
 %
-%   P = FITMULTIMODEL({V1,V1,...},{K1,K2,K3},r,@basis,Nmax,method)
-%   Passing multiple signals/kernels enables distance-domain global fitting
-%   of the parametric models to single distributions. 
-%   The multiple signals are passed as a cell array of arrays of sizes N1,N2,...
-%   and a cell array of kernel matrices with sizes N1xM,N2xM,... must be 
-%   passed as well.
+%   Additional kernel parameters can be fitted by specifying a kernel function handle
+%   (Kmodel) which accepts an array of parameters and returns a dipolar kernel matrix.
+%   These parameters will be fitted along the other parameters. 
 %
-%   P = FITMULTIMODEL({V1,V1,...},{t1,t2,t3},r,@basis,Nmax,method)
-%   Similarly, time-domain global fitting can be used when passing time-domain
-%   and the model time axes {t1,t2,...} of the corresponding signals.
+%   By passing multiple signals, a global distance distribution will be fitted 
+%   to all signals. If a kernel model is specified, the kernel function must 
+%   return a cell array of kernel matrices. Otherwise, a cell array of
+%   kernel matrices {K1,K2,___} must be specified.
 %
-%   [P,param,Pci,paramci,opt,metrics,Peval,stats] = FITMULTIMODEL(___)
-%   If requested alongside the distribution (P), the optimal fit model
-%   parameters (param), the optimal number of Gaussians (opt) and
-%   evaluated selection metrics (metrics) are returned. The fitted distance
-%   distributions fitted for ech multigauss model can be requested as a
-%   fifth output argument (Peval). A structure containing different statistical
-%   estimators of goodness of fit for the optimal model is returned as (stats).
+%   Inputs:
+%       V           - dipolar signal, M-element array
+%       K           - dipolar kernel, MxN-element matrix
+%       Kmodel      - dipolar kernel model, function handle
+%       r           - distance axis, N-element array
+%       model       - model basis function, function handle
+%       maxModels   - maximal number of components in model, scalar
+%       method      - selection functional 
+%                           'aic'  Akaike information criterion
+%                           'aicc' corrected Akaike information criterion
+%                           'bic'  Bayesian information criterion
+%                           'rmsd' Root-mean squared deviation
+%       lb          - Parameter lower bounds, 2-element cell array
+%                           lb{1}  Kmodel-parameters lower bounds
+%                           lb{2}  model-parameters lower bounds
+%       ub          - Parameter upper bounds
+%                           ub{1}  Kmodel-parameters upper bounds
+%                           ub{2}  model-parameters upper bounds
 %
-%   P = FITMULTIMODEL(...,'Property',Value)
-%   Additional (optional) arguments can be passed as property-value pairs.
+%   Outputs: 
+%       Pfit        - fitted distance distribution, N-element array
+%       parfit      - fitted parameters, 3-element cell array
+%                           parfit{1}  kernel parameters
+%                           parfit{2}  distribution basis function parameters
+%                           parfit{3}  amplitudes of the components
+%       Puq         - distance distribution uncertainty quantification, struct
+%       paruq       - parameters uncertainty quantification,struct
+%       Nopt        - Optimal number of components, scalar
+%       fcnal       - Values of the evaluated functonal specified by method
+%       Peval       - Fitted distributions for all numbers of components
+%       stats       - Goodness of fit, struct
 %
-%   'Background' - Function handle to the background model to be fitted
-%                 along the multigauss distance distribution model.
-%                 Requires the time-axis to be passed instead of the
-%                 kernel. Can be used with global fitting, where the same
-%                 model will be applied to all signals.
+%   Name-value pairs:
+%      'GlobalWeights' - Array of weighting coefficients for the individual signals in
+%                        global fitting (default = automatic).
+%       'normP'        - true/false; whether to normalize Pfit (default = true)
 %
-%   'Lower' - Array [<r>_min FWHM_min] containing the lower bound for the
-%             FWHM and mean distance of all the Gaussians.
-%   'Upper' -  Array [<r>_max FWHM_max] containing the upper bound values
-%              for the FWHM and mean distance of all the Gaussians.
-%
-%   See "help fitparamodel" for a detailed list of other property-value pairs
-%   accepted by the function.
+%       See "help snlls" for a detailed list of other name-value pairs
+%       accepted by the function.
 %
 
 % This file is a part of DeerLab. License is MIT (see LICENSE.md).
 % Copyright(c) 2019-2020: Luis Fabregas, Stefan Stoll and other contributors.
 
-function [Pfit,param,Pfitci,paramci,nGaussOpt,metrics,Peval,stats] = fitmultimodel(Vs,Ks,r,model,maxModels,method,varargin)
 
+function [Pfit,fitparam,Puq,paruq,Nopt,fcnal,Peval,stats] = fitmultimodel(V,Kmodel,r,model,maxModels,method,varargin)
 
-% Validate user input (S, K, r, and method are validated in lower-level functions)
-if nargin<5
-    error('Not enough input arguments.')
-else
-    validateattributes(maxModels,{'numeric'},{'scalar','nonnegative','nonempty'},mfilename,'maxGaussians')
-end
 if nargin<6
-    method = 'aicc';
-elseif nargin==7
-    varargin = [{method} varargin];
-    method = 'aicc';
+    error('At least 6 inputs requried: fitmultimodel(V,Kmodel,r,model,maxModels,method)')
 end
 
-% Parse the optional parameters
-%--------------------------------------------------------------
-optionalProperties = {'Upper','Lower','Background','internal::parselater'};
-[Upper,Lower,BckgModel] = parseoptions(optionalProperties,varargin);
+%Pre-allocate static workspace variables to share between subfunctions
+[nKparam,lbK,ubK,nSignals] = deal([]);
 
-% Control that the boundaries match the model and are appropiate
-modelInfo = model();
-nparam =  numel(modelInfo);
-paramNames = [{modelInfo.Parameter}];
-str = [];
-for i=1:numel(paramNames), str = [str paramNames{i} ', ']; end, str(end-1:end) = ''; 
-if ~isempty(Upper) && isempty(BckgModel) && length(Upper)~=nparam
-    error('''Upper'' property must be a %i-element array of upper boundaries for the parameters [%s]',nparam,str)
-elseif ~isempty(Upper) && ~isempty(BckgModel) && length(Upper)<(nparam+2)
-    error('''Upper'' property must be a %i-element array [%s lambda_max Bparam_max]',nparam,str)
+% Parse inputs in the varargin
+[lb,ub,options] = parseinputs(varargin);
+
+% Validate all inputs
+validateinputs()
+
+% Default optional settings
+GlobalWeights = globalweights(V);
+normP = true;
+
+% Parse and validate options passed by the user, if the user has specified
+% any, this call will overwrite the defaults above
+parsevalidate(options)
+
+% Extract information about the model
+info = model();
+nparam = numel([info.Start]);
+if isempty(lb0)
+    lb0 = [info.Lower];
 end
-if ~isempty(Lower) && isempty(BckgModel)  && length(Lower)~=nparam
-    error('''Lower'' property must be a %i-element array of lower boundaries for the parameters [%s]',nparam,str)
-elseif ~isempty(Upper) && ~isempty(BckgModel) && length(Lower)<(nparam+2)
-    error('''Lower'' property must be a %i-element array [%s lambda_min Bparam_min]',nparam,str)
+if isempty(ub0)
+    ub0 = [info.Upper];
+end
+paramnames = {info.Parameter};
+
+if any(cellfun(@(str)any(strcmp(str,{'Center','Location'})),paramnames))
+    % If the center of the basis function is a parameter...
+    idx = find((cellfun(@(str)any(strcmp(str,{'Center','Location'})),paramnames)));
+    % ... limit it to the distance axis range (stabilizes parameter search)
+    ub0(idx) = max(r);
+    lb0(idx) = min(r);
 end
 
-%Parse the required inputs for global fitting
-if ~iscell(Vs)
-   Vs = {Vs}; 
+% Pre-allocate containers
+[Vfit,Pfit,plin_,pnonlin_,nlin_ub_,nlin_lb_,lin_ub_,lin_lb_] = deal(cell(maxModels,1));
+[aic,aicc,bic,rmsd] = deal(zeros(maxModels,1));
+
+% Loop over number of components in model
+% =======================================
+for Nmodels=1:maxModels
+    
+    % Prepare non-linear model with N-components
+    % ===========================================
+    Knonlin = @(par)nonlinmodel(par,Nmodels);
+    
+    % Box constraints for the model parameters (non-linear parameters)
+    nlin_lb = repmat(lb0,1,Nmodels);
+    nlin_ub = repmat(ub0,1,Nmodels);
+    
+    % Add the box constraints on the non-linear kernel parameters
+    nlin_lb = [lbK nlin_lb];
+    nlin_ub = [ubK nlin_ub];
+    
+    % Start values of non-linear parameters
+    rng(1)
+    par0 = (nlin_ub-nlin_lb).*rand(1,numel(nlin_lb)) + nlin_lb;
+    
+    % Box constraints for the components amplitudes (linear parameters)
+    lin_lb = zeros(1,Nmodels); % Non-negativity constraint
+    lin_ub = inf(1,Nmodels); % Unbounded
+    
+    % Separable non-linear least-squares (SNLLS) fit
+    % ===============================================
+    options_ = [options,'includePenalty',false]; % Do not use regularization
+    [pnonlin,plin] = snlls(V,Knonlin,par0,nlin_lb,nlin_ub,lin_lb,lin_ub,options_{:});
+    % Store the parameters for later
+    pnonlin_{Nmodels} = pnonlin;
+    plin_{Nmodels} = plin;
+    nlin_ub_{Nmodels} = nlin_ub;
+    nlin_lb_{Nmodels} = nlin_lb;
+    lin_ub_{Nmodels} = lin_ub;
+    lin_lb_{Nmodels} = lin_lb;
+    
+    % Get fitted kernel
+    Kfit = nonlinmodel(pnonlin,Nmodels);
+    
+    % Get fitted signal
+    Vfit{Nmodels} = cellfun(@(K) K*plin(:),Kfit,'UniformOutput',false);
+    
+    % Get fitted distribution
+    Pfit{Nmodels} = Pmodel(pnonlin,plin);
+    
+    % Likelihood estimators
+    % =====================
+    [aic(Nmodels),aicc(Nmodels),bic(Nmodels),rmsd(Nmodels)] = logestimators(Vfit{Nmodels},plin,pnonlin);
+    
 end
-if ~iscell(Ks)
-   Ks = {Ks}; 
+
+Peval = Pfit;
+
+% Select the optimal model
+% ========================
+fcnal = eval(method);
+[~,Nopt] = min(fcnal);
+Pfit = Pfit{Nopt};
+Vfit = Vfit{Nopt};
+pnonlin = pnonlin_{Nopt};
+plin = plin_{Nopt};
+nlin_lb = nlin_lb_{Nopt};
+nlin_ub = nlin_ub_{Nopt};
+lin_lb = lin_lb_{Nopt};
+lin_ub = lin_ub_{Nopt};
+
+% Package the fitted parameters
+% =============================
+fitparam{1} = pnonlin(1:nKparam); % Kernel parameters
+fitparam{2} = pnonlin(nKparam+1:end); % Components parameters
+fitparam{3} = plin; % Components amplitudes
+
+% Uncertainty quantification analysis (if requested)
+% ==================================================
+if nargout>2
+    [Puq,paruq] = uncertainty();
 end
-for i=1:numel(Ks)
-    if ~all(size(Ks{i}) > 1)
-        ts{i} = Ks{i};
-        Ks{i} = dipolarkernel(ts{i},r);
+
+% Goodness of fit
+% ===============
+Ndof = nKparam + nparam + Nopt;
+stats = cellfun(@(V,Vfit)gof(V,Vfit,Ndof),V(:),Vfit(:));
+
+% If requested re-normalize the distribution
+if normP
+    Pnorm = trapz(r,Pfit);
+    Pfit = Pfit/Pnorm;
+    if nargout>2
+        Puq.ci = @(p) Puq.ci(p)/Pnorm;
     end
 end
-if ~isempty(BckgModel) && ~exist('ts','var')
-    error('Time axes must be provided for a time-domain fit.')
-end
-Nsignals = numel(Vs);
 
-% Multi-component model construction
-%--------------------------------------------------------------
 
-% Compile list of multi-component models
-multiModels = cell(maxModels,1);
-if strcmp(func2str(model),'dd_gauss')
-    % If basis function is a Gaussian, use built-in models
-    multiModels{1} = @dd_gauss;
-    if maxModels>=2, multiModels{2} = @dd_gauss2; end
-    if maxModels>=3, multiModels{3} = @dd_gauss3; end
-    if maxModels>=4, multiModels{4} = @dd_gauss4; end
-    if maxModels>=5, multiModels{5} = @dd_gauss5; end
-    for i = 6:maxModels
-        multiModels{i} =  mixmodels(repmat({@dd_gauss},1,i));
-    end
-elseif strcmp(func2str(model),'dd_rice')
-    % If basis function is a Rician, use built-in models
-    multiModels{1} = @dd_rice;
-    if maxModels>=2, multiModels{2} = @dd_rice2; end
-    if maxModels>=3, multiModels{3} = @dd_rice3; end
-    if maxModels>=4, multiModels{4} = @dd_rice4; end
-    if maxModels>=5, multiModels{5} = @dd_rice5; end
-    for i = 6:maxModels
-        multiModels{i} =  mixmodels(repmat({@dd_rice},1,i));
-    end
-else
-    % Otherwise mix the models
-    multiModels{1} = model;
-    for i = 2:maxModels
-        multiModels{i} =  mixmodels(repmat({model},1,i));
-    end
-end
+% =========================================================================
+% =========================================================================
+% =========================================================================
 
-% Preparation of parameter boundaries and start values
-%--------------------------------------------------------------
-
-% If the user has specified som boundaries then set the models boundaries appropiately
-if ~isempty(Upper) || ~isempty(Lower)
-    % Run over all multi-Gauss models
-    for i = 1:maxModels
-        % Get the info about the models
-        info = multiModels{i}();
-        modelnparam = numel(info);
-        boundary = zeros(1,modelnparam);
-        paramNames = [{info.Parameter}];
-
-        %Get the indices of the different parameters on the mixed models\\
-        paramidx = (1:nparam+1:modelnparam) + (0:nparam).';
-        if i>i
-            ampidx = paramidx(end,1:end);
-        else
-            ampidx = [];
+% Non-linear augmented kernel model
+% ------------------------------------------------------------------
+    function Knonlin = nonlinmodel(par,Nmodels)
+        
+        K = Kmodel(par(1:nKparam));
+        if ~iscell(K), K = {K}; end
+        Knonlin = cell(nSignals,1);
+        for iSignal = 1:nSignals
+            subset = nKparam;
+            for iModel = 1:Nmodels
+                subset = subset(end)+1:subset(end)+nparam;
+                % Get Gauss basis functions
+                Pbasis = model(r,par(subset));
+                
+                % Combine all non-linear functions into one
+                Knonlin{iSignal} = [Knonlin{iSignal} K{iSignal}*Pbasis];
+            end
         end
-        if ~isempty(Upper)
-            for j=1:nparam
-                boundary(paramidx(j,:)) = Upper(j);
+    end
+
+% Muli-component distribution model
+% ------------------------------------------------------------------
+% This function constructs the distance distribution from a set of
+% non-linear and linear parameters given certain number of components and
+% their basis function.
+    function Pfit = Pmodel(nlinpar,linpar)
+        subset = nKparam;
+        Pfit = 0;
+        for iModel = 1:numel(linpar)
+            subset = subset(end)+1:subset(end)+nparam;
+            % Get Gauss basis functions
+            Pfit = Pfit + linpar(iModel)*model(r,nlinpar(subset));
+        end
+    end
+
+% Log-Likelihood Estimators
+% ------------------------------------------------------------------
+% Computes the estimated likelihood of a multi-component model being the
+% optimal choice.
+    function [AIC,AICc,BIC,RMSD] = logestimators(Vfit,plin,pnonlin)
+        [rmsd_,logprob] = deal(0);
+        nParams = numel(pnonlin) + numel(plin);
+        Q = nParams + 1;
+        for iSignal = 1:nSignals
+            N = numel(V{iSignal});
+            SSR = sum((V{iSignal} - Vfit{iSignal}).^2);
+            logprob = logprob + GlobalWeights(iSignal)*N*log(SSR/N);
+            rmsd_ = rmsd_ + GlobalWeights(iSignal)*sqrt(1/N*SSR);
+        end
+        % Compute the estimators
+        RMSD = rmsd_;
+        AIC =  logprob + 2*Q;
+        AICc = logprob + 2*Q + 2*Q*(Q+1)/(N-Q-1);
+        BIC =  logprob + Q*log(N);
+    end
+
+% Uncertainty Quantificiation
+% ------------------------------------------------------------------
+% This function performs the covariance-based uncertaint analysis for the
+% optimal multi-component model. It generates the uncertainty structure for
+% the fit parameters and propagates it to the model.
+    function [Puq,paramuq] = uncertainty()
+        % Get full augmented residual vector
+        %====================================
+        Knonlin = @(par)nonlinmodel(par,Nopt);
+        res = [];
+        for j=1:nSignals
+            res = [res; V{j} - cellselect(Knonlin(pnonlin),j)*plin(:)];
+        end
+        Jlin = [];
+        Jnonlin = [];
+        for j=1:nSignals
+            Jnonlin = [Jnonlin; jacobianest(@(p)GlobalWeights(j)*cellselect(Knonlin(p),j)*plin(:),pnonlin)];
+            Jlin = [Jlin; GlobalWeights(j)*cellselect(Knonlin(pnonlin),j)];
+        end
+        J = [Jnonlin Jlin];
+        
+        % Estimate the heteroscedasticity-consistent covariance matrix
+        covmatrix = hccm(J,res,'HC1');
+        
+        % Construct uncertainty quantification structure for fitted parameters
+        paramuq = uqst('covariance',[pnonlin(:); plin(:)],covmatrix,[nlin_lb(:); lin_lb(:)],[nlin_ub(:); lin_ub(:)]);
+        
+        P_subset = 1:nKparam+nparam*Nopt;
+        amps_subset = P_subset(end)+1:P_subset(end)+Nopt;
+        Puq = paramuq.propagate(@(p) Pmodel(p(P_subset),p(amps_subset)),zeros(numel(r),1));
+    end
+
+% Input parsing
+% ------------------------------------------------------------------
+% This function parses the different input schemes
+    function  [lb,ub,options] = parseinputs(inputs)
+        % Prepare empty containers
+        [lb,ub] = deal([]);
+        % Parse the varargin cell array
+        optionstart = numel(inputs);
+        for i=1:numel(inputs)
+            if ischar(inputs{i})
+                optionstart = i-1;
+                break
             end
-            boundary(ampidx) = 1; % Amplitudes upper bound
-            if numel(Upper)>nparam+1
-                boundary(numel(boundary)+1:numel(boundary) + numel(Upper(3:end))) = Upper(3:end); % Background upper bound
+            switch i
+                case 1
+                    lb = inputs{i};
+                case 2
+                    ub = inputs{i};
             end
-            UpperBounds{i} = boundary;
+        end
+        inputs(1:optionstart) = [];
+        options = inputs;
+    end
+
+% Input validation
+% ------------------------------------------------------------------
+% This function checks that all inputs are valid
+    function validateinputs()
+        if ~iscell(V)
+            V = {V};
+        end
+        nSignals = numel(V);
+        for ii=1:nSignals
+            V{ii} = V{ii}(:);
+            validateattributes(V{ii},{'numeric'},{'vector','nonempty'});
+        end
+        % Basic validation of inputs
+        validateattributes(maxModels,{'numeric'},{'scalar','integer','nonnegative','nonzero'});
+        validateattributes(r,{'numeric'},{'vector','nonnegative'});
+        validateattributes(model,{'function_handle'},{'nonempty'});
+        validateattributes(method,{'char'},{'nonempty'});
+        method = validatestring(method,{'aic','aicc','bic','rmsd'});
+        r = r(:).';
+        % Check kernel model
+        if ~iscell(Kmodel)
+            Kmodel = {Kmodel};
+        end
+        if isa(Kmodel{1},'function_handle')
+            Kmodel = Kmodel{1};
+            nKparam = 0;
+            failing = true;
+            while failing
+                nKparam = nKparam + 1;
+                try
+                    Kmodel(rand(nKparam,1));
+                    failing = false;
+                catch
+                    failing = true;
+                end
+            end
         else
-            UpperBounds = [];
+            nKparam = 0;
+            Kmodel = @(~)Kmodel;
         end
         
-        if ~isempty(Lower)
-            for j=1:nparam
-                boundary(paramidx(j,:)) = Lower(j);
-            end
-            boundary(ampidx) = 0; % Amplitudes lower bound
-            if numel(Lower)>nparam+1
-                boundary(numel(boundary)+1:numel(boundary) + numel(Lower(3:end))) = Lower(3:end); %Background upper bound
-            end
-            LowerBounds{i} = boundary;
-        else
-            LowerBounds = [];
+        % Parse boundaries
+        if isempty(lb)
+            lb = {[],[]};
         end
-               
-    end
-else
-    % Otherwise just pass them empty to use the model defaults
-    LowerBounds = [];
-    UpperBounds = [];
-end
-
-
-% Preparation of the background model
-%--------------------------------------------------------------
-if ~isempty(BckgModel)
-    if isempty(LowerBounds)
-        for i = 1:maxModels
-            info = multiModels{i}();
-            Plower = [info.Lower];
-            infoB = BckgModel();
-            Blower = [infoB.Lower];
-            LowerBounds{i} = [Plower repmat([0 Blower],1,Nsignals)];
+        if isempty(ub)
+            ub = {[],[]};
+        end
+        lbK = lb{1};
+        ubK = ub{1};
+        lb0 = lb{2};
+        ub0 = ub{2};
+        if numel(lbK)~=nKparam || numel(ubK)~=nKparam
+            error('The upper/lower bounds of the kernel parameters must be %i-element arrays',nKparam)
         end
     end
-    if isempty(UpperBounds)
-        for i = 1:maxModels
-            info = multiModels{i}();
-            Pupper = [info.Upper];
-            infoB = BckgModel();
-            Bupper = [infoB.Upper];
-            UpperBounds{i} = [Pupper repmat([1 Bupper],1,Nsignals)];
+
+% Parsing and validation of options
+% ------------------------------------------------------------------
+% This function parses the name-value pairs or structures with options
+% passes to the main function in the varargin. If the options pass, the
+% default values are overwritten by the user-specified values.
+    function parsevalidate(varargin)
+        
+        validoptions = {'normP','GlobalWeights'};
+        
+        % Parse options
+        [normP_,GlobalWeights_] = parseoptions(validoptions,varargin);
+        
+        if ~isempty(normP_)
+            validateattributes(normP_,{'logical'},{'scalar'})
+            normP = normP_;
+        end
+        if ~isempty(GlobalWeights_)
+            validateattributes(GlobalWeights_,{'numeric'},{'nonnegative','nonempty'})
+            GlobalWeights = GlobalWeights_/sum(GlobalWeights_);
         end
     end
-    for i = 1:maxModels
-        DistModel = multiModels{i};
-        info = DistModel();
-        Nparam = numel(info);
-        Pparam = [info.Start];
-        infoB = BckgModel();
-        Bparam = infoB.Start;
-        lampars = Nparam + (1+numel(Bparam))*(1:Nsignals)-numel(Bparam);
-        Bpars = lampars + 1;
-        lam0 = 0.25;
-        timeMultiGaussModels{i} = @(t,param,idx) (1 - param(lampars(idx)) + param(lampars(idx))*dipolarkernel(t,r)*DistModel(r,param(1:Nparam)) ).*BckgModel(t,param(Bpars(idx):Bpars(idx)+numel(Bparam)-1));
-        param0{i} = [Pparam repmat([lam0 Bparam],Nsignals,1)];
+
+    function cell = cellselect(cell,idx)
+        if ~iscell(cell)
+            return
+        end
+        cell = cell{idx};
     end
+
 end
 
-% Optimal multi-component model selection
-%--------------------------------------------------------------
-
-% Run fitting and model selection to see which multi-Gauss model is optimal
-if ~isempty(BckgModel)
-    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(timeMultiGaussModels,Vs,ts,method,param0,LowerBounds,UpperBounds,varargin);
-else
-    [nGaussOpt,metrics,fitparams,paramcis,stats] = selectmodel(multiModels,Vs,r,Ks,method,[],LowerBounds,UpperBounds,varargin);
-end
-
-% Calculate the distance distribution for the optimal multi-Gauss model
-param = fitparams{nGaussOpt};
-paramci = paramcis{nGaussOpt};
-optModel = multiModels{nGaussOpt};
-info = optModel();
-nparam = numel(info);
-Pfit = optModel(r,param(1:nparam));
-stats = stats{nGaussOpt};
-
-% Uncertainty estimation
-%--------------------------------------------------------------
-if nargin>3
-    %Loop over different signals
-    lb = zeros(numel(r),1);
-    Pfitci = paramci.propagate(@(par)optModel(r,par(1:nparam)),lb);
-end
-
-if nargout>6
-    Peval = zeros(maxModels,numel(r));
-    for i = 1:maxModels
-        info = multiModels{i}();
-        nparam = height(info);
-        p = fitparams{i};
-        Peval(i,:) = multiModels{i}(r,p(1:nparam));
-    end
-end
-
-return

@@ -20,7 +20,7 @@ Pci50 = Puq.ci(50);
 Pci95 = Puq.ci(95);
 
 % Pass 1-2: confidence intervals behave as expected
-pass(1) = all(all(abs(parfit - paruq50.') < abs(parfit - paruq95.')));
+pass(1) = all(all(abs(cell2mat(parfit) - paruq50.') < abs(cell2mat(parfit) - paruq95.')));
 pass(2) = all(all(abs(Pfit - Pci50) <= abs(Pfit - Pci95)));
 
 pass = all(pass);

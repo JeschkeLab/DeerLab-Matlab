@@ -13,8 +13,8 @@ K = dipolarkernel(t,r,0.3,B);
 scale = 1e3;
 V = K*P + whitegaussnoise(t,0.005);
 
-Pfit1 = fitmultimodel(V*scale,K,r,@dd_gauss,3,'aic');
-Pfit2 = fitmultimodel(V,K,r,@dd_gauss,3,'aic','rescale',false);
+Pfit1 = fitmultimodel(V*scale,K,r,@dd_gauss,3,'aic','normp',true);
+Pfit2 = fitmultimodel(V,K,r,@dd_gauss,3,'aic','normp',false);
 
 %Pass 1: distance distribution is well fitted
 pass(1) = all(abs(Pfit1 - P) < 2e-1);
@@ -24,7 +24,7 @@ pass = all(pass);
 maxerr = max(abs(Pfit1 - P));
 
 if opt.Display
-   plot(r,P,'k',r,Pfit1,'r',r,Pfit2,'b')
+   plot(r,P,'k',r,Pfit1,'r',r,Pfit2,'b--')
    legend('truth','rescaled','normalized')
    xlabel('r [nm]')
    ylabel('P(r) [nm^{-1}]')

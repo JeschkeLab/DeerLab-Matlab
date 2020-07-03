@@ -26,7 +26,7 @@ end
 
 % Pass 3: not enough upper boundaries
 try
-    selectmodel(Models,S,r,K,'aic','upper',[1 2 3]); 
+    selectmodel(Models,S,r,K,'aic',[],[],[1 2 3]); 
     pass(3) = false;
 catch
     pass(3) = true;
@@ -34,7 +34,7 @@ end
 
 % Pass 4: not enough lower boundaries
 try
-    selectmodel(Models,S,r,K,'aic','lower',[1 2 3]); 
+    selectmodel(Models,S,r,K,'aic',[],[1 2 3]); 
     pass(4) = false;
 catch
     pass(4) = true;

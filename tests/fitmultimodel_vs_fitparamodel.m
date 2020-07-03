@@ -11,10 +11,10 @@ S = K*P;
 par0 = [2 0.1 0.5 5 0.1 0.5];
 
 [~,P_FP] = fitparamodel(S,@dd_gauss2,r,K,par0);
-P_MG = fitmultimodel(S,K,r,@dd_gauss,6);
+P_MG = fitmultimodel(S,K,r,@dd_gauss,6,'aicc');
 
 % Pass: fitparamodel and fitmultigauss find the same solution
-pass = all(abs(P_FP - P_MG) < 1e-9);
+pass = all(abs(P_FP - P_MG) < 1e-6);
 
 maxerr = max(abs(P_FP - P_MG));
  
