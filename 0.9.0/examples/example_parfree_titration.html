@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Analyzing pseudo-titration (dose-respononse) curves with parameter-free distributions &mdash; DeerLab  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" /><link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_parfree_titration.html">0.9.2</option>
+        <option value="../../0.9.1/examples/example_parfree_titration.html">0.9.1</option>
+        <option value="../../0.9.0/examples/example_parfree_titration.html">0.9.0</option>
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_parfree_titration.html">0.9.2</option>
+        <option value="../../0.9.1/examples/example_parfree_titration.html">0.9.1</option>
+        <option selected value="">0.9.0</option>
+        <option value="../../develop/examples/example_parfree_titration.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Others</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../funding.html">Funding</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Analyzing pseudo-titration (dose-respononse) curves with parameter-free distributions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="analyzing-pseudo-titration-dose-respononse-curves-with-parameter-free-distributions">
+<span id="example-parfree-titration"></span><h1>Analyzing pseudo-titration (dose-respononse) curves with parameter-free distributions<a class="headerlink" href="#analyzing-pseudo-titration-dose-respononse-curves-with-parameter-free-distributions" title="Permalink to this headline">¶</a></h1>
+<p><strong>Script:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Analyzing pseudo-titration (dose-respononse) curves with </span>
+<span class="c">% parameter-free distributions </span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This example shows how to use separable non-linear least squares (SNLLS)</span>
+<span class="c">% to fit a pseudo-titration curve to multiple DEER datsets, using</span>
+<span class="c">% parameter-free distance distributions.</span>
+
+<span class="n">clc</span><span class="p">,</span><span class="n">clear</span><span class="p">,</span><span class="n">clf</span>
+
+<span class="c">% Generating multiple datasets</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% First, let&#39;s start by simulating some data. In this example we will</span>
+<span class="c">% simulate a protein system in their states A (natural) and B (changed upon addition</span>
+<span class="c">% of a ligand L) given by the chemical equilibrium  A + L &lt;-&gt; B.</span>
+
+<span class="c">% Time axes</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">3</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">4</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">5</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">6</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">ts</span><span class="p">{</span><span class="mi">7</span><span class="p">}</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">Nsignals</span> <span class="p">=</span> <span class="nb">numel</span><span class="p">(</span><span class="n">ts</span><span class="p">);</span>
+
+<span class="c">% Distance axes for states A and B</span>
+<span class="n">rA</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">rB</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+
+<span class="c">% Distributions for states A and B</span>
+<span class="n">PA</span> <span class="p">=</span> <span class="n">dd_gauss</span><span class="p">(</span><span class="n">rA</span><span class="p">,[</span><span class="mf">5.5</span> <span class="mf">0.4</span><span class="p">]);</span>
+<span class="n">PB</span> <span class="p">=</span> <span class="n">dd_gauss2</span><span class="p">(</span><span class="n">rB</span><span class="p">,[</span><span class="mf">4.5</span> <span class="mf">0.7</span> <span class="mf">0.4</span> <span class="mf">3.5</span> <span class="mf">0.6</span> <span class="mf">0.6</span><span class="p">]);</span>
+
+<span class="n">L</span> <span class="p">=</span> <span class="p">[</span><span class="mf">0.3</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">10</span> <span class="mi">30</span> <span class="mi">100</span> <span class="mi">300</span><span class="p">];</span> <span class="c">% total ligand concentration, uM</span>
+<span class="n">KD</span> <span class="p">=</span> <span class="mf">5.65</span><span class="p">;</span>  <span class="c">% dissociation constant, uM</span>
+
+<span class="c">% Populations of states A and B</span>
+<span class="p">[</span><span class="n">xA</span><span class="p">,</span><span class="n">xB</span><span class="p">]</span> <span class="p">=</span> <span class="n">chemicalequilibrium</span><span class="p">(</span><span class="n">KD</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+
+<span class="c">% Global kernel model</span>
+<span class="n">Ks</span> <span class="p">=</span> <span class="n">Kmodel</span><span class="p">([</span><span class="mf">0.25</span> <span class="mf">0.1</span> <span class="n">KD</span><span class="p">],</span><span class="n">ts</span><span class="p">,</span><span class="n">rA</span><span class="p">,</span><span class="n">rB</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+
+<span class="c">% Simulate dipolar signals</span>
+<span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">Nsignals</span>
+    <span class="n">rng</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span>
+    <span class="n">Vs</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span> <span class="p">=</span> <span class="n">Ks</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span><span class="o">*</span><span class="p">[</span><span class="n">PA</span><span class="p">;</span> <span class="n">PB</span><span class="p">]</span> <span class="o">+</span> <span class="n">whitegaussnoise</span><span class="p">(</span><span class="n">ts</span><span class="p">{</span><span class="nb">i</span><span class="p">},</span><span class="mf">0.005</span><span class="p">);</span>
+    <span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+    <span class="n">hold</span> <span class="s">on,plot(ts{i},Vs{i}+i/9,&#39;k.&#39;),hold</span> <span class="s">off</span>
+<span class="k">end</span>
+
+<span class="c">% Analysis</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% For simplification, we will assume that all DEER traces have the same</span>
+<span class="c">% background function and modulation depth. Thus, we will fit the</span>
+<span class="c">% modulations depth (lam) and background decay constant (k) globally along</span>
+<span class="c">% the dissociation constant (KD).</span>
+
+<span class="c">% Non-linear parameters:</span>
+<span class="c">%       lam  k   KD</span>
+<span class="n">par0</span> <span class="p">=</span> <span class="p">[</span><span class="mf">0.5</span> <span class="mf">0.5</span>  <span class="mi">5</span><span class="p">];</span>  <span class="c">% start values </span>
+<span class="n">lb</span>   <span class="s">=</span> <span class="s">[</span> <span class="s">0</span>   <span class="s">0</span>   <span class="s">1]</span><span class="p">;</span>  <span class="c">% lower bounds</span>
+<span class="n">ub</span>   <span class="s">=</span> <span class="s">[</span> <span class="s">1</span>   <span class="s">1</span>   <span class="s">10]</span><span class="p">;</span> <span class="c">% upper bounds</span>
+
+<span class="c">% Linear parameters:</span>
+<span class="c">%     |-------PA--------||--------PB--------|</span>
+<span class="n">lbl</span> <span class="p">=</span> <span class="p">[</span><span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">numel</span><span class="p">(</span><span class="n">rA</span><span class="p">))</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">numel</span><span class="p">(</span><span class="n">rB</span><span class="p">))];</span> <span class="c">% Non-negativity constraint</span>
+<span class="n">ubl</span> <span class="p">=</span> <span class="p">[];</span> <span class="c">% Unconstrained</span>
+
+<span class="c">% Run SNLLS optimization</span>
+<span class="p">[</span><span class="n">parfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">puq</span><span class="p">]</span> <span class="p">=</span> <span class="n">snlls</span><span class="p">(</span><span class="n">Vs</span><span class="p">,@(</span><span class="n">p</span><span class="p">)</span><span class="n">Kmodel</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">ts</span><span class="p">,</span><span class="n">rA</span><span class="p">,</span><span class="n">rB</span><span class="p">,</span><span class="n">L</span><span class="p">),</span><span class="n">par0</span><span class="p">,</span><span class="n">lb</span><span class="p">,</span><span class="n">ub</span><span class="p">,</span><span class="n">lbl</span><span class="p">,</span><span class="n">ubl</span><span class="p">,</span><span class="s">&#39;GlobalWeights&#39;</span><span class="p">,</span><span class="nb">ones</span><span class="p">(</span><span class="n">Nsignals</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="c">% Extract the fitted disociation constant value and its 95%-confidence interval</span>
+<span class="n">KD</span> <span class="p">=</span> <span class="n">parfit</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">parci</span> <span class="p">=</span> <span class="n">puq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">,</span><span class="s">&#39;nonlin&#39;</span><span class="p">);</span>
+<span class="n">KDci</span> <span class="p">=</span> <span class="n">parci</span><span class="p">(</span><span class="mi">3</span><span class="p">,:);</span>
+
+<span class="c">% Print result</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;KD = %.2f(%.2f-%.2f)uM \n&#39;</span><span class="p">,</span><span class="n">KD</span><span class="p">,</span><span class="n">KDci</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">KDci</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="c">% Plot results</span>
+<span class="n">plotresults</span><span class="p">(</span><span class="n">parfit</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="n">ts</span><span class="p">,</span><span class="n">rA</span><span class="p">,</span><span class="n">rB</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">xA</span><span class="p">,</span><span class="n">xB</span><span class="p">)</span>
+
+
+<span class="c">% Dipolar kernel model</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="c">% Here we define the dipolar kernel model as the non-linear function of the</span>
+<span class="c">% SNLLS problem. This function needs to take the parameters and return a</span>
+<span class="c">% cell-array of kernels, each one for the corresponding datasets that we</span>
+<span class="c">% have. </span>
+<span class="c">% Since we have a total distribution of the form </span>
+<span class="c">%     P = xA*PA + xB*PB</span>
+<span class="c">% we can define an augmented kernel as</span>
+<span class="c">%     K = [xA*KA xB*KB]</span>
+<span class="c">% such that </span>
+<span class="c">%     K*[PA PB] = V</span>
+<span class="c">% and the vector [PA PB] constitutes the linear part fitted by SNLLS.</span>
+<span class="k">function</span><span class="w"> </span>K <span class="p">=</span><span class="w"> </span><span class="nf">Kmodel</span><span class="p">(</span>p,ts,rA,rB,L<span class="p">)</span><span class="w"></span>
+
+<span class="n">Nsignals</span> <span class="p">=</span> <span class="nb">numel</span><span class="p">(</span><span class="n">ts</span><span class="p">);</span>
+
+<span class="c">% Unpack parameters</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> 
+<span class="n">k</span>   <span class="s">=</span> <span class="s">p(2)</span><span class="p">;</span>
+<span class="n">KD</span> <span class="p">=</span> <span class="n">p</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c">% Get fractions for given KD</span>
+<span class="p">[</span><span class="n">xA</span><span class="p">,</span><span class="n">xB</span><span class="p">]</span> <span class="p">=</span> <span class="n">chemicalequilibrium</span><span class="p">(</span><span class="n">KD</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+
+<span class="c">% General the dipolar kernels</span>
+<span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="n">Nsignals</span>
+    <span class="n">B</span> <span class="p">=</span> <span class="n">bg_exp</span><span class="p">(</span><span class="n">ts</span><span class="p">{</span><span class="nb">i</span><span class="p">},</span><span class="n">k</span><span class="p">,</span><span class="n">lam</span><span class="p">);</span>
+    <span class="c">% Kernel for fraction A</span>
+    <span class="n">KA</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">ts</span><span class="p">{</span><span class="nb">i</span><span class="p">},</span><span class="n">rA</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+    <span class="c">% Kernel for fraction B</span>
+    <span class="n">KB</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">ts</span><span class="p">{</span><span class="nb">i</span><span class="p">},</span><span class="n">rB</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">);</span>
+    <span class="n">K</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span> <span class="p">=</span> <span class="p">[</span><span class="n">xA</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">KA</span> <span class="n">xB</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">KB</span><span class="p">];</span>
+<span class="nf">end</span>
+
+<span class="s">end</span>
+
+
+<span class="c">%Prepare equilibrium of type: A + L &lt;-&gt; B</span>
+<span class="c">%----------------------------------------------------------------------------</span>
+
+<span class="k">function</span><span class="w"> </span>[xA,xB] <span class="p">=</span><span class="w"> </span><span class="nf">chemicalequilibrium</span><span class="p">(</span>KD,L<span class="p">)</span><span class="w"></span>
+
+<span class="n">Ctot</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">% total protein concentration, uM</span>
+
+<span class="c">% % Get fraction of state B</span>
+<span class="n">Kb</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">KD</span><span class="p">;</span>
+<span class="n">for</span> <span class="s">q</span> <span class="s">=</span> <span class="s">1:numel(L)</span>
+    <span class="n">xB_</span> <span class="p">=</span> <span class="n">roots</span><span class="p">([</span><span class="n">Kb</span><span class="o">*</span><span class="n">Ctot</span> <span class="o">-</span><span class="p">(</span><span class="n">Kb</span><span class="o">*</span><span class="n">L</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="n">Kb</span><span class="o">*</span><span class="n">Ctot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="n">Kb</span><span class="o">*</span><span class="n">L</span><span class="p">(</span><span class="n">q</span><span class="p">)]);</span>
+    <span class="n">try</span>
+    <span class="s">xB(q)</span> <span class="s">=</span> <span class="s">xB_(xB_&lt;=1</span> <span class="s">&amp;</span> <span class="s">xB_&gt;=0)</span><span class="p">;</span>
+    <span class="n">catch</span>
+    <span class="s">xB(q)</span> <span class="s">=</span> <span class="s">min(1,max(0,xB_(1)))</span><span class="p">;</span>    
+    <span class="nf">end</span>
+<span class="s">end</span>
+<span class="c">% Get fraction of state A</span>
+<span class="n">xA</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xB</span><span class="p">;</span>
+<span class="nf">end</span>
+
+
+<span class="s">%</span> <span class="s">Plots</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">plotresults</span><span class="p">(</span>parfit,Pfit,ts,rA,rB,L,xA,xB<span class="p">)</span><span class="w"></span>
+
+<span class="n">Nsignals</span> <span class="p">=</span> <span class="nb">numel</span><span class="p">(</span><span class="n">ts</span><span class="p">);</span>
+
+<span class="c">% Simulate fits</span>
+<span class="n">Ksfit</span> <span class="p">=</span> <span class="n">Kmodel</span><span class="p">(</span><span class="n">parfit</span><span class="p">,</span><span class="n">ts</span><span class="p">,</span><span class="n">rA</span><span class="p">,</span><span class="n">rB</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+<span class="n">for</span> <span class="s">i=1:Nsignals</span>
+    <span class="n">Vsfit</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span> <span class="p">=</span> <span class="n">Ksfit</span><span class="p">{</span><span class="nb">i</span><span class="p">}</span><span class="o">*</span><span class="n">Pfit</span><span class="p">(:);</span>
+    <span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+    <span class="n">hold</span> <span class="s">on,plot(ts{i},Vsfit{i}+i/9,&#39;r&#39;,&#39;LineWidth&#39;,1.5),hold</span> <span class="s">off</span>
+<span class="k">end</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+<span class="n">KDfit</span> <span class="p">=</span> <span class="n">parfit</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="p">[</span><span class="n">xAfit</span><span class="p">,</span><span class="n">xBfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">chemicalequilibrium</span><span class="p">(</span><span class="n">KDfit</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+
+
+<span class="n">for</span> <span class="s">i=1:Nsignals</span>
+    <span class="n">PAfit</span> <span class="p">=</span> <span class="n">xAfit</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">Pfit</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="nb">numel</span><span class="p">(</span><span class="n">rA</span><span class="p">));</span>
+    <span class="n">PBfit</span> <span class="p">=</span> <span class="n">xBfit</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">Pfit</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">rA</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="p">);</span>
+    <span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">hold</span> <span class="s">on</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">rA</span><span class="p">,</span><span class="n">PAfit</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="nb">i</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">rB</span><span class="p">,</span><span class="n">PBfit</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="nb">i</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [nm]&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;state A&#39;</span><span class="p">,</span><span class="s">&#39;state B&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="nb">log10</span><span class="p">(</span><span class="n">L</span><span class="p">),</span><span class="n">xA</span><span class="p">,</span><span class="s">&#39;r-&#39;</span><span class="p">,</span><span class="nb">log10</span><span class="p">(</span><span class="n">L</span><span class="p">),</span><span class="n">xB</span><span class="p">,</span><span class="s">&#39;b-&#39;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="nb">log10</span><span class="p">(</span><span class="n">L</span><span class="p">),</span><span class="n">xAfit</span><span class="p">,</span><span class="s">&#39;ro&#39;</span><span class="p">,</span><span class="nb">log10</span><span class="p">(</span><span class="n">L</span><span class="p">),</span><span class="n">xBfit</span><span class="p">,</span><span class="s">&#39;bo&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;log_{10}([L])&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Fractions&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;state A&#39;</span><span class="p">,</span><span class="s">&#39;state B&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>KD = 5.78(3.60-7.96)uM
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/example_parfree_titration.png"><img alt="../_images/example_parfree_titration.png" src="../_images/example_parfree_titration.png" style="width: 50%;" /></a>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

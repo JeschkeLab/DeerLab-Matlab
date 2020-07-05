@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Emulating the DeerAnalysis workflow &mdash; DeerLab  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="/source/_static/theme_override.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_util.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/theme_override.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_emulating_deeranalysis.html">0.9.2</option>
+        <option value="../../0.9.1/examples/example_emulating_deeranalysis.html">0.9.1</option>
+        <option value="../../0.9.0/examples/example_emulating_deeranalysis.html">0.9.0</option>
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Others</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../funding.html">Funding</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Emulating the DeerAnalysis workflow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="emulating-the-deeranalysis-workflow">
+<span id="example-emulating-deeranalysis"></span><h1>Emulating the DeerAnalysis workflow<a class="headerlink" href="#emulating-the-deeranalysis-workflow" title="Permalink to this headline">¶</a></h1>
+<p><strong>Script:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Emulating the DeerAnalysis workflow</span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This example shows how to reproduce the type of workflow implemented in</span>
+<span class="c">% DeerAnalysis, using DeerLab functions. This kind of analysis workflow is </span>
+<span class="c">% outdated and not recommended for routine or accurate data analysis.</span>
+
+<span class="n">clf</span><span class="p">,</span><span class="n">clc</span><span class="p">,</span><span class="n">clear</span>
+
+<span class="c">% Generating a dataset</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% For this example we will simulate a simple 4pDEER signal</span>
+
+<span class="c">% Parameters</span>
+<span class="n">rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">250</span><span class="p">);</span>
+<span class="n">rtrue</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">200</span><span class="p">);</span>
+<span class="n">Ptrue</span> <span class="p">=</span> <span class="n">dd_gauss3</span><span class="p">(</span><span class="n">rtrue</span><span class="p">,[</span><span class="mf">4.5</span> <span class="mf">0.6</span> <span class="mf">0.4</span> <span class="mi">3</span> <span class="mf">0.4</span> <span class="mf">0.3</span> <span class="mi">4</span> <span class="mf">0.7</span> <span class="mf">0.5</span><span class="p">]);</span>
+<span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span>
+<span class="n">kappa</span> <span class="p">=</span> <span class="mi">180</span><span class="p">;</span> <span class="c">%uM</span>
+
+<span class="c">% Simulate an experimental signal with some a.u. and phase offset</span>
+<span class="n">Bmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">t</span><span class="p">,</span><span class="n">lam</span><span class="p">)</span> <span class="n">bg_hom3d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">kappa</span><span class="p">,</span><span class="n">lam</span><span class="p">);</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">rtrue</span><span class="p">,</span><span class="n">Ptrue</span><span class="p">,</span><span class="n">lambda</span><span class="p">,</span><span class="n">Bmodel</span><span class="p">,</span><span class="s">&#39;scale&#39;</span><span class="p">,</span><span class="mf">3e6</span><span class="p">,</span><span class="s">&#39;phase&#39;</span><span class="p">,</span><span class="o">-</span><span class="nb">pi</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.01</span><span class="p">);</span>
+
+<span class="c">% DeerAnalysis workflow</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% Pre-processing</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">correctphase</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+<span class="n">t</span> <span class="p">=</span> <span class="n">correctzerotime</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">V</span><span class="o">/</span><span class="n">max</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+
+<span class="c">% Distance axis estimation</span>
+<span class="n">r</span> <span class="p">=</span> <span class="n">time2dist</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+
+<span class="c">% Background fit</span>
+<span class="p">[</span><span class="n">Bfit</span><span class="p">,</span><span class="n">lamfit</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitbackground</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">t</span><span class="p">,@</span><span class="n">bg_strexp</span><span class="p">);</span>
+
+<span class="c">% Background &quot;correction&quot; by division</span>
+<span class="n">Vcorr</span> <span class="p">=</span> <span class="p">(</span><span class="n">V</span><span class="o">./</span><span class="n">Bfit</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">lamfit</span><span class="p">)</span><span class="o">/</span><span class="n">lamfit</span><span class="p">;</span>
+
+<span class="c">% Tikhonov regularization using the L-curve criterion</span>
+<span class="n">K</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">fitregmodel</span><span class="p">(</span><span class="n">Vcorr</span><span class="p">,</span><span class="n">K</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="s">&#39;tikh&#39;</span><span class="p">,</span><span class="s">&#39;lr&#39;</span><span class="p">);</span>
+
+<span class="c">% Plots</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">lamfit</span><span class="p">)</span><span class="o">*</span><span class="n">Bfit</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;(1-\lambda)B_{fit}&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Vcorr</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">K</span><span class="o">*</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;corrected data&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+
+<span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">rtrue</span><span class="p">,</span><span class="n">Ptrue</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on</span>
+<span class="n">set</span><span class="p">(</span><span class="n">gca</span><span class="p">,</span><span class="s">&#39;FontSize&#39;</span><span class="p">,</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [nm]&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P [nm^{-1}]&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;truth&#39;</span><span class="p">,</span><span class="s">&#39;fit&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<a class="reference internal image-reference" href="../_images/example_emulating_deeranalysis.png"><img alt="../_images/example_emulating_deeranalysis.png" src="../_images/example_emulating_deeranalysis.png" style="width: 30%;" /></a>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

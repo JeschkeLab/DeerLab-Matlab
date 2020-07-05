@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Uncertainty propagation from parameter fits &mdash; DeerLab  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/custom.css" type="text/css" />  <link rel="stylesheet" href="../_static/table_main.css" type="text/css" />
+<link rel="stylesheet" href="../../develop/_static/theme_override.css" type="text/css" />  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_param_error_propagation.html">0.9.2</option>
+        <option value="../../0.9.1/examples/example_param_error_propagation.html">0.9.1</option>
+        <option value="../../0.9.0/examples/example_param_error_propagation.html">0.9.0</option>
+        <option selected value="">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_param_error_propagation.html">0.9.2</option>
+        <option value="../../0.9.1/examples/example_param_error_propagation.html">0.9.1</option>
+        <option selected value="">0.9.0</option>
+        <option value="../../develop/examples/example_param_error_propagation.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div class="select">
+    <select onChange="window.location.href=this.value">
+        <option value="../../0.9.2/examples/example_param_error_propagation.html">0.9.2</option>
+        <option selected value="">0.9.1</option>
+        <option value="../../0.9.0/examples/example_param_error_propagation.html">0.9.0</option>
+        <option value="../../develop/examples/example_param_error_propagation.html">develop</option>
+    </select>
+    <div class="select_arrow">
+    </div>
+</div>
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting DeerLab</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../download.html">Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../firstscript.html">A first script</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../preprocess.html">Loading and preprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fitting.html">Fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example scripts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../functions.html">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelsref.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../theory.html">Theory</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Others</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../funding.html">Funding</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DeerLab</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Uncertainty propagation from parameter fits</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uncertainty-propagation-from-parameter-fits">
+<span id="example-param-error-propagation"></span><h1>Uncertainty propagation from parameter fits<a class="headerlink" href="#uncertainty-propagation-from-parameter-fits" title="Permalink to this headline">¶</a></h1>
+<p><strong>Script:</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%============================================================================</span>
+<span class="c">% DeerLab Example:</span>
+<span class="c">% Uncertainty propagation from parameter fits using covariance-based uncertainty</span>
+<span class="c">% quantificaion</span>
+<span class="c">%============================================================================</span>
+
+<span class="c">% This example explains how to propagate the uncertainty of the fitted</span>
+<span class="c">% parameters to the models which depend on them.</span>
+
+<span class="n">clc</span><span class="p">,</span><span class="n">clf</span><span class="p">,</span><span class="n">clear</span>
+
+<span class="c">% Generate data</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+<span class="n">rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">300</span><span class="p">);</span>
+<span class="n">r</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">400</span><span class="p">);</span>
+<span class="n">center</span> <span class="p">=</span> <span class="mf">3.5</span><span class="p">;</span> <span class="c">% [nm] Rician center distance</span>
+<span class="n">width</span> <span class="p">=</span> <span class="mf">0.3</span><span class="p">;</span> <span class="c">% [nm] Rician width</span>
+<span class="n">lam</span> <span class="p">=</span> <span class="mf">0.27</span><span class="p">;</span> <span class="c">% Modulation depth</span>
+<span class="n">conc</span> <span class="p">=</span> <span class="mi">150</span><span class="p">;</span> <span class="c">% [uM] Spin concentration</span>
+<span class="n">P</span> <span class="p">=</span> <span class="n">dd_rice</span><span class="p">(</span><span class="n">r</span><span class="p">,[</span><span class="n">center</span> <span class="n">width</span><span class="p">]);</span>
+<span class="n">B</span> <span class="p">=</span> <span class="n">bg_hom3d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">conc</span><span class="p">,</span><span class="n">lam</span><span class="p">);</span>
+<span class="n">V</span> <span class="p">=</span> <span class="n">dipolarsignal</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="n">lam</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="s">&#39;noiselevel&#39;</span><span class="p">,</span><span class="mf">0.03</span><span class="p">);</span>
+
+<span class="c">% Fit the data</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% Pre-calculate the elemental dipolar kernel (for speed)</span>
+<span class="n">K0</span> <span class="p">=</span> <span class="n">dipolarkernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">r</span><span class="p">);</span>
+
+<span class="c">% First we define the models for the different elements in our analysis</span>
+<span class="c">% (background, distribution and dipolar signal). For simplicity these</span>
+<span class="c">% models take the full parameter set</span>
+<span class="c">%</span>
+<span class="c">%          par = [lambda center width conc]; </span>
+<span class="c">%</span>
+<span class="c">% and select the appropiate elements from the parameter set, i.e.</span>
+<span class="c">%</span>
+<span class="c">%   Pmodel = f1(center,width) -&gt; par(2) &amp; par(3)</span>
+<span class="c">%   Bmodel = f2(conc,lambda)  -&gt; par(4) &amp; par(1)</span>
+<span class="c">%   Vmodel = f3(par)          -&gt; par(1) &amp; par(2) &amp; par(3) &amp; par(4)</span>
+<span class="c">%</span>
+<span class="c">% By defining the models like this, we can spare then the indexing of the</span>
+<span class="c">% parameters each time we call one of these model and can pass the full</span>
+<span class="c">% parameter set directly.</span>
+
+<span class="n">Pmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">par</span><span class="p">)</span> <span class="n">dd_rice</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">par</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">));</span>
+<span class="n">Bmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">par</span><span class="p">)</span> <span class="n">bg_hom3d</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">par</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="n">par</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="n">Vmodel</span> <span class="p">=</span> <span class="p">@(</span><span class="n">par</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">par</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">par</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">K0</span><span class="o">*</span><span class="n">Pmodel</span><span class="p">(</span><span class="n">par</span><span class="p">))</span><span class="o">.*</span><span class="n">Bmodel</span><span class="p">(</span><span class="n">par</span><span class="p">);</span>
+
+
+<span class="c">% Next since we are dealing with a custom-defined model we need to specify</span>
+<span class="c">% the start values as well as boundaries of the parameter set:</span>
+
+<span class="c">% Parameters:[lam  center width  conc]</span>
+<span class="n">par0</span>  <span class="s">=</span>      <span class="s">[0.35</span>  <span class="s">4.0</span>   <span class="s">0.4</span>    <span class="s">500</span> <span class="s">]</span><span class="p">;</span> <span class="c">% start values</span>
+<span class="n">lower</span> <span class="p">=</span>      <span class="p">[</span><span class="mf">0.10</span>  <span class="mf">2.0</span>   <span class="mf">0.1</span>    <span class="mf">0.1</span> <span class="p">];</span> <span class="c">% lower bounds</span>
+<span class="n">upper</span> <span class="p">=</span>      <span class="p">[</span><span class="mf">0.50</span>  <span class="mf">7.0</span>   <span class="mf">0.5</span>    <span class="mi">1500</span><span class="p">];</span> <span class="c">% upper bounds</span>
+
+<span class="c">% Finally we can fit the data. It is important to request the parameter</span>
+<span class="c">% uncertainty quantification (paruq) output!</span>
+<span class="p">[</span><span class="n">fitpar</span><span class="p">,</span><span class="o">~</span><span class="p">,</span><span class="n">paruq</span><span class="p">]</span> <span class="p">=</span> <span class="n">fitparamodel</span><span class="p">(</span><span class="n">V</span><span class="p">,@(</span><span class="n">t</span><span class="p">,</span><span class="n">par</span><span class="p">)</span><span class="n">Vmodel</span><span class="p">(</span><span class="n">par</span><span class="p">),</span><span class="n">t</span><span class="p">,</span><span class="n">par0</span><span class="p">,</span><span class="n">lower</span><span class="p">,</span><span class="n">upper</span><span class="p">);</span>
+
+<span class="c">% Forward-calculate the models with the fitted parameters</span>
+<span class="n">Vfit</span> <span class="p">=</span> <span class="n">Vmodel</span><span class="p">(</span><span class="n">fitpar</span><span class="p">);</span>
+<span class="n">Pfit</span> <span class="p">=</span> <span class="n">Pmodel</span><span class="p">(</span><span class="n">fitpar</span><span class="p">);</span>
+<span class="n">Bfit</span> <span class="p">=</span> <span class="n">Bmodel</span><span class="p">(</span><span class="n">fitpar</span><span class="p">);</span>
+<span class="n">lamfit</span> <span class="p">=</span> <span class="n">fitpar</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+
+<span class="c">% Uncertainty propagation</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% In DeerLab, all uncertainty quantification structures contain a field</span>
+<span class="c">% .propagate() which is a function handle. This function has all the</span>
+<span class="c">% internal information on the covariance matrices required to propagate the</span>
+<span class="c">% uncertainty from the parameters to the models. </span>
+<span class="c">%</span>
+<span class="c">% Thus, all we neeed to do is call .propagate and pass the model function</span>
+<span class="c">% which we want to propagate the uncertainty to. It is important that if</span>
+<span class="c">% the uncertainty quantification structure is defined for N-parameters (N=4</span>
+<span class="c">% in this case) the model function must accept all N parameters. Since we</span>
+<span class="c">% defined our model function to accept all N parameters already we do not</span>
+<span class="c">% need to worry about it.</span>
+
+<span class="c">% 1. Uncertainty of the dipolar signal fit</span>
+<span class="c">% =========================================</span>
+<span class="c">% This case is easy, we already have the model and it is unconstrained</span>
+<span class="n">Vuq</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">Vmodel</span><span class="p">);</span> <span class="c">% Uncertainty quantification for Vfit</span>
+<span class="n">Vci95</span> <span class="p">=</span> <span class="n">Vuq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span> <span class="c">% 95%-confidence intervals for Vfit</span>
+
+<span class="c">% 2. Uncertainty of the distance distribution</span>
+<span class="c">% ===========================================</span>
+<span class="c">% In this case, the distribution has a non-negativity constraint which we</span>
+<span class="c">% can specify via the lb input. </span>
+<span class="n">lb</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">r</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span> <span class="c">% Non-negativity constraint</span>
+<span class="n">Puq</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">Pmodel</span><span class="p">,</span><span class="n">lb</span><span class="p">);</span> <span class="c">% Uncertainty quantification for Pfit</span>
+<span class="n">Pci95</span> <span class="p">=</span> <span class="n">Puq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span> <span class="c">% 95%-confidence intervals for Pfit</span>
+
+<span class="c">% 3. Uncertainty of the background</span>
+<span class="c">% ================================</span>
+<span class="c">% In this case, since we want to use this for plotting we need to evaluate</span>
+<span class="c">% the function (1-lambda)*Bfit instead of just Bfit in order to plot the\</span>
+<span class="c">% correct function.</span>
+<span class="n">Buq</span> <span class="p">=</span> <span class="n">paruq</span><span class="p">.</span><span class="n">propagate</span><span class="p">(@(</span><span class="n">p</span><span class="p">)(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">Bmodel</span><span class="p">(</span><span class="n">p</span><span class="p">));</span> <span class="c">% Uncertainty quantification for (1-lam)Bfit</span>
+<span class="n">Bci95</span> <span class="p">=</span> <span class="n">Buq</span><span class="p">.</span><span class="n">ci</span><span class="p">(</span><span class="mi">95</span><span class="p">);</span> <span class="c">% 95%-confidence intervals for (1-lam)Bfit</span>
+
+<span class="c">% Plots</span>
+<span class="c">%-----------------------------------------------------------------------------</span>
+
+<span class="c">% Time-domain</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">),</span><span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="s">&#39;k.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">Vfit</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,(</span><span class="mi">1</span><span class="o">-</span><span class="n">lamfit</span><span class="p">)</span><span class="o">*</span><span class="n">Bfit</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">fill</span><span class="p">([</span><span class="n">t</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="n">Vci95</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">Vci95</span><span class="p">(:,</span><span class="mi">2</span><span class="p">))],</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="s">&#39;LineStyle&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">fill</span><span class="p">([</span><span class="n">t</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">t</span><span class="p">)],[</span><span class="n">Bci95</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">Bci95</span><span class="p">(:,</span><span class="mi">2</span><span class="p">))],</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="s">&#39;LineStyle&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t [\mus]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;V(t)&#39;</span><span class="p">)</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;Vfit&#39;</span><span class="p">,</span><span class="s">&#39;Bfit&#39;</span><span class="p">,</span><span class="s">&#39;Vfit 95%-CI&#39;</span><span class="p">,</span><span class="s">&#39;Bfit 95%-CI&#39;</span><span class="p">)</span>
+
+<span class="c">% Distance-domain</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">),</span><span class="n">cla</span><span class="p">,</span><span class="n">hold</span> <span class="n">on</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">P</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">Pfit</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">fill</span><span class="p">([</span><span class="n">r</span> <span class="nb">fliplr</span><span class="p">(</span><span class="n">r</span><span class="p">)],[</span><span class="n">Pci95</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span> <span class="nb">flipud</span><span class="p">(</span><span class="n">Pci95</span><span class="p">(:,</span><span class="mi">2</span><span class="p">))],</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;FaceAlpha&#39;</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="s">&#39;LineStyle&#39;</span><span class="p">,</span><span class="s">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;r [nm]&#39;</span><span class="p">),</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;P(r) [nm^{-1}]&#39;</span><span class="p">)</span>
+<span class="n">axis</span> <span class="s">tight,</span> <span class="s">grid</span> <span class="s">on,</span> <span class="s">box</span> <span class="s">on</span>
+<span class="n">legend</span><span class="p">(</span><span class="s">&#39;truth&#39;</span><span class="p">,</span><span class="s">&#39;Pfit&#39;</span><span class="p">,</span><span class="s">&#39;Pfit 95%-CI&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<a class="reference internal image-reference" href="../_images/example_param_error_propagation.png"><img alt="../_images/example_param_error_propagation.png" src="../_images/example_param_error_propagation.png" style="width: 30%;" /></a>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2019-2020, Luis Fábregas Ibáñez, Stefan Stoll, and others
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
