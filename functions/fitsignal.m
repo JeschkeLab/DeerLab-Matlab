@@ -216,7 +216,7 @@ else
     lbl = zeros(numel(r),1);
     
     % Separable non-linear least squares (SNNLS) 
-    [parfit_,Pfit,snlls_uq] = snlls(Vexp,@multiPathwayModel,par0,lb,ub,lbl);
+    [parfit_,Pfit,snlls_uq] = snlls(Vexp,@multiPathwayModel,par0,lb,ub,lbl,'RegParam',regparam);
 
     % Get the fitted models
     [Kfit,Bfit] = multiPathwayModel(parfit_);
@@ -476,12 +476,13 @@ end
             normP = normP_;
         end
         if ~isempty(regparam_)
-            if ischar(regparam)
+            if ischar(regparam_)
                 allowedMethodInputs = {'lr','lc','cv','gcv','rgcv','srgcv','aic','bic','aicc','rm','ee','ncp','gml','mcl'};
-                validateattributes(regparam,{'char'},{'nonempty'},mfilename,'RegParam option');
-                regparam = validatestring(regparam,allowedMethodInputs);
+                validateattributes(regparam_,{'char'},{'nonempty'},mfilename,'RegParam option');
+                regparam = validatestring(regparam_,allowedMethodInputs);
             else
-                validateattributes(regparam,{'numeric'},{'scalar','nonempty','nonnegative'},mfilename,'RegParam')
+                validateattributes(regparam_,{'numeric'},{'scalar','nonempty','nonnegative'},mfilename,'RegParam')
+                regparam = regparam_;
             end
         end
         if ~isempty(regtype_)
