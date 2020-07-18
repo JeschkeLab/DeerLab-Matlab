@@ -1,23 +1,6 @@
 
-<p align="center">
-<img src="./docsrc/source/_static/logo_dark.png" alt="DeerLab Logo" width="60%"></img>
-</p>
-</div>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/MATLAB-R2017a--R2020a-brightgreen?style=flat"></img>
-  <img src="https://img.shields.io/github/downloads/JeschkeLab/DeerLab/total?style=flat"></img>
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fdeershields.s3.eu-central-1.amazonaws.com%2Fcoverage_badge.json"></img>
-</p>
-
-### About
-The DeerLab software package is a MATLAB toolbox for the analysis of data from DEER (double electron-electron resonance) spectroscopy and similar dipolar EPR spectroscopy techniques (RIDME, DQC, SIFTER,...). The main homepage can be found at [jeschkelab.github.io/DeerLab](https://jeschkelab.github.io/DeerLab/). This is the GitHub repository of the DeerLab source code, including instructions for compiling and installing DeerLab.
-
-DeerLab consists of a collection of functions that perform modelling, processing or fitting tasks. They can be combined in scripts to build custom data analysis workflows.
-
-To model distance distributions, DeerLab supports two types of model classes and associated workflows: parameter-free models (as used in Tikhonov regularization) as well as a series of parameterized models (mutli-Gaussians etc). It also provides a selection of background and experiment models. There are functions for generating synthetic datasets as well as for fitting and analyzing experimental data sets.
-
-If you want to get notified upon publication of a new DeerLab release, you just need to press the `Watch` button above and select `Releases only`. 
+# DeerLab has been migrated to Python
+You can find the latest version of the source code in the [DeerLab repository](https://github.com/JeschkeLab/DeerLab), where it will be continued to be developed. All DeerLab pre-releases written in MATLAB are still available in this repository.
 
 ### Requirements
 DeerLab requires the following products:
