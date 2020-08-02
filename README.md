@@ -1,23 +1,16 @@
+# Migration Warning
 
-<p align="center">
-<img src="./docsrc/source/_static/logo_dark.png" alt="DeerLab Logo" width="60%"></img>
-</p>
-</div>
+This repository has been migrated to Python and can be found in [a new repository](https://github.com/JeschkeLab/DeerLab). Follow along there for updates. 
 
-<p align="center">
-  <img src="https://img.shields.io/badge/MATLAB-R2017a--R2020a-brightgreen?style=flat"></img>
-  <img src="https://img.shields.io/github/downloads/JeschkeLab/DeerLab/total?style=flat"></img>
-  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fdeershields.s3.eu-central-1.amazonaws.com%2Fcoverage_badge.json"></img>
-</p>
+The MATLAB version of DeerLab (versions 0.9.0-0.9.2 and older) are deprecated and no further support will be provided for them. 
+
+This repository is marked archived, and will no longer receive any updates.
 
 ### About
-The DeerLab software package is a MATLAB toolbox for the analysis of data from DEER (double electron-electron resonance) spectroscopy and similar dipolar EPR spectroscopy techniques (RIDME, DQC, SIFTER,...). The main homepage can be found at [jeschkelab.github.io/DeerLab](https://jeschkelab.github.io/DeerLab/). This is the GitHub repository of the DeerLab source code, including instructions for compiling and installing DeerLab.
+
+The DeerLab software package is a MATLAB toolbox for the analysis of data from DEER (double electron-electron resonance) spectroscopy and similar dipolar EPR spectroscopy techniques (RIDME, DQC, SIFTER,...). The documentation for the MATLAB version can be found [here](jeschkelab.github.io/DeerLab-Matlab). This is the GitHub repository of the MATLAB DeerLab source code, including instructions for compiling and installing DeerLab.
 
 DeerLab consists of a collection of functions that perform modelling, processing or fitting tasks. They can be combined in scripts to build custom data analysis workflows.
-
-To model distance distributions, DeerLab supports two types of model classes and associated workflows: parameter-free models (as used in Tikhonov regularization) as well as a series of parameterized models (mutli-Gaussians etc). It also provides a selection of background and experiment models. There are functions for generating synthetic datasets as well as for fitting and analyzing experimental data sets.
-
-If you want to get notified upon publication of a new DeerLab release, you just need to press the `Watch` button above and select `Releases only`. 
 
 ### Requirements
 DeerLab requires the following products:
