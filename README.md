@@ -47,7 +47,7 @@ In order for MATLAB to access the DeerLab functions, the path to the DeerLab ins
 
 A publication about DeerLab is [available here](https://doi.org/10.5194/mr-2020-13). When you use DeerLab in your work, please cite 
 
-> Fábregas Ibáñez, L., Jeschke, G., and Stoll, S.: DeerLab: A comprehensive toolbox for analyzing dipolar EPR spectroscopy data, Magn. Reson. Discuss., https://doi.org/10.5194/mr-2020-13, in review, 2020
+> Fábregas Ibáñez, L., Jeschke, G., and Stoll, S.: DeerLab: A comprehensive toolbox for analyzing dipolar EPR spectroscopy data, Magn. Reson. Discuss., https://doi.org/10.5194/mr-2020-13, 2020
 
 Please check back frequently for updated publication information.
 
